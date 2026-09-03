@@ -843,6 +843,30 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
         "done": true
       },
       {
+        "name": "JSON to CSV",
+        "slug": "json-to-csv",
+        "tier": 2,
+        "done": true
+      },
+      {
+        "name": "CSV to JSON",
+        "slug": "csv-to-json",
+        "tier": 2,
+        "done": true
+      },
+      {
+        "name": "XML Formatter",
+        "slug": "xml-formatter",
+        "tier": 2,
+        "done": true
+      },
+      {
+        "name": "XML to JSON",
+        "slug": "xml-to-json",
+        "tier": 2,
+        "done": true
+      },
+      {
         "name": "Base64 Encode",
         "slug": "base64-encode",
         "tier": 1,
@@ -861,9 +885,33 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
         "done": true
       },
       {
+        "name": "JWT Generator",
+        "slug": "jwt-generator",
+        "tier": 2,
+        "done": true
+      },
+      {
         "name": "Regex Tester",
         "slug": "regex-tester",
         "tier": 1,
+        "done": true
+      },
+      {
+        "name": "HTML Minifier",
+        "slug": "html-minifier",
+        "tier": 2,
+        "done": true
+      },
+      {
+        "name": "CSS Minifier",
+        "slug": "css-minifier",
+        "tier": 2,
+        "done": true
+      },
+      {
+        "name": "JS Minifier",
+        "slug": "js-minifier",
+        "tier": 3,
         "done": true
       },
       {
@@ -876,6 +924,60 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
         "name": "Hash Generator",
         "slug": "hash-generator",
         "tier": 1,
+        "done": true
+      },
+      {
+        "name": "SQL Formatter",
+        "slug": "sql-formatter",
+        "tier": 2,
+        "done": true
+      },
+      {
+        "name": "SQL Minifier",
+        "slug": "sql-minifier",
+        "tier": 2,
+        "done": true
+      },
+      {
+        "name": "Cron Expression Generator",
+        "slug": "cron-expression-generator",
+        "tier": 2,
+        "done": true
+      },
+      {
+        "name": "HTML Formatter / Beautifier",
+        "slug": "html-formatter-beautifier",
+        "tier": 2,
+        "done": true
+      },
+      {
+        "name": "HTML to Markdown",
+        "slug": "html-to-markdown",
+        "tier": 2,
+        "done": true
+      },
+      {
+        "name": "Markdown to HTML",
+        "slug": "markdown-to-html",
+        "tier": 2,
+        "done": true
+      },
+      {
+        "name": "Markdown Previewer",
+        "slug": "markdown-previewer",
+        "tier": 2,
+        "done": true
+      },
+      {
+        "name": "Code Diff Checker",
+        "slug": "code-diff-checker",
+        "tier": 2,
+        "done": true
+      },
+      {
+        "name": "Code Beautifier (universal)",
+        "slug": "code-beautifier",
+        "tier": 3,
         "done": true
       },
       {
@@ -897,9 +999,27 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
         "done": true
       },
       {
+        "name": "JSON Diff Checker",
+        "slug": "json-diff-checker",
+        "tier": 2,
+        "done": true
+      },
+      {
+        "name": "JSON Path Tester",
+        "slug": "json-path-tester",
+        "tier": 2,
+        "done": true
+      },
+      {
         "name": "URL Parser",
         "slug": "url-parser",
         "tier": 1,
+        "done": true
+      },
+      {
+        "name": "User Agent Parser",
+        "slug": "user-agent-parser",
+        "tier": 2,
         "done": true
       },
       {
@@ -975,30 +1095,6 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
         "done": true
       },
       {
-        "name": "JSON to CSV",
-        "slug": "json-to-csv",
-        "tier": 2,
-        "done": false
-      },
-      {
-        "name": "CSV to JSON",
-        "slug": "csv-to-json",
-        "tier": 2,
-        "done": false
-      },
-      {
-        "name": "XML Formatter",
-        "slug": "xml-formatter",
-        "tier": 2,
-        "done": false
-      },
-      {
-        "name": "XML to JSON",
-        "slug": "xml-to-json",
-        "tier": 2,
-        "done": false
-      },
-      {
         "name": "YAML Formatter",
         "slug": "yaml-formatter",
         "tier": 2,
@@ -1017,104 +1113,8 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
         "done": false
       },
       {
-        "name": "JWT Generator",
-        "slug": "jwt-generator",
-        "tier": 2,
-        "done": false
-      },
-      {
-        "name": "HTML Minifier",
-        "slug": "html-minifier",
-        "tier": 2,
-        "done": false
-      },
-      {
-        "name": "CSS Minifier",
-        "slug": "css-minifier",
-        "tier": 2,
-        "done": false
-      },
-      {
-        "name": "JS Minifier",
-        "slug": "js-minifier",
-        "tier": 3,
-        "done": false
-      },
-      {
-        "name": "SQL Formatter",
-        "slug": "sql-formatter",
-        "tier": 2,
-        "done": false
-      },
-      {
-        "name": "SQL Minifier",
-        "slug": "sql-minifier",
-        "tier": 2,
-        "done": false
-      },
-      {
-        "name": "Cron Expression Generator",
-        "slug": "cron-expression-generator",
-        "tier": 2,
-        "done": false
-      },
-      {
-        "name": "HTML Formatter / Beautifier",
-        "slug": "html-formatter-beautifier",
-        "tier": 2,
-        "done": false
-      },
-      {
-        "name": "HTML to Markdown",
-        "slug": "html-to-markdown",
-        "tier": 2,
-        "done": false
-      },
-      {
-        "name": "Markdown to HTML",
-        "slug": "markdown-to-html",
-        "tier": 2,
-        "done": false
-      },
-      {
-        "name": "Markdown Previewer",
-        "slug": "markdown-previewer",
-        "tier": 2,
-        "done": false
-      },
-      {
-        "name": "Code Diff Checker",
-        "slug": "code-diff-checker",
-        "tier": 2,
-        "done": false
-      },
-      {
-        "name": "Code Beautifier (universal)",
-        "slug": "code-beautifier",
-        "tier": 3,
-        "done": false
-      },
-      {
-        "name": "JSON Diff Checker",
-        "slug": "json-diff-checker",
-        "tier": 2,
-        "done": false
-      },
-      {
-        "name": "JSON Path Tester",
-        "slug": "json-path-tester",
-        "tier": 2,
-        "done": false
-      },
-      {
         "name": "GraphQL Query Formatter",
         "slug": "graphql-query-formatter",
-        "tier": 2,
-        "done": false
-      },
-      {
-        "name": "User Agent Parser",
-        "slug": "user-agent-parser",
         "tier": 2,
         "done": false
       },
@@ -3681,4 +3681,4 @@ export const ALL_TOOLS: (Tool & { categoryName: string; categorySlug: string })[
   });
 
 export const TOTAL_TOOLS = 574;
-export const TOTAL_TOOLS_DONE = 399;
+export const TOTAL_TOOLS_DONE = 419;

@@ -376,28 +376,28 @@ otherwise. Mark `[x]` here AND flip `done` by re-running `npm run generate:tools
 - [ ] Text Encryptor / Decryptor
 
 ### Developer Tools
-- [ ] JSON to CSV
-- [ ] CSV to JSON
-- [ ] XML Formatter
-- [ ] XML to JSON
+- [x] JSON to CSV
+- [x] CSV to JSON
+- [x] XML Formatter
+- [x] XML to JSON
 - [ ] YAML Formatter
 - [ ] YAML to JSON
 - [ ] JSON to YAML
-- [ ] JWT Generator
-- [ ] HTML Minifier
-- [ ] CSS Minifier
-- [ ] SQL Formatter
-- [ ] SQL Minifier
-- [ ] Cron Expression Generator
-- [ ] HTML Formatter / Beautifier
-- [ ] HTML to Markdown
-- [ ] Markdown to HTML
-- [ ] Markdown Previewer
-- [ ] Code Diff Checker
-- [ ] JSON Diff Checker
-- [ ] JSON Path Tester
+- [x] JWT Generator
+- [x] HTML Minifier
+- [x] CSS Minifier
+- [x] SQL Formatter
+- [x] SQL Minifier
+- [x] Cron Expression Generator
+- [x] HTML Formatter / Beautifier
+- [x] HTML to Markdown
+- [x] Markdown to HTML
+- [x] Markdown Previewer
+- [x] Code Diff Checker
+- [x] JSON Diff Checker
+- [x] JSON Path Tester
 - [ ] GraphQL Query Formatter
-- [ ] User Agent Parser
+- [x] User Agent Parser
 
 ### Video Tools
 - [x] Screen Recorder
@@ -537,8 +537,8 @@ otherwise. Mark `[x]` here AND flip `done` by re-running `npm run generate:tools
 - [x] Image Noise Reducer
 
 ### Developer Tools
-- [ ] JS Minifier
-- [ ] Code Beautifier (universal)
+- [x] JS Minifier
+- [x] Code Beautifier (universal)
 
 ### Video Tools
 - [x] Video Trimmer

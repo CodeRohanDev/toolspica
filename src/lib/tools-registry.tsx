@@ -401,6 +401,26 @@ import { PomodoroTimer } from "@/components/tools/pomodoro-timer";
 import { OnlineStopwatch } from "@/components/tools/online-stopwatch";
 import { CountdownToDateWidget } from "@/components/tools/countdown-to-date-widget";
 import { WorkDaysCalculator } from "@/components/tools/work-days-calculator";
+import { JsonToCsv } from "@/components/tools/json-to-csv";
+import { CsvToJson } from "@/components/tools/csv-to-json";
+import { XmlFormatter } from "@/components/tools/xml-formatter";
+import { XmlToJson } from "@/components/tools/xml-to-json";
+import { JwtGenerator } from "@/components/tools/jwt-generator";
+import { HtmlMinifier } from "@/components/tools/html-minifier";
+import { CssMinifier } from "@/components/tools/css-minifier";
+import { SqlFormatter } from "@/components/tools/sql-formatter";
+import { SqlMinifier } from "@/components/tools/sql-minifier";
+import { CronExpressionGenerator } from "@/components/tools/cron-expression-generator";
+import { HtmlFormatterBeautifier } from "@/components/tools/html-formatter-beautifier";
+import { HtmlToMarkdown } from "@/components/tools/html-to-markdown";
+import { MarkdownToHtml } from "@/components/tools/markdown-to-html";
+import { MarkdownPreviewer } from "@/components/tools/markdown-previewer";
+import { CodeDiffChecker } from "@/components/tools/code-diff-checker";
+import { CodeBeautifier } from "@/components/tools/code-beautifier";
+import { JsonDiffChecker } from "@/components/tools/json-diff-checker";
+import { JsonPathTester } from "@/components/tools/json-path-tester";
+import { UserAgentParser } from "@/components/tools/user-agent-parser";
+import { JsMinifier } from "@/components/tools/js-minifier";
 import { wordCounterContent } from "@/lib/tools-content/word-counter";
 import { characterCounterContent } from "@/lib/tools-content/character-counter";
 import { caseConverterContent } from "@/lib/tools-content/case-converter";
@@ -800,6 +820,26 @@ import { pomodoroTimerContent } from "@/lib/tools-content/pomodoro-timer";
 import { onlineStopwatchContent } from "@/lib/tools-content/online-stopwatch";
 import { countdownToDateWidgetContent } from "@/lib/tools-content/countdown-to-date-widget";
 import { workDaysCalculatorContent } from "@/lib/tools-content/work-days-calculator";
+import { jsonToCsvContent } from "@/lib/tools-content/json-to-csv";
+import { csvToJsonContent } from "@/lib/tools-content/csv-to-json";
+import { xmlFormatterContent } from "@/lib/tools-content/xml-formatter";
+import { xmlToJsonContent } from "@/lib/tools-content/xml-to-json";
+import { jwtGeneratorContent } from "@/lib/tools-content/jwt-generator";
+import { htmlMinifierContent } from "@/lib/tools-content/html-minifier";
+import { cssMinifierContent } from "@/lib/tools-content/css-minifier";
+import { sqlFormatterContent } from "@/lib/tools-content/sql-formatter";
+import { sqlMinifierContent } from "@/lib/tools-content/sql-minifier";
+import { cronExpressionGeneratorContent } from "@/lib/tools-content/cron-expression-generator";
+import { htmlFormatterBeautifierContent } from "@/lib/tools-content/html-formatter-beautifier";
+import { htmlToMarkdownContent } from "@/lib/tools-content/html-to-markdown";
+import { markdownToHtmlContent } from "@/lib/tools-content/markdown-to-html";
+import { markdownPreviewerContent } from "@/lib/tools-content/markdown-previewer";
+import { codeDiffCheckerContent } from "@/lib/tools-content/code-diff-checker";
+import { codeBeautifierContent } from "@/lib/tools-content/code-beautifier";
+import { jsonDiffCheckerContent } from "@/lib/tools-content/json-diff-checker";
+import { jsonPathTesterContent } from "@/lib/tools-content/json-path-tester";
+import { userAgentParserContent } from "@/lib/tools-content/user-agent-parser";
+import { jsMinifierContent } from "@/lib/tools-content/js-minifier";
 
 export interface RegisteredTool {
   Component: ComponentType;
@@ -1569,6 +1609,26 @@ export const TOOLS_REGISTRY: Record<string, RegisteredTool> = {
   "online-stopwatch": { Component: OnlineStopwatch, content: onlineStopwatchContent },
   "countdown-to-date-widget": { Component: CountdownToDateWidget, content: countdownToDateWidgetContent },
   "work-days-calculator": { Component: WorkDaysCalculator, content: workDaysCalculatorContent },
+  "json-to-csv": { Component: JsonToCsv, content: jsonToCsvContent },
+  "csv-to-json": { Component: CsvToJson, content: csvToJsonContent },
+  "xml-formatter": { Component: XmlFormatter, content: xmlFormatterContent },
+  "xml-to-json": { Component: XmlToJson, content: xmlToJsonContent },
+  "jwt-generator": { Component: JwtGenerator, content: jwtGeneratorContent },
+  "html-minifier": { Component: HtmlMinifier, content: htmlMinifierContent },
+  "css-minifier": { Component: CssMinifier, content: cssMinifierContent },
+  "sql-formatter": { Component: SqlFormatter, content: sqlFormatterContent },
+  "sql-minifier": { Component: SqlMinifier, content: sqlMinifierContent },
+  "cron-expression-generator": { Component: CronExpressionGenerator, content: cronExpressionGeneratorContent },
+  "html-formatter-beautifier": { Component: HtmlFormatterBeautifier, content: htmlFormatterBeautifierContent },
+  "html-to-markdown": { Component: HtmlToMarkdown, content: htmlToMarkdownContent },
+  "markdown-to-html": { Component: MarkdownToHtml, content: markdownToHtmlContent },
+  "markdown-previewer": { Component: MarkdownPreviewer, content: markdownPreviewerContent },
+  "code-diff-checker": { Component: CodeDiffChecker, content: codeDiffCheckerContent },
+  "code-beautifier": { Component: CodeBeautifier, content: codeBeautifierContent },
+  "json-diff-checker": { Component: JsonDiffChecker, content: jsonDiffCheckerContent },
+  "json-path-tester": { Component: JsonPathTester, content: jsonPathTesterContent },
+  "user-agent-parser": { Component: UserAgentParser, content: userAgentParserContent },
+  "js-minifier": { Component: JsMinifier, content: jsMinifierContent },
 };
 
 export function getRegisteredTool(slug: string): RegisteredTool | undefined {
