@@ -1,0 +1,9 @@
+/sitemap.xml
+  - 2,000 URLs ✅
+  - 10,000 URLs ✅
+  - 50,000 URLs ✅
+
+/sitemap-index.xml
+  - sitemap-posts.xml
+  - sitemap-products.xml
+  - sitemap-categories.xml

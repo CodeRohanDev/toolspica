@@ -1,0 +1,59 @@
+import type { ToolContent } from "./types";
+
+export const randomTextGeneratorContent: ToolContent = {
+  overview: [
+    "A random text generator produces filler content the same way a Lorem Ipsum generator does, but with one key difference: instead of Latin-derived placeholder words, it assembles readable, English-language sentences from a bank of everyday business and workplace vocabulary — subjects like \"the team\" or \"our customers\", actions like \"reviewed\" or \"launched\", and objects like \"the dashboard\" or \"the release notes\". The result reads like plausible (if slightly repetitive) real-world sentences rather than classical-Latin-flavored gibberish, which makes it a better fit for situations where you specifically need filler that looks like genuine English content rather than obviously-fake placeholder text.",
+    "That distinction matters more than it might seem. Lorem Ipsum is instantly recognizable as placeholder text to anyone who has worked in design or publishing, which is exactly the point when you want reviewers to know a page isn't finished. But sometimes you need the opposite: test data for a search index, a demo environment that needs to look populated with realistic-sounding activity logs, sample rows for a table or CSV that needs readable (if fake) English strings, or dummy comments and reviews for a UI prototype where Latin placeholder text would look obviously wrong and break the illusion of a working product.",
+    "This generator works in the same three units as a typical text generator — words, sentences, or paragraphs — with a count you control. Sentences are constructed by randomly combining a subject, a verb, an object, and a closing phrase from four separate word banks, which keeps the grammar structurally consistent (subject-verb-object-modifier) while still producing a large number of distinct combinations rather than repeating the same handful of fixed sentences. Paragraphs bundle 3 to 5 of these sentences together.",
+    "Everything runs client-side using JavaScript's Math.random(), regenerating a fresh combination every time you click Generate, with no limit on how many words, sentences, or paragraphs you request in one go.",
+  ],
+  howItWorks: [
+    {
+      title: "Pick a unit",
+      description: "Choose whether you want random words, full sentences, or paragraphs.",
+    },
+    {
+      title: "Set how many",
+      description: "Enter the count you need for your test data or mockup.",
+    },
+    {
+      title: "Generate and copy",
+      description: "Click Generate for a new random combination, then copy the result.",
+    },
+  ],
+  examples: [
+    {
+      label: "3 sentences",
+      input: "Unit: sentences, Count: 3",
+      output:
+        "The team reviewed the dashboard before the deadline. Our customers tested the onboarding flow without any issues. The new system improved the search results ahead of schedule.",
+    },
+  ],
+  faqs: [
+    {
+      question: "How is this different from the Lorem Ipsum Generator?",
+      answer:
+        "Lorem Ipsum produces Latin-derived placeholder text that's deliberately meant to look like non-language filler. This tool produces grammatically structured English sentences from a real vocabulary bank, which is better suited for demos, mock activity feeds, or test data that needs to look like genuine (if generic) written content.",
+    },
+    {
+      question: "Will the sentences ever repeat exactly?",
+      answer:
+        "It's possible but unlikely for short outputs, since each sentence randomly combines one of several subjects, verbs, objects, and closing phrases — with dozens of possible combinations per sentence, exact repeats become rarer the more you generate, though not mathematically impossible.",
+    },
+    {
+      question: "Can I use this to generate realistic-looking test data for a database?",
+      answer:
+        "It works well for short text fields like activity log entries, comments, or descriptions where the content just needs to look like plausible English. For structured data like names, emails, or addresses, a dedicated fake-data generator built for that purpose will give more realistic results.",
+    },
+    {
+      question: "Why do all the sentences follow a similar structure?",
+      answer:
+        "Each sentence is built from the same four-part template (subject, verb, object, closing phrase) to keep the grammar reliably correct across every random combination. The tradeoff is that longer outputs can feel somewhat repetitive in rhythm, even though the specific words vary — a reasonable tradeoff for a lightweight, dependency-free generator.",
+    },
+    {
+      question: "Is this text safe to use publicly, or could it accidentally resemble something copyrighted?",
+      answer:
+        "The vocabulary and sentence structures are generic, everyday business language randomly recombined — there's no meaningful risk of it matching a real, copyrighted passage, unlike text generated by scraping or paraphrasing an existing source.",
+    },
+  ],
+};

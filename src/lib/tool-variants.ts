@@ -1,0 +1,17469 @@
+// Programmatic SEO landing pages: each variant renders the exact same
+// underlying tool (same engine, same Component, same FAQ/examples) at a
+// different root-level URL, with genuinely distinct H1/intro/meta copy
+// targeting a different real search query and audience. This is what
+// instruction.md's "Dynamic SEO Landing Pages" strategy is — NOT doorway
+// pages with swapped headlines: each variant's intro paragraph must say
+// something a generic tool page doesn't, or don't add it.
+//
+// Add new variants here; wire the target tool into TOOLS_REGISTRY first.
+
+export interface ToolVariant {
+  slug: string;
+  toolSlug: string;
+  h1: string;
+  subtitle: string;
+  metaTitle: string;
+  metaDescription: string;
+  introParagraph: string;
+}
+
+export const TOOL_VARIANTS: ToolVariant[] = [
+  {
+    slug: "essay-word-counter",
+    toolSlug: "word-counter",
+    h1: "Essay Word Counter",
+    subtitle: "Check Your Essay's Word Count Before You Submit It",
+    metaTitle: "Essay Word Counter — Free, Instant Word Count Checker",
+    metaDescription:
+      "Free essay word counter for students. Instantly check if your essay meets a 250, 500, 1000, or 1500-word requirement, plus character and paragraph counts.",
+    introParagraph:
+      "Most essay assignments and scholarship applications come with a hard word limit — 250, 500, 1000, sometimes an exact range like \"800-1000 words.\" Paste your essay in and get an instant, accurate word count, so you know immediately whether you need to trim it down or add more, without submitting first and finding out you're over the limit.",
+  },
+  {
+    slug: "blog-word-counter",
+    toolSlug: "word-counter",
+    h1: "Blog Word Counter",
+    subtitle: "Check Word Count & Reading Time for SEO-Friendly Posts",
+    metaTitle: "Blog Word Counter — Word Count & Reading Time for Bloggers",
+    metaDescription:
+      "Free blog word counter with reading time estimate. Check your post's length against SEO best practices before publishing.",
+    introParagraph:
+      "Longer, more thorough blog posts tend to rank better for competitive keywords — a common SEO guideline is 1,000+ words for a post to have a real shot at ranking, though the right length always depends on the topic and search intent. This tool gives you an instant word count and estimated reading time as you draft, so you can gauge whether your post has enough depth before you hit publish.",
+  },
+  {
+    slug: "character-and-word-counter",
+    toolSlug: "word-counter",
+    h1: "Character and Word Counter",
+    subtitle: "Count Both Characters and Words in One Place",
+    metaTitle: "Character and Word Counter — Free Online Tool",
+    metaDescription:
+      "Free tool that counts both characters and words simultaneously, with and without spaces, plus sentences and paragraphs — all updating live as you type.",
+    introParagraph:
+      "Sometimes you need both numbers at once — a word count for a content requirement and a character count for a platform's strict limit. This tool tracks both simultaneously, along with sentence and paragraph counts, so you don't need to switch between two separate tools to get the full picture of your text.",
+  },
+  {
+    slug: "reading-time-calculator",
+    toolSlug: "word-counter",
+    h1: "Reading Time Calculator",
+    subtitle: "Estimate How Long an Article Takes to Read",
+    metaTitle: "Reading Time Calculator — Free Estimated Read Time Tool",
+    metaDescription:
+      "Free reading time calculator based on average adult reading speed. Paste your article to see estimated read time, plus word and character counts.",
+    introParagraph:
+      "\"5 min read\" labels at the top of articles are calculated from a simple average: roughly 200 words per minute for adult silent reading of general, non-technical text. Paste your article in and this tool calculates that estimate instantly, alongside the full word count it's based on — useful for bloggers, newsletter writers, and anyone who wants to set reader expectations before they click in.",
+  },
+  {
+    slug: "word-count-checker",
+    toolSlug: "word-counter",
+    h1: "Word Count Checker",
+    subtitle: "Instantly Check the Word Count of Any Text",
+    metaTitle: "Word Count Checker — Free Instant Word Counter",
+    metaDescription:
+      "Free word count checker. Paste any text — an email, a caption, a report — and instantly see its word count, character count, and reading time.",
+    introParagraph:
+      "Whether it's an email that needs to stay concise, a social media caption bumping against a length guideline, or a report that needs to hit a target word count, this tool gives you an instant, exact count the moment you paste your text in — no waiting, no uploading, no guessing.",
+  },
+  {
+    slug: "sentence-counter",
+    toolSlug: "word-counter",
+    h1: "Sentence Counter",
+    subtitle: "Count the Number of Sentences in Your Text",
+    metaTitle: "Sentence Counter — Free Online Sentence Count Tool",
+    metaDescription:
+      "Free sentence counter. Paste your text to instantly see how many sentences it contains, alongside word, character, and paragraph counts.",
+    introParagraph:
+      "Sentence count is a useful, often-overlooked signal for readability — writing with very long average sentence length can read as dense or hard to follow, while checking a specific sentence count matters for some structured writing exercises and assignments. This tool counts sentences by detecting terminal punctuation (periods, question marks, exclamation points), alongside full word and character counts.",
+  },
+  {
+    slug: "character-limit-checker",
+    toolSlug: "character-counter",
+    h1: "Character Limit Checker",
+    subtitle: "Check Your Text Against Twitter, SMS & Meta Tag Limits",
+    metaTitle: "Character Limit Checker — Twitter, SMS & Meta Tag Limits",
+    metaDescription:
+      "Free character limit checker for Twitter/X (280), SMS (160), meta titles (60), and more. See exactly how many characters you have left as you type.",
+    introParagraph:
+      "Every platform enforces a different character limit — 280 for an X post, 160 for a single SMS segment, roughly 60 for a meta title before Google truncates it. This tool shows live progress bars against each of these common limits as you type, so you know exactly how much room you have left before you hit publish or send.",
+  },
+  {
+    slug: "online-character-counter",
+    toolSlug: "character-counter",
+    h1: "Online Character Counter",
+    subtitle: "Count Characters, Words & Bytes Instantly",
+    metaTitle: "Online Character Counter — Free, Instant, No Sign-Up",
+    metaDescription:
+      "Free online character counter. Paste any text to instantly see its character count (with and without spaces), word count, and byte size.",
+    introParagraph:
+      "A character counter measures length in characters rather than words — the number that actually matters for form fields, bios, captions, and any input with a strict character cap. This tool counts instantly as you type or paste, with no character limit of its own and no sign-up required.",
+  },
+  {
+    slug: "sms-character-counter",
+    toolSlug: "character-counter",
+    h1: "SMS Character Counter",
+    subtitle: "Check How Many SMS Segments Your Message Will Use",
+    metaTitle: "SMS Character Counter — Check Text Message Length & Segments",
+    metaDescription:
+      "Free SMS character counter. Check your message against the standard 160-character single-segment limit before it splits into multiple texts.",
+    introParagraph:
+      "A standard SMS segment holds 160 characters (or as few as 70 if it contains certain emoji or non-Latin characters) — go over that, and your message typically splits into multiple linked segments, which can affect delivery and cost depending on your carrier or SMS platform. This tool shows exactly where your message stands against that limit as you type.",
+  },
+  {
+    slug: "instagram-bio-character-counter",
+    toolSlug: "character-counter",
+    h1: "Instagram Bio Character Counter",
+    subtitle: "Check Your Bio Against Instagram's 150-Character Limit",
+    metaTitle: "Instagram Bio Character Counter — Free Online Tool",
+    metaDescription:
+      "Free Instagram bio character counter. Check your bio text against Instagram's 150-character limit before saving it to your profile.",
+    introParagraph:
+      "Instagram caps bios at 150 characters, and going over means the platform simply won't save your edit — a frustrating surprise if you've already crafted the wording. Type your bio in and this tool shows your exact count against that limit as you type, so you know before you hit save.",
+  },
+  {
+    slug: "meta-description-length-checker",
+    toolSlug: "character-counter",
+    h1: "Meta Description Length Checker",
+    subtitle: "Check Your Meta Description Against Google's Display Limit",
+    metaTitle: "Meta Description Length Checker — Free SEO Tool",
+    metaDescription:
+      "Free meta description length checker. Check your SEO meta description against Google's roughly 155-160 character display limit before it gets truncated.",
+    introParagraph:
+      "Google typically truncates a meta description around 155-160 characters in search results, cutting off anything past that with an ellipsis — often mid-sentence, in a way that reads awkwardly. Paste your draft description in and this tool shows the live character count, so you can trim it before it ships.",
+  },
+  {
+    slug: "uppercase-to-lowercase-converter",
+    toolSlug: "case-converter",
+    h1: "Uppercase to Lowercase Converter",
+    subtitle: "Convert Shouty Capitals Back to Normal Text",
+    metaTitle: "Uppercase to Lowercase Converter — Free Online Tool",
+    metaDescription:
+      "Free uppercase to lowercase converter. Paste text typed in all caps (like from a CapsLock accident) and instantly convert it back to normal lowercase.",
+    introParagraph:
+      "Typed a whole paragraph with CapsLock stuck on, or pasted text from a source that stores everything in capitals? This tool flips it straight to lowercase in one click, with no need to retype anything — and the other case options are right there if you need Title Case or Sentence case instead.",
+  },
+  {
+    slug: "text-capitalization-tool",
+    toolSlug: "case-converter",
+    h1: "Text Capitalization Tool",
+    subtitle: "Switch Between UPPERCASE, lowercase, Title Case & More",
+    metaTitle: "Text Capitalization Tool — UPPERCASE, lowercase, Title Case",
+    metaDescription:
+      "Free text capitalization tool. Convert any text between UPPERCASE, lowercase, Title Case, Sentence case, and aLtErNaTiNg case instantly.",
+    introParagraph:
+      "Writers, editors, and social media managers switch text capitalization constantly — a headline needs Title Case, a caption needs Sentence case, a heading in a style guide might demand full UPPERCASE. This tool applies any of those conversions instantly to text of any length, with the converted result ready to copy right away.",
+  },
+  {
+    slug: "camelcase-to-snakecase-converter",
+    toolSlug: "case-converter",
+    h1: "camelCase to snake_case Converter",
+    subtitle: "Convert Variable Naming Conventions Instantly",
+    metaTitle: "camelCase to snake_case Converter — Free Developer Tool",
+    metaDescription:
+      "Free camelCase, PascalCase, snake_case, and kebab-case converter for developers renaming variables between coding style conventions.",
+    introParagraph:
+      "Different languages and style guides enforce different variable naming conventions — JavaScript typically favors camelCase, Python favors snake_case, and CSS classes often use kebab-case. This tool converts identifiers between all of these formats instantly, which is faster and less error-prone than hand-editing every variable name when porting code between languages or conforming to a linter rule.",
+  },
+  {
+    slug: "mocking-spongebob-case-generator",
+    toolSlug: "case-converter",
+    h1: "Mocking SpongeBob Case Generator",
+    subtitle: "Turn Text Into aLtErNaTiNg CaSe for Memes",
+    metaTitle: "Mocking SpongeBob Case Generator — Free Meme Text Tool",
+    metaDescription:
+      "Free Mocking SpongeBob case generator. Turn any text into aLtErNaTiNg CaPiTaLs, the sarcastic meme text format, instantly.",
+    introParagraph:
+      "The \"Mocking SpongeBob\" meme format — text with rAnDoMlY aLtErNaTiNg capitalization — is used to convey sarcasm in comments, captions, and replies across nearly every platform. Type your text in and this tool converts it into that exact alternating-case format instantly, ready to paste.",
+  },
+  {
+    slug: "pascal-case-converter",
+    toolSlug: "case-converter",
+    h1: "PascalCase Converter",
+    subtitle: "Convert Text or Variable Names Into PascalCase",
+    metaTitle: "PascalCase Converter — Free Developer Tool",
+    metaDescription:
+      "Free PascalCase converter. Convert any text, variable name, or phrase into PascalCase (UpperCamelCase), the convention used for class and component names.",
+    introParagraph:
+      "PascalCase — where every word, including the first, starts with a capital letter — is the standard naming convention for classes in most object-oriented languages and for component names in frameworks like React. This tool converts any text or existing identifier into correct PascalCase instantly.",
+  },
+  {
+    slug: "url-slug-generator",
+    toolSlug: "slug-generator",
+    h1: "URL Slug Generator",
+    subtitle: "Turn Any Title Into a Clean, SEO-Friendly URL",
+    metaTitle: "URL Slug Generator — Free SEO-Friendly URL Creator",
+    metaDescription:
+      "Free URL slug generator. Turn any blog title or page heading into a clean, lowercase, hyphenated URL slug ready to paste into your CMS.",
+    introParagraph:
+      "A clean URL slug — lowercase, hyphenated, no special characters — is a small but real SEO factor, and it's what most CMS platforms expect in the permalink field anyway. Paste in your post title or page heading and this tool strips punctuation, converts spaces to hyphens, and lowercases everything automatically, so you can copy the result straight into WordPress, Shopify, or wherever you're publishing.",
+  },
+  {
+    slug: "blog-post-slug-generator",
+    toolSlug: "slug-generator",
+    h1: "Blog Post Slug Generator",
+    subtitle: "Generate a Short, Keyword-Friendly Slug for Your Post",
+    metaTitle: "Blog Post Slug Generator — Free Online Tool for Bloggers",
+    metaDescription:
+      "Free blog post slug generator for WordPress, Ghost, and other CMS platforms. Converts your post title into a short, clean, keyword-friendly slug.",
+    introParagraph:
+      "Long, unedited slugs — WordPress's default is often the full post title — can hurt both readability and keyword focus in the URL. Paste your title in and this tool generates the hyphenated slug version instantly, letting you trim it down to just the target keywords before you paste it into your CMS's permalink field.",
+  },
+  {
+    slug: "wordpress-permalink-generator",
+    toolSlug: "slug-generator",
+    h1: "WordPress Permalink Generator",
+    subtitle: "Generate a Clean Permalink Slug for Any WordPress Post",
+    metaTitle: "WordPress Permalink Generator — Free Online Tool",
+    metaDescription:
+      "Free WordPress permalink generator. Convert any post or page title into a clean, SEO-friendly permalink slug ready to paste into WordPress.",
+    introParagraph:
+      "WordPress's default permalink is often the entire post title left un-edited, which is longer and less focused than the SEO best practice of a short, keyword-targeted permalink. Paste your title in and this tool generates the clean slug version, ready to override WordPress's default in the permalink field.",
+  },
+  {
+    slug: "product-url-slug-generator",
+    toolSlug: "slug-generator",
+    h1: "Product URL Slug Generator",
+    subtitle: "Generate Clean URL Slugs for E-Commerce Product Pages",
+    metaTitle: "Product URL Slug Generator — Free Online Tool",
+    metaDescription:
+      "Free product URL slug generator for e-commerce. Convert product names into clean, SEO-friendly slugs for Shopify, WooCommerce, or any storefront.",
+    introParagraph:
+      "A product name with sizes, model numbers, and special characters (like \"Men's Running Shoe — Size 10, Blue/Gray\") makes for a messy, unreadable product URL if used as-is. This tool converts it into a clean slug instantly, ready for a Shopify, WooCommerce, or custom storefront product page.",
+  },
+  {
+    slug: "lorem-ipsum-paragraph-generator",
+    toolSlug: "lorem-ipsum-generator",
+    h1: "Lorem Ipsum Paragraph Generator",
+    subtitle: "Generate Placeholder Paragraphs for Mockups & Layouts",
+    metaTitle: "Lorem Ipsum Paragraph Generator — Free Placeholder Text",
+    metaDescription:
+      "Free Lorem Ipsum paragraph generator. Generate any number of placeholder paragraphs for design mockups, CMS testing, or print layouts.",
+    introParagraph:
+      "Designers need realistic-looking body copy to test how a layout handles real paragraph lengths and line breaks, without waiting on final copy from a client or writer. This tool generates however many Lorem Ipsum paragraphs you need in one click, ready to drop straight into Figma, a CMS, or a print layout as a stand-in.",
+  },
+  {
+    slug: "dummy-text-generator",
+    toolSlug: "lorem-ipsum-generator",
+    h1: "Dummy Text Generator",
+    subtitle: "Generate Filler Text for Wireframes & Prototypes",
+    metaTitle: "Dummy Text Generator — Free Filler Text for Designers",
+    metaDescription:
+      "Free dummy text generator for wireframes and prototypes. Generate placeholder words, sentences, or paragraphs of classic Lorem Ipsum text.",
+    introParagraph:
+      "Early wireframes and prototypes rarely have final copy ready, but empty text boxes make it impossible to judge spacing, font size, or line height. This tool generates dummy Lorem Ipsum text by word count, sentence count, or paragraph count, so you can fill a layout with realistic-length filler in seconds.",
+  },
+  {
+    slug: "lorem-ipsum-word-generator",
+    toolSlug: "lorem-ipsum-generator",
+    h1: "Lorem Ipsum Word Generator",
+    subtitle: "Generate an Exact Word Count of Lorem Ipsum Text",
+    metaTitle: "Lorem Ipsum Word Generator — Free Online Tool",
+    metaDescription:
+      "Free Lorem Ipsum word generator. Generate an exact number of Lorem Ipsum words, useful for testing a strict word-count field or character limit.",
+    introParagraph:
+      "Testing how a text field, database column, or design element handles an exact word count needs filler text sized precisely, not just \"a few paragraphs.\" This tool generates Lorem Ipsum by an exact word count you specify, giving you precise, repeatable test content.",
+  },
+  {
+    slug: "figma-placeholder-text-generator",
+    toolSlug: "lorem-ipsum-generator",
+    h1: "Placeholder Text Generator for Figma",
+    subtitle: "Generate Lorem Ipsum Text to Paste Into Design Mockups",
+    metaTitle: "Placeholder Text Generator for Figma — Free Tool",
+    metaDescription:
+      "Free Lorem Ipsum generator built for designers filling Figma, Sketch, or Adobe XD mockups with realistic-length placeholder body copy.",
+    introParagraph:
+      "Testing how a Figma or Sketch layout handles real paragraph lengths and line wraps means filling it with text of a realistic length, not a single placeholder word repeated. This tool generates any number of Lorem Ipsum paragraphs on demand, ready to copy straight into your design tool's text layer.",
+  },
+  {
+    slug: "remove-duplicate-words",
+    toolSlug: "remove-duplicate-lines",
+    h1: "Remove Duplicate Words",
+    subtitle: "Strip Repeated Lines From a List Instantly",
+    metaTitle: "Remove Duplicate Words / Lines — Free Online Tool",
+    metaDescription:
+      "Free tool to remove duplicate lines from any list — email lists, keyword lists, usernames — leaving only unique entries, one per line.",
+    introParagraph:
+      "Merged spreadsheets, combined mailing lists, and scraped keyword lists almost always end up with repeated entries. Paste your list in and this tool strips every duplicate line, keeping just the first occurrence of each unique entry, so you're left with a clean list with no manual scanning required.",
+  },
+  {
+    slug: "unique-line-extractor",
+    toolSlug: "remove-duplicate-lines",
+    h1: "Unique Line Extractor",
+    subtitle: "Extract Only the Unique Lines From Any Text List",
+    metaTitle: "Unique Line Extractor — Free Duplicate Line Remover",
+    metaDescription:
+      "Free unique line extractor. Paste any list and get back only the lines that appear once, with all duplicates removed automatically.",
+    introParagraph:
+      "Whether you're cleaning a CSV export, a list of email addresses, or a set of URLs pulled from multiple sources, finding duplicates by eye in a long list is slow and error-prone. This tool compares every line and returns only the unique ones instantly, with the option to ignore case differences when two lines only differ by capitalization.",
+  },
+  {
+    slug: "remove-duplicate-emails-from-list",
+    toolSlug: "remove-duplicate-lines",
+    h1: "Remove Duplicate Emails From a List",
+    subtitle: "Clean a Merged Mailing List Down to Unique Addresses",
+    metaTitle: "Remove Duplicate Emails From List — Free Online Tool",
+    metaDescription:
+      "Free tool to remove duplicate email addresses from a mailing list. Paste your list, one address per line, and get back only unique entries.",
+    introParagraph:
+      "Merging mailing lists from multiple signup forms or export files almost always produces repeated email addresses, which can trigger duplicate-send warnings or inflate your subscriber count inaccurately. Paste your list in, one email per line, and this tool strips every duplicate automatically.",
+  },
+  {
+    slug: "csv-duplicate-remover",
+    toolSlug: "remove-duplicate-lines",
+    h1: "CSV Duplicate Row Remover",
+    subtitle: "Remove Duplicate Rows From a Pasted CSV Column",
+    metaTitle: "CSV Duplicate Remover — Free Online Tool",
+    metaDescription:
+      "Free CSV duplicate remover. Paste a single column copied from a spreadsheet and instantly strip out every repeated row, leaving unique values only.",
+    introParagraph:
+      "A spreadsheet column copied out for cleanup — customer names, SKUs, order IDs — often carries duplicate rows from a bad merge or export. Paste the column in as plain text and this tool removes every duplicate, ready to paste back into your spreadsheet clean.",
+  },
+  {
+    slug: "sort-lines-alphabetically",
+    toolSlug: "sort-lines",
+    h1: "Sort Lines Alphabetically",
+    subtitle: "Sort Any List of Lines A-Z, Z-A, or by Length",
+    metaTitle: "Sort Lines Alphabetically — Free Online List Sorter",
+    metaDescription:
+      "Free tool to sort lines of text alphabetically (A-Z or Z-A), numerically, or by length. Paste a list and get it sorted instantly.",
+    introParagraph:
+      "A raw list of names, keywords, or file paths is far easier to scan and audit once it's sorted — but doing it by hand in a text editor means selecting, cutting, and manually reordering lines one at a time. This tool sorts any pasted list alphabetically, in reverse, or by line length in a single click.",
+  },
+  {
+    slug: "alphabetical-order-generator",
+    toolSlug: "sort-lines",
+    h1: "Alphabetical Order Generator",
+    subtitle: "Put Any List of Words or Names Into A-Z Order",
+    metaTitle: "Alphabetical Order Generator — Free List Sorting Tool",
+    metaDescription:
+      "Free alphabetical order generator. Paste a list of names, words, or items and instantly arrange them from A to Z (or Z to A).",
+    introParagraph:
+      "Students alphabetizing a bibliography, teachers organizing a class roster, and anyone tidying up a reference list all run into the same tedious task: manual alphabetical sorting. Paste the list in and this tool arranges it from A to Z (or reverses it to Z to A) instantly, with duplicate and blank lines handled cleanly.",
+  },
+  {
+    slug: "sort-numbers-in-list",
+    toolSlug: "sort-lines",
+    h1: "Sort Numbers in a List",
+    subtitle: "Sort a List of Numbers Numerically, Not Alphabetically",
+    metaTitle: "Sort Numbers in a List — Free Online Tool",
+    metaDescription:
+      "Free tool to sort a list of numbers numerically. Fixes the common problem where alphabetical sorting puts \"10\" before \"2\".",
+    introParagraph:
+      "Sorting a list of numbers alphabetically produces a wrong-looking order — \"10\" sorts before \"2\" because it compares digit by digit as text, not by actual numeric value. This tool's numeric sort mode compares the actual value of each line instead, producing the correct 1, 2, 3...10 order.",
+  },
+  {
+    slug: "reverse-alphabetical-order-tool",
+    toolSlug: "sort-lines",
+    h1: "Reverse Alphabetical Order Tool",
+    subtitle: "Sort Any List From Z to A Instantly",
+    metaTitle: "Reverse Alphabetical Order Tool — Free Online Tool",
+    metaDescription:
+      "Free tool to sort a list in reverse alphabetical order, from Z to A. Paste any list of words or names and get it reverse-sorted instantly.",
+    introParagraph:
+      "Some reference lists and rankings are conventionally shown Z-to-A rather than the standard A-to-Z — reverse-chronological version numbers, certain leaderboard styles, or just a specific formatting requirement. This tool sorts your pasted list in that exact reverse order in one click.",
+  },
+  {
+    slug: "find-and-replace-text-tool",
+    toolSlug: "find-and-replace",
+    h1: "Find and Replace Text Tool",
+    subtitle: "Replace Every Occurrence of a Word or Phrase Instantly",
+    metaTitle: "Find and Replace Text Tool — Free Online Bulk Text Replace",
+    metaDescription:
+      "Free find and replace tool. Replace every occurrence of a word or phrase in a block of text at once, with case-sensitive and whole-word options.",
+    introParagraph:
+      "Renaming a product, fixing a repeated typo, or swapping a placeholder value across a long document by hand means hunting down every occurrence one at a time. This tool replaces every match in your pasted text in a single pass, with options for case sensitivity and whole-word-only matching so you don't accidentally replace part of a longer word.",
+  },
+  {
+    slug: "bulk-text-replacer",
+    toolSlug: "find-and-replace",
+    h1: "Bulk Text Replacer",
+    subtitle: "Swap Words or Phrases Across an Entire Document",
+    metaTitle: "Bulk Text Replacer — Free Find & Replace Tool",
+    metaDescription:
+      "Free bulk text replacer for swapping a word or phrase throughout an entire document, list, or script in one operation.",
+    introParagraph:
+      "Content templates, scripts, and exported data files often need the same value swapped out in dozens of places — a client name, a variable, a boilerplate phrase. This tool applies one find-and-replace operation across the entire pasted text at once, saving the repetitive manual edits a text editor's single-match replace would otherwise require.",
+  },
+  {
+    slug: "case-sensitive-find-and-replace",
+    toolSlug: "find-and-replace",
+    h1: "Case-Sensitive Find and Replace",
+    subtitle: "Replace Text While Matching Exact Capitalization Only",
+    metaTitle: "Case-Sensitive Find and Replace — Free Online Tool",
+    metaDescription:
+      "Free case-sensitive find and replace tool. Replace only exact-case matches, leaving text with different capitalization untouched.",
+    introParagraph:
+      "A standard find-and-replace can accidentally catch \"Product\" when you only meant to replace \"product\", silently breaking capitalized instances you wanted left alone. This tool's case-sensitive mode matches only the exact capitalization you specify, leaving everything else untouched.",
+  },
+  {
+    slug: "whole-word-replace-tool",
+    toolSlug: "find-and-replace",
+    h1: "Whole Word Replace Tool",
+    subtitle: "Replace Only Whole-Word Matches, Not Partial Substrings",
+    metaTitle: "Whole Word Replace Tool — Free Online Tool",
+    metaDescription:
+      "Free whole-word find and replace tool. Replace a word only when it appears as a complete word, not as part of a longer word.",
+    introParagraph:
+      "Replacing \"cat\" without whole-word matching also silently rewrites part of \"category\" or \"concatenate\" — a classic find-and-replace mistake. This tool's whole-word option only matches your search term when it appears as a complete, standalone word.",
+  },
+  {
+    slug: "backwards-text-generator",
+    toolSlug: "text-reverser",
+    h1: "Backwards Text Generator",
+    subtitle: "Flip Any Sentence Into Mirror-Image Backwards Text",
+    metaTitle: "Backwards Text Generator — Free Online Tool",
+    metaDescription:
+      "Free backwards text generator. Type any sentence and instantly flip it into reversed, mirror-image text for social posts, pranks, or design.",
+    introParagraph:
+      "Backwards text is a small, recognizable trick — a caption that reads normally reversed, a mirror-effect message, a bit of text-based wordplay for a social post or a prank message to a friend. Type your sentence in and this tool flips every character end to end instantly, ready to copy and paste wherever you want the reversed version.",
+  },
+  {
+    slug: "palindrome-text-generator",
+    toolSlug: "text-reverser",
+    h1: "Palindrome Checker Text Flipper",
+    subtitle: "Reverse Text to Test If a Phrase Reads the Same Backwards",
+    metaTitle: "Palindrome Text Flipper — Free Character Reversal Tool",
+    metaDescription:
+      "Free tool to reverse a phrase's characters and compare it to the original — the quickest way to manually verify whether something is a palindrome.",
+    introParagraph:
+      "Checking a palindrome by eye gets hard fast once a phrase includes spacing and punctuation, like \"A man, a plan, a canal, Panama.\" This tool reverses the exact characters you paste in, so you can place the reversed output next to the original and see for yourself whether it matches once spacing and case are ignored.",
+  },
+  {
+    slug: "random-paragraph-generator",
+    toolSlug: "random-text-generator",
+    h1: "Random Paragraph Generator",
+    subtitle: "Generate Random Filler Paragraphs for Testing & Design",
+    metaTitle: "Random Paragraph Generator — Free Online Tool",
+    metaDescription:
+      "Free random paragraph generator. Generate any number of randomized filler paragraphs for typing practice, layout testing, or placeholder content.",
+    introParagraph:
+      "Sometimes plain Lorem Ipsum's fixed, familiar Latin wording is exactly what you don't want — testing how a search field or spellchecker handles varied vocabulary, or just wanting filler text that doesn't look identical to every other placeholder on the internet. This tool generates randomized English paragraphs on demand, a fresh set with every click.",
+  },
+  {
+    slug: "test-data-text-generator",
+    toolSlug: "random-text-generator",
+    h1: "Test Data Text Generator",
+    subtitle: "Generate Random Text for Software Testing",
+    metaTitle: "Test Data Text Generator — Free Online Tool",
+    metaDescription:
+      "Free test data text generator. Generate randomized text of any length for testing form fields, database columns, and text processing code.",
+    introParagraph:
+      "Testing how a form field, database column, or text-processing function handles varied input needs genuinely randomized text rather than the same familiar Lorem Ipsum every time. This tool generates fresh randomized text on every click, at whatever length your test needs.",
+  },
+  {
+    slug: "remove-special-characters-from-text",
+    toolSlug: "text-cleaner",
+    h1: "Remove Special Characters From Text",
+    subtitle: "Strip Symbols, Emoji & Non-Standard Characters Instantly",
+    metaTitle: "Remove Special Characters From Text — Free Online Tool",
+    metaDescription:
+      "Free tool to remove special characters, symbols, and emoji from text, leaving only clean letters, numbers, and standard punctuation.",
+    introParagraph:
+      "Text copied from a PDF, a chat app, or a formatted document often carries invisible or non-standard characters — smart quotes, stray symbols, emoji — that break when pasted into a plain-text field, a CSV, or a script. This tool strips exactly that kind of clutter, leaving clean, standard text behind.",
+  },
+  {
+    slug: "text-formatter-online",
+    toolSlug: "text-cleaner",
+    h1: "Online Text Formatter",
+    subtitle: "Clean Up Messy, Copy-Pasted Text in One Click",
+    metaTitle: "Online Text Formatter — Free Text Cleanup Tool",
+    metaDescription:
+      "Free online text formatter and cleaner. Fix messy line breaks, stray whitespace, and formatting artifacts left behind from copying text between apps.",
+    introParagraph:
+      "Copying text between a PDF, a Word document, and a web form usually leaves behind a mess of inconsistent line breaks and formatting artifacts that don't match where you're pasting it. This tool runs your pasted text through a cleanup pass, normalizing it into plain, consistent text ready to drop anywhere.",
+  },
+  {
+    slug: "remove-extra-whitespace",
+    toolSlug: "remove-extra-spaces",
+    h1: "Remove Extra Whitespace",
+    subtitle: "Collapse Repeated Spaces Into Single Spaces Instantly",
+    metaTitle: "Remove Extra Whitespace — Free Online Tool",
+    metaDescription:
+      "Free tool to remove extra whitespace from text. Collapses repeated spaces, tabs, and blank lines down to clean, single spacing.",
+    introParagraph:
+      "Text pasted from a PDF, an old spreadsheet, or an email chain frequently carries double and triple spaces left over from the original formatting. This tool collapses every run of repeated whitespace down to a single space, instantly cleaning up text that would otherwise look sloppy or inconsistent once pasted somewhere new.",
+  },
+  {
+    slug: "double-space-remover",
+    toolSlug: "remove-extra-spaces",
+    h1: "Double Space Remover",
+    subtitle: "Fix Text With Accidental Double Spaces Between Words",
+    metaTitle: "Double Space Remover — Free Online Tool",
+    metaDescription:
+      "Free double space remover. Paste text with accidental double (or triple) spaces between words and get it back with clean, single spacing.",
+    introParagraph:
+      "A habit from typewriter-era typing — hitting the spacebar twice after a period — still shows up constantly in pasted text, along with accidental double spaces from editing and rearranging sentences. This tool finds every instance and collapses it to a single space, so the final text reads cleanly with no manual find-and-replace needed.",
+  },
+  {
+    slug: "url-percent-encoder",
+    toolSlug: "url-encoder",
+    h1: "URL Percent Encoder",
+    subtitle: "Encode Special Characters for Safe Use in a URL",
+    metaTitle: "URL Percent Encoder — Free Online URL Encoding Tool",
+    metaDescription:
+      "Free URL percent encoder. Convert spaces, symbols, and non-ASCII characters into safe percent-encoded (%20-style) format for use in a URL.",
+    introParagraph:
+      "A raw space, ampersand, or non-ASCII character inserted directly into a URL query string can break the link or get misinterpreted by the server reading it. This tool converts every character that isn't URL-safe into its percent-encoded equivalent (a space becomes %20, and so on), producing a URL that will parse correctly wherever it's used.",
+  },
+  {
+    slug: "encode-url-for-query-string",
+    toolSlug: "url-encoder",
+    h1: "Encode URL for Query String",
+    subtitle: "Safely Encode a Value Before Adding It to a URL",
+    metaTitle: "Encode URL for Query String — Free Online Tool",
+    metaDescription:
+      "Free tool to encode a value for safe use inside a URL query string parameter, escaping spaces, symbols, and reserved characters correctly.",
+    introParagraph:
+      "Passing a user-typed value — a search term, a name, a redirect path — into a URL's query string requires escaping any character that has special meaning in a URL, like &, =, or a literal space. This tool handles that encoding for you, so the value you build into a link or API call reaches the other end exactly as intended.",
+  },
+  {
+    slug: "url-percent-decoder",
+    toolSlug: "url-decoder",
+    h1: "URL Percent Decoder",
+    subtitle: "Convert a Percent-Encoded URL Back Into Readable Text",
+    metaTitle: "URL Percent Decoder — Free Online URL Decoding Tool",
+    metaDescription:
+      "Free URL percent decoder. Paste a percent-encoded URL (with %20, %2F, and similar codes) and instantly convert it back into readable text.",
+    introParagraph:
+      "A URL full of %20, %2F, and similar percent-codes is technically correct but unreadable at a glance — useful for a browser, unhelpful for a human trying to understand what a link actually points to. This tool decodes every percent-encoded sequence back into its original readable character instantly.",
+  },
+  {
+    slug: "decode-url-query-parameters",
+    toolSlug: "url-decoder",
+    h1: "Decode URL Query Parameters",
+    subtitle: "Read Encoded Values Inside a Query String Clearly",
+    metaTitle: "Decode URL Query Parameters — Free Online Tool",
+    metaDescription:
+      "Free tool to decode percent-encoded values inside a URL's query string, so you can read exactly what data a link is actually passing.",
+    introParagraph:
+      "Debugging a redirect, an analytics link, or an API call often means reading a query string full of encoded values that need decoding before they make sense. Paste the full URL or just the parameter in and this tool converts every percent-encoded character back to plain text, so you can see exactly what value is being passed.",
+  },
+  {
+    slug: "keyword-density-checker",
+    toolSlug: "word-frequency-counter",
+    h1: "Keyword Density Checker",
+    subtitle: "Check How Often a Keyword Appears in Your Content",
+    metaTitle: "Keyword Density Checker — Free SEO Word Frequency Tool",
+    metaDescription:
+      "Free keyword density checker. Paste your article to see how often each word repeats, so you can spot keyword stuffing or under-optimization.",
+    introParagraph:
+      "SEO writers walk a line between using a target keyword naturally enough to signal relevance and repeating it so often it reads as spammy, which search engines can flag as over-optimization. This tool ranks every word in your content by frequency, so you can quickly see exactly how often your target keyword (and every other word) actually appears.",
+  },
+  {
+    slug: "most-common-words-in-text",
+    toolSlug: "word-frequency-counter",
+    h1: "Most Common Words in Text Finder",
+    subtitle: "Find the Most Frequently Used Words in Any Passage",
+    metaTitle: "Most Common Words Finder — Free Word Frequency Tool",
+    metaDescription:
+      "Free tool to find the most common words in any text — an essay, article, transcript, or speech — ranked from most to least frequent.",
+    introParagraph:
+      "Teachers reviewing student writing, researchers analyzing transcripts, and writers auditing their own drafts all run into the same question: what words show up the most? Paste any text in and this tool ranks every word by how often it appears, with an option to filter out common filler words like \"the\" and \"and\" that would otherwise dominate the list.",
+  },
+  {
+    slug: "rot13-cipher-tool",
+    toolSlug: "rot13-encoder",
+    h1: "ROT13 Cipher Tool",
+    subtitle: "Encode or Decode Text With the Classic ROT13 Cipher",
+    metaTitle: "ROT13 Cipher Tool — Free Online Encoder & Decoder",
+    metaDescription:
+      "Free ROT13 cipher tool. Encode or decode text instantly using the classic letter-rotation cipher — the same operation works both ways.",
+    introParagraph:
+      "ROT13 is a simple substitution cipher that shifts every letter 13 places through the alphabet — famous for a quirky property: applying it twice returns the original text, which means the exact same operation both encodes and decodes. It's used for spoiler text, puzzle hints, and old forum conventions rather than real security. This tool applies it instantly to any text you paste in.",
+  },
+  {
+    slug: "spoiler-text-encoder",
+    toolSlug: "rot13-encoder",
+    h1: "Spoiler Text Encoder",
+    subtitle: "Scramble Spoilers So They Aren't Readable at a Glance",
+    metaTitle: "Spoiler Text Encoder — Free ROT13 Tool",
+    metaDescription:
+      "Free spoiler text encoder using ROT13. Hide a movie ending, plot twist, or puzzle answer from accidental glances without deleting it.",
+    introParagraph:
+      "Posting a plot twist, a puzzle answer, or a movie ending in a forum or comment section risks spoiling it for anyone who scrolls past. ROT13-encoding the text keeps it right there in the post but unreadable at a glance — anyone who wants the answer can run it back through this same tool to decode it.",
+  },
+  {
+    slug: "morse-code-translator-online",
+    toolSlug: "morse-code-translator",
+    h1: "Morse Code Translator Online",
+    subtitle: "Convert Text to Morse Code or Morse Code Back to Text",
+    metaTitle: "Morse Code Translator — Free Text to Morse Converter",
+    metaDescription:
+      "Free online Morse code translator. Convert any text into Morse code (dots and dashes), or decode Morse code back into readable text.",
+    introParagraph:
+      "Morse code — a system of dots and dashes representing letters and numbers — is still taught for radio licensing, used in puzzles and escape rooms, and referenced in emergency-signal contexts (like the universally recognized SOS pattern). This tool converts in both directions instantly, so you can translate plain text into Morse or decode Morse back into readable text.",
+  },
+  {
+    slug: "text-to-morse-code-converter",
+    toolSlug: "morse-code-translator",
+    h1: "Text to Morse Code Converter",
+    subtitle: "Turn Any Sentence Into Morse Code Dots and Dashes",
+    metaTitle: "Text to Morse Code Converter — Free Online Tool",
+    metaDescription:
+      "Free text to Morse code converter. Type any sentence and instantly get its Morse code translation, ready to copy or use as a learning reference.",
+    introParagraph:
+      "Learning Morse code, building a puzzle, or just curious how a name or message translates into dots and dashes — typing it out by hand from a reference chart is slow and easy to get wrong. This tool converts any text you type into accurate Morse code instantly, letter by letter.",
+  },
+  {
+    slug: "binary-code-translator",
+    toolSlug: "binary-to-text",
+    h1: "Binary Code Translator",
+    subtitle: "Convert Binary Numbers Back Into Readable Text",
+    metaTitle: "Binary Code Translator — Free Binary to Text Converter",
+    metaDescription:
+      "Free binary code translator. Paste a string of binary (0s and 1s) and instantly convert it back into readable text characters.",
+    introParagraph:
+      "A string of binary digits is how computers represent every character internally, but it's unreadable to a person without conversion. This tool decodes standard 8-bit binary sequences back into their original text characters instantly — useful for CS coursework, puzzles, and understanding how character encoding actually works under the hood.",
+  },
+  {
+    slug: "binary-to-ascii-converter",
+    toolSlug: "binary-to-text",
+    h1: "Binary to ASCII Converter",
+    subtitle: "Decode Binary Digits Into Standard ASCII Text",
+    metaTitle: "Binary to ASCII Converter — Free Online Tool",
+    metaDescription:
+      "Free binary to ASCII converter. Paste 8-bit binary sequences and convert them back into their corresponding ASCII text characters.",
+    introParagraph:
+      "Each standard ASCII character maps to a specific 8-bit binary value — the letter \"A\", for instance, is 01000001. This tool reverses that mapping automatically, taking a string of binary digits and returning the ASCII text it represents, without you needing to look up or calculate each byte by hand.",
+  },
+  {
+    slug: "text-to-binary-converter",
+    toolSlug: "text-to-binary",
+    h1: "Text to Binary Converter",
+    subtitle: "Convert Any Text Into Its Binary Representation",
+    metaTitle: "Text to Binary Converter — Free Online Tool",
+    metaDescription:
+      "Free text to binary converter. Type any word or sentence and instantly see its binary (0s and 1s) representation, character by character.",
+    introParagraph:
+      "Seeing exactly how a word or sentence translates into binary is a common step in learning how computers represent text at the lowest level. Type any text in and this tool converts each character into its 8-bit binary value instantly, laid out clearly so you can see the pattern character by character.",
+  },
+  {
+    slug: "ascii-to-binary-converter",
+    toolSlug: "text-to-binary",
+    h1: "ASCII to Binary Converter",
+    subtitle: "Convert ASCII Text Characters Into Binary Code",
+    metaTitle: "ASCII to Binary Converter — Free Online Tool",
+    metaDescription:
+      "Free ASCII to binary converter. Convert any standard ASCII text into its 8-bit binary equivalent instantly, ready to copy.",
+    introParagraph:
+      "Computer science coursework and low-level programming both eventually require converting ASCII text into its binary equivalent by hand — tedious and error-prone to do with a lookup table. This tool does the conversion instantly for any text you type, showing the accurate binary value for every character.",
+  },
+  {
+    slug: "palindrome-word-checker",
+    toolSlug: "palindrome-checker",
+    h1: "Palindrome Word Checker",
+    subtitle: "Check If a Word or Phrase Reads the Same Backwards",
+    metaTitle: "Palindrome Word Checker — Free Online Tool",
+    metaDescription:
+      "Free palindrome checker. Type any word or phrase and instantly find out if it reads the same forwards and backwards.",
+    introParagraph:
+      "A palindrome — like \"racecar\" or \"A man, a plan, a canal, Panama\" — reads identically forwards and backwards once spacing, punctuation, and case are ignored. Type any word or phrase in and this tool checks it instantly, handy for word games, puzzles, and classroom examples.",
+  },
+  {
+    slug: "is-this-a-palindrome-tool",
+    toolSlug: "palindrome-checker",
+    h1: "Is This a Palindrome? Checker Tool",
+    subtitle: "Instantly Verify Any Word, Name, or Sentence",
+    metaTitle: "Is This a Palindrome? — Free Instant Checker",
+    metaDescription:
+      "Free instant palindrome checker for words, names, and full sentences. Ignores spacing, punctuation, and capitalization for an accurate check.",
+    introParagraph:
+      "Whether it's a name, a made-up word for a puzzle, or a full sentence someone claims is a palindrome, verifying it by eye gets unreliable once punctuation and spacing are involved. This tool strips all of that out automatically and checks the remaining letters against their reverse, giving an instant, accurate yes-or-no answer.",
+  },
+  {
+    slug: "anagram-finder",
+    toolSlug: "anagram-solver",
+    h1: "Anagram Finder",
+    subtitle: "Find Valid Words That Can Be Made From a Set of Letters",
+    metaTitle: "Anagram Finder — Free Online Anagram Solver",
+    metaDescription:
+      "Free anagram finder. Enter a word or set of letters and find every valid word that can be rearranged from those same letters.",
+    introParagraph:
+      "Stuck on a word puzzle, a Scrabble or Words With Friends play, or just wondering what other real words hide inside a set of letters — manually trying rearrangements is slow. Type your letters in and this tool checks every valid rearrangement against a dictionary, returning real words you can actually use.",
+  },
+  {
+    slug: "word-unscrambler",
+    toolSlug: "anagram-solver",
+    h1: "Word Unscrambler",
+    subtitle: "Unscramble Jumbled Letters Into Real Words",
+    metaTitle: "Word Unscrambler — Free Online Anagram Tool",
+    metaDescription:
+      "Free word unscrambler. Enter scrambled or jumbled letters and instantly find every valid word that can be formed from them.",
+    introParagraph:
+      "A jumbled set of letters from a word game, crossword clue, or puzzle app can hide several valid words at once, and staring at scrambled letters rarely reveals them quickly. This tool checks every possible rearrangement of the letters you enter against a real dictionary and returns the valid matches instantly.",
+  },
+  {
+    slug: "line-count-tool",
+    toolSlug: "line-counter",
+    h1: "Line Count Tool",
+    subtitle: "Count the Number of Lines in Any Block of Text",
+    metaTitle: "Line Count Tool — Free Online Line Counter",
+    metaDescription:
+      "Free line count tool. Paste any text, code, or list and instantly see how many lines it contains, including or excluding blank lines.",
+    introParagraph:
+      "Whether it's checking a script against a line-count limit, verifying how many entries are in a pasted list, or auditing a config file, counting lines by scrolling and eyeballing them is unreliable past a handful of lines. Paste your text in and this tool counts them instantly, with the option to include or exclude blank lines.",
+  },
+  {
+    slug: "count-lines-in-text-file",
+    toolSlug: "line-counter",
+    h1: "Count Lines in Text",
+    subtitle: "Get an Exact Line Count for Any Pasted Content",
+    metaTitle: "Count Lines in Text — Free Online Tool",
+    metaDescription:
+      "Free tool to count lines in any pasted text or code snippet. Get an exact, instant line count with no upload required.",
+    introParagraph:
+      "Log files, code snippets, and long lists all come up against the same simple question: how many lines is this exactly? Paste the content in and this tool returns an exact count instantly, without needing to open the file in an editor with line numbers turned on.",
+  },
+  {
+    slug: "count-paragraphs-in-essay",
+    toolSlug: "paragraph-counter",
+    h1: "Count Paragraphs in an Essay",
+    subtitle: "Check How Many Paragraphs Your Essay or Article Has",
+    metaTitle: "Count Paragraphs in Essay — Free Online Tool",
+    metaDescription:
+      "Free tool to count paragraphs in an essay or article. Check your writing against a required paragraph count before submitting.",
+    introParagraph:
+      "Some assignments and structured writing formats specify an exact paragraph count — a five-paragraph essay, a report with a required number of sections. Paste your writing in and this tool counts paragraphs instantly by detecting blank-line breaks, so you can confirm your structure matches what's required before you submit.",
+  },
+  {
+    slug: "paragraph-count-checker",
+    toolSlug: "paragraph-counter",
+    h1: "Paragraph Count Checker",
+    subtitle: "Instantly Check the Number of Paragraphs in Any Text",
+    metaTitle: "Paragraph Count Checker — Free Online Tool",
+    metaDescription:
+      "Free paragraph count checker. Paste any text and instantly see how many paragraphs it contains, alongside word and sentence counts.",
+    introParagraph:
+      "Editors, teachers, and writers checking a draft's structure often need a quick paragraph count alongside the usual word count. Paste your text in and this tool counts paragraphs instantly by detecting where blank lines separate blocks of text, giving you an accurate structural count in addition to length.",
+  },
+  {
+    slug: "remove-leading-trailing-spaces",
+    toolSlug: "whitespace-remover",
+    h1: "Remove Leading and Trailing Spaces",
+    subtitle: "Trim Extra Spaces From the Start and End of Every Line",
+    metaTitle: "Remove Leading & Trailing Spaces — Free Online Tool",
+    metaDescription:
+      "Free tool to remove leading and trailing spaces from every line of text, cleaning up accidental indentation and trailing whitespace.",
+    introParagraph:
+      "Pasting from a spreadsheet or an indented document frequently leaves stray spaces at the start or end of every line — invisible on screen but capable of breaking exact-match comparisons, CSV imports, or code formatting. This tool trims every line's leading and trailing whitespace in one pass, leaving the visible text untouched.",
+  },
+  {
+    slug: "trim-whitespace-online",
+    toolSlug: "whitespace-remover",
+    h1: "Trim Whitespace Online",
+    subtitle: "Clean Up Tabs, Spaces & Blank Lines in One Click",
+    metaTitle: "Trim Whitespace Online — Free Text Cleanup Tool",
+    metaDescription:
+      "Free online whitespace trimmer. Remove excess tabs, spaces, and blank lines from any pasted text or code in a single click.",
+    introParagraph:
+      "Inconsistent whitespace — stray tabs, uneven indentation, extra blank lines — accumulates fast in text copied between different apps and editors. This tool strips it all out in one click, leaving clean, consistently spaced text ready to paste wherever you need it.",
+  },
+  {
+    slug: "remove-blank-lines-tool",
+    toolSlug: "whitespace-remover",
+    h1: "Remove Blank Lines Tool",
+    subtitle: "Strip Every Empty Line Out of a Block of Text",
+    metaTitle: "Remove Blank Lines Tool — Free Online Tool",
+    metaDescription:
+      "Free tool to remove blank lines from text. Paste content with scattered empty lines and get it back compact, with every blank line removed.",
+    introParagraph:
+      "Text copied from a PDF or a poorly formatted export often carries scattered blank lines that make a document look longer and messier than it needs to be. This tool strips out every empty line in one pass, leaving compact, clean text.",
+  },
+  {
+    slug: "clean-code-whitespace-tool",
+    toolSlug: "whitespace-remover",
+    h1: "Clean Code Whitespace Tool",
+    subtitle: "Strip Trailing Whitespace and Blank Lines From Code",
+    metaTitle: "Clean Code Whitespace Tool — Free Online Tool",
+    metaDescription:
+      "Free tool to clean whitespace from code — trailing spaces, tabs, and unnecessary blank lines — before a commit or code review.",
+    introParagraph:
+      "Trailing whitespace and inconsistent blank lines in a code file are exactly the kind of noise a linter flags and a code reviewer notices immediately. Paste your code in and this tool strips that whitespace clutter out before you commit.",
+  },
+  {
+    slug: "capitalize-first-letter-of-each-word",
+    toolSlug: "title-case-converter",
+    h1: "Capitalize First Letter of Each Word",
+    subtitle: "Convert Any Text Into Proper Title Case",
+    metaTitle: "Capitalize Each Word — Free Title Case Converter",
+    metaDescription:
+      "Free tool to capitalize the first letter of each word in your text, following standard title case rules for headlines and titles.",
+    introParagraph:
+      "A title, heading, or book name typically follows title case conventions — capitalizing major words while correctly leaving small words like \"a,\" \"the,\" and \"of\" lowercase (unless they start the title). Paste your text in and this tool applies those rules automatically, rather than naively capitalizing every single word.",
+  },
+  {
+    slug: "headline-capitalization-tool",
+    toolSlug: "title-case-converter",
+    h1: "Headline Capitalization Tool",
+    subtitle: "Format Any Headline With Correct Title Case Rules",
+    metaTitle: "Headline Capitalization Tool — Free Online Tool",
+    metaDescription:
+      "Free headline capitalization tool. Convert any draft headline into properly formatted title case, following standard style-guide capitalization rules.",
+    introParagraph:
+      "Getting headline capitalization exactly right by hand means remembering which small words to lowercase and which to capitalize at the start or end of a title — easy to get subtly wrong. This tool applies standard title case rules to any headline you paste in, correctly instantly.",
+  },
+  {
+    slug: "sentence-case-generator",
+    toolSlug: "sentence-case-converter",
+    h1: "Sentence Case Generator",
+    subtitle: "Capitalize Only the First Word of Every Sentence",
+    metaTitle: "Sentence Case Generator — Free Online Tool",
+    metaDescription:
+      "Free sentence case generator. Convert text written in all caps or title case into proper sentence case, capitalizing only the first word of each sentence.",
+    introParagraph:
+      "Text pasted from an all-caps source or a title-cased heading often needs converting into normal sentence case — capitalizing only the first word of each sentence (and proper nouns), the way ordinary prose is written. This tool detects sentence boundaries and applies that formatting automatically.",
+  },
+  {
+    slug: "fix-capitalization-in-text",
+    toolSlug: "sentence-case-converter",
+    h1: "Fix Capitalization in Text",
+    subtitle: "Correct Inconsistent or Broken Capitalization Instantly",
+    metaTitle: "Fix Capitalization in Text — Free Online Tool",
+    metaDescription:
+      "Free tool to fix inconsistent capitalization in text. Converts messy, all-caps, or randomly-cased text into properly capitalized sentences.",
+    introParagraph:
+      "Text with broken capitalization — copied from a form field, an old export, or a CapsLock accident — reads as unprofessional and needs fixing before it's used anywhere real. This tool rebuilds correct sentence-level capitalization automatically, so you don't have to manually recapitalize every sentence by hand.",
+  },
+  {
+    slug: "instagram-hashtag-generator",
+    toolSlug: "text-to-hashtags-converter",
+    h1: "Instagram Hashtag Generator",
+    subtitle: "Turn Your Post Topic Into Ready-to-Use Instagram Hashtags",
+    metaTitle: "Instagram Hashtag Generator — Free Online Tool",
+    metaDescription:
+      "Free Instagram hashtag generator. Turn any topic or caption into a set of clean, ready-to-paste hashtags for your next Instagram post.",
+    introParagraph:
+      "Instagram discoverability still leans heavily on relevant hashtags, but manually formatting a batch of them — no spaces, no punctuation, consistent casing — is fiddly to do by hand for every post. Type your topic in and this tool generates properly formatted hashtags instantly, ready to paste straight into your caption.",
+  },
+  {
+    slug: "twitter-hashtag-generator",
+    toolSlug: "text-to-hashtags-converter",
+    h1: "Twitter/X Hashtag Generator",
+    subtitle: "Generate Clean Hashtags for X (Twitter) Posts",
+    metaTitle: "Twitter/X Hashtag Generator — Free Online Tool",
+    metaDescription:
+      "Free hashtag generator for X (Twitter). Convert your post topic into properly formatted hashtags, including accessible CamelCase options.",
+    introParagraph:
+      "X's character limit makes every hashtag count, and accessibility guidance specifically recommends CamelCase formatting (#LikeThis) so screen readers announce combined hashtags correctly. This tool generates both single-word hashtags and combined CamelCase tags from any topic you type in, ready for your next post.",
+  },
+  {
+    slug: "placeholder-text-generator",
+    toolSlug: "fake-text-placeholder-generator",
+    h1: "Placeholder Text Generator",
+    subtitle: "Generate Realistic UI Copy for Mockups & Prototypes",
+    metaTitle: "Placeholder Text Generator — Free Online Tool",
+    metaDescription:
+      "Free placeholder text generator for designers. Generate realistic headlines, button labels, and body copy for mockups and prototypes.",
+    introParagraph:
+      "Lorem Ipsum looks obviously fake sitting inside a button or headline in a mockup, which is exactly why designers need a different kind of placeholder — text that reads like real product copy. This tool generates realistic UI text across headings, buttons, and body copy, so a wireframe or prototype looks and feels closer to the finished product.",
+  },
+  {
+    slug: "sample-text-generator-for-design",
+    toolSlug: "fake-text-placeholder-generator",
+    h1: "Sample Text Generator for Design Mockups",
+    subtitle: "Fill Your Design With Realistic Sample Copy Instantly",
+    metaTitle: "Sample Text Generator for Design — Free Online Tool",
+    metaDescription:
+      "Free sample text generator built for designers filling in Figma mockups, wireframes, or prototypes with realistic-looking UI copy.",
+    introParagraph:
+      "A design review goes better when the mockup looks close to a real, finished screen — and generic Lorem Ipsum in a button or headline undercuts that. This tool generates sample headings, subheadings, button labels, and list items that read like genuine product copy, ready to drop straight into your design file.",
+  },
+  {
+    slug: "word-wrap-tool",
+    toolSlug: "text-wrapper",
+    h1: "Word Wrap Tool",
+    subtitle: "Wrap Text to a Fixed Character Width",
+    metaTitle: "Word Wrap Tool — Free Online Text Wrapping Tool",
+    metaDescription:
+      "Free word wrap tool. Reformat any block of text so no line exceeds a character limit you set, breaking only at word boundaries.",
+    introParagraph:
+      "Fixed-width environments — terminals, code comment blocks, receipt printers — don't automatically wrap long lines the way a modern web page does, so text needs manual line breaks inserted at the right character count. This tool re-wraps any text to a width you set, breaking only between words so nothing gets cut mid-word.",
+  },
+  {
+    slug: "line-break-inserter",
+    toolSlug: "text-wrapper",
+    h1: "Line Break Inserter",
+    subtitle: "Add Consistent Line Breaks or Wrappers to Every Line",
+    metaTitle: "Line Break Inserter — Free Online Tool",
+    metaDescription:
+      "Free tool to insert consistent line breaks, prefixes, or suffixes into every line of your text — useful for code, lists, and formatted output.",
+    introParagraph:
+      "Preparing a list for code — wrapping each line in quotes for an array, or adding HTML tags around each item — requires touching every single line the same way, which is exactly the kind of repetitive task that's fast to automate and slow to do by hand. This tool applies a consistent prefix, suffix, or fixed-width wrap to every line of pasted text at once.",
+  },
+  {
+    slug: "csv-column-to-list-converter",
+    toolSlug: "column-to-comma-converter",
+    h1: "CSV Column to List Converter",
+    subtitle: "Turn a Spreadsheet Column Into a Comma-Separated List",
+    metaTitle: "CSV Column to List Converter — Free Online Tool",
+    metaDescription:
+      "Free tool to convert a spreadsheet or CSV column into a comma-separated, quoted, or pipe-separated list for use in SQL, code, or forms.",
+    introParagraph:
+      "Copying a column straight out of Excel or Google Sheets gives you one value per line, but SQL queries, JavaScript arrays, and many form fields expect that same data as a single delimited line instead. Paste the column in and this tool joins it with your choice of comma, semicolon, or pipe, with optional quoting for code and SQL use.",
+  },
+  {
+    slug: "list-to-comma-separated-values",
+    toolSlug: "column-to-comma-converter",
+    h1: "List to Comma-Separated Values Converter",
+    subtitle: "Convert a Line-by-Line List Into a Single CSV-Style Line",
+    metaTitle: "List to CSV Converter — Free Online Tool",
+    metaDescription:
+      "Free tool to convert a line-by-line list into a single comma-separated (CSV-style) line, with optional quoting for each value.",
+    introParagraph:
+      "A list of tags, IDs, or names pasted one per line needs to become a single comma-separated line for plenty of common tasks — a CSV field, a config value, an API parameter. This tool joins your list instantly with the separator and quoting style you choose, skipping the manual retyping.",
+  },
+  {
+    slug: "remove-repeated-words",
+    toolSlug: "duplicate-word-remover",
+    h1: "Remove Repeated Words",
+    subtitle: "Strip Out Accidentally Repeated Words From Your Writing",
+    metaTitle: "Remove Repeated Words — Free Online Tool",
+    metaDescription:
+      "Free tool to remove accidentally repeated words from text — catches typos like 'the the' left over from editing and rewriting.",
+    introParagraph:
+      "Editing and rewriting a sentence often leaves behind an accidental repeated word — \"the the,\" \"is is\" — that's easy to miss on a re-read because your eyes skip right over it. This tool scans your text and flags or removes exactly those accidental repeats.",
+  },
+  {
+    slug: "duplicate-word-finder",
+    toolSlug: "duplicate-word-remover",
+    h1: "Duplicate Word Finder",
+    subtitle: "Find and Fix Accidentally Doubled Words in Your Text",
+    metaTitle: "Duplicate Word Finder — Free Online Tool",
+    metaDescription:
+      "Free duplicate word finder. Paste your writing and instantly spot and remove words that were accidentally typed twice in a row.",
+    introParagraph:
+      "A proofreading pass rarely catches an accidentally doubled word, since the brain tends to auto-correct what it expects to see rather than what's actually on the page. Paste your draft in and this tool finds every consecutively repeated word automatically, a small but genuinely useful proofreading catch before you publish or submit.",
+  },
+  {
+    slug: "bulk-slug-generator",
+    toolSlug: "text-to-slug-bulk-converter",
+    h1: "Bulk Slug Generator",
+    subtitle: "Convert a List of Titles Into URL Slugs All at Once",
+    metaTitle: "Bulk Slug Generator — Free Online Tool",
+    metaDescription:
+      "Free bulk slug generator. Paste a list of page or post titles and convert every one into a clean URL slug in a single pass.",
+    introParagraph:
+      "Migrating a batch of blog posts, setting up a new CMS, or building an SEO spreadsheet all involve turning dozens of titles into URL slugs at once — doing that one at a time in a single-slug tool is slow. Paste your whole list of titles in, one per line, and this tool converts every one into a clean slug simultaneously.",
+  },
+  {
+    slug: "batch-url-slug-converter",
+    toolSlug: "text-to-slug-bulk-converter",
+    h1: "Batch URL Slug Converter",
+    subtitle: "Convert Multiple Titles Into Slugs in One Operation",
+    metaTitle: "Batch URL Slug Converter — Free Online Tool",
+    metaDescription:
+      "Free batch URL slug converter for content teams. Convert a full list of article or product titles into clean slugs simultaneously.",
+    introParagraph:
+      "Content and e-commerce teams often need to generate slugs for a whole batch of articles or products at once — a spreadsheet export, a migration list, a new category launch. This tool processes an entire pasted list line by line, returning a matching clean slug for every title in one pass.",
+  },
+  {
+    slug: "bulk-permalink-generator",
+    toolSlug: "text-to-slug-bulk-converter",
+    h1: "Bulk Permalink Generator",
+    subtitle: "Generate Permalinks for an Entire List of Post Titles",
+    metaTitle: "Bulk Permalink Generator — Free Online Tool",
+    metaDescription:
+      "Free bulk permalink generator. Paste a full list of post titles and generate a clean, SEO-friendly permalink for every one in a single pass.",
+    introParagraph:
+      "Migrating a blog to a new CMS or restructuring permalinks site-wide means generating a fresh slug for every existing post title at once. Paste your full list of titles in, one per line, and this tool converts them all into clean permalinks simultaneously.",
+  },
+  {
+    slug: "csv-title-to-slug-converter",
+    toolSlug: "text-to-slug-bulk-converter",
+    h1: "CSV Title to Slug Converter",
+    subtitle: "Convert a Column of Titles Into Slugs for a Spreadsheet Import",
+    metaTitle: "CSV Title to Slug Converter — Free Online Tool",
+    metaDescription:
+      "Free tool to convert a spreadsheet column of titles into matching URL slugs, ready to paste back in for a CMS bulk import.",
+    introParagraph:
+      "Preparing a spreadsheet for a bulk CMS import often requires a slug column alongside the title column, generated consistently for every row. Paste your title column in and this tool generates the matching slug for every row in one pass, ready to paste back into your spreadsheet.",
+  },
+  {
+    slug: "reverse-word-order-tool",
+    toolSlug: "text-reverser",
+    h1: "Reverse Word Order Tool",
+    subtitle: "Flip the Order of Words in a Sentence, Not the Letters",
+    metaTitle: "Reverse Word Order Tool — Free Online Tool",
+    metaDescription:
+      "Free tool to reverse word order in a sentence, keeping each word spelled correctly while flipping their sequence back to front.",
+    introParagraph:
+      "Unlike a full character reversal, reversing word order keeps every word spelled normally but flips their sequence — \"Hello World\" becomes \"World Hello\". This tool applies that specific transformation instantly, useful for testing right-to-left layouts or simple wordplay.",
+  },
+  {
+    slug: "reverse-line-order-tool",
+    toolSlug: "text-reverser",
+    h1: "Reverse Line Order Tool",
+    subtitle: "Flip a List or Log File So the Last Line Comes First",
+    metaTitle: "Reverse Line Order Tool — Free Online Tool",
+    metaDescription:
+      "Free tool to reverse the order of lines in a list or log file, putting the last line first, without changing the text within each line.",
+    introParagraph:
+      "A log file, numbered list, or exported record set is sometimes in the opposite order you need — oldest-first when you want newest-first, or vice versa. This tool flips which line comes first without touching the text inside each individual line.",
+  },
+  {
+    slug: "non-lorem-placeholder-text-generator",
+    toolSlug: "random-text-generator",
+    h1: "Non-Lorem Placeholder Text Generator",
+    subtitle: "Placeholder Text That Isn't the Same Old Lorem Ipsum",
+    metaTitle: "Non-Lorem Placeholder Text — Free Online Tool",
+    metaDescription:
+      "Free placeholder text generator that produces randomized English filler instead of the instantly recognizable Lorem Ipsum boilerplate.",
+    introParagraph:
+      "Lorem Ipsum is instantly recognizable as filler, which sometimes undercuts a mockup's realism. This tool generates randomized English placeholder text instead — different on every click, and less obviously fake at a glance than the classic Latin boilerplate.",
+  },
+  {
+    slug: "typing-practice-text-generator",
+    toolSlug: "random-text-generator",
+    h1: "Typing Practice Text Generator",
+    subtitle: "Generate Random Text for Typing Speed Practice",
+    metaTitle: "Typing Practice Text Generator — Free Online Tool",
+    metaDescription:
+      "Free typing practice text generator. Generate random paragraphs to practice and measure your typing speed, without memorizing the same passage.",
+    introParagraph:
+      "Practicing typing speed with the same memorized passage stops testing real typing skill once you know it by heart. This tool generates a fresh random passage every time, giving you genuinely new text to type each practice session.",
+  },
+  {
+    slug: "remove-emoji-from-text",
+    toolSlug: "text-cleaner",
+    h1: "Remove Emoji From Text",
+    subtitle: "Strip Every Emoji Out of a Block of Text Instantly",
+    metaTitle: "Remove Emoji From Text — Free Online Tool",
+    metaDescription:
+      "Free tool to remove emoji from text. Paste any text containing emoji and get a clean, emoji-free version ready for formal use or plain-text systems.",
+    introParagraph:
+      "Text copied from a chat app or social post often carries emoji that look fine casually but don't belong in a formal document, a CSV export, or a system that can't render them properly. This tool strips every emoji out in one pass, leaving the rest of the text untouched.",
+  },
+  {
+    slug: "remove-non-ascii-characters-tool",
+    toolSlug: "text-cleaner",
+    h1: "Remove Non-ASCII Characters Tool",
+    subtitle: "Strip Special Unicode Characters Down to Plain ASCII",
+    metaTitle: "Remove Non-ASCII Characters — Free Online Tool",
+    metaDescription:
+      "Free tool to remove non-ASCII characters from text. Strip smart quotes, accented letters, and other Unicode symbols down to plain ASCII text.",
+    introParagraph:
+      "Legacy systems, some CSV parsers, and certain APIs choke on non-ASCII characters like smart quotes, em dashes, or accented letters copied from a word processor. This tool strips text down to plain ASCII, catching exactly the invisible characters that cause these downstream failures.",
+  },
+  {
+    slug: "trim-spaces-in-excel-data",
+    toolSlug: "remove-extra-spaces",
+    h1: "Trim Spaces in Excel Data",
+    subtitle: "Clean Extra Spaces From Data Copied Out of a Spreadsheet",
+    metaTitle: "Trim Spaces in Excel Data — Free Online Tool",
+    metaDescription:
+      "Free tool to trim extra spaces from data copied out of Excel or Google Sheets, fixing padding spaces that break exact-match lookups.",
+    introParagraph:
+      "A spreadsheet cell with invisible leading, trailing, or doubled internal spaces will silently fail an exact-match VLOOKUP or comparison, and it's hard to spot by eye. Paste your data in and this tool trims every extra space instantly, before you paste it back.",
+  },
+  {
+    slug: "clean-whitespace-from-csv-data",
+    toolSlug: "remove-extra-spaces",
+    h1: "Clean Whitespace From CSV Data",
+    subtitle: "Fix Inconsistent Spacing in a Pasted CSV Column",
+    metaTitle: "Clean Whitespace From CSV Data — Free Online Tool",
+    metaDescription:
+      "Free tool to clean whitespace from CSV data. Paste a column with inconsistent spacing and get it back with clean, single spacing throughout.",
+    introParagraph:
+      "A CSV export from an older system or a manually maintained spreadsheet frequently carries inconsistent internal spacing that looks fine visually but breaks exact string matching in code. This tool normalizes every run of extra whitespace to a single space across the whole pasted block.",
+  },
+  {
+    slug: "javascript-encodeuricomponent-tool",
+    toolSlug: "url-encoder",
+    h1: "encodeURIComponent Online Tool",
+    subtitle: "Encode a String the Same Way JavaScript's encodeURIComponent Does",
+    metaTitle: "encodeURIComponent Online Tool — Free URL Encoder",
+    metaDescription:
+      "Free online tool matching JavaScript's encodeURIComponent behavior. Encode a string for safe use in a URL without running any code.",
+    introParagraph:
+      "Sometimes you just need the output of JavaScript's encodeURIComponent() without spinning up a console or writing a script — checking what a value will look like once encoded, or generating an encoded string for a non-JS context. This tool applies the same standard URL-component encoding instantly.",
+  },
+  {
+    slug: "escape-url-special-characters-tool",
+    toolSlug: "url-encoder",
+    h1: "Escape URL Special Characters",
+    subtitle: "Escape Reserved Characters Before Adding Them to a URL",
+    metaTitle: "Escape URL Special Characters — Free Online Tool",
+    metaDescription:
+      "Free tool to escape special characters in a URL, converting reserved characters like &, =, and spaces into their safe, percent-encoded form.",
+    introParagraph:
+      "Characters like &, =, #, and a literal space all have reserved meaning inside a URL, and leaving them unescaped in a dynamically built link can break the URL or truncate it unexpectedly. This tool escapes every reserved character correctly, producing a URL-safe string.",
+  },
+  {
+    slug: "javascript-decodeuricomponent-tool",
+    toolSlug: "url-decoder",
+    h1: "decodeURIComponent Online Tool",
+    subtitle: "Decode a Percent-Encoded String Without Writing Code",
+    metaTitle: "decodeURIComponent Online Tool — Free URL Decoder",
+    metaDescription:
+      "Free online tool matching JavaScript's decodeURIComponent behavior. Decode a percent-encoded string back to plain text without running any code.",
+    introParagraph:
+      "Checking what a percent-encoded value actually decodes to shouldn't require opening a browser console and running decodeURIComponent() manually. This tool performs the same standard decoding instantly, right in the page.",
+  },
+  {
+    slug: "unescape-url-tool",
+    toolSlug: "url-decoder",
+    h1: "Unescape URL Tool",
+    subtitle: "Convert an Escaped URL Back Into Its Plain Form",
+    metaTitle: "Unescape URL Tool — Free Online Tool",
+    metaDescription:
+      "Free tool to unescape a URL. Paste a URL with percent-encoded reserved characters and get back the original, readable, unescaped version.",
+    introParagraph:
+      "A URL logged, shared, or generated with escaped reserved characters (%26 for &, %3D for =, and similar) is harder to read and verify than its plain form. This tool reverses that escaping instantly, showing the URL exactly as originally intended.",
+  },
+  {
+    slug: "repeated-words-checker",
+    toolSlug: "word-frequency-counter",
+    h1: "Repeated Words Checker",
+    subtitle: "Find Which Words You've Overused in a Piece of Writing",
+    metaTitle: "Repeated Words Checker — Free Online Tool",
+    metaDescription:
+      "Free repeated words checker. Paste your draft and instantly see which words you've used most often, so you can vary your vocabulary before publishing.",
+    introParagraph:
+      "Writers often lean on the same handful of words without realizing it during a first draft — a habit only visible once you actually count usage rather than trusting your read-through. Paste your writing in and this tool ranks every word by how often it repeats.",
+  },
+  {
+    slug: "vocabulary-analyzer-tool",
+    toolSlug: "word-frequency-counter",
+    h1: "Vocabulary Analyzer Tool",
+    subtitle: "Analyze the Word Patterns in Any Piece of Writing",
+    metaTitle: "Vocabulary Analyzer Tool — Free Online Tool",
+    metaDescription:
+      "Free vocabulary analyzer. Paste a speech, essay, or transcript and instantly see its most frequently used words, ranked and visualized.",
+    introParagraph:
+      "Analyzing the vocabulary patterns of a speech, transcript, or piece of writing — for a linguistics exercise, a writing style study, or simple curiosity — starts with knowing which words actually dominate the text. This tool ranks every word by frequency instantly.",
+  },
+  {
+    slug: "caesar-cipher-generator",
+    toolSlug: "rot13-encoder",
+    h1: "Caesar Cipher Generator (ROT13)",
+    subtitle: "Encode Text With the Classic Shift-13 Caesar Cipher",
+    metaTitle: "Caesar Cipher Generator — Free ROT13 Online Tool",
+    metaDescription:
+      "Free Caesar cipher generator using a 13-letter shift (ROT13), the classic substitution cipher taught in cryptography basics.",
+    introParagraph:
+      "A Caesar cipher shifts every letter a fixed number of places through the alphabet — ROT13 is the specific, self-inverse version using a shift of 13, a common first example in cryptography education. This tool applies that exact shift to any text instantly.",
+  },
+  {
+    slug: "rot13-text-scrambler-for-forums",
+    toolSlug: "rot13-encoder",
+    h1: "ROT13 Text Scrambler for Forums",
+    subtitle: "Scramble Text for Forum and Usenet-Style Spoiler Conventions",
+    metaTitle: "ROT13 Text Scrambler for Forums — Free Online Tool",
+    metaDescription:
+      "Free ROT13 text scrambler for forums. Scramble spoilers, puzzle answers, or sensitive text using the classic Usenet and forum ROT13 convention.",
+    introParagraph:
+      "Long before dedicated spoiler tags existed, forums and Usenet groups used ROT13 as the standard convention for hiding puzzle answers and plot details in plain sight within a post. This tool applies that same scrambling instantly for anyone still using or referencing the convention.",
+  },
+  {
+    slug: "morse-code-decoder",
+    toolSlug: "morse-code-translator",
+    h1: "Morse Code Decoder",
+    subtitle: "Decode Dots and Dashes Back Into Readable Text",
+    metaTitle: "Morse Code Decoder — Free Online Tool",
+    metaDescription:
+      "Free Morse code decoder. Paste a sequence of dots and dashes and instantly decode it back into readable English text.",
+    introParagraph:
+      "Decoding a string of Morse code by hand means checking every letter against a reference chart one at a time — slow, and easy to make an error on. Paste the dots and dashes in and this tool decodes the full message back into text instantly.",
+  },
+  {
+    slug: "sos-morse-code-translator",
+    toolSlug: "morse-code-translator",
+    h1: "SOS Morse Code Translator",
+    subtitle: "Learn and Translate the Universal SOS Distress Signal",
+    metaTitle: "SOS Morse Code Translator — Free Online Tool",
+    metaDescription:
+      "Free Morse code translator, including the universally recognized SOS distress signal (three dots, three dashes, three dots).",
+    introParagraph:
+      "SOS is the single most widely recognized Morse code sequence — three dots, three dashes, three dots — used internationally as a distress signal. This tool translates SOS and any other text into full Morse code, useful for learning the code beyond just that one famous sequence.",
+  },
+  {
+    slug: "binary-decoder-tool",
+    toolSlug: "binary-to-text",
+    h1: "Binary Decoder Tool",
+    subtitle: "Decode a Binary String Into Its Original Text",
+    metaTitle: "Binary Decoder Tool — Free Online Tool",
+    metaDescription:
+      "Free binary decoder. Paste a binary string (0s and 1s) and instantly decode it back into readable text, character by character.",
+    introParagraph:
+      "A binary string found in a CS assignment, a puzzle, or old data needs decoding back into text to actually mean anything to a human reader. This tool decodes standard binary sequences into readable text instantly.",
+  },
+  {
+    slug: "binary-message-decoder",
+    toolSlug: "binary-to-text",
+    h1: "Binary Message Decoder",
+    subtitle: "Decode a Hidden Binary Message Into Plain Text",
+    metaTitle: "Binary Message Decoder — Free Online Tool",
+    metaDescription:
+      "Free binary message decoder. Paste a binary-encoded message from a puzzle, riddle, or coursework assignment and decode it instantly.",
+    introParagraph:
+      "Puzzles, escape rooms, and coding riddles frequently hide a message in binary as a decoding challenge. Paste the binary sequence in and this tool reveals the hidden message instantly, without needing to manually convert each byte.",
+  },
+  {
+    slug: "convert-name-to-binary",
+    toolSlug: "text-to-binary",
+    h1: "Convert Your Name to Binary",
+    subtitle: "See What Your Name Looks Like in Binary Code",
+    metaTitle: "Convert Name to Binary — Free Online Tool",
+    metaDescription:
+      "Free tool to convert your name (or any text) into binary code. A popular way to see your name represented in 0s and 1s, character by character.",
+    introParagraph:
+      "Seeing your own name translated into binary is a popular first experiment when learning how computers represent characters — a small, personal way to understand character encoding. Type your name in and this tool converts it into accurate binary instantly.",
+  },
+  {
+    slug: "encode-message-in-binary",
+    toolSlug: "text-to-binary",
+    h1: "Encode a Message in Binary",
+    subtitle: "Turn Any Message Into Binary Code for a Puzzle or Gift",
+    metaTitle: "Encode Message in Binary — Free Online Tool",
+    metaDescription:
+      "Free tool to encode a message in binary code. Turn any sentence into 0s and 1s for a puzzle, a geeky gift, or a coding demonstration.",
+    introParagraph:
+      "Encoding a secret message in binary is a popular choice for a geeky gift, a puzzle for a tech-savvy friend, or a classroom demonstration of character encoding. Type your message in and this tool converts it into accurate binary instantly, ready to copy.",
+  },
+  {
+    slug: "palindrome-name-checker",
+    toolSlug: "palindrome-checker",
+    h1: "Palindrome Name Checker",
+    subtitle: "Check If a Name Reads the Same Forwards and Backwards",
+    metaTitle: "Palindrome Name Checker — Free Online Tool",
+    metaDescription:
+      "Free palindrome name checker. Type any name and instantly find out if it's a palindrome, reading the same forwards and backwards.",
+    introParagraph:
+      "Names like \"Hannah\", \"Anna\", or \"Bob\" happen to be palindromes, and checking whether a specific name qualifies is a fun, common curiosity. Type any name in and this tool checks it instantly against its reverse.",
+  },
+  {
+    slug: "palindrome-number-checker",
+    toolSlug: "palindrome-checker",
+    h1: "Palindrome Number Checker",
+    subtitle: "Check If a Number Reads the Same Forwards and Backwards",
+    metaTitle: "Palindrome Number Checker — Free Online Tool",
+    metaDescription:
+      "Free palindrome number checker. Enter any number and instantly check whether its digits read the same forwards and backwards, like 12321.",
+    introParagraph:
+      "A palindromic number — like 121 or 12321 — reads identically in both directions, a common concept in math coursework and programming interview questions. Enter any number in and this tool checks it against its reversed digit sequence instantly.",
+  },
+  {
+    slug: "scrabble-word-finder",
+    toolSlug: "anagram-solver",
+    h1: "Scrabble Word Finder",
+    subtitle: "Find Valid Scrabble Words From Your Letter Tiles",
+    metaTitle: "Scrabble Word Finder — Free Anagram Solver",
+    metaDescription:
+      "Free Scrabble word finder. Enter your available letter tiles and find every valid word you can form to maximize your next play.",
+    introParagraph:
+      "Staring at a rack of seven Scrabble tiles, trying to spot every possible valid word by eye, is exactly the kind of combinatorial task a solver handles far more thoroughly than a human can. Type your available letters in and this tool returns every valid word they can form.",
+  },
+  {
+    slug: "words-with-friends-solver",
+    toolSlug: "anagram-solver",
+    h1: "Words With Friends Solver",
+    subtitle: "Find the Best Word From Your Letters for Your Next Move",
+    metaTitle: "Words With Friends Solver — Free Anagram Tool",
+    metaDescription:
+      "Free Words With Friends word solver. Enter your available letters and find every valid word you could play, sorted to help you pick the best move.",
+    introParagraph:
+      "Finding the strongest possible play in Words With Friends means checking dozens of possible letter combinations against a real dictionary — well beyond what's practical to do in your head. Enter your letters and this tool returns every valid word they can form.",
+  },
+  {
+    slug: "how-many-lines-in-my-code",
+    toolSlug: "line-counter",
+    h1: "How Many Lines Is My Code?",
+    subtitle: "Count the Exact Number of Lines in a Code Snippet",
+    metaTitle: "Count Lines of Code — Free Online Line Counter",
+    metaDescription:
+      "Free tool to count lines of code. Paste any code snippet or file contents and instantly see its exact line count, including or excluding blanks.",
+    introParagraph:
+      "Estimating a code review's scope, checking a snippet against a length guideline, or just satisfying curiosity about a file's size all start with an accurate line count. Paste your code in and this tool counts instantly, with the option to exclude blank lines.",
+  },
+  {
+    slug: "text-line-counter-online",
+    toolSlug: "line-counter",
+    h1: "Text Line Counter Online",
+    subtitle: "Get an Instant Line Count for Any Pasted Text",
+    metaTitle: "Text Line Counter Online — Free Tool",
+    metaDescription:
+      "Free online text line counter. Paste any content and instantly see how many lines it spans, updated live as you edit.",
+    introParagraph:
+      "Whether it's verifying a list's size, checking a form's line limit, or just wanting a live count while editing, this tool tracks the exact number of lines in your pasted text and updates instantly as you type or paste more.",
+  },
+  {
+    slug: "how-many-paragraphs-in-my-essay",
+    toolSlug: "paragraph-counter",
+    h1: "How Many Paragraphs Is My Essay?",
+    subtitle: "Get an Instant Paragraph Count for Any Piece of Writing",
+    metaTitle: "How Many Paragraphs in My Essay — Free Tool",
+    metaDescription:
+      "Free tool to count how many paragraphs are in your essay or article. Paste your writing and get an instant, accurate paragraph count.",
+    introParagraph:
+      "A structured writing assignment often specifies a required number of paragraphs, and manually counting blank-line breaks in a long essay is easy to miscount. Paste your essay in and this tool counts paragraphs instantly and accurately.",
+  },
+  {
+    slug: "paragraph-structure-analyzer",
+    toolSlug: "paragraph-counter",
+    h1: "Paragraph Structure Analyzer",
+    subtitle: "Check Paragraph Count and Average Length in Your Writing",
+    metaTitle: "Paragraph Structure Analyzer — Free Online Tool",
+    metaDescription:
+      "Free paragraph structure analyzer. Paste your writing to see paragraph count alongside word and sentence counts, for a quick structural check.",
+    introParagraph:
+      "Reviewing a draft's overall structure — is it too many short, choppy paragraphs, or a few overly dense blocks — starts with the actual numbers rather than a subjective read. Paste your writing in and this tool shows paragraph count alongside word and sentence counts for a fuller structural picture.",
+  },
+  {
+    slug: "capitalize-title-online",
+    toolSlug: "title-case-converter",
+    h1: "Capitalize a Title Online",
+    subtitle: "Correctly Capitalize Any Title, Heading, or Book Name",
+    metaTitle: "Capitalize a Title Online — Free Title Case Tool",
+    metaDescription:
+      "Free tool to correctly capitalize any title. Follows standard title case rules, capitalizing major words and correctly lowercasing minor ones.",
+    introParagraph:
+      "Correctly capitalizing a title — a book name, an assignment title, a report heading — means knowing which small connector words stay lowercase, a rule most people apply inconsistently by hand. This tool applies standard title case rules automatically to any title you type in.",
+  },
+  {
+    slug: "apa-title-case-converter",
+    toolSlug: "title-case-converter",
+    h1: "APA Title Case Converter",
+    subtitle: "Format a Title to Match APA Style Capitalization Rules",
+    metaTitle: "APA Title Case Converter — Free Online Tool",
+    metaDescription:
+      "Free title case converter for APA-style titles. Convert any heading or paper title into properly capitalized title case for academic formatting.",
+    introParagraph:
+      "Academic writing formatted to APA style requires correct title case capitalization for headings and paper titles — capitalizing major words, lowercasing minor connector words. This tool applies that formatting automatically to any title you paste in.",
+  },
+  {
+    slug: "convert-caps-to-normal-text",
+    toolSlug: "sentence-case-converter",
+    h1: "Convert CAPS to Normal Text",
+    subtitle: "Fix Text Typed Entirely in Capital Letters",
+    metaTitle: "Convert CAPS to Normal Text — Free Online Tool",
+    metaDescription:
+      "Free tool to convert text typed in all caps back into normal sentence case, fixing a CapsLock accident or shouty pasted text.",
+    introParagraph:
+      "Text typed with CapsLock stuck on reads as shouting and needs converting back into normal sentence case — capitalizing only the first word of each sentence, not every letter. This tool fixes it in one click, detecting sentence boundaries automatically.",
+  },
+  {
+    slug: "proper-sentence-formatting-tool",
+    toolSlug: "sentence-case-converter",
+    h1: "Proper Sentence Formatting Tool",
+    subtitle: "Format Text Into Correctly Capitalized, Readable Sentences",
+    metaTitle: "Proper Sentence Formatting Tool — Free Online Tool",
+    metaDescription:
+      "Free tool to properly format text into correctly capitalized sentences, fixing text pasted from an all-caps or inconsistently cased source.",
+    introParagraph:
+      "Text pulled from a form submission, an old export, or an inconsistently cased source often needs reformatting into properly capitalized, readable sentences before it's usable anywhere professional. This tool applies correct sentence-case formatting automatically.",
+  },
+  {
+    slug: "tiktok-hashtag-generator",
+    toolSlug: "text-to-hashtags-converter",
+    h1: "TikTok Hashtag Generator",
+    subtitle: "Generate Hashtags Optimized for TikTok Discoverability",
+    metaTitle: "TikTok Hashtag Generator — Free Online Tool",
+    metaDescription:
+      "Free TikTok hashtag generator. Turn your video's topic into a set of clean, ready-to-use hashtags for your caption.",
+    introParagraph:
+      "TikTok's For You Page algorithm still relies partly on hashtags to categorize and surface content, and correctly formatted tags matter for that. Type your video's topic in and this tool generates properly formatted hashtags instantly, ready to paste into your caption.",
+  },
+  {
+    slug: "linkedin-hashtag-generator",
+    toolSlug: "text-to-hashtags-converter",
+    h1: "LinkedIn Hashtag Generator",
+    subtitle: "Generate Professional Hashtags for LinkedIn Posts",
+    metaTitle: "LinkedIn Hashtag Generator — Free Online Tool",
+    metaDescription:
+      "Free LinkedIn hashtag generator. Turn your post topic into clean, professional hashtags formatted correctly for LinkedIn's platform.",
+    introParagraph:
+      "LinkedIn's professional context makes hashtag formatting matter even more — a messy or overly casual tag stands out on a business-focused feed. Type your topic in and this tool generates clean, properly formatted hashtags including the accessible CamelCase option LinkedIn's audience tends to favor.",
+  },
+  {
+    slug: "ui-copy-generator",
+    toolSlug: "fake-text-placeholder-generator",
+    h1: "UI Copy Generator",
+    subtitle: "Generate Realistic Interface Copy for App & Web Mockups",
+    metaTitle: "UI Copy Generator — Free Online Tool",
+    metaDescription:
+      "Free UI copy generator for designers. Generate realistic headings, button labels, and body text for app and web interface mockups.",
+    introParagraph:
+      "An app or web mockup reviewed with realistic interface copy in place — genuine-sounding headings, buttons, and body text — gets evaluated far more honestly than one filled with obvious Lorem Ipsum. This tool generates exactly that kind of realistic UI copy on demand.",
+  },
+  {
+    slug: "wireframe-text-generator",
+    toolSlug: "fake-text-placeholder-generator",
+    h1: "Wireframe Text Generator",
+    subtitle: "Fill Early Wireframes With Realistic Placeholder Copy",
+    metaTitle: "Wireframe Text Generator — Free Online Tool",
+    metaDescription:
+      "Free wireframe text generator. Fill early-stage wireframes with realistic headings, labels, and body copy before real content is written.",
+    introParagraph:
+      "Early wireframes need to feel real enough to evaluate layout and hierarchy honestly, even before actual copy exists. This tool generates realistic placeholder headings, subheadings, and body text specifically suited to filling out a wireframe's content areas.",
+  },
+  {
+    slug: "html-list-wrapper-tool",
+    toolSlug: "text-wrapper",
+    h1: "HTML List Wrapper Tool",
+    subtitle: "Wrap Each Line of a List in HTML List Item Tags",
+    metaTitle: "HTML List Wrapper Tool — Free Online Tool",
+    metaDescription:
+      "Free tool to wrap each line of a plain list in <li></li> tags, turning a simple list into ready-to-use HTML list markup.",
+    introParagraph:
+      "Turning a plain text list into HTML markup means wrapping every single line in <li> and </li> tags by hand, unless you automate it. Paste your list in and this tool wraps every line instantly, ready to paste inside a <ul> or <ol> element.",
+  },
+  {
+    slug: "quote-wrap-list-for-code",
+    toolSlug: "text-wrapper",
+    h1: "Quote-Wrap a List for Code",
+    subtitle: "Wrap Every Line of a List in Quotes for an Array",
+    metaTitle: "Quote-Wrap List for Code — Free Online Tool",
+    metaDescription:
+      "Free tool to wrap every line of a list in quotation marks, ready to paste into code as an array of string literals.",
+    introParagraph:
+      "Turning a plain list of values into a code array of string literals means wrapping every single line in quotes — tedious by hand for anything longer than a few items. Paste your list in and this tool quote-wraps every line instantly, ready to paste into your code.",
+  },
+  {
+    slug: "spreadsheet-column-to-sql-list",
+    toolSlug: "column-to-comma-converter",
+    h1: "Spreadsheet Column to SQL List",
+    subtitle: "Convert a Spreadsheet Column Into a Quoted SQL IN List",
+    metaTitle: "Spreadsheet Column to SQL List — Free Online Tool",
+    metaDescription:
+      "Free tool to convert a spreadsheet column into a quoted, comma-separated list for a SQL IN(...) clause, ready to paste into a query.",
+    introParagraph:
+      "Building a SQL `IN (...)` clause from a spreadsheet column of IDs or names means quoting and comma-joining every value by hand, unless automated. Paste the column in and this tool generates the exact quoted, comma-separated list ready to paste into your query.",
+  },
+  {
+    slug: "convert-list-to-javascript-array",
+    toolSlug: "column-to-comma-converter",
+    h1: "Convert a List to a JavaScript Array",
+    subtitle: "Turn a Line-by-Line List Into a Quoted JS Array",
+    metaTitle: "Convert List to JavaScript Array — Free Online Tool",
+    metaDescription:
+      "Free tool to convert a line-by-line list into a JavaScript array of quoted strings, ready to paste directly into your code.",
+    introParagraph:
+      "Turning a plain list of values into a JavaScript array literal means wrapping every value in quotes and joining them with commas inside brackets. Paste your list in and this tool generates the properly quoted, comma-separated values, ready to wrap in `[ ]` and drop into your code.",
+  },
+  {
+    slug: "remove-double-words-typo-checker",
+    toolSlug: "duplicate-word-remover",
+    h1: "Remove Double Words Typo Checker",
+    subtitle: "Catch and Fix Accidentally Doubled Words Before You Publish",
+    metaTitle: "Double Word Typo Checker — Free Online Tool",
+    metaDescription:
+      "Free double word typo checker. Paste your draft and catch accidentally doubled words like 'the the' before publishing or submitting.",
+    introParagraph:
+      "An accidentally doubled word is one of the most common typos that survives a normal proofread, since your brain tends to read past it automatically. Paste your draft in and this tool flags every instance before you publish or submit.",
+  },
+  {
+    slug: "proofreading-repeated-word-tool",
+    toolSlug: "duplicate-word-remover",
+    h1: "Proofreading Repeated Word Tool",
+    subtitle: "A Quick Proofreading Pass for Consecutive Repeated Words",
+    metaTitle: "Proofreading Repeated Word Tool — Free Online Tool",
+    metaDescription:
+      "Free proofreading tool that scans your writing specifically for consecutive repeated words, a common editing mistake easy to miss on a re-read.",
+    introParagraph:
+      "A final proofreading pass rarely catches a doubled word left over from editing and rewriting a sentence, since it's such an easy thing to skip right past. This tool specifically scans for that one error pattern, giving you a targeted final check before publishing.",
+  },
+  {
+    slug: "json-pretty-print",
+    toolSlug: "json-formatter",
+    h1: "JSON Pretty Print Tool",
+    subtitle: "Format Minified JSON Into Clean, Readable Structure",
+    metaTitle: "JSON Pretty Print — Free Online JSON Formatter",
+    metaDescription:
+      "Free JSON pretty print tool. Paste minified or ugly JSON and instantly get it reformatted with clean indentation and readable structure.",
+    introParagraph:
+      "A minified API response or log entry crammed onto one line is technically valid JSON but nearly impossible to read by eye. Paste it in and this tool reformats it instantly with proper indentation and line breaks, turning a dense wall of text into a structure you can actually scan.",
+  },
+  {
+    slug: "json-beautifier-online",
+    toolSlug: "json-formatter",
+    h1: "JSON Beautifier Online",
+    subtitle: "Beautify and Indent Any JSON Payload Instantly",
+    metaTitle: "JSON Beautifier — Free Online Tool",
+    metaDescription:
+      "Free online JSON beautifier. Instantly reformat any JSON object or array with clean, consistent indentation for easier debugging and review.",
+    introParagraph:
+      "Reviewing a config file, an API payload, or a data export in raw JSON form is much easier once it's properly indented and structured. This tool beautifies any pasted JSON instantly, with adjustable indentation, so nested objects and arrays are easy to trace visually.",
+  },
+  {
+    slug: "check-json-syntax",
+    toolSlug: "json-validator",
+    h1: "Check JSON Syntax Online",
+    subtitle: "Instantly Validate JSON and Locate Syntax Errors",
+    metaTitle: "Check JSON Syntax — Free Online JSON Validator",
+    metaDescription:
+      "Free tool to check JSON syntax. Paste your JSON and instantly find out if it's valid, with the exact line and error if it's not.",
+    introParagraph:
+      "A single missing comma or unclosed bracket can silently break a config file or API request, and manually scanning JSON for the exact error is slow. Paste your JSON in and this tool validates it instantly, pointing to exactly where the syntax breaks if it's invalid.",
+  },
+  {
+    slug: "json-syntax-error-finder",
+    toolSlug: "json-validator",
+    h1: "JSON Syntax Error Finder",
+    subtitle: "Find the Exact Line Causing Your JSON to Break",
+    metaTitle: "JSON Syntax Error Finder — Free Online Tool",
+    metaDescription:
+      "Free JSON syntax error finder. Paste broken JSON and instantly locate the exact position of the syntax error that's causing it to fail.",
+    introParagraph:
+      "A JSON parser error message like \"Unexpected token at position 142\" isn't very helpful without a way to map that position back to a readable location in your file. This tool validates your JSON and clearly surfaces the exact error and its location, so you can jump straight to the problem instead of scanning line by line.",
+  },
+  {
+    slug: "minify-json-online",
+    toolSlug: "json-minifier",
+    h1: "Minify JSON Online",
+    subtitle: "Strip Whitespace to Shrink JSON File Size Instantly",
+    metaTitle: "Minify JSON Online — Free JSON Compressor",
+    metaDescription:
+      "Free online JSON minifier. Paste formatted JSON and instantly strip all unnecessary whitespace to reduce file size before shipping it.",
+    introParagraph:
+      "Formatted JSON with indentation and line breaks is great for reading but wastes bytes in production — extra whitespace adds up in a config file, API payload, or bundled data file. Paste your JSON in and this tool strips every unnecessary character instantly, leaving the smallest valid version.",
+  },
+  {
+    slug: "compress-json-file",
+    toolSlug: "json-minifier",
+    h1: "Compress JSON File",
+    subtitle: "Reduce JSON Payload Size for Faster API Responses",
+    metaTitle: "Compress JSON File — Free Online JSON Minifier",
+    metaDescription:
+      "Free tool to compress a JSON file by stripping whitespace and formatting, reducing payload size for faster API responses and smaller bundles.",
+    introParagraph:
+      "Every byte in an API response or bundled data file affects load time, and formatted JSON's indentation and line breaks are pure overhead once it's being consumed by code rather than a human. This tool compresses your JSON down to its minimal valid form in one paste, ready to ship.",
+  },
+  {
+    slug: "base64-encoder-online",
+    toolSlug: "base64-encode",
+    h1: "Base64 Encoder Online",
+    subtitle: "Encode Text or Data Into Base64 Format Instantly",
+    metaTitle: "Base64 Encoder Online — Free, Fast, No Sign-Up",
+    metaDescription:
+      "Free online Base64 encoder. Convert any text into Base64-encoded format instantly for embedding in URLs, headers, or config files.",
+    introParagraph:
+      "Base64 encoding turns arbitrary text or binary data into a safe, ASCII-only string — needed for embedding data in a URL, an HTTP header, a JSON field, or a config file that can't handle raw binary or special characters. Paste your text in and this tool encodes it instantly, entirely in your browser.",
+  },
+  {
+    slug: "text-to-base64-converter",
+    toolSlug: "base64-encode",
+    h1: "Text to Base64 Converter",
+    subtitle: "Convert Plain Text Into Base64-Encoded Output",
+    metaTitle: "Text to Base64 Converter — Free Online Tool",
+    metaDescription:
+      "Free text to Base64 converter. Type or paste any text and instantly get its Base64-encoded equivalent, ready to copy.",
+    introParagraph:
+      "Encoding a string into Base64 by hand isn't practical, but plenty of everyday developer tasks need it — building a Basic Auth header, embedding a small string in a data URI, or preparing a value for a system that only accepts ASCII-safe text. This tool converts any text into Base64 instantly.",
+  },
+  {
+    slug: "base64-decoder-online",
+    toolSlug: "base64-decode",
+    h1: "Base64 Decoder Online",
+    subtitle: "Decode Base64 Strings Back Into Readable Text",
+    metaTitle: "Base64 Decoder Online — Free, Fast, No Sign-Up",
+    metaDescription:
+      "Free online Base64 decoder. Paste a Base64-encoded string and instantly decode it back into its original readable text.",
+    introParagraph:
+      "A Base64 string in a config file, JWT payload, or API response needs decoding before its actual content is readable. Paste it in and this tool decodes it back into plain text instantly, fully in your browser with nothing sent anywhere.",
+  },
+  {
+    slug: "decode-base64-to-text",
+    toolSlug: "base64-decode",
+    h1: "Decode Base64 to Text",
+    subtitle: "Convert a Base64 String Back to Its Original Text",
+    metaTitle: "Decode Base64 to Text — Free Online Tool",
+    metaDescription:
+      "Free tool to decode Base64 back to text. Paste any Base64-encoded string and see its original, human-readable content instantly.",
+    introParagraph:
+      "Debugging often means encountering a Base64-encoded value buried in a header, cookie, or log entry with no obvious way to read it. This tool reverses the encoding instantly, showing you the original plain text hidden behind the Base64 string.",
+  },
+  {
+    slug: "jwt-token-decoder",
+    toolSlug: "jwt-decoder",
+    h1: "JWT Token Decoder",
+    subtitle: "Decode a JSON Web Token's Header and Payload",
+    metaTitle: "JWT Token Decoder — Free Online JWT Debugger",
+    metaDescription:
+      "Free JWT token decoder. Paste any JSON Web Token and instantly see its decoded header, payload, and claims, entirely in your browser.",
+    introParagraph:
+      "A JWT looks like a random string but actually contains a Base64-encoded header and payload with real, readable claims inside — an expiry time, a user ID, custom fields. Paste any token in and this tool decodes it instantly, without ever validating the signature against a server or sending the token anywhere.",
+  },
+  {
+    slug: "decode-jwt-online",
+    toolSlug: "jwt-decoder",
+    h1: "Decode JWT Online",
+    subtitle: "Inspect a JWT's Claims Without Leaving Your Browser",
+    metaTitle: "Decode JWT Online — Free, Private, No Server Round-Trip",
+    metaDescription:
+      "Free online JWT decoder that runs entirely client-side. Decode a JSON Web Token's claims instantly without sending it to any server.",
+    introParagraph:
+      "Pasting an auth token into a random online tool is a real privacy concern for a lot of developers, since a JWT often contains sensitive session or user data. This tool decodes entirely inside your browser using local JavaScript — the token itself is never transmitted anywhere, which matters when you're debugging with a real, live token.",
+  },
+  {
+    slug: "regex-pattern-tester",
+    toolSlug: "regex-tester",
+    h1: "Regex Pattern Tester",
+    subtitle: "Test a Regular Expression Against Sample Text Live",
+    metaTitle: "Regex Pattern Tester — Free Online Regex Debugger",
+    metaDescription:
+      "Free regex pattern tester. Write a regular expression and test it live against sample text, with matches highlighted instantly.",
+    introParagraph:
+      "Writing a regular expression that works correctly on the first try is rare — small mistakes in escaping, greediness, or anchoring are easy to make and hard to spot just by reading the pattern. This tool highlights every match live as you type, so you can iterate on a pattern until it behaves exactly as intended.",
+  },
+  {
+    slug: "regex-match-checker",
+    toolSlug: "regex-tester",
+    h1: "Regex Match Checker",
+    subtitle: "Check Which Parts of Your Text a Regex Actually Matches",
+    metaTitle: "Regex Match Checker — Free Online Tool",
+    metaDescription:
+      "Free regex match checker. Paste your pattern and test text to instantly see every match highlighted, with capture groups shown separately.",
+    introParagraph:
+      "A regex that looks correct can still match more (or less) than intended — an unescaped special character, a greedy quantifier grabbing too much. This tool runs your pattern against real sample text and highlights every match live, including individual capture groups, so unexpected behavior is obvious immediately.",
+  },
+  {
+    slug: "generate-uuid-online",
+    toolSlug: "uuid-generator",
+    h1: "Generate UUID Online",
+    subtitle: "Generate Random UUIDs (v4) Instantly, One or in Bulk",
+    metaTitle: "Generate UUID Online — Free UUID v4 Generator",
+    metaDescription:
+      "Free UUID generator. Generate random, version-4 UUIDs instantly for database keys, session IDs, or unique identifiers, one at a time or in bulk.",
+    introParagraph:
+      "A UUID is the standard way to generate a unique identifier without needing a central authority to hand them out — every UUID v4 has an astronomically low chance of colliding with any other. This tool generates them instantly, with a bulk option when you need a batch of unique IDs at once for seed data or testing.",
+  },
+  {
+    slug: "random-guid-generator",
+    toolSlug: "uuid-generator",
+    h1: "Random GUID Generator",
+    subtitle: "Generate Globally Unique Identifiers for Any System",
+    metaTitle: "Random GUID Generator — Free Online Tool",
+    metaDescription:
+      "Free GUID generator. Generate cryptographically random, globally unique identifiers (GUIDs/UUIDs) instantly for any development need.",
+    introParagraph:
+      "GUID is the term Microsoft ecosystems (like .NET and SQL Server) commonly use for what's the same underlying concept as a UUID — a randomly generated identifier unique enough to use as a primary key or object identifier without coordination. This tool generates cryptographically random ones instantly, ready to paste into your code or database.",
+  },
+  {
+    slug: "sha256-hash-generator",
+    toolSlug: "hash-generator",
+    h1: "SHA-256 Hash Generator",
+    subtitle: "Generate a SHA-256 Hash From Any Text Instantly",
+    metaTitle: "SHA-256 Hash Generator — Free Online Tool",
+    metaDescription:
+      "Free SHA-256 hash generator. Enter any text and instantly compute its SHA-256 digest using the browser's native Web Crypto API.",
+    introParagraph:
+      "SHA-256 is the standard, cryptographically strong hashing algorithm for verifying file integrity, generating deterministic identifiers, and general-purpose checksums where security actually matters (unlike MD5 or SHA-1). Type your text in and this tool computes the exact SHA-256 digest instantly using your browser's built-in, native Web Crypto implementation.",
+  },
+  {
+    slug: "md5-hash-generator",
+    toolSlug: "hash-generator",
+    h1: "MD5 Hash Generator",
+    subtitle: "Generate an MD5 Checksum From Any Text",
+    metaTitle: "MD5 Hash Generator — Free Online Tool",
+    metaDescription:
+      "Free MD5 hash generator. Enter any text and instantly compute its MD5 checksum — useful for legacy compatibility and non-security file checks.",
+    introParagraph:
+      "MD5 is cryptographically broken and should never be used for passwords or security-sensitive purposes, but it's still widely expected by legacy systems and simple file-integrity checksums where security isn't the concern. This tool computes an MD5 hash from any text instantly, alongside the stronger SHA-family options if you need them.",
+  },
+  {
+    slug: "unix-timestamp-converter",
+    toolSlug: "timestamp-converter",
+    h1: "Unix Timestamp Converter",
+    subtitle: "Convert a Unix Timestamp to a Readable Date and Back",
+    metaTitle: "Unix Timestamp Converter — Free Online Tool",
+    metaDescription:
+      "Free Unix timestamp converter. Convert a Unix timestamp into a human-readable date, or a date into its Unix timestamp equivalent, instantly.",
+    introParagraph:
+      "A raw Unix timestamp like `1735689600` is meaningless at a glance — it needs converting into an actual date to be useful for debugging a log, a database row, or an API response. This tool converts in both directions instantly, showing the result in your local timezone and UTC side by side.",
+  },
+  {
+    slug: "timestamp-to-date-converter",
+    toolSlug: "timestamp-converter",
+    h1: "Timestamp to Date Converter",
+    subtitle: "Convert Any Timestamp Format Into a Readable Date",
+    metaTitle: "Timestamp to Date Converter — Free Online Tool",
+    metaDescription:
+      "Free timestamp to date converter. Paste a timestamp in seconds or milliseconds and instantly see the corresponding readable date and time.",
+    introParagraph:
+      "Timestamps show up in seconds in some systems and milliseconds in others, and telling them apart (and converting correctly) by hand invites mistakes. Paste your timestamp in and this tool detects the format and converts it into a clear, readable date instantly.",
+  },
+  {
+    slug: "epoch-time-converter",
+    toolSlug: "epoch-unix-time-converter",
+    h1: "Epoch Time Converter",
+    subtitle: "Convert Epoch Time to Human-Readable Date Instantly",
+    metaTitle: "Epoch Time Converter — Free Online Tool",
+    metaDescription:
+      "Free epoch time converter. Convert epoch (Unix) time to a readable date and time, or the reverse, with live current-epoch display.",
+    introParagraph:
+      "Epoch time — the number of seconds since January 1, 1970 — underlies how most systems internally store timestamps, but it's unreadable without conversion. This tool converts epoch values to readable dates and back instantly, and also shows the current live epoch timestamp for quick reference.",
+  },
+  {
+    slug: "current-unix-timestamp",
+    toolSlug: "epoch-unix-time-converter",
+    h1: "Current Unix Timestamp Now",
+    subtitle: "Get the Current Unix Timestamp in Real Time",
+    metaTitle: "Current Unix Timestamp — Free Live Epoch Time Tool",
+    metaDescription:
+      "Free tool showing the current Unix (epoch) timestamp in real time, plus a converter to switch between epoch time and readable dates.",
+    introParagraph:
+      "Needing \"right now\" as a Unix timestamp for a test fixture, an API call, or a quick sanity check is a common small task during development. This tool displays the live, continuously updating current epoch timestamp, plus a full converter for any other timestamp you need to check.",
+  },
+  {
+    slug: "hex-to-rgb-converter",
+    toolSlug: "color-code-converter",
+    h1: "HEX to RGB Converter",
+    subtitle: "Convert a HEX Color Code Into Its RGB Equivalent",
+    metaTitle: "HEX to RGB Converter — Free Online Tool",
+    metaDescription:
+      "Free HEX to RGB converter. Enter any HEX color code and instantly get its exact RGB and HSL equivalents, with a live color preview.",
+    introParagraph:
+      "A design tool hands you a HEX color, but the code you're writing needs it as RGB values for a canvas operation or a JavaScript color library. Type the HEX code in and this tool converts it to exact RGB (and HSL) instantly, with a visual preview so you can confirm it's the color you expect.",
+  },
+  {
+    slug: "rgb-to-hex-converter",
+    toolSlug: "color-code-converter",
+    h1: "RGB to HEX Converter",
+    subtitle: "Convert RGB Color Values Into a HEX Code",
+    metaTitle: "RGB to HEX Converter — Free Online Tool",
+    metaDescription:
+      "Free RGB to HEX converter. Enter red, green, and blue values and instantly get the matching HEX color code for CSS or design tools.",
+    introParagraph:
+      "Some tools and libraries output colors as RGB values, but CSS and most design software expect the compact HEX notation instead. This tool converts RGB to its exact HEX equivalent instantly, along with the HSL version, so you have every format ready to paste wherever you need it.",
+  },
+  {
+    slug: "url-query-string-parser",
+    toolSlug: "url-parser",
+    h1: "URL Query String Parser",
+    subtitle: "Break a URL Into Its Protocol, Host, Path & Parameters",
+    metaTitle: "URL Query String Parser — Free Online Tool",
+    metaDescription:
+      "Free URL parser. Paste any URL and instantly break it down into protocol, host, path, and individual query string parameters.",
+    introParagraph:
+      "A long URL with a dense query string is hard to read at a glance — figuring out exactly which parameters are being passed and what their values are means squinting through ampersands and equals signs. Paste the URL in and this tool breaks it down into its component parts and individual query parameters instantly.",
+  },
+  {
+    slug: "split-url-into-parts",
+    toolSlug: "url-parser",
+    h1: "Split URL Into Parts",
+    subtitle: "Extract the Domain, Path & Parameters From Any URL",
+    metaTitle: "Split URL Into Parts — Free Online Tool",
+    metaDescription:
+      "Free tool to split a URL into its individual parts — protocol, domain, path, and query parameters — for debugging or documentation.",
+    introParagraph:
+      "Debugging a redirect chain, documenting an API endpoint, or just understanding a long tracking URL all benefit from seeing a URL broken into its clear, individual components rather than as one long string. This tool parses any URL and lays out each part clearly and instantly.",
+  },
+  {
+    slug: "http-status-code-reference",
+    toolSlug: "http-status-code-lookup",
+    h1: "HTTP Status Code Reference",
+    subtitle: "Look Up What Any HTTP Status Code Means",
+    metaTitle: "HTTP Status Code Reference — Free Lookup Tool",
+    metaDescription:
+      "Free HTTP status code reference. Look up the exact meaning of any status code from 100 to 599, with a plain-English explanation for each.",
+    introParagraph:
+      "Seeing a 429 or a 503 in an API response tells you something went wrong, but not always exactly what without checking a reference. This tool covers every standard HTTP status code with a clear, plain-English explanation of what it means and when a server typically returns it.",
+  },
+  {
+    slug: "what-does-404-mean",
+    toolSlug: "http-status-code-lookup",
+    h1: "HTTP Status Code Meanings",
+    subtitle: "Understand What Every HTTP Status Code Actually Means",
+    metaTitle: "HTTP Status Code Meanings — Free Reference Tool",
+    metaDescription:
+      "Free HTTP status code explainer. Search any status code (404, 500, 301, and more) to see exactly what it means and why a server returns it.",
+    introParagraph:
+      "Codes like 404 and 500 are common knowledge, but the full range — 301 versus 302, 403 versus 401, the entire 5xx server-error family — trips up even experienced developers. This tool provides a clear, searchable reference for every standard HTTP status code and what it actually signals.",
+  },
+  {
+    slug: "mime-type-finder",
+    toolSlug: "mime-type-lookup",
+    h1: "MIME Type Finder",
+    subtitle: "Find the Correct MIME Type for Any File Extension",
+    metaTitle: "MIME Type Finder — Free Online Lookup Tool",
+    metaDescription:
+      "Free MIME type finder. Look up the correct MIME type for any file extension, needed for Content-Type headers and file upload validation.",
+    introParagraph:
+      "Setting a Content-Type header or validating a file upload requires the exact correct MIME type string for a given file extension — get it wrong, and a browser or API may reject or mishandle the file. This tool looks up the accurate MIME type for any extension instantly.",
+  },
+  {
+    slug: "content-type-header-lookup",
+    toolSlug: "mime-type-lookup",
+    h1: "Content-Type Header Lookup",
+    subtitle: "Find the Right Content-Type Value for Any File",
+    metaTitle: "Content-Type Header Lookup — Free Online Tool",
+    metaDescription:
+      "Free Content-Type header lookup tool. Find the exact MIME type string to use in an HTTP Content-Type header for any given file type.",
+    introParagraph:
+      "An API endpoint or file server needs the exact right Content-Type value to correctly signal what kind of file it's serving — get this wrong and browsers may render or download a file incorrectly. This tool provides an instant, accurate lookup for any file extension.",
+  },
+  {
+    slug: "curl-syntax-generator",
+    toolSlug: "curl-command-generator",
+    h1: "cURL Syntax Generator",
+    subtitle: "Build a Correct cURL Command Without Memorizing Flags",
+    metaTitle: "cURL Syntax Generator — Free Online Tool",
+    metaDescription:
+      "Free cURL command generator. Build a correctly formatted curl command with headers, method, and body without memorizing every flag.",
+    introParagraph:
+      "curl's flags are notoriously easy to mix up — is it -H or --header, does the body go before or after the URL, how do you escape quotes correctly. This tool builds a syntactically correct curl command from a simple form, so you get exactly the right flags and escaping without checking the man page.",
+  },
+  {
+    slug: "generate-curl-request",
+    toolSlug: "curl-command-generator",
+    h1: "Generate cURL Request",
+    subtitle: "Build a cURL Command for Any API Request",
+    metaTitle: "Generate cURL Request — Free Online Tool",
+    metaDescription:
+      "Free tool to generate a curl request. Set your method, URL, headers, and body, and get a ready-to-run curl command instantly.",
+    introParagraph:
+      "Sharing exact API request steps with a teammate, or documenting an endpoint for other developers, is much clearer as a copy-pasteable curl command than a prose description. This tool builds that command from a simple form, ready to drop straight into a terminal or a README.",
+  },
+  {
+    slug: "base32-encoder",
+    toolSlug: "base32-encode-decode",
+    h1: "Base32 Encoder",
+    subtitle: "Encode Text Into Base32 Format Instantly",
+    metaTitle: "Base32 Encoder — Free Online Tool",
+    metaDescription:
+      "Free Base32 encoder. Convert any text into Base32-encoded format, commonly used for two-factor authentication secrets and DNS-safe identifiers.",
+    introParagraph:
+      "Base32 shows up specifically where Base64's mixed case and symbols would cause problems — two-factor authentication (TOTP) secret keys and DNS-safe identifiers both rely on Base32's case-insensitive, alphanumeric-only alphabet. This tool encodes any text into Base32 instantly.",
+  },
+  {
+    slug: "base32-decoder",
+    toolSlug: "base32-encode-decode",
+    h1: "Base32 Decoder",
+    subtitle: "Decode a Base32 String Back Into Readable Text",
+    metaTitle: "Base32 Decoder — Free Online Tool",
+    metaDescription:
+      "Free Base32 decoder. Paste a Base32-encoded string, like a 2FA secret key, and instantly decode it back into readable text.",
+    introParagraph:
+      "A Base32 string — often a two-factor authentication secret key exported from an authenticator app — needs decoding before its actual content is readable or usable elsewhere. This tool decodes any Base32 string back into plain text instantly.",
+  },
+  {
+    slug: "ascii-code-chart",
+    toolSlug: "ascii-table-reference",
+    h1: "ASCII Code Chart",
+    subtitle: "Look Up Every ASCII Character and Its Numeric Code",
+    metaTitle: "ASCII Code Chart — Free Reference Table",
+    metaDescription:
+      "Free ASCII code chart. Browse every ASCII character with its decimal, hexadecimal, and binary code, searchable and instantly accessible.",
+    introParagraph:
+      "Looking up a specific character's ASCII code — for a keyboard shortcut definition, a low-level programming task, or just curiosity — is faster with a clean, searchable reference than digging through a textbook appendix. This tool provides the full ASCII table with decimal, hex, and binary values for every character.",
+  },
+  {
+    slug: "ascii-decimal-hex-table",
+    toolSlug: "ascii-table-reference",
+    h1: "ASCII Decimal Hex Table",
+    subtitle: "Convert Between ASCII Characters and Their Codes",
+    metaTitle: "ASCII Decimal Hex Table — Free Reference Tool",
+    metaDescription:
+      "Free ASCII reference table showing every character alongside its decimal and hexadecimal code, useful for byte-level programming and debugging.",
+    introParagraph:
+      "Working at the byte level — parsing a binary protocol, debugging serial communication, writing low-level C code — regularly requires knowing exactly which decimal or hex value corresponds to a given character. This tool provides the complete ASCII table for quick reference.",
+  },
+  {
+    slug: "unicode-character-converter",
+    toolSlug: "unicode-converter",
+    h1: "Unicode Character Converter",
+    subtitle: "Convert Text to Unicode Code Points and Back",
+    metaTitle: "Unicode Character Converter — Free Online Tool",
+    metaDescription:
+      "Free Unicode converter. Convert text into its Unicode code points (U+XXXX), or convert code points back into readable characters.",
+    introParagraph:
+      "Debugging an encoding issue, working with emoji or non-Latin scripts programmatically, or just curious what code point a specific character maps to — this tool converts text into Unicode code points and back instantly, handling characters outside the basic ASCII range correctly.",
+  },
+  {
+    slug: "unicode-code-point-lookup",
+    toolSlug: "unicode-converter",
+    h1: "Unicode Code Point Lookup",
+    subtitle: "Find the Exact Unicode Code Point for Any Character",
+    metaTitle: "Unicode Code Point Lookup — Free Online Tool",
+    metaDescription:
+      "Free Unicode code point lookup. Enter any character and instantly find its exact Unicode code point (U+XXXX) for use in code or documentation.",
+    introParagraph:
+      "Referencing a specific character in code — a regex, a string comparison, an internationalization file — often requires its exact Unicode code point rather than the visual character itself. This tool looks up the precise code point for any character instantly.",
+  },
+  {
+    slug: "url-slugify-tool",
+    toolSlug: "slugify-tool",
+    h1: "URL Slugify Tool",
+    subtitle: "Slugify Any Text for Use in a Clean URL",
+    metaTitle: "URL Slugify Tool — Free Online Tool",
+    metaDescription:
+      "Free slugify tool. Convert any text — a title, a filename, a category name — into a clean, lowercase, hyphenated URL-safe slug.",
+    introParagraph:
+      "\"Slugify\" is a common function name in web frameworks for exactly this operation — stripping special characters, converting spaces to hyphens, and lowercasing text to produce a URL-safe string. This tool performs the same operation directly in the browser, useful when you need the result without writing or running code.",
+  },
+  {
+    slug: "convert-title-to-slug",
+    toolSlug: "slugify-tool",
+    h1: "Convert Title to Slug",
+    subtitle: "Turn Any Title or Name Into a URL-Safe Slug",
+    metaTitle: "Convert Title to Slug — Free Online Tool",
+    metaDescription:
+      "Free tool to convert any title, filename, or category name into a URL-safe slug — lowercase, hyphenated, and free of special characters.",
+    introParagraph:
+      "A category name, filename, or page title with spaces, capitals, and punctuation isn't safe to drop directly into a URL. This tool converts it into a clean, URL-safe slug instantly, matching the format most frameworks and CMS platforms expect.",
+  },
+  {
+    slug: "gitignore-file-generator",
+    toolSlug: "git-ignore-generator",
+    h1: ".gitignore File Generator",
+    subtitle: "Generate a .gitignore File for Your Language or Framework",
+    metaTitle: ".gitignore File Generator — Free Online Tool",
+    metaDescription:
+      "Free .gitignore generator. Pick your language, framework, or IDE and instantly generate a complete, ready-to-use .gitignore file.",
+    introParagraph:
+      "Every language and framework has its own set of build artifacts, dependency folders, and local config files that shouldn't be committed to version control — node_modules, __pycache__, .env, and dozens more depending on your stack. This tool generates a complete, correct .gitignore file for your specific setup instantly, instead of hunting one down or writing it from memory.",
+  },
+  {
+    slug: "create-gitignore-online",
+    toolSlug: "git-ignore-generator",
+    h1: "Create .gitignore Online",
+    subtitle: "Generate the Right .gitignore for Your Tech Stack",
+    metaTitle: "Create .gitignore Online — Free Generator",
+    metaDescription:
+      "Free online tool to create a .gitignore file matched to your exact tech stack — Node, Python, Java, and more — in one click.",
+    introParagraph:
+      "Starting a new repository without a proper .gitignore risks accidentally committing dependency folders, build output, or secrets like a .env file. This tool generates the correct .gitignore for your specific language or framework in one click, ready to drop into your new project.",
+  },
+  {
+    slug: "open-source-license-picker",
+    toolSlug: "open-source-license-generator",
+    h1: "Open Source License Picker",
+    subtitle: "Generate the Right License Text for Your Repository",
+    metaTitle: "Open Source License Picker — Free Online Tool",
+    metaDescription:
+      "Free open source license generator. Pick MIT, Apache 2.0, GPL, or another common license and instantly generate the correct license text.",
+    introParagraph:
+      "Publishing a repository without a license leaves its legal terms genuinely ambiguous, but writing correct license text by hand risks getting the wording wrong. This tool generates the exact, correctly worded text for common open source licenses — MIT, Apache 2.0, GPL, and more — filled in with your project details.",
+  },
+  {
+    slug: "mit-license-generator",
+    toolSlug: "open-source-license-generator",
+    h1: "MIT License Generator",
+    subtitle: "Generate a Correctly Formatted MIT License Instantly",
+    metaTitle: "MIT License Generator — Free Online Tool",
+    metaDescription:
+      "Free MIT license generator. Enter your name and year and instantly get the correctly formatted MIT license text for your project's LICENSE file.",
+    introParagraph:
+      "The MIT license is the most widely used open source license, but it still needs to be filled in correctly with the copyright holder's name and year — a detail easy to skip or get wrong when copying it from memory. This tool generates the exact, correctly formatted text ready to drop into your LICENSE file.",
+  },
+  {
+    slug: "format-api-response-json",
+    toolSlug: "api-response-formatter",
+    h1: "Format API Response JSON",
+    subtitle: "Pretty-Print and Analyze a Raw API Response",
+    metaTitle: "Format API Response JSON — Free Online Tool",
+    metaDescription:
+      "Free tool to format a raw API response. Paste minified JSON from a network tab or curl output and get it formatted with key structural stats.",
+    introParagraph:
+      "A raw response captured from a browser's network tab or a curl command is usually minified and hard to scan visually. Paste it in and this tool formats it cleanly while also reporting useful structural stats — total key count, max nesting depth, array length — to help you understand an unfamiliar response quickly.",
+  },
+  {
+    slug: "api-json-viewer",
+    toolSlug: "api-response-formatter",
+    h1: "API JSON Viewer",
+    subtitle: "View and Debug Any API Response's Structure Clearly",
+    metaTitle: "API JSON Viewer — Free Online Tool",
+    metaDescription:
+      "Free API JSON viewer. Paste any API response to view it formatted and readable, with quick stats on its structure and nesting depth.",
+    introParagraph:
+      "Understanding an unfamiliar API response's shape before writing code against it — how deep is the nesting, how many fields does it actually contain — is much faster with a clean, formatted view than scrolling through raw minified JSON. This tool formats any response and summarizes its structure instantly.",
+  },
+  {
+    slug: "binary-to-decimal-converter",
+    toolSlug: "number-base-converter",
+    h1: "Binary to Decimal Converter",
+    subtitle: "Convert Binary, Octal, Decimal & Hex Between Each Other",
+    metaTitle: "Binary to Decimal Converter — Free Online Tool",
+    metaDescription:
+      "Free binary to decimal converter, also converting between octal and hexadecimal. Enter a number in any base and see all four instantly.",
+    introParagraph:
+      "Converting a binary or hexadecimal value into decimal by hand — multiplying out powers of two or sixteen — is exactly the kind of arithmetic worth automating, whether for CS coursework, low-level programming, or debugging a memory address. Enter a number in any base and this tool shows all four representations simultaneously.",
+  },
+  {
+    slug: "hex-to-decimal-converter",
+    toolSlug: "number-base-converter",
+    h1: "Hex to Decimal Converter",
+    subtitle: "Convert Hexadecimal Values to Decimal Instantly",
+    metaTitle: "Hex to Decimal Converter — Free Online Tool",
+    metaDescription:
+      "Free hex to decimal converter. Enter a hexadecimal value and instantly see its decimal, binary, and octal equivalents.",
+    introParagraph:
+      "Hex values show up constantly in programming — memory addresses, color codes, error codes — but reasoning about their actual magnitude usually means converting to decimal first. This tool converts any hex value to decimal (plus binary and octal) instantly, no manual calculation needed.",
+  },
+  {
+    slug: "env-file-to-json-converter",
+    toolSlug: "environment-variable-to-json-converter",
+    h1: ".env File to JSON Converter",
+    subtitle: "Convert Environment Variables Into a JSON Object",
+    metaTitle: ".env File to JSON Converter — Free Online Tool",
+    metaDescription:
+      "Free .env to JSON converter. Paste your .env file's contents and instantly convert every KEY=VALUE line into a structured JSON object.",
+    introParagraph:
+      "A .env file's simple KEY=VALUE format is great for environment configuration but isn't directly usable where you need structured JSON — a config object, a deployment script, documentation. Paste your .env contents in and this tool converts every line into a proper JSON object instantly.",
+  },
+  {
+    slug: "dotenv-to-json",
+    toolSlug: "environment-variable-to-json-converter",
+    h1: "dotenv to JSON Converter",
+    subtitle: "Convert a dotenv File's Variables Into JSON Format",
+    metaTitle: "dotenv to JSON Converter — Free Online Tool",
+    metaDescription:
+      "Free dotenv to JSON converter. Paste the contents of a .env file and get back a clean JSON object with every environment variable as a key.",
+    introParagraph:
+      "Migrating environment configuration into a JSON-based config system, or just documenting a project's required environment variables in a structured format, means converting out of the .env file's plain KEY=VALUE syntax. This tool handles that conversion instantly, including values wrapped in quotes.",
+  },
+  {
+    slug: "rotate-image-90-degrees",
+    toolSlug: "rotate-image",
+    h1: "Rotate Image 90 Degrees",
+    subtitle: "Rotate a Sideways Photo Left or Right Instantly",
+    metaTitle: "Rotate Image 90 Degrees — Free Online Tool",
+    metaDescription:
+      "Free tool to rotate an image 90 degrees left or right. Fix a sideways phone photo or scanned document instantly, right in your browser.",
+    introParagraph:
+      "A phone photo taken sideways or a scan that came out rotated is one of the most common small image annoyances. Upload it and rotate left or right 90° in one click — the fix is baked into the actual downloaded file, not just how it displays on this page.",
+  },
+  {
+    slug: "fix-sideways-photo",
+    toolSlug: "rotate-image",
+    h1: "Fix a Sideways Photo",
+    subtitle: "Correct an Image's Orientation in One Click",
+    metaTitle: "Fix Sideways Photo — Free Online Rotation Tool",
+    metaDescription:
+      "Free tool to fix a sideways or upside-down photo. Rotate 90°, 180°, or the opposite direction instantly, with the corrected orientation saved to the file.",
+    introParagraph:
+      "Downloaded, scanned, or camera-roll photos that came out rotated the wrong way are frustrating but a one-click fix. Upload the photo, pick the correct rotation direction, and download a properly oriented version — no editing software required.",
+  },
+  {
+    slug: "mirror-image-online",
+    toolSlug: "flip-image",
+    h1: "Mirror Image Online",
+    subtitle: "Flip a Photo Horizontally or Vertically Instantly",
+    metaTitle: "Mirror Image Online — Free Flip Tool",
+    metaDescription:
+      "Free online image mirror tool. Flip any photo horizontally or vertically instantly to create a mirrored version, right in your browser.",
+    introParagraph:
+      "A mirrored version of a photo is useful for correcting a selfie's reversed orientation, creating a symmetrical design element, or fixing text that appears backwards in a scanned image. Upload your photo and flip it horizontally or vertically in one click.",
+  },
+  {
+    slug: "flip-photo-horizontally",
+    toolSlug: "flip-image",
+    h1: "Flip Photo Horizontally",
+    subtitle: "Create a Left-Right Mirrored Version of Any Image",
+    metaTitle: "Flip Photo Horizontally — Free Online Tool",
+    metaDescription:
+      "Free tool to flip a photo horizontally, creating a left-right mirrored version. Also supports vertical flipping, all processed in your browser.",
+    introParagraph:
+      "Selfies taken with a front-facing camera often come out mirrored compared to how you actually appear, and correcting that (or intentionally reversing an image for a design layout) just needs a horizontal flip. This tool does it instantly with no quality loss.",
+  },
+  {
+    slug: "convert-png-to-jpg-online",
+    toolSlug: "png-to-jpg",
+    h1: "Convert PNG to JPG Online",
+    subtitle: "Convert PNG Images to JPG in Your Browser Instantly",
+    metaTitle: "Convert PNG to JPG Online — Free, Private, No Upload",
+    metaDescription:
+      "Free online PNG to JPG converter. Upload a PNG and instantly convert it to JPG format, entirely in your browser — no file ever leaves your device.",
+    introParagraph:
+      "PNG files are often larger than necessary for a photo that doesn't need transparency, and plenty of upload forms and platforms specifically require JPG instead. This tool converts PNG to JPG entirely in your browser, with the file never leaving your device.",
+  },
+  {
+    slug: "png-to-jpg-batch-converter",
+    toolSlug: "png-to-jpg",
+    h1: "PNG to JPG Batch Converter",
+    subtitle: "Convert Multiple PNG Images to JPG at Once",
+    metaTitle: "PNG to JPG Batch Converter — Free Online Tool",
+    metaDescription:
+      "Free PNG to JPG converter supporting multiple images. Upload several PNGs and convert them all to JPG format in one pass, right in your browser.",
+    introParagraph:
+      "Converting a whole folder of PNG screenshots or graphics into JPG one at a time in a general image editor is slow. This tool lets you upload and convert several PNG images to JPG in one session, all processed locally without uploading to a server.",
+  },
+  {
+    slug: "convert-jpg-to-png-online",
+    toolSlug: "jpg-to-png",
+    h1: "Convert JPG to PNG Online",
+    subtitle: "Convert JPG Images to Lossless PNG Format Instantly",
+    metaTitle: "Convert JPG to PNG Online — Free, Private Tool",
+    metaDescription:
+      "Free online JPG to PNG converter. Convert any JPG photo into lossless PNG format instantly, entirely in your browser with no upload.",
+    introParagraph:
+      "Some design and editing workflows require PNG's lossless format instead of JPG — no compression artifacts, and support for transparency if you add it later in an editor. This tool converts JPG to PNG instantly, right in your browser.",
+  },
+  {
+    slug: "jpg-to-png-converter-free",
+    toolSlug: "jpg-to-png",
+    h1: "Free JPG to PNG Converter",
+    subtitle: "Convert JPG to PNG With No Quality Loss",
+    metaTitle: "Free JPG to PNG Converter — No Sign-Up, No Upload",
+    metaDescription:
+      "Free JPG to PNG converter with no sign-up required. Upload a JPG and get a lossless PNG back instantly, processed entirely on your device.",
+    introParagraph:
+      "Needing a PNG version of a JPG photo — for a design tool, a presentation, or a platform that requires it — shouldn't require installing software or uploading a file to a third-party server. This tool converts instantly and privately, right in your browser.",
+  },
+  {
+    slug: "convert-webp-to-jpg-online",
+    toolSlug: "webp-to-jpg",
+    h1: "Convert WebP to JPG Online",
+    subtitle: "Convert Modern WebP Images to Universal JPG Format",
+    metaTitle: "Convert WebP to JPG Online — Free, Private Tool",
+    metaDescription:
+      "Free online WebP to JPG converter. Convert a WebP image (common from Google Images) into universally compatible JPG format instantly.",
+    introParagraph:
+      "WebP images — increasingly common from Google Images and modern websites — aren't supported everywhere, especially in older software or platforms that expect a standard JPG. This tool converts WebP to JPG instantly, entirely in your browser.",
+  },
+  {
+    slug: "webp-to-jpg-batch-converter",
+    toolSlug: "webp-to-jpg",
+    h1: "WebP to JPG Batch Converter",
+    subtitle: "Convert Multiple WebP Images to JPG at Once",
+    metaTitle: "WebP to JPG Batch Converter — Free Online Tool",
+    metaDescription:
+      "Free WebP to JPG batch converter. Upload several WebP images and convert them all to JPG format in one session, right in your browser.",
+    introParagraph:
+      "A folder of WebP images downloaded from the web — often saved that way without realizing it — can be a hassle when the software you need to use them in doesn't support WebP. This tool converts several at once to universally compatible JPG.",
+  },
+  {
+    slug: "convert-jpg-to-webp-online",
+    toolSlug: "jpg-to-webp",
+    h1: "Convert JPG to WebP Online",
+    subtitle: "Convert JPG Photos to Modern, Smaller WebP Format",
+    metaTitle: "Convert JPG to WebP Online — Free, Private Tool",
+    metaDescription:
+      "Free online JPG to WebP converter. Convert a JPG photo into the smaller, modern WebP format for faster website loading, instantly in your browser.",
+    introParagraph:
+      "WebP typically produces noticeably smaller file sizes than JPG at similar visual quality, which directly helps website loading speed — a real factor in both user experience and Core Web Vitals. This tool converts JPG to WebP instantly, entirely on your device.",
+  },
+  {
+    slug: "jpg-to-webp-for-website",
+    toolSlug: "jpg-to-webp",
+    h1: "JPG to WebP for Faster Websites",
+    subtitle: "Optimize Photos for Web Performance With WebP",
+    metaTitle: "JPG to WebP for Website — Free Image Optimizer",
+    metaDescription:
+      "Free JPG to WebP converter built for web performance. Shrink your image file sizes for faster page loads without a noticeable quality drop.",
+    introParagraph:
+      "Page speed directly affects both user experience and search rankings, and image weight is usually the single biggest factor in a slow-loading page. Converting JPG photos to WebP before uploading them to your site is one of the simplest wins available — this tool does the conversion instantly.",
+  },
+  {
+    slug: "blur-part-of-image",
+    toolSlug: "blur-image",
+    h1: "Blur Part of an Image",
+    subtitle: "Blur a Photo to Hide Faces, Text, or Sensitive Details",
+    metaTitle: "Blur Part of an Image — Free Online Tool",
+    metaDescription:
+      "Free tool to blur an image. Blur an entire photo or apply a blur effect to hide a face, license plate, or sensitive text before sharing.",
+    introParagraph:
+      "Sharing a screenshot or photo publicly often means blurring out something sensitive first — a face for privacy, a license plate, an account number visible in a screenshot. This tool applies an adjustable blur effect entirely in your browser, with nothing ever uploaded.",
+  },
+  {
+    slug: "gaussian-blur-image-online",
+    toolSlug: "blur-image",
+    h1: "Gaussian Blur Image Online",
+    subtitle: "Apply a Smooth Blur Effect to Any Photo",
+    metaTitle: "Gaussian Blur Image Online — Free Tool",
+    metaDescription:
+      "Free Gaussian blur tool for images. Apply an adjustable, smooth blur effect to any photo instantly, right in your browser.",
+    introParagraph:
+      "A smooth blur effect is useful for softening a background, creating a bokeh-style photo look, or obscuring sensitive detail without a harsh pixelated edge. This tool applies an adjustable blur strength to any uploaded image instantly.",
+  },
+  {
+    slug: "get-hex-code-from-image",
+    toolSlug: "image-color-picker",
+    h1: "Get HEX Code From Image",
+    subtitle: "Click Any Pixel to Extract Its Exact Color Code",
+    metaTitle: "Get HEX Code From Image — Free Color Picker Tool",
+    metaDescription:
+      "Free tool to get the HEX code from any image. Upload a photo, click any pixel, and instantly see its exact HEX, RGB, and HSL color values.",
+    introParagraph:
+      "Matching a color from a photo, screenshot, or design reference to an exact code you can use in CSS or a design tool requires more precision than eyeballing it. Upload the image, click the exact pixel you want, and this tool reads the precise HEX, RGB, and HSL values instantly.",
+  },
+  {
+    slug: "color-picker-from-photo",
+    toolSlug: "image-color-picker",
+    h1: "Color Picker From Photo",
+    subtitle: "Extract the Exact Color of Any Point in an Image",
+    metaTitle: "Color Picker From Photo — Free Online Tool",
+    metaDescription:
+      "Free color picker for photos. Upload any image and click a point on it to instantly extract its exact color code for design or branding use.",
+    introParagraph:
+      "Building a brand palette or matching a design element to a color already used in a logo or photo means pulling the exact underlying color value, not guessing at it visually. This tool lets you upload any photo and click a pixel to get its precise color code.",
+  },
+  {
+    slug: "convert-image-to-base64-string",
+    toolSlug: "image-to-base64",
+    h1: "Convert Image to Base64 String",
+    subtitle: "Encode an Image Into a Base64 Data URI Instantly",
+    metaTitle: "Convert Image to Base64 String — Free Online Tool",
+    metaDescription:
+      "Free tool to convert an image to a Base64 string. Upload any image and get its Base64-encoded data URI, ready to embed directly in HTML or CSS.",
+    introParagraph:
+      "Embedding a small image directly in HTML or CSS as a data URI (instead of a separate file request) can reduce round-trips for small icons and assets. Upload your image and this tool converts it into a Base64 data URI instantly, ready to paste straight into your code.",
+  },
+  {
+    slug: "image-to-base64-data-uri",
+    toolSlug: "image-to-base64",
+    h1: "Image to Base64 Data URI Converter",
+    subtitle: "Generate a Base64 Data URI From Any Image File",
+    metaTitle: "Image to Base64 Data URI — Free Online Tool",
+    metaDescription:
+      "Free tool to generate a Base64 data URI from an image. Upload a photo or icon and get a ready-to-use data:image string for your code.",
+    introParagraph:
+      "A CSS background-image, an inline SVG fallback, or an email template that can't reference external image files all sometimes need an image embedded directly as a data URI. This tool converts any uploaded image into that exact format instantly.",
+  },
+  {
+    slug: "decode-base64-image",
+    toolSlug: "base64-to-image",
+    h1: "Decode Base64 Image String",
+    subtitle: "Convert a Base64 String Back Into a Viewable Image File",
+    metaTitle: "Decode Base64 Image — Free Online Tool",
+    metaDescription:
+      "Free tool to decode a Base64 image string. Paste a Base64-encoded data URI and instantly view and download it as a real image file.",
+    introParagraph:
+      "A Base64-encoded image string found in a config file, an API response, or an email's HTML source isn't viewable on its own — it needs decoding back into an actual image. Paste the string in and this tool renders and lets you download it as a real image file.",
+  },
+  {
+    slug: "base64-to-png-converter",
+    toolSlug: "base64-to-image",
+    h1: "Base64 to PNG Converter",
+    subtitle: "Convert a Base64 Data URI Into a Downloadable PNG",
+    metaTitle: "Base64 to PNG Converter — Free Online Tool",
+    metaDescription:
+      "Free Base64 to PNG converter. Paste a Base64-encoded image string and instantly get a downloadable PNG file, no software required.",
+    introParagraph:
+      "Extracting an actual image file from a Base64 string embedded somewhere in code — a saved data URI, an old export, an email template — usually means writing a quick script unless you have the right tool. Paste the string in and this tool decodes and gives you a downloadable image file instantly.",
+  },
+  {
+    slug: "convert-bmp-to-jpg-online",
+    toolSlug: "bmp-to-jpg",
+    h1: "Convert BMP to JPG Online",
+    subtitle: "Convert Bitmap Images to Compressed JPG Format",
+    metaTitle: "Convert BMP to JPG Online — Free, Private Tool",
+    metaDescription:
+      "Free online BMP to JPG converter. Convert an uncompressed BMP file into a much smaller JPG instantly, entirely in your browser.",
+    introParagraph:
+      "BMP files are uncompressed and can be dramatically larger than necessary for photos exported from older software or Windows tools like Paint. This tool converts BMP to compact JPG format instantly, shrinking the file size significantly without needing any software installed.",
+  },
+  {
+    slug: "bitmap-to-jpg-converter",
+    toolSlug: "bmp-to-jpg",
+    h1: "Bitmap to JPG Converter",
+    subtitle: "Shrink a Large BMP File Down to a Compact JPG",
+    metaTitle: "Bitmap to JPG Converter — Free Online Tool",
+    metaDescription:
+      "Free bitmap (BMP) to JPG converter. Upload a .bmp file and get a much smaller, web-friendly JPG version instantly in your browser.",
+    introParagraph:
+      "A .bmp file exported from legacy software is often ten times larger than an equivalent JPG for the same image, making it a poor fit for web use or sharing. This tool converts it to properly compressed JPG instantly, right on your device.",
+  },
+  {
+    slug: "convert-photo-to-black-and-white",
+    toolSlug: "image-grayscale-converter",
+    h1: "Convert Photo to Black and White",
+    subtitle: "Turn Any Color Photo Into Grayscale Instantly",
+    metaTitle: "Convert Photo to Black and White — Free Online Tool",
+    metaDescription:
+      "Free tool to convert a photo to black and white. Upload any color image and instantly get a grayscale version, right in your browser.",
+    introParagraph:
+      "A black-and-white conversion gives a photo a timeless, editorial look, and removes color as a distraction when you want the focus purely on composition, contrast, and light. Upload any color photo and this tool converts it to grayscale instantly.",
+  },
+  {
+    slug: "grayscale-photo-online",
+    toolSlug: "image-grayscale-converter",
+    h1: "Grayscale Photo Converter Online",
+    subtitle: "Remove Color From Any Image in One Click",
+    metaTitle: "Grayscale Photo Converter — Free Online Tool",
+    metaDescription:
+      "Free grayscale photo converter. Remove color from any uploaded image instantly, producing a clean black-and-white version ready to download.",
+    introParagraph:
+      "Whether it's for a design mockup that needs a desaturated placeholder image, a print layout, or just an artistic choice, converting a photo to grayscale by hand in a full editor is more work than it needs to be. This tool does it instantly with one upload.",
+  },
+  {
+    slug: "round-image-corners-online",
+    toolSlug: "image-rounded-corners",
+    h1: "Round Image Corners Online",
+    subtitle: "Add Rounded Corners to Any Photo Instantly",
+    metaTitle: "Round Image Corners Online — Free Tool",
+    metaDescription:
+      "Free tool to round the corners of an image. Upload a photo and instantly add smooth, adjustable rounded corners, right in your browser.",
+    introParagraph:
+      "Rounded corners give a photo a softer, more modern look, matching the rounded-card style common across app icons, profile photos, and web design. This tool bakes adjustable rounded corners directly into the exported image, so the effect travels with the file wherever it's used.",
+  },
+  {
+    slug: "circle-crop-image-tool",
+    toolSlug: "image-rounded-corners",
+    h1: "Rounded & Circular Image Crop Tool",
+    subtitle: "Round Corners or Fully Circle-Crop Any Photo",
+    metaTitle: "Circle Crop Image Tool — Free Online Tool",
+    metaDescription:
+      "Free tool to round an image's corners or crop it into a full circle, common for profile photos and app icons, exported with transparency.",
+    introParagraph:
+      "Profile photos and app icons commonly need a fully circular crop rather than just softened corners, and getting a clean, anti-aliased circular edge by hand takes real editing skill. This tool applies an adjustable corner radius, up to a full circle, exported with a transparent background.",
+  },
+  {
+    slug: "add-frame-to-image",
+    toolSlug: "image-border-adder",
+    h1: "Add a Frame to an Image",
+    subtitle: "Add a Solid Color Border Frame to Any Photo",
+    metaTitle: "Add a Frame to an Image — Free Online Tool",
+    metaDescription:
+      "Free tool to add a frame or border to any image. Choose the width and color and get a bordered photo ready to download instantly.",
+    introParagraph:
+      "A solid color frame instantly gives a photo a more finished, gallery-ready look, or helps a product thumbnail stand out against a busy background. This tool adds an adjustable-width, any-color border, baked directly into the exported image file.",
+  },
+  {
+    slug: "photo-border-generator",
+    toolSlug: "image-border-adder",
+    h1: "Photo Border Generator",
+    subtitle: "Generate a Custom Colored Border Around Any Photo",
+    metaTitle: "Photo Border Generator — Free Online Tool",
+    metaDescription:
+      "Free photo border generator. Upload an image, choose a border width and color, and instantly download the bordered version.",
+    introParagraph:
+      "Consistent borders across a set of photos — for a portfolio grid, a social media theme, or a printed collage — give an otherwise disparate set of images a unified, professional feel. This tool applies the exact same border settings quickly to as many images as you need, one at a time.",
+  },
+  {
+    slug: "pixelate-face-in-photo",
+    toolSlug: "image-pixelator",
+    h1: "Pixelate a Face in a Photo",
+    subtitle: "Pixelate Part of an Image to Hide a Face or Detail",
+    metaTitle: "Pixelate Face in Photo — Free Online Tool",
+    metaDescription:
+      "Free tool to pixelate a face or sensitive detail in a photo. Upload an image and apply an adjustable pixelation effect before sharing it.",
+    introParagraph:
+      "Sharing a photo that includes someone else's face, a license plate, or other identifying detail often calls for pixelating it out rather than a full blur, which is the more recognizable, deliberate-looking privacy convention. This tool applies adjustable pixelation entirely in your browser, with nothing uploaded to a server.",
+  },
+  {
+    slug: "mosaic-effect-image-tool",
+    toolSlug: "image-pixelator",
+    h1: "Mosaic Effect Image Tool",
+    subtitle: "Apply a Retro Pixelated Mosaic Effect to Any Photo",
+    metaTitle: "Mosaic Effect Image Tool — Free Online Tool",
+    metaDescription:
+      "Free tool to apply a mosaic or pixelation effect to any photo, for privacy blurring or a retro 8-bit visual style, adjustable in your browser.",
+    introParagraph:
+      "Beyond hiding sensitive detail, a strong pixelation effect is also a deliberate stylistic choice — the blocky, retro 8-bit look used in games, album art, and social posts. This tool lets you dial the pixel block size up or down to land anywhere from a subtle mosaic to full retro pixel art.",
+  },
+  {
+    slug: "instagram-post-size-resizer",
+    toolSlug: "social-media-image-resizer",
+    h1: "Instagram Post Size Resizer",
+    subtitle: "Resize Any Photo to Instagram's Exact Post Dimensions",
+    metaTitle: "Instagram Post Size Resizer — Free Online Tool",
+    metaDescription:
+      "Free Instagram post resizer. Upload any photo and instantly resize it to Instagram's exact 1080×1080 post dimensions, cropped and centered correctly.",
+    introParagraph:
+      "Uploading a photo with the wrong aspect ratio to Instagram means the platform auto-crops it in ways you didn't choose, often cutting off exactly the part of the photo you cared about. This tool resizes and center-crops your image to Instagram's exact post dimensions before you upload, so you control the crop.",
+  },
+  {
+    slug: "youtube-thumbnail-size-resizer",
+    toolSlug: "social-media-image-resizer",
+    h1: "YouTube Thumbnail Size Resizer",
+    subtitle: "Resize Any Image to YouTube's Exact Thumbnail Dimensions",
+    metaTitle: "YouTube Thumbnail Size Resizer — Free Online Tool",
+    metaDescription:
+      "Free YouTube thumbnail resizer. Resize any image to YouTube's standard 1280×720 thumbnail dimensions instantly, properly cropped and centered.",
+    introParagraph:
+      "A YouTube thumbnail uploaded at the wrong dimensions gets stretched or cropped unpredictably by the platform, undermining a design you spent time on. This tool resizes and center-crops any image to YouTube's exact 1280×720 standard before you upload it, so it displays exactly as designed.",
+  },
+  {
+    slug: "rotate-image-any-angle",
+    toolSlug: "image-rotator-by-angle",
+    h1: "Rotate Image by Any Angle",
+    subtitle: "Straighten a Tilted Photo by an Exact Custom Angle",
+    metaTitle: "Rotate Image by Any Angle — Free Online Tool",
+    metaDescription:
+      "Free tool to rotate an image by any custom angle, not just 90°. Straighten a slightly tilted photo with a live preview, right in your browser.",
+    introParagraph:
+      "A photo that's just a few degrees off level — a slightly tilted horizon, a scanned document that wasn't perfectly aligned — needs a precise custom rotation, not a blunt 90° turn. This tool supports any angle from -180° to 180° with a live preview, so you can straighten a photo exactly.",
+  },
+  {
+    slug: "straighten-tilted-photo",
+    toolSlug: "image-rotator-by-angle",
+    h1: "Straighten a Tilted Photo",
+    subtitle: "Fix a Slightly Crooked Photo With Precise Angle Control",
+    metaTitle: "Straighten a Tilted Photo — Free Online Tool",
+    metaDescription:
+      "Free tool to straighten a tilted or crooked photo. Enter an exact rotation angle or fine-tune it live until the horizon or edges line up.",
+    introParagraph:
+      "A landscape photo with a slightly crooked horizon, or a scanned page that wasn't quite square, is a common small flaw that a standard 90°-only rotation tool can't fix. This tool lets you dial in the exact angle needed with a live preview, correcting even a 1-2 degree tilt precisely.",
+  },
+  {
+    slug: "json-viewer-online",
+    toolSlug: "json-formatter",
+    h1: "JSON Viewer Online",
+    subtitle: "View and Explore Any JSON Structure Formatted Clearly",
+    metaTitle: "JSON Viewer Online — Free Formatting Tool",
+    metaDescription:
+      "Free online JSON viewer. Paste any JSON data to view it cleanly formatted and indented, making nested structures easy to explore.",
+    introParagraph:
+      "Opening a raw JSON file or API response directly often shows an unreadable single line, especially in a browser without a JSON-viewing extension installed. Paste it into this tool instead and it renders cleanly formatted and indented, ready to explore.",
+  },
+  {
+    slug: "json-indent-formatter",
+    toolSlug: "json-formatter",
+    h1: "JSON Indent Formatter",
+    subtitle: "Reformat JSON With Your Choice of Indentation Width",
+    metaTitle: "JSON Indent Formatter — Free Online Tool",
+    metaDescription:
+      "Free JSON indent formatter. Reformat any JSON with 2-space, 4-space, or tab indentation, matching your project's style guide.",
+    introParagraph:
+      "Different teams and style guides prefer different JSON indentation widths — 2 spaces, 4 spaces, or tabs — and matching that consistently by hand across pasted snippets is tedious. This tool reformats any JSON with your chosen indentation instantly.",
+  },
+  {
+    slug: "validate-json-online-free",
+    toolSlug: "json-validator",
+    h1: "Validate JSON Online Free",
+    subtitle: "Check Any JSON for Valid Syntax Before You Use It",
+    metaTitle: "Validate JSON Online Free — Instant Syntax Checker",
+    metaDescription:
+      "Free tool to validate JSON online. Paste your JSON and instantly confirm whether it's syntactically valid, with clear error details if not.",
+    introParagraph:
+      "Before feeding JSON into a script, API, or config loader, confirming it's actually valid syntax first saves debugging a cryptic downstream parse error later. Paste it in and this tool validates it instantly, right in your browser.",
+  },
+  {
+    slug: "json-linter-online",
+    toolSlug: "json-validator",
+    h1: "JSON Linter Online",
+    subtitle: "Lint Your JSON for Syntax Errors Before Deployment",
+    metaTitle: "JSON Linter Online — Free Online Tool",
+    metaDescription:
+      "Free online JSON linter. Paste your JSON configuration or data file and instantly catch syntax errors before they break your build or deployment.",
+    introParagraph:
+      "A malformed JSON config file can silently break a build or deployment pipeline, and catching that before it ships is far cheaper than debugging it in production. This tool lints your JSON instantly, flagging exactly where the syntax breaks.",
+  },
+  {
+    slug: "shrink-json-file-size",
+    toolSlug: "json-minifier",
+    h1: "Shrink JSON File Size",
+    subtitle: "Reduce a JSON File's Size by Stripping Whitespace",
+    metaTitle: "Shrink JSON File Size — Free Online Minifier",
+    metaDescription:
+      "Free tool to shrink JSON file size. Paste formatted JSON and strip all unnecessary whitespace to reduce its footprint before shipping or storing it.",
+    introParagraph:
+      "A large formatted JSON file used for local storage, a static config, or a bundled data file takes up more space than it needs to once it's meant to be read by code rather than a human. This tool strips it down to its minimal valid size instantly.",
+  },
+  {
+    slug: "json-whitespace-stripper",
+    toolSlug: "json-minifier",
+    h1: "JSON Whitespace Stripper",
+    subtitle: "Strip All Formatting Whitespace From a JSON Payload",
+    metaTitle: "JSON Whitespace Stripper — Free Online Tool",
+    metaDescription:
+      "Free tool to strip whitespace from JSON. Paste indented, formatted JSON and get back the minimal, whitespace-free version instantly.",
+    introParagraph:
+      "Every space and line break in formatted JSON is pure overhead once it's being sent over the wire or bundled into a production asset. This tool strips every bit of unnecessary whitespace from your pasted JSON in one click.",
+  },
+  {
+    slug: "encode-image-to-base64",
+    toolSlug: "base64-encode",
+    h1: "Encode File to Base64",
+    subtitle: "Convert Any Small File or Text Into a Base64 String",
+    metaTitle: "Encode File to Base64 — Free Online Tool",
+    metaDescription:
+      "Free tool to encode text or a small file's contents into Base64 format, ready for embedding in code, config files, or API payloads.",
+    introParagraph:
+      "Base64 encoding is the standard way to safely embed binary-adjacent data inside a text-only format like JSON, XML, or a config file. Paste your content in and this tool produces the correctly encoded Base64 string instantly.",
+  },
+  {
+    slug: "basic-auth-header-encoder",
+    toolSlug: "base64-encode",
+    h1: "Basic Auth Header Encoder",
+    subtitle: "Encode a Username:Password Pair for an HTTP Basic Auth Header",
+    metaTitle: "Basic Auth Header Encoder — Free Online Tool",
+    metaDescription:
+      "Free Basic Auth header encoder. Enter a username and password to generate the correctly Base64-encoded Authorization header value.",
+    introParagraph:
+      "HTTP Basic Authentication requires the username and password joined with a colon and Base64-encoded before being placed in the Authorization header — a specific format that's easy to get wrong by hand. This tool generates the correctly encoded value instantly.",
+  },
+  {
+    slug: "decode-base64-string-online",
+    toolSlug: "base64-decode",
+    h1: "Decode Base64 String Online",
+    subtitle: "Decode Any Base64 String Back to Its Original Form",
+    metaTitle: "Decode Base64 String Online — Free Tool",
+    metaDescription:
+      "Free tool to decode a Base64 string online. Paste any Base64-encoded value and instantly see its decoded, original content.",
+    introParagraph:
+      "A Base64 string encountered in a config file, API payload, or auth header needs decoding to actually verify or read its contents. This tool decodes it instantly, entirely in your browser.",
+  },
+  {
+    slug: "decode-basic-auth-header",
+    toolSlug: "base64-decode",
+    h1: "Decode Basic Auth Header",
+    subtitle: "Decode a Base64-Encoded Authorization Header Value",
+    metaTitle: "Decode Basic Auth Header — Free Online Tool",
+    metaDescription:
+      "Free tool to decode an HTTP Basic Auth Authorization header. Paste the Base64-encoded value and instantly see the username and password it contains.",
+    introParagraph:
+      "Debugging an API request that uses HTTP Basic Authentication sometimes means verifying exactly which username and password are actually being sent in the encoded header. Paste the Base64 value in and this tool decodes it back to the original credentials instantly.",
+  },
+  {
+    slug: "jwt-payload-viewer",
+    toolSlug: "jwt-decoder",
+    h1: "JWT Payload Viewer",
+    subtitle: "View a JSON Web Token's Claims and Expiry Instantly",
+    metaTitle: "JWT Payload Viewer — Free Online Tool",
+    metaDescription:
+      "Free JWT payload viewer. Paste any JSON Web Token and instantly see its decoded claims, including expiry time, in readable JSON format.",
+    introParagraph:
+      "Checking whether a JWT has expired, or what user data and permissions it actually carries in its claims, means decoding the payload — this tool does that instantly, formatting the claims as readable JSON.",
+  },
+  {
+    slug: "jwt-expiry-checker",
+    toolSlug: "jwt-decoder",
+    h1: "JWT Expiry Checker",
+    subtitle: "Check Exactly When a JWT Expires",
+    metaTitle: "JWT Expiry Checker — Free Online Tool",
+    metaDescription:
+      "Free JWT expiry checker. Paste a JSON Web Token and instantly see its exp claim converted into a readable expiration date and time.",
+    introParagraph:
+      "A JWT's expiry is stored as a raw Unix timestamp in its exp claim, unreadable without conversion. Paste your token in and this tool decodes it and shows the exact expiration date and time in readable form.",
+  },
+  {
+    slug: "regex-tool-with-explanation",
+    toolSlug: "regex-tester",
+    h1: "Regex Tool With Live Match Highlighting",
+    subtitle: "Test a Regex Pattern and See Every Match Highlighted Live",
+    metaTitle: "Regex Tool With Match Highlighting — Free Online Tool",
+    metaDescription:
+      "Free regex tool with live match highlighting. Write a pattern and instantly see every match in your test text highlighted as you type.",
+    introParagraph:
+      "Understanding exactly what a regex pattern matches is far easier when you can see it highlighted against real text in real time, rather than reasoning through the pattern abstractly. This tool highlights every match live as you refine your pattern.",
+  },
+  {
+    slug: "email-regex-validator",
+    toolSlug: "regex-tester",
+    h1: "Email Regex Validator",
+    subtitle: "Test an Email Validation Regex Against Sample Addresses",
+    metaTitle: "Email Regex Validator — Free Online Tool",
+    metaDescription:
+      "Free tool to test an email validation regex pattern against a list of sample addresses, checking which ones correctly match or fail.",
+    introParagraph:
+      "Writing a regex to validate email addresses is a notoriously easy thing to get subtly wrong — either too strict (rejecting valid addresses) or too loose (accepting invalid ones). Test your pattern against real sample addresses here and see exactly which ones match.",
+  },
+  {
+    slug: "uuid-v4-generator",
+    toolSlug: "uuid-generator",
+    h1: "UUID v4 Generator",
+    subtitle: "Generate Cryptographically Random Version 4 UUIDs",
+    metaTitle: "UUID v4 Generator — Free Online Tool",
+    metaDescription:
+      "Free UUID v4 generator. Generate cryptographically random, RFC 4122-compliant version 4 UUIDs instantly, one at a time or in bulk.",
+    introParagraph:
+      "UUID version 4 is the most common variant in modern use, generated from cryptographically random bits rather than a timestamp or hardware address, which is exactly why collisions are so vanishingly unlikely. This tool generates RFC 4122-compliant v4 UUIDs instantly.",
+  },
+  {
+    slug: "bulk-uuid-generator",
+    toolSlug: "uuid-generator",
+    h1: "Bulk UUID Generator",
+    subtitle: "Generate a Batch of Unique UUIDs at Once",
+    metaTitle: "Bulk UUID Generator — Free Online Tool",
+    metaDescription:
+      "Free bulk UUID generator. Generate dozens or hundreds of unique UUIDs at once for seed data, test fixtures, or database migrations.",
+    introParagraph:
+      "Seeding a test database or generating fixture data often requires a batch of unique identifiers all at once, rather than clicking generate one at a time. This tool generates a full batch of UUIDs in a single click, ready to copy as a list.",
+  },
+  {
+    slug: "sha1-hash-generator",
+    toolSlug: "hash-generator",
+    h1: "SHA-1 Hash Generator",
+    subtitle: "Generate a SHA-1 Hash From Any Text",
+    metaTitle: "SHA-1 Hash Generator — Free Online Tool",
+    metaDescription:
+      "Free SHA-1 hash generator. Enter any text and instantly compute its SHA-1 digest — useful for legacy checksums, not for security purposes.",
+    introParagraph:
+      "SHA-1 is cryptographically broken for security purposes (practical collision attacks exist), but it's still expected by some legacy systems, Git's older object hashing, and non-security checksums. This tool computes a SHA-1 digest from any text instantly.",
+  },
+  {
+    slug: "file-checksum-generator",
+    toolSlug: "hash-generator",
+    h1: "File Checksum Generator",
+    subtitle: "Generate a Checksum to Verify a Downloaded File Wasn't Corrupted",
+    metaTitle: "File Checksum Generator — Free Online Tool",
+    metaDescription:
+      "Free checksum generator. Paste text content and generate MD5 or SHA hashes to verify data integrity before or after a transfer.",
+    introParagraph:
+      "Verifying a downloaded file matches its publisher's published checksum is the standard way to confirm it wasn't corrupted or tampered with in transit. This tool computes multiple hash algorithms simultaneously from any pasted content, so you can compare against whichever one was published.",
+  },
+  {
+    slug: "date-to-unix-timestamp-converter",
+    toolSlug: "timestamp-converter",
+    h1: "Date to Unix Timestamp Converter",
+    subtitle: "Convert Any Calendar Date Into Its Unix Timestamp",
+    metaTitle: "Date to Unix Timestamp Converter — Free Online Tool",
+    metaDescription:
+      "Free date to Unix timestamp converter. Pick a calendar date and time and instantly get its corresponding Unix timestamp value.",
+    introParagraph:
+      "Generating a Unix timestamp for a specific future or past date — for a test fixture, a scheduled task, or a database seed value — is much faster with a converter than manually calculating seconds since 1970. Pick your date and this tool returns the exact timestamp instantly.",
+  },
+  {
+    slug: "milliseconds-to-date-converter",
+    toolSlug: "timestamp-converter",
+    h1: "Milliseconds to Date Converter",
+    subtitle: "Convert a Millisecond Timestamp Into a Readable Date",
+    metaTitle: "Milliseconds to Date Converter — Free Online Tool",
+    metaDescription:
+      "Free tool to convert a millisecond timestamp (like JavaScript's Date.now()) into a readable date and time instantly.",
+    introParagraph:
+      "JavaScript's Date.now() and many logging systems store timestamps in milliseconds rather than seconds, which needs dividing by 1000 before it matches a standard Unix timestamp — an easy step to forget. This tool detects and converts millisecond timestamps correctly, automatically.",
+  },
+  {
+    slug: "epoch-converter-for-developers",
+    toolSlug: "epoch-unix-time-converter",
+    h1: "Epoch Converter for Developers",
+    subtitle: "Convert Epoch Timestamps While Debugging Logs or APIs",
+    metaTitle: "Epoch Converter for Developers — Free Online Tool",
+    metaDescription:
+      "Free epoch converter built for developers debugging logs, APIs, or databases full of raw Unix timestamps.",
+    introParagraph:
+      "Debugging a log file or database full of raw epoch timestamps means constantly converting values back to readable dates to make sense of the sequence of events. This tool handles that conversion instantly, in either direction, without leaving your browser.",
+  },
+  {
+    slug: "epoch-to-local-time-converter",
+    toolSlug: "epoch-unix-time-converter",
+    h1: "Epoch to Local Time Converter",
+    subtitle: "Convert an Epoch Timestamp Into Your Local Timezone",
+    metaTitle: "Epoch to Local Time Converter — Free Online Tool",
+    metaDescription:
+      "Free tool to convert an epoch (Unix) timestamp into your local timezone's readable date and time, alongside the UTC equivalent.",
+    introParagraph:
+      "An epoch timestamp is timezone-agnostic by definition, but understanding what it actually means to you requires converting it into your local timezone. This tool shows both your local time and UTC side by side for any epoch value.",
+  },
+  {
+    slug: "hsl-to-hex-converter",
+    toolSlug: "color-code-converter",
+    h1: "HSL to HEX Converter",
+    subtitle: "Convert an HSL Color Value Into a HEX Code",
+    metaTitle: "HSL to HEX Converter — Free Online Tool",
+    metaDescription:
+      "Free HSL to HEX converter. Enter hue, saturation, and lightness values and instantly get the matching HEX color code for CSS.",
+    introParagraph:
+      "Adjusting a color's lightness or saturation is far more intuitive in HSL, but CSS and design tools often still expect the final value as HEX. This tool converts your adjusted HSL value into exact HEX (and RGB) instantly.",
+  },
+  {
+    slug: "css-color-code-converter",
+    toolSlug: "color-code-converter",
+    h1: "CSS Color Code Converter",
+    subtitle: "Convert Between Every CSS Color Format Instantly",
+    metaTitle: "CSS Color Code Converter — Free Online Tool",
+    metaDescription:
+      "Free CSS color code converter. Convert any color between HEX, RGB, and HSL notation, all valid CSS color formats, with a live preview.",
+    introParagraph:
+      "CSS accepts color values in several different notations, and a design system or component library often needs the same color expressed consistently in a specific one. This tool converts any color between all three CSS-valid formats instantly, with a visual preview to confirm the match.",
+  },
+  {
+    slug: "parse-url-parameters-online",
+    toolSlug: "url-parser",
+    h1: "Parse URL Parameters Online",
+    subtitle: "Extract Every Query Parameter From a URL Instantly",
+    metaTitle: "Parse URL Parameters Online — Free Online Tool",
+    metaDescription:
+      "Free tool to parse URL parameters. Paste any URL and instantly extract every individual query parameter as a clear key-value list.",
+    introParagraph:
+      "Understanding exactly what data a tracking link, redirect, or API call URL is passing means extracting its query parameters into a clear list rather than reading them inline in a long string. This tool does that extraction instantly.",
+  },
+  {
+    slug: "extract-domain-from-url",
+    toolSlug: "url-parser",
+    h1: "Extract Domain From URL",
+    subtitle: "Get Just the Domain Name From Any Full URL",
+    metaTitle: "Extract Domain From URL — Free Online Tool",
+    metaDescription:
+      "Free tool to extract just the domain name from a full URL, stripping the protocol, path, and query string down to the bare hostname.",
+    introParagraph:
+      "Pulling just the domain out of a full URL — for grouping analytics data, checking a link's source, or a quick sanity check — is a small but recurring task. Paste the full URL in and this tool extracts the clean domain instantly.",
+  },
+  {
+    slug: "what-does-403-mean",
+    toolSlug: "http-status-code-lookup",
+    h1: "What Does HTTP 403 Mean?",
+    subtitle: "Understand the 403 Forbidden Status Code and Common Causes",
+    metaTitle: "What Does 403 Mean — Free HTTP Status Reference",
+    metaDescription:
+      "Free lookup explaining what HTTP status code 403 Forbidden means, alongside every other standard status code from 100 to 599.",
+    introParagraph:
+      "A 403 Forbidden response means the server understood the request but is refusing to authorize it — different from a 401, which specifically means you're not authenticated at all. This tool explains the distinction alongside every other standard HTTP status code.",
+  },
+  {
+    slug: "rest-api-status-code-guide",
+    toolSlug: "http-status-code-lookup",
+    h1: "REST API Status Code Guide",
+    subtitle: "A Reference for Every Status Code a REST API Might Return",
+    metaTitle: "REST API Status Code Guide — Free Reference Tool",
+    metaDescription:
+      "Free REST API status code guide covering every standard HTTP status code an API endpoint might return, with a plain-English explanation for each.",
+    introParagraph:
+      "Designing or debugging a REST API means picking (or interpreting) the right status code for every response scenario — success, client error, server error, redirect. This tool provides a clear, complete reference for every standard code.",
+  },
+  {
+    slug: "file-extension-to-mime-type",
+    toolSlug: "mime-type-lookup",
+    h1: "File Extension to MIME Type Lookup",
+    subtitle: "Find the MIME Type for Any File Extension Instantly",
+    metaTitle: "File Extension to MIME Type — Free Lookup Tool",
+    metaDescription:
+      "Free tool to look up the MIME type for any file extension — .pdf, .jpg, .json, and hundreds more — for use in headers or upload validation.",
+    introParagraph:
+      "Validating a file upload against an allowed MIME type list, or setting a correct Content-Type header, both require knowing the exact MIME string for a given extension. This tool provides an instant, accurate lookup covering hundreds of file types.",
+  },
+  {
+    slug: "image-mime-type-checker",
+    toolSlug: "mime-type-lookup",
+    h1: "Image MIME Type Checker",
+    subtitle: "Find the Correct MIME Type for Any Image File Format",
+    metaTitle: "Image MIME Type Checker — Free Online Tool",
+    metaDescription:
+      "Free tool to check the correct MIME type for image file formats like JPG, PNG, WebP, and SVG, for use in upload validation or headers.",
+    introParagraph:
+      "Image upload validation and Content-Type headers both need the exact MIME type string — image/jpeg, image/png, image/webp, and so on — which is easy to mix up between similar formats. This tool provides a quick, accurate lookup for any image extension.",
+  },
+  {
+    slug: "curl-to-postman-alternative",
+    toolSlug: "curl-command-generator",
+    h1: "Build a cURL Command Without Postman",
+    subtitle: "Generate a curl Command Right in Your Browser, No App Needed",
+    metaTitle: "Build cURL Command Without Postman — Free Online Tool",
+    metaDescription:
+      "Free tool to build a curl command without installing Postman or Insomnia. Set method, headers, and body, get a ready-to-run curl command.",
+    introParagraph:
+      "Not every API test needs a full desktop client like Postman installed — sometimes you just need a quick, correct curl command for a terminal or a script. This tool builds one from a simple form, right in your browser.",
+  },
+  {
+    slug: "curl-post-request-generator",
+    toolSlug: "curl-command-generator",
+    h1: "cURL POST Request Generator",
+    subtitle: "Build a curl POST Command With JSON Body and Headers",
+    metaTitle: "cURL POST Request Generator — Free Online Tool",
+    metaDescription:
+      "Free tool to generate a curl POST request with a JSON body and custom headers, correctly formatted and escaped, ready to run.",
+    introParagraph:
+      "A POST request with a JSON body and custom headers has more moving parts to get right in curl syntax than a simple GET — correct escaping of quotes inside the body is a common stumbling block. This tool builds the full command correctly from a simple form.",
+  },
+  {
+    slug: "totp-secret-base32-encoder",
+    toolSlug: "base32-encode-decode",
+    h1: "TOTP Secret Base32 Encoder",
+    subtitle: "Encode a Secret Key Into Base32 for Two-Factor Auth Setup",
+    metaTitle: "TOTP Secret Base32 Encoder — Free Online Tool",
+    metaDescription:
+      "Free tool to encode a secret key into Base32 format, the encoding required for TOTP-based two-factor authentication (2FA) setup.",
+    introParagraph:
+      "TOTP-based two-factor authentication specifically requires the secret key in Base32 format — that's the standard authenticator apps like Google Authenticator expect. This tool encodes any text into correctly formatted Base32 instantly.",
+  },
+  {
+    slug: "base32-to-text-converter",
+    toolSlug: "base32-encode-decode",
+    h1: "Base32 to Text Converter",
+    subtitle: "Convert a Base32-Encoded String Back Into Plain Text",
+    metaTitle: "Base32 to Text Converter — Free Online Tool",
+    metaDescription:
+      "Free Base32 to text converter. Paste a Base32-encoded string and instantly decode it back into its original, readable text content.",
+    introParagraph:
+      "A Base32 string — from a 2FA setup key or a DNS-safe identifier — needs decoding to check or verify its actual underlying content. This tool decodes any Base32 string back into readable text instantly.",
+  },
+  {
+    slug: "extended-ascii-table",
+    toolSlug: "ascii-table-reference",
+    h1: "Extended ASCII Table",
+    subtitle: "Reference the Full Extended ASCII Character Set",
+    metaTitle: "Extended ASCII Table — Free Reference Tool",
+    metaDescription:
+      "Free extended ASCII table covering all 256 characters, including symbols and accented letters beyond the standard 128-character set.",
+    introParagraph:
+      "The extended ASCII set adds 128 more characters beyond standard ASCII — box-drawing symbols, accented letters, and other characters used by specific legacy systems and encodings. This tool provides a complete, searchable reference for the full 256-character set.",
+  },
+  {
+    slug: "keyboard-ascii-codes-reference",
+    toolSlug: "ascii-table-reference",
+    h1: "Keyboard ASCII Codes Reference",
+    subtitle: "Look Up the ASCII Code for Any Keyboard Character",
+    metaTitle: "Keyboard ASCII Codes Reference — Free Tool",
+    metaDescription:
+      "Free reference for keyboard ASCII codes. Look up the exact ASCII code for any letter, number, or symbol on a standard keyboard.",
+    introParagraph:
+      "Programming a keyboard shortcut handler, working with raw keycodes, or just needing the exact ASCII value for a specific keyboard character all benefit from a fast, searchable reference. This tool covers every standard keyboard character's ASCII code.",
+  },
+  {
+    slug: "unicode-to-text-converter",
+    toolSlug: "unicode-converter",
+    h1: "Unicode to Text Converter",
+    subtitle: "Convert Unicode Code Points Back Into Readable Characters",
+    metaTitle: "Unicode to Text Converter — Free Online Tool",
+    metaDescription:
+      "Free tool to convert Unicode code points (like U+0041) back into their corresponding readable text characters instantly.",
+    introParagraph:
+      "A list of Unicode code points found in documentation, a bug report, or an internationalization file isn't directly readable without converting each one back to its actual character. This tool converts them back to readable text instantly.",
+  },
+  {
+    slug: "emoji-unicode-lookup",
+    toolSlug: "unicode-converter",
+    h1: "Emoji Unicode Lookup",
+    subtitle: "Find the Exact Unicode Code Point Behind Any Emoji",
+    metaTitle: "Emoji Unicode Lookup — Free Online Tool",
+    metaDescription:
+      "Free emoji Unicode lookup. Enter any emoji and instantly find its exact underlying Unicode code point, useful for code or documentation.",
+    introParagraph:
+      "Referencing a specific emoji programmatically — in a regex, a string comparison, or documentation — requires its exact Unicode code point, which isn't obvious just by looking at the emoji itself. This tool looks it up instantly.",
+  },
+  {
+    slug: "generate-slug-from-string",
+    toolSlug: "slugify-tool",
+    h1: "Generate Slug From String",
+    subtitle: "Slugify Any String for Use as a URL or File Identifier",
+    metaTitle: "Generate Slug From String — Free Online Tool",
+    metaDescription:
+      "Free tool to generate a slug from any string. Convert text into a clean, lowercase, hyphenated identifier for URLs, filenames, or database keys.",
+    introParagraph:
+      "Beyond just URLs, a slugified string is often useful as a clean filename or a simple database key derived from a human-readable label. This tool converts any string into that clean, hyphenated slug format instantly.",
+  },
+  {
+    slug: "javascript-slugify-alternative",
+    toolSlug: "slugify-tool",
+    h1: "Slugify a String Without Installing a Library",
+    subtitle: "Get Slugify Output Without npm Installing a Package",
+    metaTitle: "Slugify String Without a Library — Free Online Tool",
+    metaDescription:
+      "Free tool that replicates the output of common slugify npm packages, without needing to install a dependency for a one-off conversion.",
+    introParagraph:
+      "Installing a slugify npm package just to convert a handful of strings one time is overkill for a quick, one-off need. This tool produces the same clean, lowercase, hyphenated output instantly in the browser, no install required.",
+  },
+  {
+    slug: "gitignore-generator-for-python",
+    toolSlug: "git-ignore-generator",
+    h1: "Python .gitignore Generator",
+    subtitle: "Generate a Complete .gitignore File for Python Projects",
+    metaTitle: "Python .gitignore Generator — Free Online Tool",
+    metaDescription:
+      "Free Python .gitignore generator. Instantly generate a complete .gitignore covering __pycache__, virtual environments, and common Python artifacts.",
+    introParagraph:
+      "A Python project's .gitignore needs to cover __pycache__ directories, .pyc files, virtual environment folders, and tool-specific caches like .pytest_cache — easy to forget one and accidentally commit it. This tool generates the complete, correct file instantly.",
+  },
+  {
+    slug: "gitignore-generator-for-node",
+    toolSlug: "git-ignore-generator",
+    h1: "Node.js .gitignore Generator",
+    subtitle: "Generate a Complete .gitignore File for Node.js Projects",
+    metaTitle: "Node.js .gitignore Generator — Free Online Tool",
+    metaDescription:
+      "Free Node.js .gitignore generator. Instantly generate a complete .gitignore covering node_modules, build output, and common Node.js artifacts.",
+    introParagraph:
+      "A Node.js project without a proper .gitignore risks accidentally committing the entire node_modules folder — often hundreds of megabytes of dependencies that should never be in version control. This tool generates the complete, correct file for Node.js instantly.",
+  },
+  {
+    slug: "apache-2-0-license-generator",
+    toolSlug: "open-source-license-generator",
+    h1: "Apache 2.0 License Generator",
+    subtitle: "Generate a Correctly Formatted Apache 2.0 License",
+    metaTitle: "Apache 2.0 License Generator — Free Online Tool",
+    metaDescription:
+      "Free Apache 2.0 license generator. Enter your project details and instantly get the correctly formatted Apache License 2.0 text for your repository.",
+    introParagraph:
+      "The Apache 2.0 license includes explicit patent grant language that the MIT license doesn't, making it a common choice for projects concerned about patent protection. This tool generates the correctly formatted full license text instantly.",
+  },
+  {
+    slug: "gpl-license-generator",
+    toolSlug: "open-source-license-generator",
+    h1: "GPL License Generator",
+    subtitle: "Generate GPL License Text for Your Open Source Project",
+    metaTitle: "GPL License Generator — Free Online Tool",
+    metaDescription:
+      "Free GPL license generator. Generate correctly formatted GNU General Public License text for a project requiring copyleft licensing.",
+    introParagraph:
+      "The GPL's copyleft terms require derivative works to also be open-sourced under the same license — a deliberate choice some maintainers make to keep their code and its forks permanently open. This tool generates the correct GPL license text for your project.",
+  },
+  {
+    slug: "debug-api-response-online",
+    toolSlug: "api-response-formatter",
+    h1: "Debug API Response Online",
+    subtitle: "Format and Inspect a Raw API Response While Debugging",
+    metaTitle: "Debug API Response Online — Free Online Tool",
+    metaDescription:
+      "Free tool to debug an API response. Paste raw output from a network tab or curl command and get it formatted with key structural stats instantly.",
+    introParagraph:
+      "Debugging an integration often means repeatedly pasting fresh API responses somewhere readable to check field values and structure as you iterate. This tool formats and summarizes any response instantly, right in the browser, with nothing sent to a third party.",
+  },
+  {
+    slug: "postman-response-formatter",
+    toolSlug: "api-response-formatter",
+    h1: "Postman-Style Response Formatter",
+    subtitle: "Format a Copied API Response the Way Postman Would",
+    metaTitle: "Postman-Style Response Formatter — Free Online Tool",
+    metaDescription:
+      "Free tool to format a copied API response with clean structure and stats, similar to what you'd see in Postman's response viewer.",
+    introParagraph:
+      "Sometimes you have a raw response copied from a curl command or log rather than run live through Postman, and still want that same clean, formatted view. This tool formats and summarizes it instantly without needing the full Postman app.",
+  },
+  {
+    slug: "octal-to-decimal-converter",
+    toolSlug: "number-base-converter",
+    h1: "Octal to Decimal Converter",
+    subtitle: "Convert Octal Numbers to Decimal, Binary & Hex",
+    metaTitle: "Octal to Decimal Converter — Free Online Tool",
+    metaDescription:
+      "Free octal to decimal converter. Enter a number in octal (base 8) and instantly see its decimal, binary, and hexadecimal equivalents.",
+    introParagraph:
+      "Octal notation still shows up in specific contexts like Unix file permission values (like 755 or 644), and converting between octal and decimal to actually understand a permission setting is a common small task. This tool converts instantly between all four common bases.",
+  },
+  {
+    slug: "unix-file-permissions-converter",
+    toolSlug: "number-base-converter",
+    h1: "Unix File Permissions Converter",
+    subtitle: "Convert an Octal Permission Value Into Decimal or Binary",
+    metaTitle: "Unix File Permissions Converter — Free Online Tool",
+    metaDescription:
+      "Free tool to convert a Unix file permission value (like chmod 755) between octal, decimal, and binary to understand exactly what it grants.",
+    introParagraph:
+      "A chmod value like 755 is octal notation, and understanding exactly what permissions it grants means breaking each digit down into its binary read/write/execute bits. This tool converts the value across bases instantly to help make sense of it.",
+  },
+  {
+    slug: "env-variables-documentation-generator",
+    toolSlug: "environment-variable-to-json-converter",
+    h1: "Environment Variables Documentation Generator",
+    subtitle: "Turn a .env File Into a Structured Reference Document",
+    metaTitle: "Environment Variables Documentation Generator — Free Tool",
+    metaDescription:
+      "Free tool to convert a .env file into structured JSON, useful as a starting point for documenting a project's required environment variables.",
+    introParagraph:
+      "Documenting which environment variables a project requires — for onboarding a new developer or writing a README — starts with a clear, structured list rather than the raw .env file's plain syntax. This tool converts your .env into structured JSON as a documentation starting point.",
+  },
+  {
+    slug: "convert-env-variables-to-object",
+    toolSlug: "environment-variable-to-json-converter",
+    h1: "Convert Environment Variables to a JSON Object",
+    subtitle: "Turn .env KEY=VALUE Pairs Into a Structured Config Object",
+    metaTitle: "Convert Env Variables to JSON Object — Free Online Tool",
+    metaDescription:
+      "Free tool to convert environment variables into a structured JSON config object, ready to use in a Node.js, Python, or other application config.",
+    introParagraph:
+      "Some application frameworks expect configuration as a structured object rather than reading directly from a .env file, requiring a one-time conversion from KEY=VALUE syntax into JSON. This tool handles that conversion instantly for any .env content you paste in.",
+  },
+  {
+    slug: "how-old-am-i-calculator",
+    toolSlug: "age-calculator",
+    h1: "How Old Am I? Age Calculator",
+    subtitle: "Find Your Exact Age in Years, Months & Days",
+    metaTitle: "How Old Am I — Free Exact Age Calculator",
+    metaDescription:
+      "Free calculator answering exactly how old you are. Enter your birth date to see your exact age in years, months, and days, updated to today.",
+    introParagraph:
+      "\"How old am I?\" seems like a simple question, but the honest answer is more precise than just a year count — it's years, months, and days as of today. Enter your birth date and this tool calculates your exact current age instantly, along with total days lived and days until your next birthday.",
+  },
+  {
+    slug: "chronological-age-calculator",
+    toolSlug: "age-calculator",
+    h1: "Chronological Age Calculator",
+    subtitle: "Calculate Precise Chronological Age for Assessments & Forms",
+    metaTitle: "Chronological Age Calculator — Free Online Tool",
+    metaDescription:
+      "Free chronological age calculator. Calculate exact age in years, months, and days as of any date, for educational, psychological, or medical use.",
+    introParagraph:
+      "Chronological age — the precise, exact age of a person as of a specific date — is a specific term used in educational assessments, psychological testing, and medical contexts, where an approximate year count isn't precise enough. This tool calculates it exactly, down to the day, as of today or any date you choose.",
+  },
+  {
+    slug: "days-until-birthday-calculator",
+    toolSlug: "age-calculator",
+    h1: "Days Until My Birthday Calculator",
+    subtitle: "Count Down the Exact Days Until Your Next Birthday",
+    metaTitle: "Days Until Birthday Calculator — Free Online Tool",
+    metaDescription:
+      "Free tool to calculate exactly how many days are left until your next birthday. Enter your birth date to see your countdown instantly.",
+    introParagraph:
+      "Counting down to a birthday by hand means checking a calendar and counting weeks, an easy thing to get slightly wrong. Enter your date of birth and this tool calculates the exact number of days remaining until your next birthday instantly, alongside your full current age breakdown.",
+  },
+  {
+    slug: "exact-age-calculator",
+    toolSlug: "age-calculator",
+    h1: "Exact Age Calculator",
+    subtitle: "Calculate Your Precise Age Down to the Day",
+    metaTitle: "Exact Age Calculator — Free Online Tool",
+    metaDescription:
+      "Free exact age calculator. Get your precise age in years, months, and days, calculated using accurate calendar math, not rough estimates.",
+    introParagraph:
+      "An age estimate based on subtracting birth year from the current year can be off by up to a year depending on whether the birthday has passed yet — an exact age calculation needs full calendar-aware math. This tool calculates your precise age to the exact day, with no rounding or estimation.",
+  },
+  {
+    slug: "percent-increase-calculator",
+    toolSlug: "percentage-calculator",
+    h1: "Percent Increase Calculator",
+    subtitle: "Calculate the Percentage Increase Between Two Values",
+    metaTitle: "Percent Increase Calculator — Free Online Tool",
+    metaDescription:
+      "Free percent increase calculator. Enter an original and new value to instantly calculate the percentage increase between them.",
+    introParagraph:
+      "Calculating a percentage increase — a salary raise, a business growth metric, a price hike — requires dividing the change by the original value, a step that's easy to reverse by mistake. Enter your two values and this tool calculates the exact percentage increase instantly.",
+  },
+  {
+    slug: "percent-decrease-calculator",
+    toolSlug: "percentage-calculator",
+    h1: "Percent Decrease Calculator",
+    subtitle: "Calculate the Percentage Decrease Between Two Values",
+    metaTitle: "Percent Decrease Calculator — Free Online Tool",
+    metaDescription:
+      "Free percent decrease calculator. Enter an original and new value to instantly calculate the percentage decrease between them.",
+    introParagraph:
+      "A percentage decrease — a price drop, a weight change, a metric that fell — is calculated the same way as an increase but read as a negative change relative to the original value. Enter your before and after values and this tool calculates the exact percentage drop instantly.",
+  },
+  {
+    slug: "what-percentage-calculator",
+    toolSlug: "percentage-calculator",
+    h1: "What Percentage Is X of Y Calculator",
+    subtitle: "Find What Percent One Number Represents of Another",
+    metaTitle: "What Percentage Calculator — Free Online Tool",
+    metaDescription:
+      "Free calculator to find what percentage one number is of another — useful for grades, statistics, budgets, and progress tracking.",
+    introParagraph:
+      "\"What percent of my budget did I spend\" or \"what percent of students passed\" are both the same underlying question — given a part and a whole, what's the percentage relationship. Enter your two numbers and this tool calculates the exact percentage instantly.",
+  },
+  {
+    slug: "percent-off-calculator",
+    toolSlug: "percentage-calculator",
+    h1: "Percent Off Calculator",
+    subtitle: "Quickly Calculate What a Percentage Off a Number Equals",
+    metaTitle: "Percent Off Calculator — Free Online Tool",
+    metaDescription:
+      "Free percent off calculator. Quickly find what a percentage of any number equals — a fast, no-frills alternative to a full discount calculator.",
+    introParagraph:
+      "Sometimes you just need the raw math — what does 15% of 60 actually equal — without a full shopping-cart-style discount and tax breakdown. This tool's \"X% of Y\" mode gives you that exact number instantly, for tips, quick estimates, or any straightforward percentage calculation.",
+  },
+  {
+    slug: "sale-price-calculator",
+    toolSlug: "discount-calculator",
+    h1: "Sale Price Calculator",
+    subtitle: "Calculate the Final Sale Price After a Discount",
+    metaTitle: "Sale Price Calculator — Free Online Tool",
+    metaDescription:
+      "Free sale price calculator. Enter the original price and discount percentage to instantly see the final sale price and amount saved.",
+    introParagraph:
+      "A sale sign showing \"40% off\" doesn't tell you the actual price you'll pay — that still requires doing the math on the original price. Enter both and this tool calculates the exact sale price and dollar amount saved instantly.",
+  },
+  {
+    slug: "percent-off-price-calculator",
+    toolSlug: "discount-calculator",
+    h1: "Percent Off Price Calculator",
+    subtitle: "Calculate a Discounted Price From Any Percentage Off",
+    metaTitle: "Percent Off Price Calculator — Free Online Tool",
+    metaDescription:
+      "Free tool to calculate a discounted price from any percentage off. Enter the original price and discount rate for the exact final price.",
+    introParagraph:
+      "Comparing a 25%-off item to a 30%-off item at a different store only makes sense once both are converted into actual final prices, not left as raw percentages. This tool converts any percentage-off price instantly, including optional sales tax for a true final total.",
+  },
+  {
+    slug: "coupon-discount-calculator",
+    toolSlug: "discount-calculator",
+    h1: "Coupon Discount Calculator",
+    subtitle: "Calculate Your Total Savings From a Coupon Code",
+    metaTitle: "Coupon Discount Calculator — Free Online Tool",
+    metaDescription:
+      "Free coupon discount calculator. Enter the item price and your coupon's percentage off to see your total savings and final checkout price.",
+    introParagraph:
+      "A percentage-off coupon code shows the rate but not the actual amount it'll knock off your total, especially once tax is factored back in after the discount. This tool calculates your exact savings and final checkout price instantly.",
+  },
+  {
+    slug: "discount-and-tax-calculator",
+    toolSlug: "discount-calculator",
+    h1: "Discount and Tax Calculator",
+    subtitle: "Calculate a Discounted Price Including Sales Tax",
+    metaTitle: "Discount and Tax Calculator — Free Online Tool",
+    metaDescription:
+      "Free calculator combining a discount and sales tax in one step. Get the true final price after both a percentage discount and tax are applied.",
+    introParagraph:
+      "Getting the true final price right requires applying the discount first and calculating tax on the already-discounted amount — get that order wrong and the final total is off. This tool handles both steps correctly in the right order, giving you the accurate final price in one calculation.",
+  },
+  {
+    slug: "body-mass-index-calculator",
+    toolSlug: "bmi-calculator",
+    h1: "Body Mass Index (BMI) Calculator",
+    subtitle: "Calculate Your BMI and Standard Weight Category",
+    metaTitle: "Body Mass Index Calculator — Free Online Tool",
+    metaDescription:
+      "Free Body Mass Index (BMI) calculator. Enter your height and weight to calculate your BMI and see which standard WHO category it falls into.",
+    introParagraph:
+      "Body Mass Index — the full name behind the common \"BMI\" abbreviation — is a standardized ratio of weight to height used as a quick population-level health screening reference. Enter your height and weight in metric or imperial units and this tool calculates your BMI and category instantly.",
+  },
+  {
+    slug: "healthy-weight-calculator",
+    toolSlug: "bmi-calculator",
+    h1: "Healthy Weight Range Calculator",
+    subtitle: "Check Where Your Weight Falls on the Standard BMI Scale",
+    metaTitle: "Healthy Weight Calculator — Free BMI-Based Tool",
+    metaDescription:
+      "Free healthy weight calculator based on standard BMI ranges. Enter your height and weight to see whether you fall in the WHO 'normal weight' range.",
+    introParagraph:
+      "Checking whether your weight falls within the standard \"normal\" range for your height is exactly what the BMI Normal weight category (18.5–24.9) is designed to indicate. This tool calculates your BMI and shows clearly which standard category it falls into.",
+  },
+  {
+    slug: "bmi-calculator-metric",
+    toolSlug: "bmi-calculator",
+    h1: "BMI Calculator (Metric)",
+    subtitle: "Calculate BMI Using Centimeters and Kilograms",
+    metaTitle: "BMI Calculator Metric — Free Online Tool (cm, kg)",
+    metaDescription:
+      "Free metric BMI calculator using centimeters and kilograms. Enter your height and weight for an instant, accurate BMI result and category.",
+    introParagraph:
+      "Most BMI calculators default to imperial units (feet, inches, pounds), which is an extra conversion step if you think in centimeters and kilograms. This tool's metric mode calculates BMI directly from cm and kg, no conversion needed.",
+  },
+  {
+    slug: "bmi-calculator-kg-cm",
+    toolSlug: "bmi-calculator",
+    h1: "BMI Calculator kg/cm",
+    subtitle: "Quickly Calculate BMI From Kilograms and Centimeters",
+    metaTitle: "BMI Calculator kg/cm — Free Online Tool",
+    metaDescription:
+      "Free BMI calculator for kilograms and centimeters. Enter your weight in kg and height in cm to instantly calculate your Body Mass Index.",
+    introParagraph:
+      "Entering height and weight in kilograms and centimeters directly, without switching to feet, inches, or pounds first, is exactly what this tool's metric mode is built for. Get an instant, accurate BMI result and standard category.",
+  },
+  {
+    slug: "days-between-dates-calculator",
+    toolSlug: "date-calculator",
+    h1: "Days Between Dates Calculator",
+    subtitle: "Calculate the Exact Number of Days Between Two Dates",
+    metaTitle: "Days Between Dates Calculator — Free Online Tool",
+    metaDescription:
+      "Free tool to calculate the exact number of days between two dates. Enter both dates for an instant, accurate day count.",
+    introParagraph:
+      "Counting days between two dates by hand on a calendar is slow and easy to miscount, especially across month boundaries. Enter both dates and this tool calculates the exact number of days between them instantly, along with the full years/months/days breakdown.",
+  },
+  {
+    slug: "date-difference-calculator",
+    toolSlug: "date-calculator",
+    h1: "Date Difference Calculator",
+    subtitle: "Find the Exact Time Span Between Any Two Dates",
+    metaTitle: "Date Difference Calculator — Free Online Tool",
+    metaDescription:
+      "Free date difference calculator. Enter two dates to instantly see the exact span between them in years, months, days, and total days.",
+    introParagraph:
+      "Figuring out exactly how much time has passed (or will pass) between two dates — a project timeline, an anniversary, a countdown — needs accurate calendar math, not a rough guess. This tool calculates the exact difference instantly, in every useful unit.",
+  },
+  {
+    slug: "add-days-to-date-calculator",
+    toolSlug: "date-calculator",
+    h1: "Add Days to a Date Calculator",
+    subtitle: "Find the Exact Date a Number of Days From a Start Date",
+    metaTitle: "Add Days to Date Calculator — Free Online Tool",
+    metaDescription:
+      "Free calculator to add a number of days to any date. Enter a start date and day count to find the exact resulting date and weekday.",
+    introParagraph:
+      "Calculating a deadline or due date — \"60 days from the invoice date\" — by manually counting a calendar is slow and easy to get wrong across month boundaries. Enter your start date and day count and this tool calculates the exact resulting date and weekday instantly.",
+  },
+  {
+    slug: "days-from-today-calculator",
+    toolSlug: "date-calculator",
+    h1: "Days From Today Calculator",
+    subtitle: "Find What Date Falls a Number of Days From Today",
+    metaTitle: "Days From Today Calculator — Free Online Tool",
+    metaDescription:
+      "Free tool to calculate what date falls a certain number of days from today. Enter a day count to instantly find the resulting date and weekday.",
+    introParagraph:
+      "\"What date is 45 days from today\" is one of the most common date-math questions, useful for deadlines, countdowns, and planning. Set today as your start date, enter the day count, and this tool calculates the exact resulting date and weekday instantly.",
+  },
+  {
+    slug: "add-hours-and-minutes-calculator",
+    toolSlug: "time-calculator",
+    h1: "Add Hours and Minutes Calculator",
+    subtitle: "Add Two Time Durations Together Correctly",
+    metaTitle: "Add Hours and Minutes Calculator — Free Online Tool",
+    metaDescription:
+      "Free tool to add hours and minutes together correctly, automatically carrying minutes over 60 into extra hours, unlike simple addition.",
+    introParagraph:
+      "Adding two durations like 2h 40m and 1h 35m by hand means remembering to carry the extra minutes over 60 into another hour — an easy step to forget. This tool adds hours, minutes, and seconds correctly every time, with no manual carrying required.",
+  },
+  {
+    slug: "work-hours-calculator",
+    toolSlug: "time-calculator",
+    h1: "Work Hours Calculator",
+    subtitle: "Total Up Multiple Work Time Entries Correctly",
+    metaTitle: "Work Hours Calculator — Free Online Tool",
+    metaDescription:
+      "Free work hours calculator. Add up recorded work durations correctly, with results shown in both H/M/S format and decimal hours for payroll.",
+    introParagraph:
+      "Summing recorded work time entries — hours and minutes from a timesheet — needs to handle minute carrying correctly to produce an accurate total, and the total often needs converting to decimal hours for payroll. This tool does both instantly.",
+  },
+  {
+    slug: "subtract-time-calculator",
+    toolSlug: "time-calculator",
+    h1: "Subtract Time Calculator",
+    subtitle: "Find the Difference Between Two Time Durations",
+    metaTitle: "Subtract Time Calculator — Free Online Tool",
+    metaDescription:
+      "Free tool to subtract one time duration from another, correctly borrowing across hours and minutes, with the result shown clearly.",
+    introParagraph:
+      "Subtracting time durations correctly means borrowing across the hour/minute boundary when needed, the same carrying logic as addition but in reverse. This tool handles that automatically, showing a clear negative result if the second duration is larger.",
+  },
+  {
+    slug: "how-long-was-my-shift-calculator",
+    toolSlug: "time-duration-calculator",
+    h1: "How Long Was My Shift?",
+    subtitle: "Calculate Total Hours Worked From Clock-In and Clock-Out Times",
+    metaTitle: "How Long Was My Shift — Free Duration Calculator",
+    metaDescription:
+      "Free tool to calculate how long a work shift lasted from clock-in and clock-out times, including overnight shifts, with decimal hours for payroll.",
+    introParagraph:
+      "Checking exactly how many hours a shift lasted — including tricky overnight shifts that cross midnight — is a common payroll and scheduling question. Enter your clock-in and clock-out times and this tool calculates the exact duration, in both hours/minutes and decimal hours.",
+  },
+  {
+    slug: "elapsed-time-calculator",
+    toolSlug: "time-duration-calculator",
+    h1: "Elapsed Time Calculator",
+    subtitle: "Calculate the Time Elapsed Between Two Clock Times",
+    metaTitle: "Elapsed Time Calculator — Free Online Tool",
+    metaDescription:
+      "Free elapsed time calculator. Enter a start and end clock time to instantly calculate the exact time that passed between them.",
+    introParagraph:
+      "Measuring elapsed time between two clock times — a race split, a meeting length, a process duration — is straightforward until it crosses midnight, which is exactly the edge case this tool handles correctly with its overnight toggle.",
+  },
+  {
+    slug: "meeting-length-calculator",
+    toolSlug: "time-duration-calculator",
+    h1: "Meeting Length Calculator",
+    subtitle: "Calculate Exactly How Long a Meeting or Event Runs",
+    metaTitle: "Meeting Length Calculator — Free Online Tool",
+    metaDescription:
+      "Free tool to calculate the exact length of a meeting or event from its start and end time, shown in hours and minutes.",
+    introParagraph:
+      "Checking exactly how long a scheduled meeting or event block runs — for planning back-to-back sessions or estimating a calendar's total booked time — starts with an accurate duration calculation from the listed start and end times. This tool provides that instantly.",
+  },
+  {
+    slug: "world-clock-time-converter",
+    toolSlug: "time-zone-converter",
+    h1: "World Clock Time Converter",
+    subtitle: "Check the Current or Any Time Across World Time Zones",
+    metaTitle: "World Clock Time Converter — Free Online Tool",
+    metaDescription:
+      "Free world clock time converter. Convert any date and time between major world time zones, with automatic daylight saving time handling.",
+    introParagraph:
+      "Coordinating across a global team or checking what time it is in another part of the world both come down to the same conversion — a specific moment in one zone, translated accurately into another. This tool covers 25 major world time zones with automatic DST handling.",
+  },
+  {
+    slug: "meeting-time-zone-converter",
+    toolSlug: "time-zone-converter",
+    h1: "Meeting Time Zone Converter",
+    subtitle: "Convert a Proposed Meeting Time Across Time Zones",
+    metaTitle: "Meeting Time Zone Converter — Free Online Tool",
+    metaDescription:
+      "Free tool to convert a proposed meeting time across time zones, so every participant knows exactly what time it falls at for them.",
+    introParagraph:
+      "Scheduling a meeting across time zones means converting your proposed time into what it corresponds to for every other participant's local zone. This tool converts a single proposed time into any other time zone instantly, avoiding the classic mixed-up-AM/PM scheduling mistake.",
+  },
+  {
+    slug: "utc-to-local-time-converter",
+    toolSlug: "time-zone-converter",
+    h1: "UTC to Local Time Converter",
+    subtitle: "Convert a UTC Timestamp Into Any Local Time Zone",
+    metaTitle: "UTC to Local Time Converter — Free Online Tool",
+    metaDescription:
+      "Free tool to convert a UTC time into any local time zone, useful for reading server logs, API timestamps, and technical documentation.",
+    introParagraph:
+      "Server logs, API responses, and technical documentation frequently report times in UTC, which needs converting to a local time zone to actually be meaningful when reading through them. This tool converts any UTC time into any of 25 major local time zones instantly.",
+  },
+  {
+    slug: "product-launch-countdown-timer",
+    toolSlug: "countdown-timer-generator",
+    h1: "Product Launch Countdown Timer",
+    subtitle: "Build Anticipation With a Live Countdown to Your Launch",
+    metaTitle: "Product Launch Countdown Timer — Free Online Tool",
+    metaDescription:
+      "Free live countdown timer for a product launch, event, or release date. Set your target date and time and watch it count down in real time.",
+    introParagraph:
+      "Building anticipation for a launch, release, or event benefits from a live, ticking countdown rather than a static \"coming soon\" date. Set your exact target date and time and this tool counts down in real time, updating every second.",
+  },
+  {
+    slug: "event-countdown-clock",
+    toolSlug: "countdown-timer-generator",
+    h1: "Event Countdown Clock",
+    subtitle: "A Live Countdown Clock to Any Event Date and Time",
+    metaTitle: "Event Countdown Clock — Free Online Tool",
+    metaDescription:
+      "Free live event countdown clock. Enter any event's date and time to see days, hours, minutes, and seconds count down in real time.",
+    introParagraph:
+      "A wedding, a trip, a graduation, a concert — any event with a set date benefits from a live countdown clock to track exactly how much time remains. This tool counts down in real time to any target date and time you set, right in your browser.",
+  },
+  {
+    slug: "deadline-countdown-timer",
+    toolSlug: "countdown-timer-generator",
+    h1: "Deadline Countdown Timer",
+    subtitle: "Track a Live Countdown to Any Deadline",
+    metaTitle: "Deadline Countdown Timer — Free Online Tool",
+    metaDescription:
+      "Free live countdown timer for a deadline. Set the exact due date and time and watch a real-time countdown of days, hours, minutes, and seconds.",
+    introParagraph:
+      "A deadline feels more concrete with a live, visible countdown rather than a static date sitting in a calendar entry. Set your exact deadline date and time and this tool shows a real-time countdown that updates every second while the page is open.",
+  },
+  {
+    slug: "restaurant-bill-tip-calculator",
+    toolSlug: "tip-calculator",
+    h1: "Restaurant Bill Tip Calculator",
+    subtitle: "Calculate the Tip and Split a Restaurant Bill",
+    metaTitle: "Restaurant Bill Tip Calculator — Free Online Tool",
+    metaDescription:
+      "Free restaurant tip calculator. Enter your bill total and tip percentage to instantly calculate the tip amount and split the total across your group.",
+    introParagraph:
+      "Splitting a restaurant bill with tip across a group at the table means quick, accurate math on an often-odd total. Enter your bill amount, choose a tip percentage, and add the number of people, and this tool calculates each person's exact share instantly.",
+  },
+  {
+    slug: "bill-splitter-calculator",
+    toolSlug: "tip-calculator",
+    h1: "Bill Splitter Calculator",
+    subtitle: "Split a Bill With Tip Evenly Across Any Group Size",
+    metaTitle: "Bill Splitter Calculator — Free Online Tool",
+    metaDescription:
+      "Free bill splitter calculator. Enter the total bill, tip percentage, and number of people to instantly see each person's even share.",
+    introParagraph:
+      "Splitting a group bill evenly — including the tip — is the most common real-world tipping calculation, and getting it exactly right per person avoids the awkward \"who owes what\" conversation. This tool calculates each person's exact share instantly.",
+  },
+  {
+    slug: "tip-percentage-calculator",
+    toolSlug: "tip-calculator",
+    h1: "Tip Percentage Calculator",
+    subtitle: "Calculate the Exact Dollar Amount for Any Tip Percentage",
+    metaTitle: "Tip Percentage Calculator — Free Online Tool",
+    metaDescription:
+      "Free tip percentage calculator. Enter your bill and any tip percentage — including custom rates — to see the exact tip amount and total.",
+    introParagraph:
+      "Converting a tip percentage into an actual dollar amount on an odd bill total, like 18% of $53.47, is exactly the kind of math worth automating rather than estimating. This tool calculates the exact tip amount and total instantly for any percentage.",
+  },
+  {
+    slug: "loan-interest-calculator",
+    toolSlug: "simple-interest-calculator",
+    h1: "Loan Interest Calculator",
+    subtitle: "Calculate Simple Interest Owed on a Loan",
+    metaTitle: "Loan Interest Calculator — Free Simple Interest Tool",
+    metaDescription:
+      "Free loan interest calculator using the simple interest formula. Enter your loan principal, rate, and term to see total interest owed.",
+    introParagraph:
+      "Checking exactly how much interest a simple-interest loan will actually cost over its term — before signing — means running the principal, rate, and term through the standard formula rather than trusting a lender's summary figure blindly. This tool calculates the exact interest and total repayment instantly.",
+  },
+  {
+    slug: "savings-interest-calculator",
+    toolSlug: "simple-interest-calculator",
+    h1: "Savings Interest Calculator (Simple Interest)",
+    subtitle: "Calculate Simple Interest Earned on a Savings Deposit",
+    metaTitle: "Savings Interest Calculator — Free Simple Interest Tool",
+    metaDescription:
+      "Free savings interest calculator using simple interest. Enter your deposit, rate, and term to calculate exactly how much interest you'll earn.",
+    introParagraph:
+      "Some savings products and bonds calculate interest as simple interest rather than compound, meaning the growth is linear and predictable over the term. Enter your deposit amount, rate, and term and this tool calculates exactly how much you'll earn.",
+  },
+  {
+    slug: "interest-rate-calculator",
+    toolSlug: "simple-interest-calculator",
+    h1: "Simple Interest Rate Calculator",
+    subtitle: "Calculate Interest Owed or Earned at a Fixed Rate",
+    metaTitle: "Simple Interest Rate Calculator — Free Online Tool",
+    metaDescription:
+      "Free simple interest rate calculator. Enter a principal, annual rate, and time period to instantly calculate the resulting interest and total.",
+    introParagraph:
+      "A stated annual interest rate only becomes a concrete dollar figure once it's applied to a specific principal and time period — exactly what this tool calculates instantly using the standard simple interest formula.",
+  },
+  {
+    slug: "investment-growth-calculator",
+    toolSlug: "compound-interest-calculator",
+    h1: "Investment Growth Calculator",
+    subtitle: "Project How an Investment Grows With Compound Interest",
+    metaTitle: "Investment Growth Calculator — Free Online Tool",
+    metaDescription:
+      "Free investment growth calculator using compound interest. Project how a lump-sum investment grows over time at a given rate and compounding frequency.",
+    introParagraph:
+      "Projecting how an investment will grow over years or decades depends heavily on the compounding effect — small differences in rate or compounding frequency produce meaningfully different outcomes over a long enough time horizon. This tool projects that growth accurately for any principal, rate, and term.",
+  },
+  {
+    slug: "savings-growth-calculator",
+    toolSlug: "compound-interest-calculator",
+    h1: "Savings Account Growth Calculator",
+    subtitle: "See How Your Savings Balance Grows With Compound Interest",
+    metaTitle: "Savings Growth Calculator — Free Compound Interest Tool",
+    metaDescription:
+      "Free savings growth calculator. See exactly how your savings account balance grows over time based on its interest rate and compounding frequency.",
+    introParagraph:
+      "A savings account's advertised interest rate only tells part of the story — the compounding frequency (monthly, daily, and so on) also affects how quickly the balance actually grows. Enter your starting balance, rate, and term to see the real projected growth.",
+  },
+  {
+    slug: "cd-interest-calculator",
+    toolSlug: "compound-interest-calculator",
+    h1: "CD Interest Calculator",
+    subtitle: "Calculate Compound Interest Earned on a Certificate of Deposit",
+    metaTitle: "CD Interest Calculator — Free Compound Interest Tool",
+    metaDescription:
+      "Free CD (certificate of deposit) interest calculator. Enter your deposit, rate, term, and compounding frequency to calculate the maturity value.",
+    introParagraph:
+      "A CD's advertised APY and compounding schedule determine exactly how much it'll be worth at maturity, and comparing two CD offers means running both through the same calculation. This tool calculates the exact maturity value for any deposit, rate, term, and compounding frequency.",
+  },
+  {
+    slug: "annual-salary-to-hourly-calculator",
+    toolSlug: "salary-calculator",
+    h1: "Annual Salary to Hourly Calculator",
+    subtitle: "Convert a Yearly Salary Into an Hourly Rate",
+    metaTitle: "Annual Salary to Hourly Calculator — Free Online Tool",
+    metaDescription:
+      "Free tool to convert an annual salary into an hourly rate, based on your actual hours worked per week, not just a rough estimate.",
+    introParagraph:
+      "Converting an annual salary offer into an hourly rate — to compare against an hourly job offer, or just to understand your effective pay rate — depends on exactly how many hours you actually work per week. This tool calculates the precise hourly equivalent based on your real schedule.",
+  },
+  {
+    slug: "hourly-to-salary-calculator",
+    toolSlug: "salary-calculator",
+    h1: "Hourly to Salary Calculator",
+    subtitle: "Convert an Hourly Wage Into an Annual Salary",
+    metaTitle: "Hourly to Salary Calculator — Free Online Tool",
+    metaDescription:
+      "Free tool to convert an hourly wage into an equivalent annual salary, based on your actual hours per week worked.",
+    introParagraph:
+      "An hourly wage offer becomes easier to evaluate once converted into an annual figure — the number most people think about when comparing overall compensation. Enter your hourly rate and hours per week and this tool calculates the equivalent annual salary instantly.",
+  },
+  {
+    slug: "paycheck-frequency-calculator",
+    toolSlug: "salary-calculator",
+    h1: "Paycheck Frequency Calculator",
+    subtitle: "Convert Your Salary Into Weekly, Biweekly & Monthly Paychecks",
+    metaTitle: "Paycheck Frequency Calculator — Free Online Tool",
+    metaDescription:
+      "Free paycheck calculator. Convert an annual salary into what each paycheck amounts to weekly, monthly, or another common pay frequency.",
+    introParagraph:
+      "Budgeting around a new salary means knowing what each individual paycheck actually amounts to, not just the headline annual figure. Enter your salary and this tool breaks it down into weekly, monthly, and other common pay period equivalents instantly.",
+  },
+  {
+    slug: "road-trip-cost-calculator",
+    toolSlug: "fuel-cost-calculator",
+    h1: "Road Trip Fuel Cost Calculator",
+    subtitle: "Estimate Total Fuel Cost for an Upcoming Road Trip",
+    metaTitle: "Road Trip Fuel Cost Calculator — Free Online Tool",
+    metaDescription:
+      "Free road trip fuel cost calculator. Enter your trip distance, vehicle MPG, and gas price to budget exactly how much fuel will cost.",
+    introParagraph:
+      "Budgeting for a road trip means knowing the fuel cost ahead of time, not guessing — especially for a long-distance drive where gas is a major expense line. Enter your planned distance, your vehicle's MPG, and the current gas price to get an accurate cost estimate before you leave.",
+  },
+  {
+    slug: "gas-mileage-cost-calculator",
+    toolSlug: "fuel-cost-calculator",
+    h1: "Gas Mileage Cost Calculator",
+    subtitle: "Calculate Fuel Cost Based on Your Car's Gas Mileage",
+    metaTitle: "Gas Mileage Cost Calculator — Free Online Tool",
+    metaDescription:
+      "Free gas mileage cost calculator. Enter your car's MPG, trip distance, and gas price to calculate exactly how much a drive will cost in fuel.",
+    introParagraph:
+      "Knowing your car's gas mileage is only useful once it's converted into an actual cost for a specific trip or commute. This tool takes your vehicle's MPG rating alongside distance and gas price to calculate the real dollar cost instantly.",
+  },
+  {
+    slug: "commute-fuel-cost-calculator",
+    toolSlug: "fuel-cost-calculator",
+    h1: "Commute Fuel Cost Calculator",
+    subtitle: "Estimate Your Weekly or Monthly Commuting Fuel Cost",
+    metaTitle: "Commute Fuel Cost Calculator — Free Online Tool",
+    metaDescription:
+      "Free commute fuel cost calculator. Calculate the fuel cost of a daily commute, useful for estimating weekly or monthly transportation expenses.",
+    introParagraph:
+      "A daily commute's fuel cost adds up fast over a work week or month, and knowing the per-trip cost is the first step to estimating that total. Enter your one-way commute distance, your car's efficiency, and the fuel price to see the cost per trip.",
+  },
+  {
+    slug: "weighted-average-grade-calculator",
+    toolSlug: "grade-calculator",
+    h1: "Weighted Average Grade Calculator",
+    subtitle: "Calculate a Final Grade From Weighted Categories",
+    metaTitle: "Weighted Average Grade Calculator — Free Online Tool",
+    metaDescription:
+      "Free weighted average grade calculator. Add your course categories with their scores and weights to calculate an accurate final grade.",
+    introParagraph:
+      "Most college and high school courses weight different components differently — a final exam usually counts more than a single homework assignment. This tool calculates the correct weighted average final grade from however many categories your course has.",
+  },
+  {
+    slug: "college-gpa-grade-calculator",
+    toolSlug: "grade-calculator",
+    h1: "Course Grade Calculator for College",
+    subtitle: "Calculate Your Current Grade From Assignment Categories",
+    metaTitle: "College Course Grade Calculator — Free Online Tool",
+    metaDescription:
+      "Free course grade calculator for college students. Enter your assignment, quiz, and exam scores with their weights to see your current grade.",
+    introParagraph:
+      "Checking your current standing in a college course partway through the term means combining every graded category so far according to the syllabus's stated weights. This tool calculates that running weighted grade instantly as you add each category.",
+  },
+  {
+    slug: "final-grade-needed-calculator",
+    toolSlug: "grade-calculator",
+    h1: "What Grade Do I Have So Far Calculator",
+    subtitle: "Calculate Your Current Weighted Grade From Completed Work",
+    metaTitle: "What Grade Do I Have Calculator — Free Online Tool",
+    metaDescription:
+      "Free tool to calculate what grade you currently have based on completed assignments, quizzes, and exams, weighted according to your syllabus.",
+    introParagraph:
+      "Checking exactly where you stand in a class right now — before a final exam or the last few assignments are graded — means weighting everything completed so far correctly. This tool calculates your current weighted grade instantly from whatever categories you've entered.",
+  },
+  {
+    slug: "fertile-window-calculator",
+    toolSlug: "ovulation-calculator",
+    h1: "Fertile Window Calculator",
+    subtitle: "Estimate the Days You're Most Likely to Conceive",
+    metaTitle: "Fertile Window Calculator — Free Online Tool",
+    metaDescription:
+      "Free fertile window calculator. Enter your last period and cycle length to estimate the days each month you're most likely to conceive.",
+    introParagraph:
+      "The fertile window — the span of days each cycle when conception is possible — extends several days before ovulation, since sperm can survive that long, through roughly a day after the egg is released. Enter your cycle details and this tool estimates that window instantly.",
+  },
+  {
+    slug: "ovulation-date-predictor",
+    toolSlug: "ovulation-calculator",
+    h1: "Ovulation Date Predictor",
+    subtitle: "Predict Your Next Estimated Ovulation Date",
+    metaTitle: "Ovulation Date Predictor — Free Online Tool",
+    metaDescription:
+      "Free ovulation date predictor. Enter your last period start date and average cycle length to estimate your next ovulation date.",
+    introParagraph:
+      "Predicting ovulation timing based on cycle history is a useful starting reference for tracking fertility patterns over time. This tool estimates your next ovulation date from your last period and average cycle length, calculated using standard luteal-phase timing.",
+  },
+  {
+    slug: "next-period-calculator",
+    toolSlug: "ovulation-calculator",
+    h1: "Next Period Calculator",
+    subtitle: "Estimate When Your Next Period Will Start",
+    metaTitle: "Next Period Calculator — Free Online Tool",
+    metaDescription:
+      "Free next period calculator. Enter your last period start date and average cycle length to estimate when your next period is due.",
+    introParagraph:
+      "Estimating your next period date is useful for planning ahead, and it's also the same calculation this tool uses as the basis for estimating ovulation timing. Enter your last period and cycle length for an instant estimate.",
+  },
+  {
+    slug: "pregnancy-week-calculator",
+    toolSlug: "pregnancy-due-date-calculator",
+    h1: "Pregnancy Week Calculator",
+    subtitle: "Find Out What Week of Pregnancy You're In Today",
+    metaTitle: "Pregnancy Week Calculator — Free Online Tool",
+    metaDescription:
+      "Free pregnancy week calculator. Enter your last period date to see exactly what week and day of pregnancy you're currently in.",
+    introParagraph:
+      "Knowing exactly what week (and day) of pregnancy you're in right now — not just the due date — is what most week-by-week pregnancy trackers and apps are built around. This tool calculates your current week and day automatically based on today's date.",
+  },
+  {
+    slug: "conception-date-calculator",
+    toolSlug: "pregnancy-due-date-calculator",
+    h1: "Conception Date Calculator",
+    subtitle: "Estimate Your Likely Conception Date",
+    metaTitle: "Conception Date Calculator — Free Online Tool",
+    metaDescription:
+      "Free conception date calculator. Enter the first day of your last period to estimate your likely conception date and due date.",
+    introParagraph:
+      "Estimating a likely conception date — useful for legal, medical, or personal record purposes — is based on the typical 2-week gap between the last period and ovulation. Enter your last period date and this tool estimates both the conception date and your due date.",
+  },
+  {
+    slug: "due-date-by-lmp-calculator",
+    toolSlug: "pregnancy-due-date-calculator",
+    h1: "Due Date Calculator by LMP",
+    subtitle: "Calculate Due Date Using Naegele's Rule",
+    metaTitle: "Due Date Calculator by LMP — Free Online Tool",
+    metaDescription:
+      "Free due date calculator using the standard LMP (last menstrual period) method and Naegele's rule — 280 days from your last period.",
+    introParagraph:
+      "The standard clinical method for estimating a due date — Naegele's rule — adds 280 days to the first day of the last menstrual period (LMP). This tool applies that exact standard calculation, the same one used in most prenatal care settings.",
+  },
+  {
+    slug: "retirement-savings-projection-calculator",
+    toolSlug: "retirement-calculator",
+    h1: "Retirement Savings Projection Calculator",
+    subtitle: "Project Your 401(k) or IRA Balance at Retirement",
+    metaTitle: "Retirement Savings Projection Calculator — Free Tool",
+    metaDescription:
+      "Free retirement savings projection calculator for a 401(k), IRA, or any account. Project your balance at retirement based on contributions and returns.",
+    introParagraph:
+      "Projecting where a 401(k), IRA, or other retirement account will land by retirement age means combining current balance, ongoing contributions, and expected investment growth correctly over the years remaining. This tool runs that full projection instantly.",
+  },
+  {
+    slug: "401k-growth-calculator",
+    toolSlug: "retirement-calculator",
+    h1: "401(k) Growth Calculator",
+    subtitle: "Project How Your 401(k) Grows With Regular Contributions",
+    metaTitle: "401(k) Growth Calculator — Free Online Tool",
+    metaDescription:
+      "Free 401(k) growth calculator. Enter your current balance, monthly contribution, and expected return to project your balance at retirement.",
+    introParagraph:
+      "A 401(k)'s growth comes from two sources — regular payroll contributions and compound investment growth on the total balance — and projecting the combined effect over decades needs both calculated together correctly. This tool projects that combined growth instantly.",
+  },
+  {
+    slug: "how-much-do-i-need-to-retire-calculator",
+    toolSlug: "retirement-calculator",
+    h1: "How Much Do I Need to Retire Calculator",
+    subtitle: "Project Your Savings Trajectory Toward Retirement",
+    metaTitle: "How Much Do I Need to Retire — Free Projection Tool",
+    metaDescription:
+      "Free calculator to project your retirement savings trajectory based on your current age, savings, contributions, and expected investment return.",
+    introParagraph:
+      "Understanding whether your current savings rate is on track for retirement starts with an honest projection of where it's actually headed. Enter your current age, savings, monthly contribution, and expected return to see your projected trajectory.",
+  },
+  {
+    slug: "random-integer-generator",
+    toolSlug: "random-number-range-calculator",
+    h1: "Random Integer Generator",
+    subtitle: "Generate Random Whole Numbers Within Any Range",
+    metaTitle: "Random Integer Generator — Free Online Tool",
+    metaDescription:
+      "Free random integer generator. Generate one or more random whole numbers within any minimum and maximum range instantly.",
+    introParagraph:
+      "Generating random whole numbers — for a dice simulation, a raffle draw, or test data — is a common need across programming, games, and everyday decisions. This tool generates random integers within any range you set, one at a time or in bulk.",
+  },
+  {
+    slug: "random-number-picker",
+    toolSlug: "random-number-range-calculator",
+    h1: "Random Number Picker",
+    subtitle: "Pick a Random Number for Games, Drawings & Decisions",
+    metaTitle: "Random Number Picker — Free Online Tool",
+    metaDescription:
+      "Free random number picker. Set a range and instantly pick one or more genuinely random numbers for games, drawings, or decision-making.",
+    introParagraph:
+      "Picking a truly unbiased random number — to settle a decision, draw a raffle winner, or assign a random value — is harder to do fairly by just \"thinking of a number\" than it seems, since people unconsciously favor certain numbers. This tool picks genuinely at random within your specified range.",
+  },
+  {
+    slug: "dice-roll-simulator",
+    toolSlug: "random-number-range-calculator",
+    h1: "Dice Roll Simulator",
+    subtitle: "Simulate Rolling One or More Dice Online",
+    metaTitle: "Dice Roll Simulator — Free Online Tool",
+    metaDescription:
+      "Free dice roll simulator. Simulate rolling a 6-sided die (or any custom range) any number of times, with duplicates allowed for independent rolls.",
+    introParagraph:
+      "Simulating a dice roll — a standard 6-sided die, or any custom range for a different game system — is exactly what this tool's min/max range with duplicates allowed is built for, since each roll is independent and can repeat any value.",
+  },
+  {
+    slug: "mean-median-mode-calculator",
+    toolSlug: "statistics-calculator",
+    h1: "Mean, Median, and Mode Calculator",
+    subtitle: "Calculate All Three Central Tendency Measures at Once",
+    metaTitle: "Mean, Median, and Mode Calculator — Free Online Tool",
+    metaDescription:
+      "Free mean, median, and mode calculator. Enter a list of numbers to instantly calculate all three central tendency measures together.",
+    introParagraph:
+      "Mean, median, and mode are the three standard measures of central tendency taught together in any introductory statistics course, and calculating all three for the same dataset is a common assignment. This tool computes all three simultaneously from one list of numbers.",
+  },
+  {
+    slug: "average-calculator-online",
+    toolSlug: "statistics-calculator",
+    h1: "Average Calculator Online",
+    subtitle: "Calculate the Average (Mean) of Any List of Numbers",
+    metaTitle: "Average Calculator Online — Free Online Tool",
+    metaDescription:
+      "Free online average calculator. Enter any list of numbers to instantly calculate the average (mean), along with median, mode, and more.",
+    introParagraph:
+      "Calculating a straightforward average of a list of numbers — test scores, prices, measurements — is the most common statistics question, and this tool handles it instantly while also providing median and mode for a fuller picture at no extra effort.",
+  },
+  {
+    slug: "data-set-statistics-tool",
+    toolSlug: "statistics-calculator",
+    h1: "Data Set Statistics Tool",
+    subtitle: "Get a Full Statistical Summary of Any Data Set",
+    metaTitle: "Data Set Statistics Tool — Free Online Tool",
+    metaDescription:
+      "Free tool to get a full statistical summary of any data set — mean, median, mode, range, sum, count, min, and max — all at once.",
+    introParagraph:
+      "Getting oriented in a new data set quickly means checking several statistics at once rather than calculating each one separately. Paste or type your numbers in and this tool returns a complete statistical summary instantly.",
+  },
+  {
+    slug: "sample-standard-deviation-calculator",
+    toolSlug: "standard-deviation-calculator",
+    h1: "Sample Standard Deviation Calculator",
+    subtitle: "Calculate Standard Deviation for a Sample of Data",
+    metaTitle: "Sample Standard Deviation Calculator — Free Online Tool",
+    metaDescription:
+      "Free sample standard deviation calculator. Enter your data to calculate standard deviation using the n-1 sample formula (Bessel's correction).",
+    introParagraph:
+      "When your data is a sample drawn from a larger population — the most common case in real-world statistics, surveys, and research — the sample standard deviation formula (dividing by n − 1) gives a more accurate estimate of the true population variability. This tool applies that exact formula.",
+  },
+  {
+    slug: "population-standard-deviation-calculator",
+    toolSlug: "standard-deviation-calculator",
+    h1: "Population Standard Deviation Calculator",
+    subtitle: "Calculate Standard Deviation for a Complete Data Set",
+    metaTitle: "Population Standard Deviation Calculator — Free Tool",
+    metaDescription:
+      "Free population standard deviation calculator. Enter your complete data set to calculate standard deviation using the full-population formula.",
+    introParagraph:
+      "When your data represents an entire population — every value in the group you're analyzing, not a sample — population standard deviation (dividing by n) is the correct formula to use. This tool calculates it exactly, alongside the sample version if you need to compare.",
+  },
+  {
+    slug: "variance-calculator",
+    toolSlug: "standard-deviation-calculator",
+    h1: "Variance Calculator",
+    subtitle: "Calculate the Variance of Any Data Set",
+    metaTitle: "Variance Calculator — Free Online Tool",
+    metaDescription:
+      "Free variance calculator. Enter your data set to calculate variance (the average squared deviation from the mean), both sample and population.",
+    introParagraph:
+      "Variance — the average of the squared differences from the mean — is the value underlying standard deviation and used directly in many statistical formulas and hypothesis tests. This tool calculates it alongside standard deviation for both sample and population data.",
+  },
+  {
+    slug: "simplify-fraction-calculator",
+    toolSlug: "fraction-calculator",
+    h1: "Simplify Fraction Calculator",
+    subtitle: "Reduce Any Fraction to Its Lowest Terms",
+    metaTitle: "Simplify Fraction Calculator — Free Online Tool",
+    metaDescription:
+      "Free fraction simplifier. Enter any fraction to reduce it to its lowest terms instantly, using the greatest common divisor.",
+    introParagraph:
+      "Reducing a fraction like 12/18 down to its simplest form — 2/3 — is a common step in math coursework and practical calculations alike. Enter any fraction and this tool simplifies it to lowest terms instantly.",
+  },
+  {
+    slug: "add-fractions-calculator",
+    toolSlug: "fraction-calculator",
+    h1: "Add Fractions Calculator",
+    subtitle: "Add Two Fractions With Different Denominators",
+    metaTitle: "Add Fractions Calculator — Free Online Tool",
+    metaDescription:
+      "Free tool to add two fractions, even with different denominators. Get the simplified result and decimal equivalent instantly.",
+    introParagraph:
+      "Adding fractions with different denominators requires finding a common denominator first, a step that's easy to fumble by hand. Enter both fractions and this tool calculates the correct sum, automatically simplified to lowest terms.",
+  },
+  {
+    slug: "multiply-fractions-calculator",
+    toolSlug: "fraction-calculator",
+    h1: "Multiply Fractions Calculator",
+    subtitle: "Multiply Two Fractions and Simplify the Result",
+    metaTitle: "Multiply Fractions Calculator — Free Online Tool",
+    metaDescription:
+      "Free tool to multiply two fractions together. Get the simplified product and decimal equivalent instantly, no common denominator needed.",
+    introParagraph:
+      "Multiplying fractions is simpler than adding or subtracting — no common denominator needed, just multiply numerators together and denominators together — but simplifying the result correctly still takes an extra step this tool handles automatically.",
+  },
+  {
+    slug: "ratio-simplifier",
+    toolSlug: "ratio-calculator",
+    h1: "Ratio Simplifier",
+    subtitle: "Reduce Any Ratio to Its Simplest Whole-Number Form",
+    metaTitle: "Ratio Simplifier — Free Online Tool",
+    metaDescription:
+      "Free ratio simplifier. Enter any ratio to reduce it to its simplest whole-number form instantly, using the greatest common divisor.",
+    introParagraph:
+      "A ratio like 15:25 is easier to work with once reduced to its simplest form, 3:5 — the same underlying relationship, expressed in the smallest whole numbers. This tool simplifies any ratio instantly.",
+  },
+  {
+    slug: "proportion-calculator",
+    toolSlug: "ratio-calculator",
+    h1: "Proportion Calculator",
+    subtitle: "Solve for a Missing Value in a Proportion",
+    metaTitle: "Proportion Calculator — Free Online Tool",
+    metaDescription:
+      "Free proportion calculator. Solve A:B = C:D for a missing value — useful for recipe scaling, unit conversion, and math coursework.",
+    introParagraph:
+      "Solving a proportion — A:B = C:D, with one value unknown — comes up in recipe scaling, map-to-real-distance conversion, and plenty of math coursework. This tool solves for the missing value instantly using cross-multiplication.",
+  },
+  {
+    slug: "recipe-scaling-calculator",
+    toolSlug: "ratio-calculator",
+    h1: "Recipe Scaling Calculator",
+    subtitle: "Scale a Recipe's Ingredients Up or Down Proportionally",
+    metaTitle: "Recipe Scaling Calculator — Free Online Tool",
+    metaDescription:
+      "Free recipe scaling calculator. Enter your original ingredient ratio and new serving size to scale every ingredient proportionally.",
+    introParagraph:
+      "Doubling a recipe or scaling it down to fewer servings means adjusting every ingredient by the same proportion — get the math wrong on one ingredient and the whole recipe's balance is off. This tool solves the exact proportional scaling instantly.",
+  },
+  {
+    slug: "trigonometry-calculator",
+    toolSlug: "scientific-calculator",
+    h1: "Trigonometry Calculator",
+    subtitle: "Calculate Sin, Cos, Tan & More With Degree or Radian Input",
+    metaTitle: "Trigonometry Calculator — Free Online Tool",
+    metaDescription:
+      "Free trigonometry calculator supporting sin, cos, tan, and combined expressions, with a toggle between degree and radian angle input.",
+    introParagraph:
+      "Trigonometric calculations show up constantly in geometry, physics, and engineering coursework, and getting the degree/radian setting right is essential to a correct answer. This tool supports sin, cos, and tan with a clear, explicit toggle between the two angle modes.",
+  },
+  {
+    slug: "log-calculator",
+    toolSlug: "scientific-calculator",
+    h1: "Logarithm Calculator",
+    subtitle: "Calculate Base-10 and Natural Logarithms",
+    metaTitle: "Logarithm Calculator — Free Online Tool",
+    metaDescription:
+      "Free logarithm calculator supporting both base-10 (log) and natural (ln) logarithms, plus full expression support with other operations.",
+    introParagraph:
+      "Logarithms show up in chemistry (pH calculations), finance (compound growth), computer science (algorithmic complexity), and plenty of other fields — both base-10 (log) and natural (ln, base e) versions. This tool calculates either, as part of a full expression if needed.",
+  },
+  {
+    slug: "square-root-calculator",
+    toolSlug: "scientific-calculator",
+    h1: "Square Root Calculator",
+    subtitle: "Calculate the Square Root of Any Number or Expression",
+    metaTitle: "Square Root Calculator — Free Online Tool",
+    metaDescription:
+      "Free square root calculator, part of a full scientific calculator supporting combined expressions with other operations and functions.",
+    introParagraph:
+      "A square root calculation is often just one piece of a larger expression — like sqrt(a^2 + b^2) for the Pythagorean theorem — rather than a standalone operation. This tool calculates square roots as part of any full expression, not just in isolation.",
+  },
+  {
+    slug: "college-gpa-calculator",
+    toolSlug: "gpa-calculator",
+    h1: "College GPA Calculator",
+    subtitle: "Calculate Your College GPA on the Standard 4.0 Scale",
+    metaTitle: "College GPA Calculator — Free Online Tool",
+    metaDescription:
+      "Free college GPA calculator. Enter your courses, grades, and credit hours to calculate your semester or cumulative GPA on the 4.0 scale.",
+    introParagraph:
+      "Tracking your college GPA — whether for a single semester or cumulatively across your whole transcript — means correctly weighting each course's grade by its credit hours. This tool calculates that exact weighted GPA for however many courses you enter.",
+  },
+  {
+    slug: "semester-gpa-calculator",
+    toolSlug: "gpa-calculator",
+    h1: "Semester GPA Calculator",
+    subtitle: "Calculate Your GPA for a Single Semester",
+    metaTitle: "Semester GPA Calculator — Free Online Tool",
+    metaDescription:
+      "Free semester GPA calculator. Enter just this semester's courses, grades, and credits to calculate your GPA for that term alone.",
+    introParagraph:
+      "Checking your GPA for just the current semester — separate from your cumulative GPA — means entering only that term's courses. This tool calculates the correctly credit-weighted GPA for whatever set of courses you enter.",
+  },
+  {
+    slug: "cumulative-gpa-calculator",
+    toolSlug: "gpa-calculator",
+    h1: "Cumulative GPA Calculator",
+    subtitle: "Calculate Your Overall GPA Across All Semesters",
+    metaTitle: "Cumulative GPA Calculator — Free Online Tool",
+    metaDescription:
+      "Free cumulative GPA calculator. Enter every course from every semester to calculate your overall GPA across your entire academic record.",
+    introParagraph:
+      "A cumulative GPA reflects every course across every semester, correctly weighted by credit hours — the figure that typically appears on an official transcript. Enter your full course history and this tool calculates the accurate overall result.",
+  },
+  {
+    slug: "grade-point-average-calculator",
+    toolSlug: "gpa-calculator",
+    h1: "Grade Point Average Calculator",
+    subtitle: "Convert Letter Grades and Credits Into a Weighted GPA",
+    metaTitle: "Grade Point Average Calculator — Free Online Tool",
+    metaDescription:
+      "Free grade point average calculator. Convert your letter grades and credit hours into an accurate, correctly weighted GPA on the 4.0 scale.",
+    introParagraph:
+      "\"Grade point average\" is the full term behind the common GPA abbreviation — the credit-weighted average of your letter grades converted to points on the standard 4.0 scale. This tool performs that exact conversion and weighting for any set of courses.",
+  },
+  {
+    slug: "rotate-image-180-degrees",
+    toolSlug: "rotate-image",
+    h1: "Rotate Image 180 Degrees",
+    subtitle: "Flip a Fully Upside-Down Photo the Right Way Up",
+    metaTitle: "Rotate Image 180 Degrees — Free Online Tool",
+    metaDescription:
+      "Free tool to rotate an image 180 degrees, correcting a fully upside-down photo in one click, right in your browser.",
+    introParagraph:
+      "A photo that came out completely upside down — not just sideways — needs a full 180° rotation to fix, not two separate 90° turns. This tool applies exactly that in one click, baked into the downloaded file.",
+  },
+  {
+    slug: "rotate-scanned-document-image",
+    toolSlug: "rotate-image",
+    h1: "Rotate a Scanned Document Image",
+    subtitle: "Fix a Sideways or Upside-Down Scanned Page",
+    metaTitle: "Rotate Scanned Document Image — Free Online Tool",
+    metaDescription:
+      "Free tool to rotate a scanned document image that came out sideways or upside down, correcting it before you save or share the file.",
+    introParagraph:
+      "A scanner or scanning app frequently produces a sideways or upside-down page image depending on how the original document was fed in. This tool corrects the orientation in one click, so the saved file displays correctly everywhere.",
+  },
+  {
+    slug: "flip-image-vertically",
+    toolSlug: "flip-image",
+    h1: "Flip Image Vertically",
+    subtitle: "Create a Top-Bottom Mirrored Version of Any Photo",
+    metaTitle: "Flip Image Vertically — Free Online Tool",
+    metaDescription:
+      "Free tool to flip an image vertically, creating a top-bottom mirrored (upside-down reflection) version, processed entirely in your browser.",
+    introParagraph:
+      "A vertical flip — mirroring an image top to bottom — is used for creating a water-reflection design effect, correcting an inverted scan, or specific creative compositions. This tool applies it instantly alongside the horizontal flip option.",
+  },
+  {
+    slug: "reverse-image-orientation-tool",
+    toolSlug: "flip-image",
+    h1: "Reverse Image Orientation Tool",
+    subtitle: "Flip Any Photo's Orientation Horizontally or Vertically",
+    metaTitle: "Reverse Image Orientation Tool — Free Online Tool",
+    metaDescription:
+      "Free tool to reverse an image's orientation, flipping it horizontally or vertically with a single click, entirely in your browser.",
+    introParagraph:
+      "Correcting how an image is mirrored — whether it needs a left-right or top-bottom flip — is a quick fix once you know which direction you need. This tool offers both options in one place, applied instantly.",
+  },
+  {
+    slug: "png-to-jpg-for-email",
+    toolSlug: "png-to-jpg",
+    h1: "Convert PNG to JPG for Email",
+    subtitle: "Shrink a PNG Attachment Down to a Smaller JPG",
+    metaTitle: "Convert PNG to JPG for Email — Free Online Tool",
+    metaDescription:
+      "Free tool to convert a PNG image to JPG specifically to reduce file size before attaching it to an email or uploading it somewhere with size limits.",
+    introParagraph:
+      "A PNG screenshot or photo attached to an email can push against attachment size limits unnecessarily when a JPG version would look identical at a fraction of the size. This tool converts it instantly before you attach it.",
+  },
+  {
+    slug: "png-to-jpg-no-transparency",
+    toolSlug: "png-to-jpg",
+    h1: "PNG to JPG Converter (No Transparency)",
+    subtitle: "Convert a Transparent PNG to JPG With a Solid Background",
+    metaTitle: "PNG to JPG No Transparency — Free Online Tool",
+    metaDescription:
+      "Free tool to convert a transparent PNG into a JPG with a solid background, since JPG doesn't support transparency, right in your browser.",
+    introParagraph:
+      "JPG doesn't support transparency, so converting a PNG with a transparent background to JPG requires filling that transparent area with a solid color first, rather than leaving it black or corrupted. This tool handles that fill automatically during conversion.",
+  },
+  {
+    slug: "jpg-to-png-for-transparency",
+    toolSlug: "jpg-to-png",
+    h1: "JPG to PNG for Transparency Editing",
+    subtitle: "Convert JPG to PNG Before Adding a Transparent Background",
+    metaTitle: "JPG to PNG for Transparency — Free Online Tool",
+    metaDescription:
+      "Free tool to convert JPG to PNG as a first step before removing the background or adding transparency in an image editor.",
+    introParagraph:
+      "Adding transparency to an image — removing a background, for instance — requires starting from a format that actually supports it, and JPG doesn't. Convert to PNG first with this tool, then the transparency-supporting format is ready for further editing.",
+  },
+  {
+    slug: "jpg-to-png-lossless-converter",
+    toolSlug: "jpg-to-png",
+    h1: "JPG to PNG Lossless Converter",
+    subtitle: "Convert JPG to PNG Without Any Further Quality Loss",
+    metaTitle: "JPG to PNG Lossless Converter — Free Online Tool",
+    metaDescription:
+      "Free lossless JPG to PNG converter. Convert a JPG to PNG format without introducing any additional compression artifacts during conversion.",
+    introParagraph:
+      "Converting JPG to PNG doesn't recover detail already lost to JPG compression, but it does stop any further compression loss from happening during subsequent edits. This tool converts instantly to lossless PNG, right in your browser.",
+  },
+  {
+    slug: "webp-to-jpg-for-photoshop",
+    toolSlug: "webp-to-jpg",
+    h1: "WebP to JPG for Photoshop & Legacy Software",
+    subtitle: "Convert WebP to a Format Older Editing Software Can Open",
+    metaTitle: "WebP to JPG for Photoshop — Free Online Tool",
+    metaDescription:
+      "Free tool to convert WebP images to JPG for use in Photoshop or older editing software that doesn't natively support the WebP format.",
+    introParagraph:
+      "Older versions of Photoshop and plenty of other editing software don't natively open WebP files, downloaded increasingly often from modern websites. This tool converts WebP to universally supported JPG instantly, so you can open it anywhere.",
+  },
+  {
+    slug: "webp-image-converter-online",
+    toolSlug: "webp-to-jpg",
+    h1: "WebP Image Converter Online",
+    subtitle: "Convert Any WebP Image to a Universally Compatible Format",
+    metaTitle: "WebP Image Converter Online — Free, Private Tool",
+    metaDescription:
+      "Free online WebP image converter. Convert any .webp file to JPG for universal compatibility with software and platforms that don't support WebP.",
+    introParagraph:
+      "A .webp file that won't open in an older app, won't upload to a platform that doesn't accept it, or just needs to be shared with someone whose software doesn't recognize it — this tool converts it to universally compatible JPG instantly.",
+  },
+  {
+    slug: "compress-jpg-with-webp",
+    toolSlug: "jpg-to-webp",
+    h1: "Compress JPG Using WebP Conversion",
+    subtitle: "Shrink a JPG's File Size by Converting It to WebP",
+    metaTitle: "Compress JPG With WebP — Free Online Tool",
+    metaDescription:
+      "Free tool to compress a JPG by converting it to WebP format, typically producing a noticeably smaller file at similar visual quality.",
+    introParagraph:
+      "If your JPG file size is too large and you don't need broad legacy compatibility, converting to WebP is often the fastest way to shrink it meaningfully without a visible quality drop. This tool converts instantly, right in your browser.",
+  },
+  {
+    slug: "webp-converter-for-web-images",
+    toolSlug: "jpg-to-webp",
+    h1: "WebP Converter for Web Images",
+    subtitle: "Convert a Batch of Site Images to WebP for Better Performance",
+    metaTitle: "WebP Converter for Web Images — Free Online Tool",
+    metaDescription:
+      "Free WebP converter built for preparing website images. Convert JPG photos to WebP before uploading to your CMS or site for faster load times.",
+    introParagraph:
+      "Preparing a set of photos for a website's media library ahead of time — converting them all to WebP before upload — is one of the simplest, most effective page-speed optimizations available. This tool converts instantly, right in the browser.",
+  },
+  {
+    slug: "blur-background-of-photo",
+    toolSlug: "blur-image",
+    h1: "Blur the Background of a Photo",
+    subtitle: "Apply a Blur Effect to Soften a Photo's Background",
+    metaTitle: "Blur Background of Photo — Free Online Tool",
+    metaDescription:
+      "Free tool to blur the background of a photo, creating a softer, more professional-looking depth effect around your main subject.",
+    introParagraph:
+      "A blurred background helps draw attention to a subject and gives a photo a more polished, professional look, similar to a shallow depth-of-field camera effect. This tool applies an adjustable blur to your uploaded photo instantly.",
+  },
+  {
+    slug: "blur-license-plate-in-photo",
+    toolSlug: "blur-image",
+    h1: "Blur a License Plate in a Photo",
+    subtitle: "Blur Out a License Plate Before Sharing a Car Photo",
+    metaTitle: "Blur License Plate in Photo — Free Online Tool",
+    metaDescription:
+      "Free tool to blur a license plate in a photo before posting it publicly, protecting privacy while keeping the rest of the image visible.",
+    introParagraph:
+      "Sharing a photo of a car — for a marketplace listing, a review, or social media — often calls for blurring out the license plate first for privacy. This tool applies an adjustable blur to exactly the area you need, entirely in your browser.",
+  },
+  {
+    slug: "brand-color-picker-from-logo",
+    toolSlug: "image-color-picker",
+    h1: "Brand Color Picker From Logo",
+    subtitle: "Extract the Exact Colors Used in a Logo or Brand Image",
+    metaTitle: "Brand Color Picker From Logo — Free Online Tool",
+    metaDescription:
+      "Free tool to pick brand colors from a logo image. Upload a logo and click any point to extract its exact HEX color code for a style guide.",
+    introParagraph:
+      "Building a brand style guide or matching new design assets to an existing logo requires the logo's exact color values, not an eyeballed approximation. Upload the logo and click any point on it with this tool to extract the precise color code.",
+  },
+  {
+    slug: "eyedropper-tool-online",
+    toolSlug: "image-color-picker",
+    h1: "Eyedropper Tool Online",
+    subtitle: "Pick Any Color From an Uploaded Image Like a Design Eyedropper",
+    metaTitle: "Eyedropper Tool Online — Free Color Picker",
+    metaDescription:
+      "Free online eyedropper tool. Upload any image and click a point to pick its exact color, just like the eyedropper tool in Photoshop or Figma.",
+    introParagraph:
+      "The eyedropper tool in Photoshop or Figma lets you sample a color directly from an image, and this tool replicates exactly that — without needing a full design app open. Upload any image and click to pick a precise color instantly.",
+  },
+  {
+    slug: "convert-logo-to-base64",
+    toolSlug: "image-to-base64",
+    h1: "Convert a Logo to Base64",
+    subtitle: "Embed a Logo Directly Into Your CSS or HTML as Base64",
+    metaTitle: "Convert Logo to Base64 — Free Online Tool",
+    metaDescription:
+      "Free tool to convert a logo image into a Base64 data URI, ready to embed directly into CSS or HTML without a separate image file request.",
+    introParagraph:
+      "Embedding a small logo directly in CSS as a background-image data URI avoids a separate network request for that asset. Upload your logo and this tool converts it to a Base64 string ready to paste straight into your CSS or HTML.",
+  },
+  {
+    slug: "image-to-data-uri-css",
+    toolSlug: "image-to-base64",
+    h1: "Image to Data URI for CSS",
+    subtitle: "Convert an Image Into a CSS-Ready Base64 Data URI",
+    metaTitle: "Image to Data URI for CSS — Free Online Tool",
+    metaDescription:
+      "Free tool to convert any image into a Base64 data URI formatted specifically for use in a CSS background-image property.",
+    introParagraph:
+      "Using an image as a CSS background-image via a data URI means it needs to be properly formatted as a `data:image/...;base64,...` string. This tool generates that exact format instantly, ready to paste directly into your stylesheet.",
+  },
+  {
+    slug: "view-base64-image-string",
+    toolSlug: "base64-to-image",
+    h1: "View a Base64 Image String",
+    subtitle: "Preview What a Base64-Encoded Image Actually Looks Like",
+    metaTitle: "View Base64 Image String — Free Online Tool",
+    metaDescription:
+      "Free tool to view a Base64 image string. Paste any Base64-encoded image data and instantly preview and download it as a real file.",
+    introParagraph:
+      "Sometimes you just need to quickly check what a Base64 image string in a database row or config file actually looks like, without writing code to render it. Paste it in and this tool previews it instantly.",
+  },
+  {
+    slug: "base64-to-jpg-converter",
+    toolSlug: "base64-to-image",
+    h1: "Base64 to JPG Converter",
+    subtitle: "Convert a Base64 Data URI Into a Downloadable JPG",
+    metaTitle: "Base64 to JPG Converter — Free Online Tool",
+    metaDescription:
+      "Free Base64 to JPG converter. Paste a Base64-encoded image string and instantly get a downloadable JPG file, ready to save or share.",
+    introParagraph:
+      "Extracting a usable JPG file from a Base64 string embedded in code or a data export usually means writing a small script — unless you have a direct tool. Paste the string in and this tool decodes and hands you a downloadable JPG instantly.",
+  },
+  {
+    slug: "convert-old-bmp-photos",
+    toolSlug: "bmp-to-jpg",
+    h1: "Convert Old BMP Photos to JPG",
+    subtitle: "Modernize Old Bitmap Photos Into Compact JPG Files",
+    metaTitle: "Convert Old BMP Photos to JPG — Free Online Tool",
+    metaDescription:
+      "Free tool to convert old .bmp photos, common from older Windows software and digital cameras, into modern, compact JPG format.",
+    introParagraph:
+      "Old photo archives from early digital cameras or scanning software often saved images as uncompressed BMP files, taking up far more storage than needed. This tool batch-modernizes them to JPG instantly, right in your browser.",
+  },
+  {
+    slug: "bmp-file-converter-online",
+    toolSlug: "bmp-to-jpg",
+    h1: "BMP File Converter Online",
+    subtitle: "Convert Any .bmp File to a Web-Friendly Image Format",
+    metaTitle: "BMP File Converter Online — Free, Private Tool",
+    metaDescription:
+      "Free online BMP file converter. Convert any .bmp file to compact, web-friendly JPG format instantly, entirely in your browser.",
+    introParagraph:
+      "A .bmp file rarely belongs on a modern website or in an email attachment due to its uncompressed size, but the software that produced it may not offer an export option. This tool converts it to a proper web-friendly JPG instantly.",
+  },
+  {
+    slug: "black-and-white-filter-online",
+    toolSlug: "image-grayscale-converter",
+    h1: "Black and White Filter Online",
+    subtitle: "Apply a Black and White Filter to Any Photo Instantly",
+    metaTitle: "Black and White Filter Online — Free Tool",
+    metaDescription:
+      "Free black and white photo filter. Upload any color image and apply an instant grayscale filter, right in your browser.",
+    introParagraph:
+      "A black and white filter is one of the most enduring photo effects, giving an image a timeless, editorial quality by removing color entirely. This tool applies it instantly to any uploaded photo, ready to download.",
+  },
+  {
+    slug: "desaturate-image-online",
+    toolSlug: "image-grayscale-converter",
+    h1: "Desaturate Image Online",
+    subtitle: "Remove All Color From a Photo in One Click",
+    metaTitle: "Desaturate Image Online — Free Online Tool",
+    metaDescription:
+      "Free tool to desaturate an image, removing all color and converting it to grayscale in one click, right in your browser.",
+    introParagraph:
+      "Desaturating a photo entirely — stripping out all color information — is a common step before applying other stylistic edits, or simply the final look you're going for. This tool desaturates any uploaded image instantly.",
+  },
+  {
+    slug: "app-icon-rounded-corners",
+    toolSlug: "image-rounded-corners",
+    h1: "App Icon Rounded Corners Generator",
+    subtitle: "Add the Signature Rounded-Square Look to an App Icon",
+    metaTitle: "App Icon Rounded Corners — Free Online Tool",
+    metaDescription:
+      "Free tool to add rounded corners to an app icon image, matching the signature rounded-square style used across modern app icon design.",
+    introParagraph:
+      "Modern app icons almost universally use a rounded-square shape rather than sharp corners, a look that's become the platform-standard visual convention. This tool applies an adjustable rounded-corner radius to any icon image instantly.",
+  },
+  {
+    slug: "profile-picture-circle-crop",
+    toolSlug: "image-rounded-corners",
+    h1: "Profile Picture Circle Crop Tool",
+    subtitle: "Crop Any Photo Into a Perfect Circle for a Profile Picture",
+    metaTitle: "Profile Picture Circle Crop — Free Online Tool",
+    metaDescription:
+      "Free tool to crop a photo into a perfect circle for a profile picture, matching how most platforms display avatars, with transparent edges.",
+    introParagraph:
+      "Nearly every platform displays profile pictures as circles, cropping a square upload automatically — but seeing that circular crop yourself beforehand helps you frame the photo correctly. This tool applies a full circular crop with transparent edges, so you can preview exactly how it'll look.",
+  },
+  {
+    slug: "white-border-photo-frame",
+    toolSlug: "image-border-adder",
+    h1: "White Border Photo Frame Tool",
+    subtitle: "Add a Classic White Border Frame to Any Photo",
+    metaTitle: "White Border Photo Frame — Free Online Tool",
+    metaDescription:
+      "Free tool to add a classic white border frame to any photo, the timeless polaroid-style look, with adjustable border thickness.",
+    introParagraph:
+      "A white border frame gives a photo an instantly recognizable, classic polaroid-style presentation. This tool applies it with an adjustable thickness, baked directly into the exported image file.",
+  },
+  {
+    slug: "instagram-style-photo-border",
+    toolSlug: "image-border-adder",
+    h1: "Instagram-Style Photo Border Tool",
+    subtitle: "Add a Clean Border to Photos Before Posting to Instagram",
+    metaTitle: "Instagram-Style Photo Border — Free Online Tool",
+    metaDescription:
+      "Free tool to add a clean, Instagram-style border to a photo before posting, helping it stand out with a framed, polished presentation.",
+    introParagraph:
+      "A thin, clean border helps a photo stand out and look more intentionally composed once it's sitting in a busy Instagram feed. This tool applies an adjustable border with any color you choose, ready to download and post.",
+  },
+  {
+    slug: "censor-image-tool",
+    toolSlug: "image-pixelator",
+    h1: "Censor an Image Tool",
+    subtitle: "Pixelate Part of a Photo to Censor Sensitive Content",
+    metaTitle: "Censor an Image Tool — Free Online Tool",
+    metaDescription:
+      "Free tool to censor part of an image using pixelation. Upload a photo and blur out sensitive content before sharing it publicly.",
+    introParagraph:
+      "Censoring a specific detail in a photo before sharing it publicly — a document number, a private detail visible in the background — is exactly what adjustable pixelation is built for. This tool applies it entirely in your browser, with the original file never uploaded anywhere.",
+  },
+  {
+    slug: "8-bit-pixel-art-effect-tool",
+    toolSlug: "image-pixelator",
+    h1: "8-Bit Pixel Art Effect Tool",
+    subtitle: "Turn Any Photo Into Retro 8-Bit Pixel Art Style",
+    metaTitle: "8-Bit Pixel Art Effect Tool — Free Online Tool",
+    metaDescription:
+      "Free tool to turn any photo into retro 8-bit pixel art style, adjusting the pixel block size for a stronger or subtler effect.",
+    introParagraph:
+      "The blocky, low-resolution look of classic 8-bit video games is a deliberate, popular aesthetic choice for profile pictures, album art, and social posts. This tool lets you dial in exactly how strong that pixelated retro effect is.",
+  },
+  {
+    slug: "facebook-post-image-resizer",
+    toolSlug: "social-media-image-resizer",
+    h1: "Facebook Post Image Resizer",
+    subtitle: "Resize Any Photo to Facebook's Exact Post Dimensions",
+    metaTitle: "Facebook Post Image Resizer — Free Online Tool",
+    metaDescription:
+      "Free Facebook post image resizer. Resize any photo to Facebook's optimal 1200×630 post dimensions instantly, properly cropped and centered.",
+    introParagraph:
+      "An image uploaded to Facebook at the wrong dimensions gets auto-cropped in the feed in ways that can cut off important content. This tool resizes and center-crops your photo to Facebook's exact recommended post size before you upload it.",
+  },
+  {
+    slug: "linkedin-banner-resizer",
+    toolSlug: "social-media-image-resizer",
+    h1: "LinkedIn Post Image Resizer",
+    subtitle: "Resize a Photo to LinkedIn's Exact Post Dimensions",
+    metaTitle: "LinkedIn Post Image Resizer — Free Online Tool",
+    metaDescription:
+      "Free LinkedIn post image resizer. Resize any photo to LinkedIn's optimal 1200×627 post dimensions instantly, cropped and centered correctly.",
+    introParagraph:
+      "A professional-context platform like LinkedIn makes a poorly cropped, off-dimension image look especially unpolished in the feed. This tool resizes and center-crops your photo to LinkedIn's exact recommended post size before you upload.",
+  },
+  {
+    slug: "rotate-image-precise-degrees",
+    toolSlug: "image-rotator-by-angle",
+    h1: "Rotate Image by Precise Degrees",
+    subtitle: "Enter an Exact Rotation Angle Down to a Fraction of a Degree",
+    metaTitle: "Rotate Image by Precise Degrees — Free Online Tool",
+    metaDescription:
+      "Free tool to rotate an image by a precise, exact angle, useful when you know the specific number of degrees you need to correct.",
+    introParagraph:
+      "Sometimes you already know the exact angle needed — from a design spec, a measurement, or a previous edit — rather than eyeballing it live. This tool accepts a precise numeric angle and applies it exactly, no rounding to the nearest preset.",
+  },
+  {
+    slug: "photo-alignment-rotation-tool",
+    toolSlug: "image-rotator-by-angle",
+    h1: "Photo Alignment Rotation Tool",
+    subtitle: "Rotate a Photo to Align It Perfectly Before Printing or Framing",
+    metaTitle: "Photo Alignment Rotation Tool — Free Online Tool",
+    metaDescription:
+      "Free tool to align and rotate a photo to an exact angle before printing, framing, or using it in a design layout that requires precise alignment.",
+    introParagraph:
+      "Preparing a photo for printing or a design layout where precise alignment matters means correcting even a small rotational offset exactly, not approximately. This tool provides fine-grained angle control with a live preview to nail the alignment.",
+  },
+  {
+    slug: "home-loan-emi-calculator",
+    toolSlug: "emi-calculator",
+    h1: "Home Loan EMI Calculator",
+    subtitle: "Calculate the Monthly EMI for a Home Loan",
+    metaTitle: "Home Loan EMI Calculator — Free Online Tool",
+    metaDescription:
+      "Free home loan EMI calculator. Enter your home loan amount, interest rate, and tenure to calculate your exact monthly EMI and total interest.",
+    introParagraph:
+      "A home loan is typically the largest and longest EMI most people take on, making it especially important to understand the true monthly commitment and total interest before signing. Enter your home loan details and this tool calculates the exact EMI instantly.",
+  },
+  {
+    slug: "car-loan-emi-calculator",
+    toolSlug: "emi-calculator",
+    h1: "Car Loan EMI Calculator",
+    subtitle: "Calculate the Monthly EMI for a Car Loan",
+    metaTitle: "Car Loan EMI Calculator — Free Online Tool",
+    metaDescription:
+      "Free car loan EMI calculator. Enter your vehicle loan amount, interest rate, and tenure to instantly calculate your monthly EMI.",
+    introParagraph:
+      "Comparing car loan offers from a dealership versus a bank often comes down to the EMI and total interest, not just the headline interest rate. This tool calculates the exact EMI for any car loan amount, rate, and tenure instantly.",
+  },
+  {
+    slug: "personal-loan-emi-calculator",
+    toolSlug: "emi-calculator",
+    h1: "Personal Loan EMI Calculator",
+    subtitle: "Calculate the Monthly EMI for a Personal Loan",
+    metaTitle: "Personal Loan EMI Calculator — Free Online Tool",
+    metaDescription:
+      "Free personal loan EMI calculator. Calculate the exact monthly EMI and total interest for a personal loan based on amount, rate, and tenure.",
+    introParagraph:
+      "Personal loans often carry higher interest rates than secured loans, making it especially important to check the real monthly EMI and total interest before borrowing. This tool calculates both instantly for any personal loan amount and tenure.",
+  },
+  {
+    slug: "education-loan-emi-calculator",
+    toolSlug: "emi-calculator",
+    h1: "Education Loan EMI Calculator",
+    subtitle: "Calculate the Monthly EMI for an Education Loan",
+    metaTitle: "Education Loan EMI Calculator — Free Online Tool",
+    metaDescription:
+      "Free education loan EMI calculator. Calculate the monthly EMI for a student or education loan based on amount, interest rate, and repayment tenure.",
+    introParagraph:
+      "An education loan's EMI often needs to be planned around an expected future income rather than a current one, making it especially important to model different tenures before committing. This tool calculates the exact EMI for any education loan amount and tenure.",
+  },
+  {
+    slug: "gst-inclusive-price-calculator",
+    toolSlug: "gst-calculator",
+    h1: "GST Inclusive Price Calculator",
+    subtitle: "Calculate the Final Price Including GST",
+    metaTitle: "GST Inclusive Price Calculator — Free Online Tool",
+    metaDescription:
+      "Free GST inclusive price calculator. Enter a base price and GST rate to instantly calculate the final price a customer pays, including tax.",
+    introParagraph:
+      "Quoting a final, GST-inclusive price to a customer means adding the correct tax amount to a base price — a common task for invoicing and pricing. Enter your base price and GST rate and this tool calculates the final inclusive price instantly.",
+  },
+  {
+    slug: "reverse-gst-calculator",
+    toolSlug: "gst-calculator",
+    h1: "Reverse GST Calculator",
+    subtitle: "Extract the Base Price and GST From an Inclusive Total",
+    metaTitle: "Reverse GST Calculator — Free Online Tool",
+    metaDescription:
+      "Free reverse GST calculator. Enter a GST-inclusive total to correctly extract the original base price and the GST amount within it.",
+    introParagraph:
+      "Working backward from a GST-inclusive total to find the original base price requires dividing by (1 + rate/100), not simply subtracting the tax percentage — a common mistake this tool avoids by applying the correct formula.",
+  },
+  {
+    slug: "gst-percentage-calculator",
+    toolSlug: "gst-calculator",
+    h1: "GST Percentage Calculator",
+    subtitle: "Calculate GST at Any Percentage Rate Instantly",
+    metaTitle: "GST Percentage Calculator — Free Online Tool",
+    metaDescription:
+      "Free GST percentage calculator. Calculate GST at 5%, 12%, 18%, 28%, or any custom rate, with the CGST/SGST split shown automatically.",
+    introParagraph:
+      "Checking GST at a specific percentage rate — whether one of the standard slabs or a custom rate — is a common everyday calculation for invoicing, pricing, and accounting. This tool calculates it instantly, with the CGST/SGST split included.",
+  },
+  {
+    slug: "cgst-sgst-calculator",
+    toolSlug: "gst-calculator",
+    h1: "CGST SGST Calculator",
+    subtitle: "Split Total GST Into CGST and SGST Automatically",
+    metaTitle: "CGST SGST Calculator — Free Online Tool",
+    metaDescription:
+      "Free CGST SGST calculator. Enter an amount and GST rate to instantly see the even split between Central GST and State GST for intra-state invoices.",
+    introParagraph:
+      "Intra-state invoices in India need GST broken down into its CGST and SGST components separately, not shown as one combined tax line — a formatting requirement that trips up manual invoicing. This tool calculates and splits the amount automatically.",
+  },
+  {
+    slug: "sip-return-calculator",
+    toolSlug: "sip-calculator",
+    h1: "SIP Return Calculator",
+    subtitle: "Project the Returns on a Monthly SIP Investment",
+    metaTitle: "SIP Return Calculator — Free Online Tool",
+    metaDescription:
+      "Free SIP return calculator. Project the estimated returns on a monthly SIP investment based on your contribution, expected rate, and duration.",
+    introParagraph:
+      "Estimating the actual returns (growth beyond what you invest) on a SIP, separate from the total maturity value, helps evaluate whether an assumed rate of return is realistic for your investment goals. This tool breaks out the estimated returns clearly alongside the total value.",
+  },
+  {
+    slug: "mutual-fund-sip-calculator",
+    toolSlug: "sip-calculator",
+    h1: "Mutual Fund SIP Calculator",
+    subtitle: "Project Your Mutual Fund SIP's Future Value",
+    metaTitle: "Mutual Fund SIP Calculator — Free Online Tool",
+    metaDescription:
+      "Free mutual fund SIP calculator. Enter your monthly SIP amount, expected annual return, and duration to project your fund's future value.",
+    introParagraph:
+      "Planning a mutual fund SIP investment strategy means projecting what different monthly amounts, durations, or assumed return rates would produce at maturity. This tool runs that projection instantly for any combination you want to compare.",
+  },
+  {
+    slug: "sip-goal-calculator",
+    toolSlug: "sip-calculator",
+    h1: "SIP Goal Calculator",
+    subtitle: "See What a Monthly SIP Amount Grows Into Over Time",
+    metaTitle: "SIP Goal Calculator — Free Online Tool",
+    metaDescription:
+      "Free SIP goal calculator. Enter a monthly SIP amount and time horizon to see the projected value toward a financial goal like retirement or a down payment.",
+    introParagraph:
+      "Working toward a specific financial goal — a down payment, a child's education, retirement — with a SIP means understanding what your planned monthly investment is actually projected to grow into by your target date. This tool projects that value instantly.",
+  },
+  {
+    slug: "sip-calculator-for-child-education",
+    toolSlug: "sip-calculator",
+    h1: "SIP Calculator for Child Education",
+    subtitle: "Project a SIP Investment Toward a Future Education Fund",
+    metaTitle: "SIP Calculator for Child Education — Free Online Tool",
+    metaDescription:
+      "Free SIP calculator for planning a child's future education fund. Project what a monthly SIP investment grows into by your target education date.",
+    introParagraph:
+      "Planning for a child's future education costs years in advance is exactly the kind of long-horizon goal a SIP suits well, since the projection needs to account for a specific target date rather than an open-ended investment period. This tool projects the maturity value toward that specific goal.",
+  },
+  {
+    slug: "car-loan-calculator",
+    toolSlug: "loan-calculator",
+    h1: "Car Loan Calculator",
+    subtitle: "Calculate Your Monthly Car Loan Payment",
+    metaTitle: "Car Loan Calculator — Free Online Tool",
+    metaDescription:
+      "Free car loan calculator. Enter your vehicle loan amount, interest rate, and term to calculate your monthly payment and total interest.",
+    introParagraph:
+      "Before committing to a car loan, checking the real monthly payment and total interest — not just the rate quoted at the dealership — helps you evaluate whether the deal actually fits your budget. This tool calculates both instantly.",
+  },
+  {
+    slug: "personal-loan-calculator",
+    toolSlug: "loan-calculator",
+    h1: "Personal Loan Calculator",
+    subtitle: "Calculate Your Monthly Personal Loan Payment",
+    metaTitle: "Personal Loan Calculator — Free Online Tool",
+    metaDescription:
+      "Free personal loan calculator. Calculate the monthly payment and total interest for a personal loan based on amount, rate, and term.",
+    introParagraph:
+      "Personal loans often carry higher rates than secured loans, making the total interest figure especially worth checking before borrowing. Enter your loan details and this tool calculates the monthly payment and total cost instantly.",
+  },
+  {
+    slug: "student-loan-calculator",
+    toolSlug: "loan-calculator",
+    h1: "Student Loan Calculator",
+    subtitle: "Calculate Your Monthly Student Loan Payment",
+    metaTitle: "Student Loan Calculator — Free Online Tool",
+    metaDescription:
+      "Free student loan calculator. Enter your loan balance, interest rate, and repayment term to calculate your monthly payment and total interest.",
+    introParagraph:
+      "Understanding what a student loan will actually cost monthly and in total interest over a standard repayment term helps with post-graduation budgeting and comparing repayment plan options. This tool calculates both instantly.",
+  },
+  {
+    slug: "debt-consolidation-loan-calculator",
+    toolSlug: "loan-calculator",
+    h1: "Debt Consolidation Loan Calculator",
+    subtitle: "Calculate the Monthly Payment on a Debt Consolidation Loan",
+    metaTitle: "Debt Consolidation Loan Calculator — Free Online Tool",
+    metaDescription:
+      "Free debt consolidation loan calculator. Enter the combined loan amount, rate, and term to see the new single monthly payment.",
+    introParagraph:
+      "Consolidating several debts into a single loan is only worth it if the new combined monthly payment and total interest actually work out better than the separate debts it replaces. This tool calculates the new loan's monthly payment so you can compare it directly.",
+  },
+  {
+    slug: "home-loan-calculator",
+    toolSlug: "mortgage-calculator",
+    h1: "Home Loan Calculator with Taxes & Insurance",
+    subtitle: "Calculate Your Full Monthly Home Payment",
+    metaTitle: "Home Loan Calculator — Free Mortgage Payment Tool",
+    metaDescription:
+      "Free home loan calculator including property tax and insurance. Get your true total monthly payment, not just principal and interest.",
+    introParagraph:
+      "A home loan's true monthly cost includes property tax and insurance on top of principal and interest — leaving those out understates what actually leaves your account each month. This tool calculates the complete monthly payment including all four components.",
+  },
+  {
+    slug: "30-year-mortgage-calculator",
+    toolSlug: "mortgage-calculator",
+    h1: "30-Year Mortgage Calculator",
+    subtitle: "Calculate Your Monthly Payment on a 30-Year Mortgage",
+    metaTitle: "30-Year Mortgage Calculator — Free Online Tool",
+    metaDescription:
+      "Free 30-year mortgage calculator. Calculate your monthly payment including principal, interest, property tax, and insurance for a standard 30-year loan.",
+    introParagraph:
+      "The 30-year fixed mortgage is the most common home loan structure, chosen for its lower, more manageable monthly payment compared to shorter terms. This tool calculates the full monthly payment for a 30-year mortgage, including tax and insurance.",
+  },
+  {
+    slug: "down-payment-calculator",
+    toolSlug: "mortgage-calculator",
+    h1: "Down Payment Impact Calculator",
+    subtitle: "See How Your Down Payment Changes Your Monthly Payment",
+    metaTitle: "Down Payment Impact Calculator — Free Online Tool",
+    metaDescription:
+      "Free calculator to see how different down payment amounts change your monthly mortgage payment, for the same home price and interest rate.",
+    introParagraph:
+      "Deciding how much to put down on a home means understanding the real tradeoff — a bigger down payment lowers the monthly payment, but ties up more cash upfront. Try different down payment amounts in this tool to see the exact monthly payment impact.",
+  },
+  {
+    slug: "15-year-mortgage-calculator",
+    toolSlug: "mortgage-calculator",
+    h1: "15-Year Mortgage Calculator",
+    subtitle: "Calculate Your Monthly Payment on a 15-Year Mortgage",
+    metaTitle: "15-Year Mortgage Calculator — Free Online Tool",
+    metaDescription:
+      "Free 15-year mortgage calculator including property tax and insurance. Compare the higher monthly payment against a 30-year loan's total interest savings.",
+    introParagraph:
+      "A 15-year mortgage carries a higher monthly payment than a 30-year loan for the same amount, but pays off the home faster with significantly less total interest. This tool calculates the full monthly payment for a 15-year term, including tax and insurance.",
+  },
+  {
+    slug: "amortization-schedule-calculator",
+    toolSlug: "loan-amortization-calculator",
+    h1: "Amortization Schedule Calculator",
+    subtitle: "Generate a Full Month-by-Month Loan Payment Schedule",
+    metaTitle: "Amortization Schedule Calculator — Free Online Tool",
+    metaDescription:
+      "Free amortization schedule calculator. Generate a complete month-by-month breakdown of principal, interest, and remaining balance for any loan.",
+    introParagraph:
+      "Generating a full amortization schedule — every payment broken into principal and interest, with the running balance — is standard practice for verifying a loan offer or understanding exactly how a loan pays down over time. This tool builds the complete schedule instantly for any loan amount, rate, and term.",
+  },
+  {
+    slug: "mortgage-amortization-calculator",
+    toolSlug: "loan-amortization-calculator",
+    h1: "Mortgage Amortization Calculator",
+    subtitle: "See Your Full Mortgage Payment Schedule Month by Month",
+    metaTitle: "Mortgage Amortization Calculator — Free Online Tool",
+    metaDescription:
+      "Free mortgage amortization calculator. See the complete month-by-month schedule of principal, interest, and balance for a 15- or 30-year mortgage.",
+    introParagraph:
+      "A mortgage's full amortization schedule reveals just how slowly the balance drops in the early years of a 30-year term, since so much of each early payment goes to interest. This tool generates the complete schedule instantly for any mortgage amount, rate, and term.",
+  },
+  {
+    slug: "car-loan-amortization-calculator",
+    toolSlug: "loan-amortization-calculator",
+    h1: "Car Loan Amortization Calculator",
+    subtitle: "See the Full Payment Schedule for a Car Loan",
+    metaTitle: "Car Loan Amortization Calculator — Free Online Tool",
+    metaDescription:
+      "Free car loan amortization calculator. See the complete month-by-month payment schedule and understand how your balance pays down over the loan term.",
+    introParagraph:
+      "Understanding exactly how a car loan's balance decreases each month — and how much equity you actually have at any point mid-loan — requires the full amortization schedule, not just the monthly payment figure. This tool generates it instantly for any car loan.",
+  },
+  {
+    slug: "break-even-point-calculator",
+    toolSlug: "break-even-calculator",
+    h1: "Break-Even Point Calculator",
+    subtitle: "Find the Exact Sales Volume Needed to Break Even",
+    metaTitle: "Break-Even Point Calculator — Free Online Tool",
+    metaDescription:
+      "Free break-even point calculator. Enter fixed costs, variable cost, and price per unit to find the exact number of units needed to break even.",
+    introParagraph:
+      "The break-even point — the exact sales volume where total revenue equals total costs — is a foundational number for any new product or business decision. This tool calculates it instantly from your fixed costs, variable cost, and selling price.",
+  },
+  {
+    slug: "break-even-analysis-calculator",
+    toolSlug: "break-even-calculator",
+    h1: "Break-Even Analysis Calculator",
+    subtitle: "Analyze Your Business's Break-Even Point and Margins",
+    metaTitle: "Break-Even Analysis Calculator — Free Online Tool",
+    metaDescription:
+      "Free break-even analysis calculator for small businesses. Calculate break-even units, revenue, and contribution margin from your cost structure.",
+    introParagraph:
+      "A full break-even analysis for a new product or business line means understanding not just the break-even unit count, but the contribution margin driving it. This tool calculates all three together, giving a fuller picture than the unit count alone.",
+  },
+  {
+    slug: "startup-break-even-calculator",
+    toolSlug: "break-even-calculator",
+    h1: "Startup Break-Even Calculator",
+    subtitle: "Calculate When a New Product or Business Becomes Profitable",
+    metaTitle: "Startup Break-Even Calculator — Free Online Tool",
+    metaDescription:
+      "Free break-even calculator for startups and new products. Enter your cost structure to find exactly how many sales you need before turning a profit.",
+    introParagraph:
+      "Before launching a new product or business, knowing the exact sales volume needed just to cover costs — before any actual profit begins — is essential for realistic planning and fundraising conversations. This tool calculates that break-even threshold instantly.",
+  },
+  {
+    slug: "gross-profit-margin-calculator",
+    toolSlug: "profit-margin-calculator",
+    h1: "Gross Profit Margin Calculator",
+    subtitle: "Calculate Gross Profit Margin From Revenue and Cost",
+    metaTitle: "Gross Profit Margin Calculator — Free Online Tool",
+    metaDescription:
+      "Free gross profit margin calculator. Enter revenue and cost of goods sold to instantly calculate your gross profit margin percentage.",
+    introParagraph:
+      "Gross profit margin — profit as a percentage of revenue, before overhead and other indirect expenses — is one of the most commonly tracked profitability metrics for any product or service business. This tool calculates it instantly from your revenue and direct cost figures.",
+  },
+  {
+    slug: "markup-vs-margin-calculator",
+    toolSlug: "profit-margin-calculator",
+    h1: "Markup vs Margin Calculator",
+    subtitle: "See Both Markup and Margin Percentages Side by Side",
+    metaTitle: "Markup vs Margin Calculator — Free Online Tool",
+    metaDescription:
+      "Free markup vs margin calculator. Enter price and cost to see both percentages calculated together, avoiding the common confusion between them.",
+    introParagraph:
+      "Confusing markup with margin is one of the most common pricing mistakes — a 50% markup is not the same as a 50% margin, despite sounding similar. This tool calculates both from the same price and cost, side by side, so the difference is always clear.",
+  },
+  {
+    slug: "retail-price-margin-calculator",
+    toolSlug: "profit-margin-calculator",
+    h1: "Retail Price Margin Calculator",
+    subtitle: "Calculate Your Margin on Any Retail Price",
+    metaTitle: "Retail Price Margin Calculator — Free Online Tool",
+    metaDescription:
+      "Free retail price margin calculator. Enter your retail price and product cost to calculate the exact profit margin on each sale.",
+    introParagraph:
+      "Setting or checking a retail price means understanding the actual margin it produces relative to product cost, not just picking a price that feels right. This tool calculates the exact margin and profit for any retail price and cost combination.",
+  },
+  {
+    slug: "investment-return-calculator",
+    toolSlug: "roi-calculator",
+    h1: "Investment Return Calculator",
+    subtitle: "Calculate the Return on Any Investment",
+    metaTitle: "Investment Return Calculator — Free Online Tool",
+    metaDescription:
+      "Free investment return calculator. Enter your initial investment and current value to calculate total and annualized return instantly.",
+    introParagraph:
+      "Checking how well an investment actually performed — a stock, a property, a business stake — starts with comparing what you put in against what it's worth now. This tool calculates both the total and annualized return instantly.",
+  },
+  {
+    slug: "marketing-roi-calculator",
+    toolSlug: "roi-calculator",
+    h1: "Marketing ROI Calculator",
+    subtitle: "Calculate the Return on a Marketing Campaign's Spend",
+    metaTitle: "Marketing ROI Calculator — Free Online Tool",
+    metaDescription:
+      "Free marketing ROI calculator. Enter campaign spend and revenue generated to calculate the exact return on your marketing investment.",
+    introParagraph:
+      "Evaluating whether a marketing campaign was actually worth its spend means calculating ROI the same way any other investment would be evaluated — revenue generated against cost spent. This tool calculates that return instantly.",
+  },
+  {
+    slug: "real-estate-roi-calculator",
+    toolSlug: "roi-calculator",
+    h1: "Real Estate ROI Calculator",
+    subtitle: "Calculate the Return on a Property Investment",
+    metaTitle: "Real Estate ROI Calculator — Free Online Tool",
+    metaDescription:
+      "Free real estate ROI calculator. Enter your property purchase price and current or sale value to calculate total and annualized return.",
+    introParagraph:
+      "Evaluating a real estate investment's actual performance means comparing the purchase price against the current or sale value, ideally annualized to compare fairly against other investment types held for a different length of time. This tool calculates both instantly.",
+  },
+  {
+    slug: "income-tax-calculator",
+    toolSlug: "tax-calculator",
+    h1: "Income Tax Calculator",
+    subtitle: "Estimate Income Tax Owed With Progressive Brackets",
+    metaTitle: "Income Tax Calculator — Free Online Tool",
+    metaDescription:
+      "Free income tax calculator using progressive tax brackets. Enter your taxable income to estimate tax owed, effective rate, and take-home amount.",
+    introParagraph:
+      "Estimating income tax under a progressive bracket system means understanding that different portions of your income are taxed at different rates — not one flat rate applied to everything. This tool applies illustrative progressive brackets to estimate your tax and take-home amount.",
+  },
+  {
+    slug: "take-home-pay-calculator",
+    toolSlug: "tax-calculator",
+    h1: "Take-Home Pay Calculator",
+    subtitle: "Estimate Your Take-Home Pay After Tax",
+    metaTitle: "Take-Home Pay Calculator — Free Online Tool",
+    metaDescription:
+      "Free take-home pay calculator. Enter your income to estimate tax owed and what you'd actually take home, using progressive brackets or a flat rate.",
+    introParagraph:
+      "Understanding what actually lands in your pocket after tax — not just your gross income — is essential for realistic budgeting. This tool estimates your take-home amount after tax, using either progressive brackets or a flat rate you specify.",
+  },
+  {
+    slug: "effective-tax-rate-calculator",
+    toolSlug: "tax-calculator",
+    h1: "Effective Tax Rate Calculator",
+    subtitle: "Calculate Your Effective vs. Marginal Tax Rate",
+    metaTitle: "Effective Tax Rate Calculator — Free Online Tool",
+    metaDescription:
+      "Free effective tax rate calculator. See both your effective (average) and marginal (top bracket) tax rate side by side for any income.",
+    introParagraph:
+      "Your effective tax rate — total tax divided by total income — is always lower than your marginal rate under a progressive system, and confusing the two is a common source of misunderstanding about how much tax is actually owed. This tool shows both clearly, side by side.",
+  },
+  {
+    slug: "vat-inclusive-price-calculator",
+    toolSlug: "vat-calculator",
+    h1: "VAT Inclusive Price Calculator",
+    subtitle: "Calculate the Final Price Including VAT",
+    metaTitle: "VAT Inclusive Price Calculator — Free Online Tool",
+    metaDescription:
+      "Free VAT inclusive price calculator. Enter a net price and VAT rate to instantly calculate the final price a customer pays, including tax.",
+    introParagraph:
+      "Quoting a final, VAT-inclusive price to a customer means adding the correct tax amount to a net price — a routine task for invoicing and retail pricing. Enter your net price and VAT rate and this tool calculates the final inclusive price instantly.",
+  },
+  {
+    slug: "reverse-vat-calculator",
+    toolSlug: "vat-calculator",
+    h1: "Reverse VAT Calculator",
+    subtitle: "Extract the Net Price and VAT From an Inclusive Total",
+    metaTitle: "Reverse VAT Calculator — Free Online Tool",
+    metaDescription:
+      "Free reverse VAT calculator. Enter a VAT-inclusive total to correctly extract the original net price and the VAT amount within it.",
+    introParagraph:
+      "Working backward from a VAT-inclusive total to find the original net price requires dividing by (1 + rate/100), not simply subtracting the tax percentage — a common mistake this tool avoids by applying the correct formula.",
+  },
+  {
+    slug: "uk-vat-calculator",
+    toolSlug: "vat-calculator",
+    h1: "UK VAT Calculator",
+    subtitle: "Calculate UK VAT at Standard, Reduced & Zero Rates",
+    metaTitle: "UK VAT Calculator — Free Online Tool",
+    metaDescription:
+      "Free UK VAT calculator with presets for the standard 20% rate, 5% reduced rate, and 0% zero rate. Add or remove VAT from any amount instantly.",
+    introParagraph:
+      "The UK's VAT system uses a standard 20% rate for most goods and services, a 5% reduced rate for certain items, and 0% for zero-rated goods — this tool includes all three as quick presets alongside a custom rate field for anything else.",
+  },
+  {
+    slug: "paycheck-calculator",
+    toolSlug: "payroll-calculator",
+    h1: "Paycheck Calculator",
+    subtitle: "Estimate Your Take-Home Pay for Any Paycheck",
+    metaTitle: "Paycheck Calculator — Free Online Tool",
+    metaDescription:
+      "Free paycheck calculator. Enter your gross pay and deductions to estimate your net take-home pay for a single pay period.",
+    introParagraph:
+      "Checking what a specific paycheck will actually amount to after tax and deductions is a common question before payday, especially after a raise or a change in benefits elections. This tool estimates net take-home pay instantly from gross pay and your deductions.",
+  },
+  {
+    slug: "net-pay-calculator",
+    toolSlug: "payroll-calculator",
+    h1: "Net Pay Calculator",
+    subtitle: "Calculate Net Pay From Gross Salary and Deductions",
+    metaTitle: "Net Pay Calculator — Free Online Tool",
+    metaDescription:
+      "Free net pay calculator. Enter gross pay, pre-tax and post-tax deductions, and a tax rate to estimate your net (take-home) pay.",
+    introParagraph:
+      "Net pay — what actually lands in your account — depends on correctly applying pre-tax deductions, tax withholding, and post-tax deductions in the right order. This tool calculates net pay accurately following that standard payroll order.",
+  },
+  {
+    slug: "small-business-payroll-calculator",
+    toolSlug: "payroll-calculator",
+    h1: "Small Business Payroll Calculator",
+    subtitle: "Estimate Employee Net Pay for Small Business Payroll",
+    metaTitle: "Small Business Payroll Calculator — Free Online Tool",
+    metaDescription:
+      "Free payroll calculator for small business owners. Estimate an employee's net pay from gross salary, deductions, and a withholding rate.",
+    introParagraph:
+      "Small business owners running payroll without a dedicated payroll service still need to estimate what an employee will actually take home from a given gross pay figure. This tool provides that quick estimate, accounting for pre-tax deductions, withholding, and post-tax deductions.",
+  },
+  {
+    slug: "free-invoice-template-generator",
+    toolSlug: "invoice-generator",
+    h1: "Free Invoice Template Generator",
+    subtitle: "Build and Print a Professional Invoice Template",
+    metaTitle: "Free Invoice Template Generator — Online Tool",
+    metaDescription:
+      "Free invoice template generator. Fill in your details and line items to build a clean, professional invoice, ready to print or save as PDF.",
+    introParagraph:
+      "Instead of starting from a static invoice template file, filling in your business and client details directly into a working generator calculates the totals automatically and produces a print-ready invoice in one step. No software installation or account needed.",
+  },
+  {
+    slug: "freelance-invoice-generator",
+    toolSlug: "invoice-generator",
+    h1: "Freelance Invoice Generator",
+    subtitle: "Create a Professional Invoice for Freelance Work",
+    metaTitle: "Freelance Invoice Generator — Free Online Tool",
+    metaDescription:
+      "Free freelance invoice generator. Build a professional invoice for client work with itemized services, tax, and totals, ready to print or export as PDF.",
+    introParagraph:
+      "Freelancers billing clients for project work need a professional-looking invoice without paying for a subscription invoicing platform just for occasional use. This tool builds a clean, itemized invoice instantly, ready to print or save as PDF.",
+  },
+  {
+    slug: "invoice-maker-with-tax",
+    toolSlug: "invoice-generator",
+    h1: "Invoice Maker With Tax Calculation",
+    subtitle: "Build an Invoice With Automatic Tax and Total Calculation",
+    metaTitle: "Invoice Maker With Tax — Free Online Tool",
+    metaDescription:
+      "Free invoice maker with built-in tax calculation. Add line items and a tax rate, and get accurate subtotal, tax, and total amounts automatically.",
+    introParagraph:
+      "Manually calculating an invoice's subtotal, tax, and grand total across multiple line items invites arithmetic mistakes, especially as items are added or edited. This tool recalculates every total automatically and instantly as you build out the invoice.",
+  },
+  {
+    slug: "hourly-rate-calculator-for-freelancers",
+    toolSlug: "freelance-rate-calculator",
+    h1: "Hourly Rate Calculator for Freelancers",
+    subtitle: "Calculate the Hourly Rate That Actually Covers Your Costs",
+    metaTitle: "Hourly Rate Calculator for Freelancers — Free Tool",
+    metaDescription:
+      "Free hourly rate calculator built for freelancers. Factor in desired income, expenses, taxes, and realistic billable hours to find your true rate.",
+    introParagraph:
+      "Setting an hourly rate that actually sustains a freelance business — not just one that sounds competitive — means accounting for taxes, expenses, and realistic (not total) billable hours. This tool calculates that true required rate instantly.",
+  },
+  {
+    slug: "consultant-rate-calculator",
+    toolSlug: "freelance-rate-calculator",
+    h1: "Consultant Rate Calculator",
+    subtitle: "Calculate Your Required Hourly and Day Rate as a Consultant",
+    metaTitle: "Consultant Rate Calculator — Free Online Tool",
+    metaDescription:
+      "Free consultant rate calculator. Enter your target income, expenses, and billable capacity to calculate your required hourly and day rate.",
+    introParagraph:
+      "Consultants often quote by the day as well as the hour, and both figures need to be grounded in the same underlying math — target income, expenses, taxes, and realistic billable time. This tool calculates both rates together from the same inputs.",
+  },
+  {
+    slug: "freelance-day-rate-calculator",
+    toolSlug: "freelance-rate-calculator",
+    h1: "Freelance Day Rate Calculator",
+    subtitle: "Calculate the Day Rate You Need to Charge",
+    metaTitle: "Freelance Day Rate Calculator — Free Online Tool",
+    metaDescription:
+      "Free freelance day rate calculator. Calculate the day rate that covers your desired income, expenses, taxes, and realistic working weeks per year.",
+    introParagraph:
+      "Quoting a day rate for a project-based engagement should be grounded in the same real math as an hourly rate — not just picked to sound reasonable. This tool calculates the exact day rate needed based on your income goals, expenses, and available working time.",
+  },
+  {
+    slug: "sba-loan-calculator",
+    toolSlug: "business-loan-calculator",
+    h1: "SBA Loan Payment Calculator",
+    subtitle: "Calculate Monthly Payments on an SBA-Style Business Loan",
+    metaTitle: "SBA Loan Payment Calculator — Free Online Tool",
+    metaDescription:
+      "Free SBA-style loan payment calculator. Calculate your monthly payment, total interest, and net funding after any origination fee.",
+    introParagraph:
+      "SBA and similar government-backed business loans often carry longer terms and specific fee structures that affect the real net funding received. This tool calculates the monthly payment and net proceeds after any origination fee for this type of loan structure.",
+  },
+  {
+    slug: "working-capital-loan-calculator",
+    toolSlug: "business-loan-calculator",
+    h1: "Working Capital Loan Calculator",
+    subtitle: "Calculate Payments on a Short-Term Working Capital Loan",
+    metaTitle: "Working Capital Loan Calculator — Free Online Tool",
+    metaDescription:
+      "Free working capital loan calculator built for short-term business financing. Calculate monthly payment and net funds after fees for terms in months.",
+    introParagraph:
+      "Working capital loans are typically short-term, quoted in months rather than years, and often carry an origination fee that reduces the actual funds disbursed. This tool is built specifically for that structure, calculating the real monthly payment and net funding.",
+  },
+  {
+    slug: "equipment-financing-calculator",
+    toolSlug: "business-loan-calculator",
+    h1: "Equipment Financing Calculator",
+    subtitle: "Calculate Monthly Payments for Business Equipment Financing",
+    metaTitle: "Equipment Financing Calculator — Free Online Tool",
+    metaDescription:
+      "Free equipment financing calculator. Calculate the monthly payment, total interest, and net funding for a business equipment loan.",
+    introParagraph:
+      "Financing new equipment for a business follows the same loan math as any other business loan, often with its own origination fee structure specific to equipment lenders. This tool calculates the exact monthly payment and net funding for that financing.",
+  },
+  {
+    slug: "asset-depreciation-schedule-calculator",
+    toolSlug: "depreciation-calculator",
+    h1: "Asset Depreciation Schedule Calculator",
+    subtitle: "Generate a Full Depreciation Schedule for Any Business Asset",
+    metaTitle: "Asset Depreciation Schedule Calculator — Free Tool",
+    metaDescription:
+      "Free asset depreciation schedule calculator. Generate a complete year-by-year depreciation table for equipment, vehicles, or any business asset.",
+    introParagraph:
+      "Generating a full depreciation schedule for a business asset — every year's depreciation amount and remaining book value — is standard for accounting records and financial planning. This tool builds the complete schedule instantly using either straight-line or declining balance methods.",
+  },
+  {
+    slug: "straight-line-depreciation-calculator",
+    toolSlug: "depreciation-calculator",
+    h1: "Straight-Line Depreciation Calculator",
+    subtitle: "Calculate Even, Straight-Line Depreciation for Any Asset",
+    metaTitle: "Straight-Line Depreciation Calculator — Free Tool",
+    metaDescription:
+      "Free straight-line depreciation calculator. Enter asset cost, salvage value, and useful life to calculate even annual depreciation instantly.",
+    introParagraph:
+      "Straight-line is the simplest and most commonly used depreciation method — spreading an asset's depreciable cost evenly across its useful life. This tool calculates the exact even annual amount and the full year-by-year schedule instantly.",
+  },
+  {
+    slug: "vehicle-depreciation-calculator",
+    toolSlug: "depreciation-calculator",
+    h1: "Vehicle Depreciation Calculator",
+    subtitle: "Calculate How a Vehicle's Value Depreciates Over Time",
+    metaTitle: "Vehicle Depreciation Calculator — Free Online Tool",
+    metaDescription:
+      "Free vehicle depreciation calculator for how a car's value declines over its useful life using straight-line or declining balance methods.",
+    introParagraph:
+      "Vehicles typically lose value fastest in their early years, making the declining balance method a common fit for modeling how a car or fleet vehicle's book value actually declines. This tool calculates the full depreciation schedule for either method.",
+  },
+  {
+    slug: "retail-markup-calculator",
+    toolSlug: "markup-calculator",
+    h1: "Retail Markup Calculator",
+    subtitle: "Calculate the Selling Price for Any Retail Markup",
+    metaTitle: "Retail Markup Calculator — Free Online Tool",
+    metaDescription:
+      "Free retail markup calculator. Enter your product cost and target markup percentage to instantly calculate the correct selling price.",
+    introParagraph:
+      "Setting a retail price from a known product cost and a target markup percentage is one of the most routine pricing calculations in retail. This tool calculates the exact selling price instantly for any cost and markup combination.",
+  },
+  {
+    slug: "wholesale-markup-calculator",
+    toolSlug: "markup-calculator",
+    h1: "Wholesale Markup Calculator",
+    subtitle: "Calculate Wholesale Pricing From Cost and Markup",
+    metaTitle: "Wholesale Markup Calculator — Free Online Tool",
+    metaDescription:
+      "Free wholesale markup calculator. Calculate wholesale selling price from product cost and target markup percentage, with margin shown alongside.",
+    introParagraph:
+      "Wholesale pricing typically applies a specific markup percentage on top of unit cost, distinct from the markup applied at retail. This tool calculates the exact wholesale price for any cost and markup percentage, with the resulting margin shown too.",
+  },
+  {
+    slug: "price-markup-calculator",
+    toolSlug: "markup-calculator",
+    h1: "Price Markup Calculator",
+    subtitle: "Calculate a New Price From Cost Plus a Percentage Markup",
+    metaTitle: "Price Markup Calculator — Free Online Tool",
+    metaDescription:
+      "Free price markup calculator. Enter a base cost and markup percentage to calculate the final price, or work backward from a known price to its markup.",
+    introParagraph:
+      "Calculating a marked-up price from a base cost — or checking what markup an existing price represents — is a routine pricing task across any business that resells or manufactures goods. This tool handles both directions instantly.",
+  },
+  {
+    slug: "personal-net-worth-calculator",
+    toolSlug: "net-worth-calculator",
+    h1: "Personal Net Worth Calculator",
+    subtitle: "Calculate Your Personal Net Worth From Assets & Debts",
+    metaTitle: "Personal Net Worth Calculator — Free Online Tool",
+    metaDescription:
+      "Free personal net worth calculator. List your assets and debts to calculate your total net worth, a key personal finance tracking metric.",
+    introParagraph:
+      "Tracking personal net worth over time is one of the most commonly recommended ways to measure real financial progress, beyond just income. This tool lets you list out every asset and debt individually and calculates the total instantly.",
+  },
+  {
+    slug: "assets-and-liabilities-calculator",
+    toolSlug: "net-worth-calculator",
+    h1: "Assets and Liabilities Calculator",
+    subtitle: "List Your Assets and Liabilities to Calculate Net Worth",
+    metaTitle: "Assets and Liabilities Calculator — Free Online Tool",
+    metaDescription:
+      "Free assets and liabilities calculator. List each item individually to get an accurate total for your assets, liabilities, and overall net worth.",
+    introParagraph:
+      "A clear picture of financial position starts with a complete, itemized list of assets and liabilities rather than rough estimated totals. This tool lets you add as many line items as your actual finances require and calculates the totals automatically.",
+  },
+  {
+    slug: "net-worth-tracker",
+    toolSlug: "net-worth-calculator",
+    h1: "Net Worth Tracker",
+    subtitle: "Calculate Your Current Net Worth Snapshot",
+    metaTitle: "Net Worth Tracker — Free Online Tool",
+    metaDescription:
+      "Free net worth tracker. Enter your current assets and liabilities to get an instant net worth snapshot you can recalculate as your finances change.",
+    introParagraph:
+      "Checking net worth at a specific point in time — and repeating the exercise periodically as balances change — is a straightforward way to track real financial trends. This tool calculates a clear net worth snapshot from whatever assets and liabilities you enter.",
+  },
+  {
+    slug: "cost-of-living-inflation-calculator",
+    toolSlug: "inflation-calculator",
+    h1: "Cost of Living Inflation Calculator",
+    subtitle: "See How Inflation Affects the Cost of Living Over Time",
+    metaTitle: "Cost of Living Inflation Calculator — Free Tool",
+    metaDescription:
+      "Free cost of living inflation calculator. See how much prices rise over time at a given inflation rate, or what today's costs were worth in the past.",
+    introParagraph:
+      "Understanding how the cost of everyday goods and services changes over years or decades starts with applying a realistic average inflation rate to a starting amount. This tool projects that change instantly, in either direction.",
+  },
+  {
+    slug: "salary-inflation-adjustment-calculator",
+    toolSlug: "inflation-calculator",
+    h1: "Salary Inflation Adjustment Calculator",
+    subtitle: "See What a Past Salary Is Worth in Today's Dollars",
+    metaTitle: "Salary Inflation Adjustment Calculator — Free Tool",
+    metaDescription:
+      "Free salary inflation adjustment calculator. See what a salary from a past year would be worth today, adjusted for average inflation.",
+    introParagraph:
+      "Comparing a salary from years ago to a current offer only makes sense once both are expressed in the same real purchasing power terms — a raw dollar comparison ignores how much prices have risen in between. This tool adjusts a past salary figure into today's equivalent instantly.",
+  },
+  {
+    slug: "purchasing-power-calculator",
+    toolSlug: "inflation-calculator",
+    h1: "Purchasing Power Calculator",
+    subtitle: "Calculate How Inflation Erodes Purchasing Power",
+    metaTitle: "Purchasing Power Calculator — Free Online Tool",
+    metaDescription:
+      "Free purchasing power calculator. See how much a fixed amount of money's real purchasing power changes over time at a given inflation rate.",
+    introParagraph:
+      "A fixed dollar amount left unchanged loses real purchasing power every year inflation continues, even though the number itself never moves. This tool calculates exactly how much that purchasing power erodes (or, looking backward, how much more it used to be worth) over any time period.",
+  },
+  {
+    slug: "emergency-fund-savings-calculator",
+    toolSlug: "savings-goal-calculator",
+    h1: "Emergency Fund Savings Calculator",
+    subtitle: "Calculate Monthly Savings Needed to Build an Emergency Fund",
+    metaTitle: "Emergency Fund Savings Calculator — Free Tool",
+    metaDescription:
+      "Free emergency fund calculator. Set your target emergency fund amount and timeline to calculate exactly how much to save each month.",
+    introParagraph:
+      "Building an emergency fund benefits from a concrete monthly target rather than a vague \"save when I can\" approach. Set your target fund size and timeline and this tool calculates the exact monthly contribution needed to reach it.",
+  },
+  {
+    slug: "down-payment-savings-calculator",
+    toolSlug: "savings-goal-calculator",
+    h1: "Down Payment Savings Calculator",
+    subtitle: "Calculate Monthly Savings Needed for a Home Down Payment",
+    metaTitle: "Down Payment Savings Calculator — Free Online Tool",
+    metaDescription:
+      "Free down payment savings calculator. Set your target down payment and timeline to calculate the exact monthly savings amount required.",
+    introParagraph:
+      "Saving for a home down payment goes faster with a concrete monthly target tied to a real deadline, rather than an open-ended savings habit. Enter your target down payment amount and timeline and this tool calculates the exact monthly contribution needed.",
+  },
+  {
+    slug: "vacation-savings-calculator",
+    toolSlug: "savings-goal-calculator",
+    h1: "Vacation Savings Calculator",
+    subtitle: "Calculate Monthly Savings Needed for a Trip",
+    metaTitle: "Vacation Savings Calculator — Free Online Tool",
+    metaDescription:
+      "Free vacation savings calculator. Set your trip budget and travel date to calculate exactly how much to save each month to afford it.",
+    introParagraph:
+      "Planning a vacation budget in advance, with a concrete monthly savings target tied to the travel date, avoids the last-minute scramble to cover trip costs. This tool calculates the exact monthly amount needed to hit any savings goal by a set date.",
+  },
+  {
+    slug: "basal-metabolic-rate-calculator",
+    toolSlug: "bmr-calculator",
+    h1: "Basal Metabolic Rate Calculator",
+    subtitle: "Calculate BMR Using the Mifflin-St Jeor Equation",
+    metaTitle: "Basal Metabolic Rate Calculator — Free Online Tool",
+    metaDescription:
+      "Free basal metabolic rate calculator using the Mifflin-St Jeor equation. Calculate the calories your body burns at complete rest.",
+    introParagraph:
+      "\"Basal metabolic rate\" is the full term behind the common BMR abbreviation — the calories your body burns at complete rest just to keep essential functions running. This tool calculates it using the Mifflin-St Jeor equation, the modern standard in nutrition science.",
+  },
+  {
+    slug: "resting-metabolic-rate-calculator",
+    toolSlug: "bmr-calculator",
+    h1: "Resting Metabolic Rate Calculator",
+    subtitle: "Estimate Calories Burned at Rest",
+    metaTitle: "Resting Metabolic Rate Calculator — Free Online Tool",
+    metaDescription:
+      "Free resting metabolic rate calculator. Estimate how many calories your body burns daily at complete rest, based on age, height, weight, and sex.",
+    introParagraph:
+      "Resting metabolic rate (closely related to BMR) represents the baseline calorie burn your body needs before any activity is factored in. This tool estimates it using the Mifflin-St Jeor equation from your age, height, weight, and sex.",
+  },
+  {
+    slug: "metabolism-calculator",
+    toolSlug: "bmr-calculator",
+    h1: "Metabolism Calculator",
+    subtitle: "Calculate Your Body's Baseline Metabolic Rate",
+    metaTitle: "Metabolism Calculator — Free Online Tool",
+    metaDescription:
+      "Free metabolism calculator. Calculate your body's baseline metabolic rate (BMR) — the calories burned daily just to sustain essential functions.",
+    introParagraph:
+      "Understanding your baseline metabolism — how many calories your body burns before any activity — is foundational context for any nutrition or weight goal. This tool calculates that baseline instantly using the evidence-based Mifflin-St Jeor equation.",
+  },
+  {
+    slug: "navy-body-fat-calculator",
+    toolSlug: "body-fat-percentage-calculator",
+    h1: "Navy Body Fat Calculator",
+    subtitle: "Estimate Body Fat Using the U.S. Navy Circumference Method",
+    metaTitle: "Navy Body Fat Calculator — Free Online Tool",
+    metaDescription:
+      "Free U.S. Navy body fat calculator. Estimate body fat percentage using neck, waist, and height (plus hip for women) circumference measurements.",
+    introParagraph:
+      "The U.S. Navy body fat method is one of the most widely used tape-measure-based estimation techniques, requiring no special equipment beyond a flexible measuring tape. This tool applies the exact Navy formula to your circumference measurements instantly.",
+  },
+  {
+    slug: "body-fat-percentage-estimator",
+    toolSlug: "body-fat-percentage-calculator",
+    h1: "Body Fat Percentage Estimator",
+    subtitle: "Estimate Your Body Fat Percentage From Body Measurements",
+    metaTitle: "Body Fat Percentage Estimator — Free Online Tool",
+    metaDescription:
+      "Free body fat percentage estimator using body circumference measurements. No special equipment needed — just a tape measure.",
+    introParagraph:
+      "Estimating body fat percentage without special equipment like calipers or a DEXA scan is possible using validated circumference-based formulas. This tool estimates your body fat percentage from simple tape-measure measurements.",
+  },
+  {
+    slug: "waist-neck-body-fat-calculator",
+    toolSlug: "body-fat-percentage-calculator",
+    h1: "Waist and Neck Body Fat Calculator",
+    subtitle: "Estimate Body Fat From Waist and Neck Measurements",
+    metaTitle: "Waist and Neck Body Fat Calculator — Free Tool",
+    metaDescription:
+      "Free body fat calculator using waist and neck measurements (plus hip for women). Get an instant body fat percentage estimate and fitness category.",
+    introParagraph:
+      "Waist and neck circumference — the two core measurements behind the Navy method — are quick to take and require no special equipment. This tool converts those measurements into an estimated body fat percentage instantly.",
+  },
+  {
+    slug: "tdee-calculator",
+    toolSlug: "calorie-calculator",
+    h1: "TDEE Calculator",
+    subtitle: "Calculate Your Total Daily Energy Expenditure",
+    metaTitle: "TDEE Calculator — Free Online Tool",
+    metaDescription:
+      "Free TDEE (Total Daily Energy Expenditure) calculator. Calculate your maintenance calories based on BMR and activity level, plus weight goal targets.",
+    introParagraph:
+      "TDEE (Total Daily Energy Expenditure) is the full term behind the calorie maintenance figure most people are actually looking for — BMR combined with activity level to reflect real total daily burn. This tool calculates it instantly, along with weight loss and gain targets.",
+  },
+  {
+    slug: "weight-loss-calorie-calculator",
+    toolSlug: "calorie-calculator",
+    h1: "Weight Loss Calorie Calculator",
+    subtitle: "Calculate Your Daily Calorie Target for Weight Loss",
+    metaTitle: "Weight Loss Calorie Calculator — Free Online Tool",
+    metaDescription:
+      "Free weight loss calorie calculator. Calculate your maintenance calories and see mild and standard deficit targets for sustainable weight loss.",
+    introParagraph:
+      "Setting a weight loss calorie target starts with knowing your maintenance calories, then applying a sensible deficit — not guessing at a number. This tool calculates your maintenance level and shows both mild and standard deficit targets.",
+  },
+  {
+    slug: "calorie-deficit-calculator",
+    toolSlug: "calorie-calculator",
+    h1: "Calorie Deficit Calculator",
+    subtitle: "Calculate the Right Calorie Deficit for Your Goals",
+    metaTitle: "Calorie Deficit Calculator — Free Online Tool",
+    metaDescription:
+      "Free calorie deficit calculator. Calculate your maintenance calories and see exactly what a 250 or 500 calorie daily deficit looks like for you.",
+    introParagraph:
+      "A calorie deficit only makes sense relative to an accurate maintenance calorie baseline — without that baseline, a deficit target is just a guess. This tool calculates your actual maintenance calories first, then shows exactly what common deficit targets look like from there.",
+  },
+  {
+    slug: "healthy-weight-range-calculator",
+    toolSlug: "ideal-weight-calculator",
+    h1: "Healthy Weight Range Calculator",
+    subtitle: "See a Range of Ideal Weight Estimates for Your Height",
+    metaTitle: "Healthy Weight Range Calculator — Free Online Tool",
+    metaDescription:
+      "Free healthy weight range calculator using three established medical formulas — Devine, Robinson, and Hamwi — to show a realistic ideal weight range.",
+    introParagraph:
+      "A single \"ideal weight\" number oversimplifies what's really a range depending on which reference formula is used. This tool calculates all three major formulas together, giving a realistic range rather than one falsely precise number.",
+  },
+  {
+    slug: "devine-formula-calculator",
+    toolSlug: "ideal-weight-calculator",
+    h1: "Devine Formula Ideal Weight Calculator",
+    subtitle: "Calculate Ideal Body Weight Using the Devine Formula",
+    metaTitle: "Devine Formula Calculator — Free Online Tool",
+    metaDescription:
+      "Free Devine formula calculator. Calculate ideal body weight using the original 1974 Devine formula, still widely referenced in medical dosing contexts.",
+    introParagraph:
+      "The Devine formula remains the most widely referenced ideal body weight formula, originally developed for medication dosing calculations. This tool applies it directly to your height and sex for an instant result.",
+  },
+  {
+    slug: "ibw-calculator",
+    toolSlug: "ideal-weight-calculator",
+    h1: "IBW Calculator (Ideal Body Weight)",
+    subtitle: "Calculate Ideal Body Weight Using Three Reference Formulas",
+    metaTitle: "IBW Calculator — Free Ideal Body Weight Tool",
+    metaDescription:
+      "Free IBW (Ideal Body Weight) calculator. Calculate ideal body weight using Devine, Robinson, and Hamwi formulas from height and sex.",
+    introParagraph:
+      "IBW (Ideal Body Weight) is a term used across medical and fitness contexts referring to these same reference formulas. This tool calculates it using all three commonly cited versions, giving a fuller picture than any single formula alone.",
+  },
+  {
+    slug: "daily-water-intake-calculator",
+    toolSlug: "water-intake-calculator",
+    h1: "Daily Water Intake Calculator",
+    subtitle: "Calculate How Much Water You Should Drink Daily",
+    metaTitle: "Daily Water Intake Calculator — Free Online Tool",
+    metaDescription:
+      "Free daily water intake calculator. Calculate your recommended daily water intake based on body weight and exercise level.",
+    introParagraph:
+      "Figuring out how much water to actually drink each day, beyond the generic \"eight glasses\" rule, means starting from your own body weight and activity level. This tool calculates a personalized daily target instantly.",
+  },
+  {
+    slug: "hydration-calculator",
+    toolSlug: "water-intake-calculator",
+    h1: "Hydration Calculator",
+    subtitle: "Calculate Your Personalized Hydration Target",
+    metaTitle: "Hydration Calculator — Free Online Tool",
+    metaDescription:
+      "Free hydration calculator. Calculate a personalized daily fluid intake target based on your body weight and how much you exercise.",
+    introParagraph:
+      "A personalized hydration target — accounting for body size and activity level rather than a flat generic number — gives a more realistic daily goal. This tool calculates that target instantly from your weight and exercise minutes.",
+  },
+  {
+    slug: "gym-water-intake-calculator",
+    toolSlug: "water-intake-calculator",
+    h1: "Water Intake Calculator for Gym-Goers",
+    subtitle: "Calculate Water Needs Including Workout Fluid Loss",
+    metaTitle: "Water Intake Calculator for Gym-Goers — Free Tool",
+    metaDescription:
+      "Free water intake calculator for people who work out. Calculate your daily water target including extra fluid needed to replace sweat loss from exercise.",
+    introParagraph:
+      "Regular exercise increases fluid needs beyond the baseline, since sweat loss during a workout needs replacing on top of normal daily hydration. This tool adds that exercise-based adjustment automatically to your weight-based baseline.",
+  },
+  {
+    slug: "target-heart-rate-calculator",
+    toolSlug: "heart-rate-zone-calculator",
+    h1: "Target Heart Rate Calculator",
+    subtitle: "Calculate Your Target Heart Rate for Exercise Intensity",
+    metaTitle: "Target Heart Rate Calculator — Free Online Tool",
+    metaDescription:
+      "Free target heart rate calculator. Calculate your target heart rate range for a specific exercise intensity based on age and resting heart rate.",
+    introParagraph:
+      "Hitting a specific exercise intensity target means knowing the actual heart rate range that corresponds to it — not just guessing based on how hard a workout feels. This tool calculates your target heart rate range instantly from age and, optionally, resting heart rate.",
+  },
+  {
+    slug: "max-heart-rate-calculator",
+    toolSlug: "heart-rate-zone-calculator",
+    h1: "Max Heart Rate Calculator",
+    subtitle: "Estimate Your Maximum Heart Rate by Age",
+    metaTitle: "Max Heart Rate Calculator — Free Online Tool",
+    metaDescription:
+      "Free max heart rate calculator using the standard 220 minus age formula. See your estimated max heart rate plus all five training zones.",
+    introParagraph:
+      "Maximum heart rate is the foundation every training zone is calculated from, and it's most commonly estimated using the 220 minus age formula. This tool calculates that estimate instantly, along with the full set of training zones built on top of it.",
+  },
+  {
+    slug: "fat-burning-heart-rate-calculator",
+    toolSlug: "heart-rate-zone-calculator",
+    h1: "Fat Burning Heart Rate Calculator",
+    subtitle: "Find Your Fat-Burning Heart Rate Zone",
+    metaTitle: "Fat Burning Heart Rate Calculator — Free Online Tool",
+    metaDescription:
+      "Free fat burning heart rate calculator. Calculate the specific heart rate zone (Zone 2) commonly associated with fat-burning training intensity.",
+    introParagraph:
+      "The \"fat burning zone\" refers to Zone 2 — roughly 60-70% of max heart rate — where a higher percentage of calories burned come from fat stores. This tool calculates that specific zone's exact heart rate range for your age.",
+  },
+  {
+    slug: "karvonen-formula-calculator",
+    toolSlug: "heart-rate-zone-calculator",
+    h1: "Karvonen Formula Calculator",
+    subtitle: "Calculate Heart Rate Zones Using the Karvonen Method",
+    metaTitle: "Karvonen Formula Calculator — Free Online Tool",
+    metaDescription:
+      "Free Karvonen formula calculator. Calculate heart rate training zones using the heart rate reserve method, more accurate than simple percentage of max.",
+    introParagraph:
+      "The Karvonen formula — using heart rate reserve (max minus resting) rather than a flat percentage of max heart rate — is generally considered a more individually accurate way to calculate training zones. This tool applies it directly once you provide both max and resting heart rate.",
+  },
+  {
+    slug: "macro-split-calculator",
+    toolSlug: "macro-calculator",
+    h1: "Macro Split Calculator",
+    subtitle: "Convert Calories Into a Custom Macro Split",
+    metaTitle: "Macro Split Calculator — Free Online Tool",
+    metaDescription:
+      "Free macro split calculator. Enter your calorie target and any protein/carb/fat percentage split to see the exact grams for each macronutrient.",
+    introParagraph:
+      "Testing different macro splits against the same calorie target — comparing a low-carb approach to a balanced one, for example — means recalculating grams every time the percentages change. This tool recalculates instantly as you adjust any split.",
+  },
+  {
+    slug: "keto-macro-calculator",
+    toolSlug: "macro-calculator",
+    h1: "Keto Macro Calculator",
+    subtitle: "Calculate Macros for a Low-Carb Ketogenic Approach",
+    metaTitle: "Keto Macro Calculator — Free Online Tool",
+    metaDescription:
+      "Free keto-style macro calculator. Enter your calorie target and use the low-carb preset to calculate high-fat, low-carb macro grams instantly.",
+    introParagraph:
+      "A ketogenic-style eating approach requires a very specific macro split — high fat, very low carb, moderate protein — which needs precise gram targets rather than a rough estimate. This tool's low-carb preset calculates that split instantly for any calorie target.",
+  },
+  {
+    slug: "bodybuilding-macro-calculator",
+    toolSlug: "macro-calculator",
+    h1: "Bodybuilding Macro Calculator",
+    subtitle: "Calculate High-Protein Macros for Muscle Building",
+    metaTitle: "Bodybuilding Macro Calculator — Free Online Tool",
+    metaDescription:
+      "Free bodybuilding macro calculator. Use the high-protein preset to calculate macro grams optimized for muscle building and recovery.",
+    introParagraph:
+      "Bodybuilding and strength training nutrition typically prioritizes higher protein intake to support muscle recovery and growth. This tool's high-protein preset calculates the exact gram targets for that split from any calorie goal.",
+  },
+  {
+    slug: "protein-carb-fat-calculator",
+    toolSlug: "macro-calculator",
+    h1: "Protein, Carb & Fat Calculator",
+    subtitle: "Convert Any Calorie Target Into Grams of Each Macronutrient",
+    metaTitle: "Protein Carb Fat Calculator — Free Online Tool",
+    metaDescription:
+      "Free protein, carb, and fat calculator. Enter a calorie target and percentage split to instantly convert it into grams of each macronutrient.",
+    introParagraph:
+      "Converting a calorie target into actual grams of protein, carbohydrate, and fat to track requires applying each macronutrient's specific calories-per-gram value correctly. This tool handles that conversion instantly for any calorie and percentage combination.",
+  },
+  {
+    slug: "apple-shape-body-calculator",
+    toolSlug: "waist-to-hip-ratio-calculator",
+    h1: "Apple vs Pear Body Shape Calculator",
+    subtitle: "Determine Body Shape From Waist and Hip Measurements",
+    metaTitle: "Apple vs Pear Body Shape Calculator — Free Tool",
+    metaDescription:
+      "Free body shape calculator using waist-to-hip ratio to determine whether fat distribution follows an apple or pear pattern, with health risk context.",
+    introParagraph:
+      "\"Apple\" and \"pear\" body shapes refer directly to where fat tends to accumulate — waist-dominant (apple) versus hip-dominant (pear) — which is exactly what the waist-to-hip ratio measures numerically. This tool calculates that ratio and its associated risk category.",
+  },
+  {
+    slug: "abdominal-obesity-calculator",
+    toolSlug: "waist-to-hip-ratio-calculator",
+    h1: "Abdominal Obesity Risk Calculator",
+    subtitle: "Assess Abdominal Fat Distribution Risk",
+    metaTitle: "Abdominal Obesity Risk Calculator — Free Tool",
+    metaDescription:
+      "Free abdominal obesity risk calculator using waist-to-hip ratio and WHO reference thresholds to assess central fat distribution risk.",
+    introParagraph:
+      "Central (abdominal) fat distribution is associated with different health risk patterns than fat stored elsewhere on the body, and waist-to-hip ratio is a standard way to quantify it. This tool calculates the ratio and compares it against WHO reference thresholds.",
+  },
+  {
+    slug: "whr-health-risk-calculator",
+    toolSlug: "waist-to-hip-ratio-calculator",
+    h1: "WHR Health Risk Calculator",
+    subtitle: "Calculate Waist-to-Hip Ratio Health Risk Category",
+    metaTitle: "WHR Health Risk Calculator — Free Online Tool",
+    metaDescription:
+      "Free WHR (waist-to-hip ratio) health risk calculator. Enter waist and hip measurements to calculate your ratio and associated risk category.",
+    introParagraph:
+      "WHR is the standard abbreviation for waist-to-hip ratio, a measurement used across health and fitness contexts to assess fat distribution risk. This tool calculates the exact ratio and compares it against sex-specific WHO reference categories.",
+  },
+  {
+    slug: "body-shape-calculator",
+    toolSlug: "waist-to-hip-ratio-calculator",
+    h1: "Body Shape Calculator",
+    subtitle: "Determine Your Body Shape From Waist and Hip Measurements",
+    metaTitle: "Body Shape Calculator — Free Online Tool",
+    metaDescription:
+      "Free body shape calculator. Enter your waist and hip measurements to determine your body shape category based on waist-to-hip ratio.",
+    introParagraph:
+      "Body shape terminology — apple, pear, hourglass, and similar descriptions — maps directly onto the numeric waist-to-hip ratio, giving a precise number behind a commonly used descriptive category. This tool calculates that exact ratio from your measurements.",
+  },
+  {
+    slug: "bench-press-max-calculator",
+    toolSlug: "one-rep-max-calculator",
+    h1: "Bench Press Max Calculator",
+    subtitle: "Estimate Your Bench Press One-Rep Max",
+    metaTitle: "Bench Press Max Calculator — Free Online Tool",
+    metaDescription:
+      "Free bench press max calculator. Enter the weight and reps from a recent bench press set to estimate your one-rep max using the Epley formula.",
+    introParagraph:
+      "Estimating a bench press max from a recent working set — rather than testing a risky true single max — is standard practice for programming bench press training weights. This tool calculates that estimate instantly using the Epley formula.",
+  },
+  {
+    slug: "squat-max-calculator",
+    toolSlug: "one-rep-max-calculator",
+    h1: "Squat Max Calculator",
+    subtitle: "Estimate Your Squat One-Rep Max",
+    metaTitle: "Squat Max Calculator — Free Online Tool",
+    metaDescription:
+      "Free squat max calculator. Enter the weight and reps from a recent squat set to estimate your one-rep max and training percentage table.",
+    introParagraph:
+      "Programming squat training weeks around percentages of a max requires an accurate 1RM estimate, safely derived from a submaximal working set rather than a risky true max attempt. This tool calculates that estimate along with a full percentage table.",
+  },
+  {
+    slug: "deadlift-max-calculator",
+    toolSlug: "one-rep-max-calculator",
+    h1: "Deadlift Max Calculator",
+    subtitle: "Estimate Your Deadlift One-Rep Max",
+    metaTitle: "Deadlift Max Calculator — Free Online Tool",
+    metaDescription:
+      "Free deadlift max calculator. Enter the weight and reps from a recent deadlift set to estimate your one-rep max using the Epley formula.",
+    introParagraph:
+      "Deadlift training programs commonly prescribe working weights as a percentage of estimated 1RM, making an accurate estimate from a recent set genuinely useful for programming. This tool calculates that estimate and a full percentage breakdown instantly.",
+  },
+  {
+    slug: "epley-formula-calculator",
+    toolSlug: "one-rep-max-calculator",
+    h1: "Epley Formula Calculator",
+    subtitle: "Estimate One-Rep Max Using the Epley Formula",
+    metaTitle: "Epley Formula Calculator — Free Online Tool",
+    metaDescription:
+      "Free Epley formula calculator. Estimate one-rep max from any weight and rep combination using the widely used Epley strength formula.",
+    introParagraph:
+      "The Epley formula is one of the most widely referenced one-rep max estimation methods in strength training, and applying it correctly by hand for an odd weight and rep combination is easy to get wrong. This tool applies the exact formula instantly.",
+  },
+  {
+    slug: "walking-calorie-calculator",
+    toolSlug: "steps-to-calories-calculator",
+    h1: "Walking Calorie Calculator",
+    subtitle: "Calculate Calories Burned From a Walk",
+    metaTitle: "Walking Calorie Calculator — Free Online Tool",
+    metaDescription:
+      "Free walking calorie calculator. Enter your step count and body weight to estimate calories burned and distance covered during a walk.",
+    introParagraph:
+      "Estimating calories burned from a walk — for a daily step goal or a specific walking session — combines step count with body weight to produce a personalized estimate. This tool calculates that instantly, along with the approximate distance covered.",
+  },
+  {
+    slug: "10000-steps-calories-calculator",
+    toolSlug: "steps-to-calories-calculator",
+    h1: "10,000 Steps Calories Calculator",
+    subtitle: "See How Many Calories 10,000 Steps Actually Burns",
+    metaTitle: "10,000 Steps Calories Calculator — Free Tool",
+    metaDescription:
+      "Free calculator to see how many calories 10,000 steps burns based on your specific body weight, plus the approximate distance covered.",
+    introParagraph:
+      "The commonly cited \"10,000 steps a day\" goal doesn't specify a fixed calorie value, since the actual calorie burn depends on individual body weight. This tool calculates the real estimated calorie burn for 10,000 steps at your specific weight.",
+  },
+  {
+    slug: "pedometer-calorie-calculator",
+    toolSlug: "steps-to-calories-calculator",
+    h1: "Pedometer Calorie Calculator",
+    subtitle: "Convert Your Pedometer Step Count Into Calories",
+    metaTitle: "Pedometer Calorie Calculator — Free Online Tool",
+    metaDescription:
+      "Free pedometer calorie calculator. Convert any step count from a pedometer or fitness tracker into an estimated calorie burn.",
+    introParagraph:
+      "A pedometer or fitness tracker reports steps, but converting that count into calories burned requires factoring in body weight, which most basic pedometers don't account for. This tool converts any step count into a personalized calorie estimate.",
+  },
+  {
+    slug: "steps-to-distance-calculator",
+    toolSlug: "steps-to-calories-calculator",
+    h1: "Steps to Distance and Calories Calculator",
+    subtitle: "Convert Steps Into Distance Walked and Calories Burned",
+    metaTitle: "Steps to Distance Calculator — Free Online Tool",
+    metaDescription:
+      "Free steps to distance calculator. Convert any step count into both distance walked and estimated calories burned based on your body weight.",
+    introParagraph:
+      "A raw step count is more meaningful once converted into both distance walked and calories burned — two complementary ways to understand the same activity. This tool calculates both figures together instantly from your step count and weight.",
+  },
+  {
+    slug: "running-pace-calculator",
+    toolSlug: "pace-and-running-speed-calculator",
+    h1: "Running Pace Calculator",
+    subtitle: "Calculate Your Running Pace Per Kilometer or Mile",
+    metaTitle: "Running Pace Calculator — Free Online Tool",
+    metaDescription:
+      "Free running pace calculator. Enter your distance and time to calculate your exact pace per kilometer or mile, plus average speed.",
+    introParagraph:
+      "Checking your actual running pace from a completed run, or figuring out the pace needed for a goal time, is one of the most common calculations in a runner's training log. This tool calculates it instantly in either kilometers or miles.",
+  },
+  {
+    slug: "marathon-pace-calculator",
+    toolSlug: "pace-and-running-speed-calculator",
+    h1: "Marathon Pace Calculator",
+    subtitle: "Calculate the Pace Needed for a Target Marathon Time",
+    metaTitle: "Marathon Pace Calculator — Free Online Tool",
+    metaDescription:
+      "Free marathon pace calculator. Enter your target marathon finish time to calculate the exact per-kilometer or per-mile pace you need to maintain.",
+    introParagraph:
+      "Hitting a specific marathon goal time requires knowing the exact pace to maintain throughout the race, since even small pacing errors compound over 26.2 miles. This tool calculates that required pace instantly from your target time and the marathon distance.",
+  },
+  {
+    slug: "5k-pace-calculator",
+    toolSlug: "pace-and-running-speed-calculator",
+    h1: "5K Pace Calculator",
+    subtitle: "Calculate Your Pace and Speed for a 5K Run",
+    metaTitle: "5K Pace Calculator — Free Online Tool",
+    metaDescription:
+      "Free 5K pace calculator. Enter your 5K time to calculate your exact per-kilometer or per-mile pace and average running speed.",
+    introParagraph:
+      "The 5K is one of the most common race distances for both beginner and experienced runners, and checking pace from a 5K time is a frequent training log calculation. This tool calculates the exact pace and speed instantly from any 5K time.",
+  },
+  {
+    slug: "running-speed-calculator",
+    toolSlug: "pace-and-running-speed-calculator",
+    h1: "Running Speed Calculator",
+    subtitle: "Calculate Average Running Speed From Distance and Time",
+    metaTitle: "Running Speed Calculator — Free Online Tool",
+    metaDescription:
+      "Free running speed calculator. Enter distance and time to calculate your average speed in km/h or mph, alongside your pace.",
+    introParagraph:
+      "Some training contexts and fitness comparisons use speed (distance per hour) rather than pace (time per distance) as the reference figure. This tool calculates both from the same distance and time inputs, so you have whichever format you need.",
+  },
+  {
+    slug: "cm-to-inches-converter",
+    toolSlug: "length-converter",
+    h1: "CM to Inches Converter",
+    subtitle: "Convert Centimeters to Inches Instantly",
+    metaTitle: "CM to Inches Converter — Free Online Tool",
+    metaDescription:
+      "Free cm to inches converter. Convert any centimeter measurement into exact inches instantly, using the precise 2.54 cm per inch definition.",
+    introParagraph:
+      "Converting centimeters to inches comes up constantly when comparing a metric measurement — a height, a screen size, a product dimension — against an imperial spec. This tool converts instantly using the exact 2.54 cm per inch definition.",
+  },
+  {
+    slug: "feet-to-meters-converter",
+    toolSlug: "length-converter",
+    h1: "Feet to Meters Converter",
+    subtitle: "Convert Feet to Meters Instantly",
+    metaTitle: "Feet to Meters Converter — Free Online Tool",
+    metaDescription:
+      "Free feet to meters converter. Convert any measurement in feet into exact meters instantly, using the precise 0.3048 meter per foot definition.",
+    introParagraph:
+      "Converting feet to meters is a routine need when comparing a US measurement — a building height, an altitude, a distance — against metric specifications used almost everywhere else. This tool converts instantly using the exact defined foot-to-meter relationship.",
+  },
+  {
+    slug: "km-to-miles-converter",
+    toolSlug: "length-converter",
+    h1: "KM to Miles Converter",
+    subtitle: "Convert Kilometers to Miles Instantly",
+    metaTitle: "KM to Miles Converter — Free Online Tool",
+    metaDescription:
+      "Free km to miles converter. Convert kilometers to miles instantly using the exact 1.609344 km per mile definition — useful for travel and running distances.",
+    introParagraph:
+      "Converting kilometers to miles comes up constantly for international travel, road trip planning, and comparing race distances between countries using different distance conventions. This tool converts instantly using the exact defined relationship.",
+  },
+  {
+    slug: "mm-to-inches-converter",
+    toolSlug: "length-converter",
+    h1: "MM to Inches Converter",
+    subtitle: "Convert Millimeters to Inches Instantly",
+    metaTitle: "MM to Inches Converter — Free Online Tool",
+    metaDescription:
+      "Free mm to inches converter. Convert millimeter measurements into exact inches instantly, useful for engineering, tools, and precise specifications.",
+    introParagraph:
+      "Millimeter-to-inch conversion is common in engineering and manufacturing contexts, where a precise metric specification needs checking against an imperial tool or drawing. This tool converts instantly with exact precision.",
+  },
+  {
+    slug: "kg-to-lbs-converter",
+    toolSlug: "weight-converter",
+    h1: "KG to LBS Converter",
+    subtitle: "Convert Kilograms to Pounds Instantly",
+    metaTitle: "KG to LBS Converter — Free Online Tool",
+    metaDescription:
+      "Free kg to lbs converter. Convert kilograms to pounds instantly using the exact 0.45359237 kg per pound definition.",
+    introParagraph:
+      "Converting kilograms to pounds is one of the most frequently needed weight conversions, for everything from body weight to shipping package weight to product specifications. This tool converts instantly with exact precision.",
+  },
+  {
+    slug: "pounds-to-kilograms-converter",
+    toolSlug: "weight-converter",
+    h1: "Pounds to Kilograms Converter",
+    subtitle: "Convert Pounds to Kilograms Instantly",
+    metaTitle: "Pounds to Kilograms Converter — Free Online Tool",
+    metaDescription:
+      "Free pounds to kilograms converter. Convert any weight in pounds into exact kilograms instantly using the precise defined pound-kilogram relationship.",
+    introParagraph:
+      "Converting a US-measured weight in pounds into kilograms is routine for comparing against metric specifications, international shipping weights, or health and fitness figures reported in the other system. This tool converts instantly.",
+  },
+  {
+    slug: "grams-to-ounces-converter",
+    toolSlug: "weight-converter",
+    h1: "Grams to Ounces Converter",
+    subtitle: "Convert Grams to Ounces Instantly",
+    metaTitle: "Grams to Ounces Converter — Free Online Tool",
+    metaDescription:
+      "Free grams to ounces converter. Convert grams to ounces instantly, useful for cooking, jewelry weight, and product specifications.",
+    introParagraph:
+      "Grams-to-ounces conversion shows up constantly in cooking (a recipe listing metric ingredient weights), jewelry (precious metal weight), and product packaging comparing net weight across labeling conventions. This tool converts instantly.",
+  },
+  {
+    slug: "stone-to-kg-converter",
+    toolSlug: "weight-converter",
+    h1: "Stone to KG Converter",
+    subtitle: "Convert Stone to Kilograms Instantly",
+    metaTitle: "Stone to KG Converter — Free Online Tool",
+    metaDescription:
+      "Free stone to kg converter. Convert UK body weight measurements in stone into exact kilograms instantly.",
+    introParagraph:
+      "Stone is still commonly used for body weight in the UK and Ireland, and converting it into kilograms is a routine need for anyone comparing weight figures against the metric system used elsewhere. This tool converts instantly with exact precision.",
+  },
+  {
+    slug: "celsius-to-fahrenheit-converter",
+    toolSlug: "temperature-converter",
+    h1: "Celsius to Fahrenheit Converter",
+    subtitle: "Convert Celsius to Fahrenheit Instantly",
+    metaTitle: "Celsius to Fahrenheit Converter — Free Online Tool",
+    metaDescription:
+      "Free Celsius to Fahrenheit converter. Convert any Celsius temperature into exact Fahrenheit instantly using the correct ×9/5+32 formula.",
+    introParagraph:
+      "Converting Celsius to Fahrenheit is needed constantly for weather forecasts, cooking temperatures, and general temperature comparisons between the metric and US systems. This tool applies the exact formula instantly, correctly handling both the scale and offset difference.",
+  },
+  {
+    slug: "fahrenheit-to-celsius-converter",
+    toolSlug: "temperature-converter",
+    h1: "Fahrenheit to Celsius Converter",
+    subtitle: "Convert Fahrenheit to Celsius Instantly",
+    metaTitle: "Fahrenheit to Celsius Converter — Free Online Tool",
+    metaDescription:
+      "Free Fahrenheit to Celsius converter. Convert any Fahrenheit temperature into exact Celsius instantly using the correct formula.",
+    introParagraph:
+      "Converting a US temperature reading in Fahrenheit into Celsius is a routine need for anyone reading a US weather report, oven temperature, or thermostat setting from outside the US. This tool applies the exact conversion formula instantly.",
+  },
+  {
+    slug: "celsius-to-kelvin-converter",
+    toolSlug: "temperature-converter",
+    h1: "Celsius to Kelvin Converter",
+    subtitle: "Convert Celsius to Kelvin Instantly",
+    metaTitle: "Celsius to Kelvin Converter — Free Online Tool",
+    metaDescription:
+      "Free Celsius to Kelvin converter. Convert Celsius to Kelvin instantly by adding exactly 273.15 — the scientific standard temperature conversion.",
+    introParagraph:
+      "Converting Celsius to Kelvin is a routine step in physics and chemistry coursework and lab work, since Kelvin is the scientific standard temperature scale. This tool converts instantly using the exact defined offset.",
+  },
+  {
+    slug: "fahrenheit-to-kelvin-converter",
+    toolSlug: "temperature-converter",
+    h1: "Fahrenheit to Kelvin Converter",
+    subtitle: "Convert Fahrenheit to Kelvin Instantly",
+    metaTitle: "Fahrenheit to Kelvin Converter — Free Online Tool",
+    metaDescription:
+      "Free Fahrenheit to Kelvin converter. Convert Fahrenheit directly to Kelvin instantly, combining both the scale and offset conversion correctly.",
+    introParagraph:
+      "Converting directly from Fahrenheit to Kelvin requires combining two separate conversion steps correctly — this tool handles both at once, useful for scientific work starting from a US-reported temperature.",
+  },
+  {
+    slug: "kmh-to-mph-converter",
+    toolSlug: "speed-converter",
+    h1: "KM/H to MPH Converter",
+    subtitle: "Convert Kilometers per Hour to Miles per Hour",
+    metaTitle: "KM/H to MPH Converter — Free Online Tool",
+    metaDescription:
+      "Free km/h to mph converter. Convert kilometers per hour to miles per hour instantly, useful for speedometers, speed limits, and travel.",
+    introParagraph:
+      "Converting km/h to mph is routine for travelers renting a car abroad, checking a foreign speed limit sign, or comparing a vehicle's speedometer reading against a different country's convention. This tool converts instantly with exact precision.",
+  },
+  {
+    slug: "mph-to-kmh-converter",
+    toolSlug: "speed-converter",
+    h1: "MPH to KM/H Converter",
+    subtitle: "Convert Miles per Hour to Kilometers per Hour",
+    metaTitle: "MPH to KM/H Converter — Free Online Tool",
+    metaDescription:
+      "Free mph to km/h converter. Convert miles per hour to kilometers per hour instantly, useful for comparing speed limits and vehicle specs.",
+    introParagraph:
+      "Converting mph to km/h is common for anyone comparing a US or UK speed figure against the metric convention used across most of the rest of the world. This tool converts instantly with exact precision.",
+  },
+  {
+    slug: "knots-to-mph-converter",
+    toolSlug: "speed-converter",
+    h1: "Knots to MPH Converter",
+    subtitle: "Convert Knots to Miles per Hour",
+    metaTitle: "Knots to MPH Converter — Free Online Tool",
+    metaDescription:
+      "Free knots to mph converter. Convert nautical knots into miles per hour instantly, useful for aviation, boating, and weather wind speed reports.",
+    introParagraph:
+      "Wind speed and boat or aircraft speed are conventionally reported in knots, which needs converting into the more familiar mph for everyday understanding. This tool converts instantly using the precise nautical mile relationship.",
+  },
+  {
+    slug: "mps-to-kmh-converter",
+    toolSlug: "speed-converter",
+    h1: "m/s to km/h Converter",
+    subtitle: "Convert Meters per Second to Kilometers per Hour",
+    metaTitle: "m/s to km/h Converter — Free Online Tool",
+    metaDescription:
+      "Free meters per second to km/h converter. Convert m/s (the SI speed unit) into the more everyday km/h instantly.",
+    introParagraph:
+      "Physics problems and scientific data commonly report speed in meters per second, which needs converting into km/h for a more intuitive everyday sense of the speed involved. This tool converts instantly.",
+  },
+  {
+    slug: "sqft-to-sqm-converter",
+    toolSlug: "area-converter",
+    h1: "Square Feet to Square Meters Converter",
+    subtitle: "Convert Square Feet to Square Meters Instantly",
+    metaTitle: "Sq Ft to Sq M Converter — Free Online Tool",
+    metaDescription:
+      "Free square feet to square meters converter. Convert real estate, room, or floor area from sq ft to sq m instantly with exact precision.",
+    introParagraph:
+      "Converting square footage to square meters is routine when comparing US real estate listings against metric-measured properties used in most other countries. This tool converts instantly using the exact squared conversion factor.",
+  },
+  {
+    slug: "acres-to-sqft-converter",
+    toolSlug: "area-converter",
+    h1: "Acres to Square Feet Converter",
+    subtitle: "Convert Acres to Square Feet Instantly",
+    metaTitle: "Acres to Square Feet Converter — Free Online Tool",
+    metaDescription:
+      "Free acres to square feet converter. Convert land area in acres into exact square feet instantly, useful for real estate and land measurement.",
+    introParagraph:
+      "Converting a land parcel's acreage into square feet is common in real estate and construction planning, where the smaller unit gives a more concrete sense of buildable area. This tool converts instantly with exact precision.",
+  },
+  {
+    slug: "sqm-to-acres-converter",
+    toolSlug: "area-converter",
+    h1: "Square Meters to Acres Converter",
+    subtitle: "Convert Square Meters to Acres Instantly",
+    metaTitle: "Square Meters to Acres Converter — Free Online Tool",
+    metaDescription:
+      "Free square meters to acres converter. Convert a metric land area measurement into acres instantly for comparison with US or UK land listings.",
+    introParagraph:
+      "Converting a metric land area figure into acres is useful when comparing an international property listing against the acre-based convention common in the US and UK. This tool converts instantly with exact precision.",
+  },
+  {
+    slug: "hectares-to-acres-converter",
+    toolSlug: "area-converter",
+    h1: "Hectares to Acres Converter",
+    subtitle: "Convert Hectares to Acres Instantly",
+    metaTitle: "Hectares to Acres Converter — Free Online Tool",
+    metaDescription:
+      "Free hectares to acres converter. Convert agricultural or land area from hectares to acres instantly with exact precision.",
+    introParagraph:
+      "Converting hectares to acres is routine in agriculture and international land measurement, since hectares are the metric standard used internationally while acres remain common in the US and UK. This tool converts instantly.",
+  },
+  {
+    slug: "liters-to-gallons-converter",
+    toolSlug: "volume-converter",
+    h1: "Liters to Gallons Converter",
+    subtitle: "Convert Liters to US Gallons Instantly",
+    metaTitle: "Liters to Gallons Converter — Free Online Tool",
+    metaDescription:
+      "Free liters to gallons converter. Convert liters to US gallons instantly, useful for fuel tank capacity and container volume comparisons.",
+    introParagraph:
+      "Converting liters to gallons is a routine need for comparing fuel prices, tank capacities, or container volumes between metric countries and the US. This tool converts instantly using the exact US gallon definition.",
+  },
+  {
+    slug: "ml-to-oz-converter",
+    toolSlug: "volume-converter",
+    h1: "ML to OZ Converter",
+    subtitle: "Convert Milliliters to Fluid Ounces Instantly",
+    metaTitle: "ML to OZ Converter — Free Online Tool",
+    metaDescription:
+      "Free ml to fluid ounce converter. Convert milliliters to US fluid ounces instantly, useful for beverage sizes and skincare product volumes.",
+    introParagraph:
+      "Converting milliliters to fluid ounces is common for checking a beverage container's size, a skincare or cosmetic product's volume, or any metric-labeled liquid product against the US fluid ounce convention. This tool converts instantly.",
+  },
+  {
+    slug: "cups-to-liters-converter",
+    toolSlug: "volume-converter",
+    h1: "Cups to Liters Converter",
+    subtitle: "Convert US Cups to Liters Instantly",
+    metaTitle: "Cups to Liters Converter — Free Online Tool",
+    metaDescription:
+      "Free cups to liters converter. Convert US cup measurements into exact liters instantly, useful for large-batch recipe scaling.",
+    introParagraph:
+      "Converting cups to liters is useful when scaling a recipe up to a large batch size where liters become a more practical unit, or comparing a US recipe's volume against a metric container. This tool converts instantly.",
+  },
+  {
+    slug: "gallons-to-liters-converter",
+    toolSlug: "volume-converter",
+    h1: "Gallons to Liters Converter",
+    subtitle: "Convert US Gallons to Liters Instantly",
+    metaTitle: "Gallons to Liters Converter — Free Online Tool",
+    metaDescription:
+      "Free gallons to liters converter. Convert US gallons to liters instantly, useful for fuel, water, and large container volume conversions.",
+    introParagraph:
+      "Converting gallons to liters comes up for fuel tank capacity, water container sizes, and any large-volume comparison between the US gallon system and the metric liter standard used elsewhere. This tool converts instantly.",
+  },
+  {
+    slug: "mb-to-gb-converter",
+    toolSlug: "data-storage-converter",
+    h1: "MB to GB Converter",
+    subtitle: "Convert Megabytes to Gigabytes Instantly",
+    metaTitle: "MB to GB Converter — Free Online Tool",
+    metaDescription:
+      "Free MB to GB converter. Convert megabytes to gigabytes instantly using the standard 1,024-based binary conversion.",
+    introParagraph:
+      "Converting megabytes to gigabytes is routine when checking file sizes, storage capacity, or data usage against a plan or device limit expressed in a different unit. This tool converts instantly using the standard binary convention.",
+  },
+  {
+    slug: "gb-to-mb-converter",
+    toolSlug: "data-storage-converter",
+    h1: "GB to MB Converter",
+    subtitle: "Convert Gigabytes to Megabytes Instantly",
+    metaTitle: "GB to MB Converter — Free Online Tool",
+    metaDescription:
+      "Free GB to MB converter. Convert gigabytes to megabytes instantly using the standard 1,024-based binary conversion.",
+    introParagraph:
+      "Converting gigabytes down to megabytes is useful when comparing a large storage or data figure against something reported in smaller units, like a file size or a per-item data allowance. This tool converts instantly.",
+  },
+  {
+    slug: "bytes-to-mb-converter",
+    toolSlug: "data-storage-converter",
+    h1: "Bytes to MB Converter",
+    subtitle: "Convert Bytes to Megabytes Instantly",
+    metaTitle: "Bytes to MB Converter — Free Online Tool",
+    metaDescription:
+      "Free bytes to megabytes converter. Convert a raw byte count into megabytes instantly, useful for programming and file size debugging.",
+    introParagraph:
+      "Converting a raw byte count into megabytes is a common need when debugging code that reports file or memory sizes in bytes, which is far less intuitive to read than the equivalent megabyte figure. This tool converts instantly.",
+  },
+  {
+    slug: "tb-to-gb-converter",
+    toolSlug: "data-storage-converter",
+    h1: "TB to GB Converter",
+    subtitle: "Convert Terabytes to Gigabytes Instantly",
+    metaTitle: "TB to GB Converter — Free Online Tool",
+    metaDescription:
+      "Free TB to GB converter. Convert terabytes to gigabytes instantly, useful for comparing hard drive and cloud storage capacities.",
+    introParagraph:
+      "Converting terabytes to gigabytes is routine when comparing storage device capacities or cloud storage plans listed in different unit scales. This tool converts instantly using the standard binary convention.",
+  },
+  {
+    slug: "seconds-to-minutes-converter",
+    toolSlug: "time-unit-converter",
+    h1: "Seconds to Minutes Converter",
+    subtitle: "Convert Seconds to Minutes Instantly",
+    metaTitle: "Seconds to Minutes Converter — Free Online Tool",
+    metaDescription:
+      "Free seconds to minutes converter. Convert a raw seconds value into minutes and seconds instantly.",
+    introParagraph:
+      "Converting a raw seconds figure — from a video duration, a timer, or a script's output — into a more readable minutes value is a routine small conversion. This tool converts instantly.",
+  },
+  {
+    slug: "days-to-hours-converter",
+    toolSlug: "time-unit-converter",
+    h1: "Days to Hours Converter",
+    subtitle: "Convert Days to Hours Instantly",
+    metaTitle: "Days to Hours Converter — Free Online Tool",
+    metaDescription:
+      "Free days to hours converter. Convert any number of days into exact hours instantly, useful for project planning and deadlines.",
+    introParagraph:
+      "Converting days to hours is useful for project planning, shipping time estimates, or any context needing a more granular hour-level figure from a day-based duration. This tool converts instantly.",
+  },
+  {
+    slug: "weeks-to-days-converter",
+    toolSlug: "time-unit-converter",
+    h1: "Weeks to Days Converter",
+    subtitle: "Convert Weeks to Days Instantly",
+    metaTitle: "Weeks to Days Converter — Free Online Tool",
+    metaDescription:
+      "Free weeks to days converter. Convert any number of weeks into exact days instantly.",
+    introParagraph:
+      "Converting a duration given in weeks into days is a simple but routine conversion for scheduling, pregnancy tracking, or project timeline planning. This tool converts instantly.",
+  },
+  {
+    slug: "hours-to-days-converter",
+    toolSlug: "time-unit-converter",
+    h1: "Hours to Days Converter",
+    subtitle: "Convert Hours to Days Instantly",
+    metaTitle: "Hours to Days Converter — Free Online Tool",
+    metaDescription:
+      "Free hours to days converter. Convert a total hours figure into days and remaining hours instantly.",
+    introParagraph:
+      "Converting a large hours total — from a work log, a flight duration, or a project estimate — into a more readable days figure is a routine conversion. This tool converts instantly.",
+  },
+  {
+    slug: "psi-to-bar-converter",
+    toolSlug: "pressure-converter",
+    h1: "PSI to Bar Converter",
+    subtitle: "Convert PSI to Bar Instantly",
+    metaTitle: "PSI to Bar Converter — Free Online Tool",
+    metaDescription:
+      "Free PSI to bar converter. Convert tire pressure or other PSI readings into bar instantly with exact precision.",
+    introParagraph:
+      "Converting PSI to bar is routine for anyone checking a tire pressure spec or gauge reading from a US source against the bar unit used across most of Europe. This tool converts instantly with exact precision.",
+  },
+  {
+    slug: "bar-to-psi-converter",
+    toolSlug: "pressure-converter",
+    h1: "Bar to PSI Converter",
+    subtitle: "Convert Bar to PSI Instantly",
+    metaTitle: "Bar to PSI Converter — Free Online Tool",
+    metaDescription:
+      "Free bar to PSI converter. Convert a bar pressure reading into PSI instantly, useful for tire pressure and equipment specifications.",
+    introParagraph:
+      "Converting bar to PSI is useful for comparing a European pressure specification — tire pressure, equipment rating — against the PSI convention common in the US. This tool converts instantly with exact precision.",
+  },
+  {
+    slug: "atm-to-psi-converter",
+    toolSlug: "pressure-converter",
+    h1: "ATM to PSI Converter",
+    subtitle: "Convert Atmospheres to PSI Instantly",
+    metaTitle: "ATM to PSI Converter — Free Online Tool",
+    metaDescription:
+      "Free atmospheres to PSI converter. Convert standard atmosphere pressure units into PSI instantly with exact precision.",
+    introParagraph:
+      "Converting atmospheres to PSI is common in scientific and engineering contexts working with the standard atmosphere reference pressure alongside the more everyday PSI unit. This tool converts instantly.",
+  },
+  {
+    slug: "kpa-to-psi-converter",
+    toolSlug: "pressure-converter",
+    h1: "kPa to PSI Converter",
+    subtitle: "Convert Kilopascals to PSI Instantly",
+    metaTitle: "kPa to PSI Converter — Free Online Tool",
+    metaDescription:
+      "Free kPa to PSI converter. Convert kilopascal pressure readings into PSI instantly with exact precision.",
+    introParagraph:
+      "Converting kilopascals to PSI is routine for checking a metric pressure specification (common on tire sidewalls and equipment ratings outside the US) against the PSI unit. This tool converts instantly.",
+  },
+  {
+    slug: "calories-to-joules-converter",
+    toolSlug: "energy-converter",
+    h1: "Calories to Joules Converter",
+    subtitle: "Convert Calories to Joules Instantly",
+    metaTitle: "Calories to Joules Converter — Free Online Tool",
+    metaDescription:
+      "Free calories to joules converter. Convert calories to joules instantly using the exact 4.184 joules per calorie definition.",
+    introParagraph:
+      "Converting calories to joules is a routine step in physics and chemistry coursework, since joules are the SI standard energy unit while calories remain common in other contexts. This tool converts instantly with exact precision.",
+  },
+  {
+    slug: "kwh-to-joules-converter",
+    toolSlug: "energy-converter",
+    h1: "kWh to Joules Converter",
+    subtitle: "Convert Kilowatt-Hours to Joules Instantly",
+    metaTitle: "kWh to Joules Converter — Free Online Tool",
+    metaDescription:
+      "Free kWh to joules converter. Convert kilowatt-hours (from an electricity bill) into joules instantly with exact precision.",
+    introParagraph:
+      "Converting kilowatt-hours to joules is useful for translating an electricity bill's usage figure into the SI standard energy unit for scientific or engineering calculations. This tool converts instantly.",
+  },
+  {
+    slug: "kcal-to-kj-converter",
+    toolSlug: "energy-converter",
+    h1: "kcal to kJ Converter",
+    subtitle: "Convert Kilocalories to Kilojoules Instantly",
+    metaTitle: "kcal to kJ Converter — Free Online Tool",
+    metaDescription:
+      "Free kcal to kJ converter. Convert food energy from kilocalories to kilojoules instantly, matching how many nutrition labels show both.",
+    introParagraph:
+      "Many nutrition labels outside the US show both kilocalories and kilojoules, and converting between them is useful for comparing food energy figures reported in only one of the two units. This tool converts instantly.",
+  },
+  {
+    slug: "btu-to-joules-converter",
+    toolSlug: "energy-converter",
+    h1: "BTU to Joules Converter",
+    subtitle: "Convert BTU to Joules Instantly",
+    metaTitle: "BTU to Joules Converter — Free Online Tool",
+    metaDescription:
+      "Free BTU to joules converter. Convert British Thermal Units into joules instantly with exact precision.",
+    introParagraph:
+      "Converting BTU (common in HVAC equipment ratings) into joules is useful for engineering calculations requiring the SI standard energy unit. This tool converts instantly with exact precision.",
+  },
+  {
+    slug: "watts-to-horsepower-converter",
+    toolSlug: "power-converter",
+    h1: "Watts to Horsepower Converter",
+    subtitle: "Convert Watts to Horsepower Instantly",
+    metaTitle: "Watts to Horsepower Converter — Free Online Tool",
+    metaDescription:
+      "Free watts to horsepower converter. Convert a watt power rating into horsepower instantly with exact precision.",
+    introParagraph:
+      "Converting watts to horsepower is useful for comparing an electric motor's power rating (typically in watts) against a traditional engine's horsepower figure. This tool converts instantly with exact precision.",
+  },
+  {
+    slug: "horsepower-to-watts-converter",
+    toolSlug: "power-converter",
+    h1: "Horsepower to Watts Converter",
+    subtitle: "Convert Horsepower to Watts Instantly",
+    metaTitle: "Horsepower to Watts Converter — Free Online Tool",
+    metaDescription:
+      "Free horsepower to watts converter. Convert a horsepower rating into watts instantly with exact precision.",
+    introParagraph:
+      "Converting horsepower to watts is useful for comparing a traditional engine's power rating against an electric motor's wattage, or for general physics and engineering power calculations. This tool converts instantly.",
+  },
+  {
+    slug: "kw-to-hp-converter",
+    toolSlug: "power-converter",
+    h1: "kW to HP Converter",
+    subtitle: "Convert Kilowatts to Horsepower Instantly",
+    metaTitle: "kW to HP Converter — Free Online Tool",
+    metaDescription:
+      "Free kW to HP converter. Convert a kilowatt power rating into horsepower instantly, useful for comparing EV and combustion engine power figures.",
+    introParagraph:
+      "Converting kilowatts to horsepower is routine for comparing an electric vehicle's kW power rating against a traditional combustion engine's horsepower spec. This tool converts instantly with exact precision.",
+  },
+  {
+    slug: "hp-to-kw-converter",
+    toolSlug: "power-converter",
+    h1: "HP to kW Converter",
+    subtitle: "Convert Horsepower to Kilowatts Instantly",
+    metaTitle: "HP to kW Converter — Free Online Tool",
+    metaDescription:
+      "Free HP to kW converter. Convert a horsepower rating into kilowatts instantly with exact precision.",
+    introParagraph:
+      "Converting horsepower to kilowatts is useful for comparing a vehicle or equipment's traditional horsepower rating against the metric kilowatt unit used in many international specifications. This tool converts instantly.",
+  },
+  {
+    slug: "degrees-to-radians-converter",
+    toolSlug: "angle-converter",
+    h1: "Degrees to Radians Converter",
+    subtitle: "Convert Degrees to Radians Instantly",
+    metaTitle: "Degrees to Radians Converter — Free Online Tool",
+    metaDescription:
+      "Free degrees to radians converter. Convert degrees to radians instantly, essential for programming trigonometric functions correctly.",
+    introParagraph:
+      "Converting degrees to radians is essential before using most programming languages' built-in trig functions, which expect radian input rather than degrees. This tool converts instantly with exact precision.",
+  },
+  {
+    slug: "radians-to-degrees-converter",
+    toolSlug: "angle-converter",
+    h1: "Radians to Degrees Converter",
+    subtitle: "Convert Radians to Degrees Instantly",
+    metaTitle: "Radians to Degrees Converter — Free Online Tool",
+    metaDescription:
+      "Free radians to degrees converter. Convert a radian angle value into more intuitive degrees instantly.",
+    introParagraph:
+      "Converting radians to degrees is useful for making a mathematical or programming output more intuitively readable, since degrees are the everyday-familiar angle unit compared to the more abstract radian. This tool converts instantly.",
+  },
+  {
+    slug: "degrees-to-gradians-converter",
+    toolSlug: "angle-converter",
+    h1: "Degrees to Gradians Converter",
+    subtitle: "Convert Degrees to Gradians Instantly",
+    metaTitle: "Degrees to Gradians Converter — Free Online Tool",
+    metaDescription:
+      "Free degrees to gradians converter. Convert degrees to gradians instantly, useful for surveying and some European engineering contexts.",
+    introParagraph:
+      "Converting degrees to gradians is occasionally needed in surveying and certain European engineering contexts that still use the gradian's metric-friendly 400-per-circle system. This tool converts instantly.",
+  },
+  {
+    slug: "arcminutes-to-degrees-converter",
+    toolSlug: "angle-converter",
+    h1: "Arcminutes to Degrees Converter",
+    subtitle: "Convert Arcminutes to Degrees Instantly",
+    metaTitle: "Arcminutes to Degrees Converter — Free Online Tool",
+    metaDescription:
+      "Free arcminutes to degrees converter. Convert arcminute angle measurements into degrees instantly, useful for astronomy and navigation.",
+    introParagraph:
+      "Converting arcminutes to degrees is useful in astronomy and precise navigation contexts, where fine angular measurements are reported in arcminutes and need converting into the more familiar degree unit. This tool converts instantly.",
+  },
+  {
+    slug: "mpg-to-l100km-converter",
+    toolSlug: "fuel-consumption-converter",
+    h1: "MPG to L/100km Converter",
+    subtitle: "Convert MPG to Liters per 100km Instantly",
+    metaTitle: "MPG to L/100km Converter — Free Online Tool",
+    metaDescription:
+      "Free MPG to L/100km converter. Convert a US or UK MPG fuel efficiency rating into the European L/100km standard instantly.",
+    introParagraph:
+      "Converting MPG to L/100km is useful for comparing a US or UK vehicle's fuel efficiency rating against the European convention, remembering that the relationship is inverse — lower L/100km means better efficiency. This tool converts correctly and instantly.",
+  },
+  {
+    slug: "l100km-to-mpg-converter",
+    toolSlug: "fuel-consumption-converter",
+    h1: "L/100km to MPG Converter",
+    subtitle: "Convert Liters per 100km to MPG Instantly",
+    metaTitle: "L/100km to MPG Converter — Free Online Tool",
+    metaDescription:
+      "Free L/100km to MPG converter. Convert a European fuel efficiency rating into US or UK MPG instantly with the correct inverse calculation.",
+    introParagraph:
+      "Converting a European car's L/100km rating into MPG makes the figure more intuitive for US or UK buyers used to the miles-per-gallon convention. This tool applies the correct inverse-relationship math instantly.",
+  },
+  {
+    slug: "mpg-to-kml-converter",
+    toolSlug: "fuel-consumption-converter",
+    h1: "MPG to KM/L Converter",
+    subtitle: "Convert MPG to Kilometers per Liter Instantly",
+    metaTitle: "MPG to KM/L Converter — Free Online Tool",
+    metaDescription:
+      "Free MPG to km/L converter. Convert miles per gallon into kilometers per liter instantly, the fuel efficiency unit common in parts of Asia.",
+    introParagraph:
+      "Converting MPG to km/L is useful for comparing a US or UK fuel efficiency figure against the kilometers-per-liter convention common in several Asian markets. This tool converts instantly with exact precision.",
+  },
+  {
+    slug: "us-mpg-to-uk-mpg-converter",
+    toolSlug: "fuel-consumption-converter",
+    h1: "US MPG to UK MPG Converter",
+    subtitle: "Convert US MPG to UK (Imperial) MPG Instantly",
+    metaTitle: "US MPG to UK MPG Converter — Free Online Tool",
+    metaDescription:
+      "Free US to UK MPG converter. Convert US miles-per-gallon into UK (Imperial gallon) MPG instantly — the two use different gallon sizes.",
+    introParagraph:
+      "US and UK MPG aren't directly comparable without conversion, since the US gallon and the UK Imperial gallon are genuinely different sizes — the same real fuel efficiency produces different MPG numbers in each system. This tool converts correctly between them.",
+  },
+  {
+    slug: "cups-to-tablespoons-converter",
+    toolSlug: "cooking-measurement-converter",
+    h1: "Cups to Tablespoons Converter",
+    subtitle: "Convert Cups to Tablespoons Instantly",
+    metaTitle: "Cups to Tablespoons Converter — Free Online Tool",
+    metaDescription:
+      "Free cups to tablespoons converter. Convert cup measurements into exact tablespoons instantly, useful for scaling down a recipe.",
+    introParagraph:
+      "Converting cups to tablespoons is useful when scaling down a recipe to a smaller batch, or when a recipe calls for a fraction of a cup that's easier to measure out in tablespoons. This tool converts instantly with exact precision.",
+  },
+  {
+    slug: "tablespoons-to-teaspoons-converter",
+    toolSlug: "cooking-measurement-converter",
+    h1: "Tablespoons to Teaspoons Converter",
+    subtitle: "Convert Tablespoons to Teaspoons Instantly",
+    metaTitle: "Tablespoons to Teaspoons Converter — Free Online Tool",
+    metaDescription:
+      "Free tablespoons to teaspoons converter. Convert tablespoon measurements into exact teaspoons instantly — 1 tbsp equals exactly 3 tsp.",
+    introParagraph:
+      "Converting tablespoons to teaspoons is a routine small-scale recipe conversion, especially useful when halving or adjusting a recipe that calls for a specific tablespoon fraction. This tool converts instantly with exact precision.",
+  },
+  {
+    slug: "cups-to-ml-converter",
+    toolSlug: "cooking-measurement-converter",
+    h1: "Cups to ML Converter",
+    subtitle: "Convert Cups to Milliliters Instantly",
+    metaTitle: "Cups to ML Converter — Free Online Tool",
+    metaDescription:
+      "Free cups to milliliters converter. Convert US cup recipe measurements into exact milliliters instantly for metric measuring tools.",
+    introParagraph:
+      "Converting cups to milliliters is useful for following a US recipe with a metric measuring set, or converting a recipe for use in a country that measures cooking ingredients in milliliters instead. This tool converts instantly.",
+  },
+  {
+    slug: "oz-to-cups-converter",
+    toolSlug: "cooking-measurement-converter",
+    h1: "OZ to Cups Converter",
+    subtitle: "Convert Fluid Ounces to Cups Instantly",
+    metaTitle: "OZ to Cups Converter — Free Online Tool",
+    metaDescription:
+      "Free fluid ounces to cups converter. Convert fluid ounce measurements into cups instantly, useful for recipes and beverage container sizes.",
+    introParagraph:
+      "Converting fluid ounces to cups is useful when a recipe or product label specifies fluid ounces but your measuring tools are marked in cups, or vice versa. This tool converts instantly with exact precision.",
+  },
+  {
+    slug: "us-to-uk-shoe-size-converter",
+    toolSlug: "shoe-size-converter",
+    h1: "US to UK Shoe Size Converter",
+    subtitle: "Convert US Shoe Sizes to UK Sizes",
+    metaTitle: "US to UK Shoe Size Converter — Free Online Tool",
+    metaDescription:
+      "Free US to UK shoe size converter. Convert US men's or women's shoe sizes into their UK equivalent using standard sizing reference charts.",
+    introParagraph:
+      "Converting a US shoe size to its UK equivalent is essential before ordering shoes from a UK retailer, since the two countries use genuinely different size numbering. This tool converts using standard published sizing charts for both men's and women's sizes.",
+  },
+  {
+    slug: "us-to-eu-shoe-size-converter",
+    toolSlug: "shoe-size-converter",
+    h1: "US to EU Shoe Size Converter",
+    subtitle: "Convert US Shoe Sizes to EU Sizes",
+    metaTitle: "US to EU Shoe Size Converter — Free Online Tool",
+    metaDescription:
+      "Free US to EU shoe size converter. Convert US men's or women's shoe sizes into their EU equivalent for shopping European shoe brands.",
+    introParagraph:
+      "Converting a US shoe size to EU sizing is essential for ordering from a European shoe brand or retailer, since EU sizes follow a completely different numbering scale than US sizes. This tool converts using standard published sizing charts.",
+  },
+  {
+    slug: "eu-to-us-shoe-size-converter",
+    toolSlug: "shoe-size-converter",
+    h1: "EU to US Shoe Size Converter",
+    subtitle: "Convert EU Shoe Sizes to US Sizes",
+    metaTitle: "EU to US Shoe Size Converter — Free Online Tool",
+    metaDescription:
+      "Free EU to US shoe size converter. Convert a European shoe size label into its US men's or women's equivalent using standard sizing charts.",
+    introParagraph:
+      "Converting an EU shoe size into US sizing is useful when a European shoe brand's labeled size needs translating for a US shopper. This tool converts using standard published sizing reference charts for both men's and women's sizes.",
+  },
+  {
+    slug: "mens-shoe-size-chart",
+    toolSlug: "shoe-size-converter",
+    h1: "Men's Shoe Size Chart Converter",
+    subtitle: "Convert Men's Shoe Sizes Across US, UK & EU",
+    metaTitle: "Men's Shoe Size Chart — Free Online Converter",
+    metaDescription:
+      "Free men's shoe size chart converter. Convert men's US shoe sizes into UK and EU equivalents instantly using standard sizing reference data.",
+    introParagraph:
+      "Men's shoe sizing follows its own numbering convention distinct from women's sizing, and this tool's men's category converts across US, UK, and EU systems specifically for that sizing scale, based on standard published charts.",
+  },
+  {
+    slug: "us-to-uk-clothing-size-converter",
+    toolSlug: "clothing-size-converter",
+    h1: "US to UK Clothing Size Converter",
+    subtitle: "Convert US Clothing Sizes to UK Sizes",
+    metaTitle: "US to UK Clothing Size Converter — Free Tool",
+    metaDescription:
+      "Free US to UK clothing size converter. Convert US women's or men's clothing sizes into their UK equivalent using standard sizing reference charts.",
+    introParagraph:
+      "Converting a US clothing size to UK sizing is useful before ordering from a UK retailer, since UK sizes typically run a few numbers higher than the equivalent US size for women's clothing. This tool converts using standard reference charts.",
+  },
+  {
+    slug: "us-to-eu-clothing-size-converter",
+    toolSlug: "clothing-size-converter",
+    h1: "US to EU Clothing Size Converter",
+    subtitle: "Convert US Clothing Sizes to EU Sizes",
+    metaTitle: "US to EU Clothing Size Converter — Free Tool",
+    metaDescription:
+      "Free US to EU clothing size converter. Convert US women's or men's clothing sizes into their EU equivalent for shopping European brands.",
+    introParagraph:
+      "Converting a US clothing size to EU sizing is useful for shopping European fashion brands, since EU sizing uses a different numbering scale than US sizes for both women's and men's clothing. This tool converts using standard reference charts.",
+  },
+  {
+    slug: "womens-size-chart-converter",
+    toolSlug: "clothing-size-converter",
+    h1: "Women's Clothing Size Chart Converter",
+    subtitle: "Convert Women's Clothing Sizes Across US, UK & EU",
+    metaTitle: "Women's Clothing Size Chart — Free Online Tool",
+    metaDescription:
+      "Free women's clothing size chart converter. Convert women's US numeric sizes into UK and EU equivalents instantly.",
+    introParagraph:
+      "Women's clothing sizing follows numeric conventions that differ meaningfully between the US, UK, and EU, and this tool converts across all three using standard published reference chart data specifically for women's sizing.",
+  },
+  {
+    slug: "mens-size-chart-converter",
+    toolSlug: "clothing-size-converter",
+    h1: "Men's Clothing Size Chart Converter",
+    subtitle: "Convert Men's Letter Sizes Across US, UK & EU",
+    metaTitle: "Men's Clothing Size Chart — Free Online Tool",
+    metaDescription:
+      "Free men's clothing size chart converter. Convert men's letter sizes (S/M/L/XL) into chest measurements and EU equivalents instantly.",
+    introParagraph:
+      "Men's clothing is conventionally sized by letter (S, M, L, XL) tied to a chest measurement range, which needs converting to the numeric EU equivalent when shopping European brands. This tool converts using standard reference chart data.",
+  },
+  {
+    slug: "roman-numeral-date-converter",
+    toolSlug: "roman-numeral-converter",
+    h1: "Roman Numeral Date Converter",
+    subtitle: "Convert a Birth Year or Date Into Roman Numerals",
+    metaTitle: "Roman Numeral Date Converter — Free Online Tool",
+    metaDescription:
+      "Free Roman numeral date converter. Convert a birth year, anniversary, or any date's year into Roman numerals — popular for tattoos and gifts.",
+    introParagraph:
+      "Converting a meaningful year — a birth year, a wedding anniversary, a graduation date — into Roman numeral form is a popular choice for tattoos, engraved jewelry, and personalized gifts. This tool converts any year instantly into accurate Roman numeral form.",
+  },
+  {
+    slug: "roman-numeral-generator",
+    toolSlug: "roman-numeral-converter",
+    h1: "Roman Numeral Generator",
+    subtitle: "Generate the Correct Roman Numeral for Any Number",
+    metaTitle: "Roman Numeral Generator — Free Online Tool",
+    metaDescription:
+      "Free Roman numeral generator. Enter any number from 1 to 3999 and instantly generate its correct standard Roman numeral representation.",
+    introParagraph:
+      "Generating a correct Roman numeral for a specific number — for a book chapter, an outline, a formal numbering scheme — means applying the standard additive and subtractive rules correctly. This tool generates the exact standard representation instantly.",
+  },
+  {
+    slug: "roman-numeral-translator",
+    toolSlug: "roman-numeral-converter",
+    h1: "Roman Numeral Translator",
+    subtitle: "Translate Roman Numerals Back Into Regular Numbers",
+    metaTitle: "Roman Numeral Translator — Free Online Tool",
+    metaDescription:
+      "Free Roman numeral translator. Enter any Roman numeral to instantly translate it back into its regular Arabic numeral value.",
+    introParagraph:
+      "Translating a Roman numeral seen on a building, clock face, or movie credit back into a regular number requires correctly applying the subtractive notation rules. This tool translates any valid Roman numeral instantly.",
+  },
+  {
+    slug: "current-year-in-roman-numerals",
+    toolSlug: "roman-numeral-converter",
+    h1: "Current Year in Roman Numerals",
+    subtitle: "See This Year Written as a Roman Numeral",
+    metaTitle: "Current Year in Roman Numerals — Free Tool",
+    metaDescription:
+      "Free tool to convert the current year (or any year) into Roman numerals instantly — popular for New Year graphics and formal dating.",
+    introParagraph:
+      "Seeing the current year written out in Roman numeral form is a popular small curiosity, and the same conversion is genuinely useful for formally dating a document, plaque, or design in the classical style. This tool converts any year instantly.",
+  },
+  {
+    slug: "random-number-generator-1-100",
+    toolSlug: "random-number-generator",
+    h1: "Random Number Generator 1 to 100",
+    subtitle: "Pick a Random Number Between 1 and 100",
+    metaTitle: "Random Number Generator 1-100 — Free Tool",
+    metaDescription:
+      "Free random number generator for picking a number between 1 and 100 — the most common range for games, raffles, and quick decisions.",
+    introParagraph:
+      "1 to 100 is the single most requested range for a random number pick — big enough to feel genuinely unpredictable, small enough to write on a raffle ticket. This tool defaults instantly to that range while still letting you adjust it.",
+  },
+  {
+    slug: "random-number-generator-1-10",
+    toolSlug: "random-number-generator",
+    h1: "Random Number Generator 1 to 10",
+    subtitle: "Pick a Random Number Between 1 and 10",
+    metaTitle: "Random Number Generator 1-10 — Free Tool",
+    metaDescription:
+      "Free random number generator for picking a number between 1 and 10 — ideal for quick games, classroom activities, and small drawings.",
+    introParagraph:
+      "A 1-to-10 pick is the classic small-range random draw used in games, classroom warm-ups, and quick either-or-among-a-few decisions. This tool generates it instantly with the range preset and ready to go.",
+  },
+  {
+    slug: "true-random-number-generator",
+    toolSlug: "random-number-generator",
+    h1: "True Random Number Generator",
+    subtitle: "Unbiased Random Numbers for Any Range",
+    metaTitle: "True Random Number Generator — Free Online Tool",
+    metaDescription:
+      "Free true random number generator with an unbiased draw across any minimum-maximum range, with an optional no-duplicates mode.",
+    introParagraph:
+      "People searching for a 'true' random number generator are usually trying to rule out hidden bias or predictable patterns. This tool draws every value in your chosen range with exactly equal probability, with no favoritism toward any number.",
+  },
+  {
+    slug: "raffle-winner-number-picker",
+    toolSlug: "random-number-generator",
+    h1: "Raffle Winner Number Picker",
+    subtitle: "Draw a Random Winning Number for Your Raffle",
+    metaTitle: "Raffle Winner Number Picker — Free Tool",
+    metaDescription:
+      "Free raffle winner picker: enter your ticket number range and draw a fair, random winning number instantly, with an option to draw multiple winners.",
+    introParagraph:
+      "Running a raffle with numbered tickets just needs one fair, unbiased draw from the range of numbers sold. This tool draws it instantly, and the no-duplicates option lets you pick several distinct winners in one pass for multi-prize drawings.",
+  },
+  {
+    slug: "random-number-generator-no-repeats",
+    toolSlug: "random-number-generator",
+    h1: "Random Number Generator With No Repeats",
+    subtitle: "Generate Multiple Unique Random Numbers",
+    metaTitle: "Random Number Generator (No Duplicates) — Free Tool",
+    metaDescription:
+      "Free random number generator that guarantees no repeated numbers across your results — ideal for drawing multiple distinct winners or samples.",
+    introParagraph:
+      "Sometimes a batch of random numbers needs every value to be distinct — drawing several different raffle winners, or a random sample where the same item shouldn't be picked twice. This tool's no-duplicates mode handles that directly.",
+  },
+  {
+    slug: "fake-name-generator",
+    toolSlug: "random-name-generator",
+    h1: "Fake Name Generator",
+    subtitle: "Generate Realistic Fake Names for Testing",
+    metaTitle: "Fake Name Generator — Free Online Tool",
+    metaDescription:
+      "Free fake name generator producing realistic full names with no connection to real people — ideal for test data, mockups, and privacy-safe placeholders.",
+    introParagraph:
+      "'Fake name' is exactly what this generator produces: a random first-and-surname combination that reads as a real person's name while being connected to no one in particular, which is exactly the safety property test data needs.",
+  },
+  {
+    slug: "random-full-name-generator",
+    toolSlug: "random-name-generator",
+    h1: "Random Full Name Generator",
+    subtitle: "Generate a Random First and Last Name",
+    metaTitle: "Random Full Name Generator — Free Tool",
+    metaDescription:
+      "Free random full name generator that pairs a first and last name into a natural-sounding, realistic result — generate up to 50 at once.",
+    introParagraph:
+      "A 'full name' request specifically wants a first name paired with a surname rather than either alone. This tool always returns the complete pairing, batching up to 50 names in one click for populating a full sample list.",
+  },
+  {
+    slug: "test-user-name-generator",
+    toolSlug: "random-name-generator",
+    h1: "Test User Name Generator",
+    subtitle: "Generate Names for Test Accounts and QA Data",
+    metaTitle: "Test User Name Generator — Free Online Tool",
+    metaDescription:
+      "Free test user name generator for QA test accounts, staging databases, and demo environments — realistic names with zero real-person data.",
+    introParagraph:
+      "QA and staging environments need believable-looking user records without ever touching real customer data. This tool generates realistic test user names in bulk, safe to seed into any non-production database.",
+  },
+  {
+    slug: "character-name-generator",
+    toolSlug: "random-name-generator",
+    h1: "Character Name Generator",
+    subtitle: "Generate Random Names for Stories and Games",
+    metaTitle: "Character Name Generator — Free Online Tool",
+    metaDescription:
+      "Free character name generator for fiction writing, tabletop games, and role-play — generate realistic-sounding names instantly.",
+    introParagraph:
+      "Naming a minor character shouldn't stall a writing session. This tool generates realistic-sounding full names on demand, useful for fiction, tabletop RPG NPCs, or any story that needs a quick, natural-feeling name.",
+  },
+  {
+    slug: "baby-name-idea-generator",
+    toolSlug: "random-name-generator",
+    h1: "Baby Name Idea Generator",
+    subtitle: "Get Random First Name Ideas to Explore",
+    metaTitle: "Baby Name Idea Generator — Free Tool",
+    metaDescription:
+      "Free random name idea generator to spark baby name inspiration — generate a batch of first names as a starting point to explore.",
+    introParagraph:
+      "This isn't a curated baby-name database — it's a way to jog loose a name you hadn't considered by generating a batch of common first names at once, useful purely as an inspiration starting point rather than a definitive naming guide.",
+  },
+  {
+    slug: "random-word-generator-for-games",
+    toolSlug: "random-word-generator",
+    h1: "Random Word Generator for Games",
+    subtitle: "Random Word Prompts for Party and Word Games",
+    metaTitle: "Random Word Generator for Games — Free Tool",
+    metaDescription:
+      "Free random word generator built for party games like Taboo, Pictionary, and Scattergories — generate quick word prompts instantly.",
+    introParagraph:
+      "Word games live or die on having a steady supply of fresh prompts. This tool generates a batch of broadly recognizable words in one click, removing the need to flip through a card deck or app for the next round.",
+  },
+  {
+    slug: "word-of-the-day-generator",
+    toolSlug: "random-word-generator",
+    h1: "Word of the Day Generator",
+    subtitle: "Get a Random Word to Learn or Write About",
+    metaTitle: "Word of the Day Generator — Free Online Tool",
+    metaDescription:
+      "Free word-of-the-day generator: pick one random word as a daily vocabulary or journaling prompt.",
+    introParagraph:
+      "A single random word makes a lightweight daily habit prompt — learn it, use it in a sentence, or journal around it. Generate one word at a time for a quick daily pick rather than a full batch.",
+  },
+  {
+    slug: "scattergories-word-generator",
+    toolSlug: "random-word-generator",
+    h1: "Scattergories Word Generator",
+    subtitle: "Generate Random Words for Scattergories-Style Games",
+    metaTitle: "Scattergories Word Generator — Free Tool",
+    metaDescription:
+      "Free word generator for Scattergories-style category and word games — generate a fresh batch of random words for every round.",
+    introParagraph:
+      "Scattergories-style games move fast and burn through prompts quickly. This tool generates a fresh batch of random words per round, so the game keeps moving without anyone having to think one up.",
+  },
+  {
+    slug: "vocabulary-word-generator",
+    toolSlug: "random-word-generator",
+    h1: "Vocabulary Word Generator",
+    subtitle: "Generate Random Words for Vocabulary Practice",
+    metaTitle: "Vocabulary Word Generator — Free Online Tool",
+    metaDescription:
+      "Free vocabulary word generator for language learning and vocabulary drills — generate a random batch of words to study or define.",
+    introParagraph:
+      "Practicing vocabulary against a random word set beats reviewing the same fixed list every time, since it forces genuine recall rather than memorized order. Generate a batch and use them for definitions, sentences, or translation practice.",
+  },
+  {
+    slug: "random-noun-generator",
+    toolSlug: "random-word-generator",
+    h1: "Random Noun Generator",
+    subtitle: "Generate Random Nouns Instantly",
+    metaTitle: "Random Noun Generator — Free Online Tool",
+    metaDescription:
+      "Free random noun generator producing a batch of concrete, recognizable nouns — useful for writing prompts, games, and naming brainstorms.",
+    introParagraph:
+      "The word list behind this generator leans heavily on concrete nouns, which makes it a solid fit whenever specifically a noun (rather than any part of speech) is what a game or prompt calls for.",
+  },
+  {
+    slug: "random-sentence-generator-for-typing-practice",
+    toolSlug: "random-sentence-generator",
+    h1: "Random Sentence Generator for Typing Practice",
+    subtitle: "Varied Random Sentences for Typing Drills",
+    metaTitle: "Typing Practice Sentence Generator — Free Tool",
+    metaDescription:
+      "Free random sentence generator built for typing practice — varied grammatically valid sentences instead of repeating the same fixed text.",
+    introParagraph:
+      "Typing drills built on the same repeated paragraph get memorized instead of practiced. This tool generates a fresh, grammatically valid random sentence every time, keeping practice genuinely testing your typing rather than your memory.",
+  },
+  {
+    slug: "example-sentence-generator",
+    toolSlug: "random-sentence-generator",
+    h1: "Example Sentence Generator",
+    subtitle: "Generate a Random Example Sentence Instantly",
+    metaTitle: "Example Sentence Generator — Free Online Tool",
+    metaDescription:
+      "Free example sentence generator for quickly producing sample sentence text for demos, forms, and documentation.",
+    introParagraph:
+      "Needing a quick example sentence to demo a form field, illustrate formatting, or fill a placeholder is common enough that writing one by hand each time is wasted effort. This tool produces a fresh valid sentence in one click.",
+  },
+  {
+    slug: "story-starter-sentence-generator",
+    toolSlug: "random-sentence-generator",
+    h1: "Story Starter Sentence Generator",
+    subtitle: "Random Sentences as Creative Writing Prompts",
+    metaTitle: "Story Starter Generator — Free Online Tool",
+    metaDescription:
+      "Free story starter generator: get a random sentence as a creative writing prompt to spark freewriting or a short story.",
+    introParagraph:
+      "An unexpected random sentence — a strange subject doing a strange action — can be exactly the spark freewriting needs to get past a blank page. This tool generates one instantly as a story-starting prompt.",
+  },
+  {
+    slug: "grammar-practice-sentence-generator",
+    toolSlug: "random-sentence-generator",
+    h1: "Grammar Practice Sentence Generator",
+    subtitle: "Random Sentences for Grammar and Language Practice",
+    metaTitle: "Grammar Practice Sentence Generator — Free Tool",
+    metaDescription:
+      "Free grammar practice tool: generate random valid English sentences to parse, translate, or diagram for language learning.",
+    introParagraph:
+      "Grammar practice — parsing sentence structure, identifying parts of speech, or translation drills — works better against varied sentences than the same textbook examples repeated. This tool supplies a fresh one on demand.",
+  },
+  {
+    slug: "random-english-sentence-generator",
+    toolSlug: "random-sentence-generator",
+    h1: "Random English Sentence Generator",
+    subtitle: "Generate Random Grammatically Valid English Sentences",
+    metaTitle: "Random English Sentence Generator — Free Tool",
+    metaDescription:
+      "Free random English sentence generator producing grammatically valid sentences from varied subjects, verbs, and objects.",
+    introParagraph:
+      "This tool assembles genuinely varied English sentences from independent word pools rather than pulling from a small fixed list, so repeated generations stay fresh rather than cycling through the same handful of results.",
+  },
+  {
+    slug: "flip-a-coin",
+    toolSlug: "coin-flip",
+    h1: "Flip a Coin",
+    subtitle: "Flip a Virtual Coin for a Fast 50/50 Decision",
+    metaTitle: "Flip a Coin Online — Free Tool",
+    metaDescription:
+      "Flip a coin online instantly — a free, fair virtual coin toss for any quick heads-or-tails decision.",
+    introParagraph:
+      "'Flip a coin' is one of the most searched quick-decision phrases online, and this does exactly that: an unbiased 50/50 virtual toss with a short animation, ready whenever a physical coin isn't at hand.",
+  },
+  {
+    slug: "heads-or-tails-generator",
+    toolSlug: "coin-flip",
+    h1: "Heads or Tails Generator",
+    subtitle: "Get a Random Heads or Tails Result Instantly",
+    metaTitle: "Heads or Tails Generator — Free Online Tool",
+    metaDescription:
+      "Free heads or tails generator — an instant, unbiased virtual coin flip for settling quick decisions.",
+    introParagraph:
+      "Whether you call it heads-or-tails or a coin flip, the mechanic is the same: a genuinely random 50/50 pick between two outcomes. This tool runs it instantly with a satisfying flip animation.",
+  },
+  {
+    slug: "virtual-coin-toss",
+    toolSlug: "coin-flip",
+    h1: "Virtual Coin Toss",
+    subtitle: "Toss a Virtual Coin Online",
+    metaTitle: "Virtual Coin Toss — Free Online Tool",
+    metaDescription:
+      "Free virtual coin toss tool with a genuinely random 50/50 result and running heads/tails stats for your session.",
+    introParagraph:
+      "A virtual coin toss needs to actually behave like a fair coin, not just look like one — this tool draws a genuinely random outcome on every toss and tracks your session's heads/tails totals as proof of the balance.",
+  },
+  {
+    slug: "coin-flip-simulator",
+    toolSlug: "coin-flip",
+    h1: "Coin Flip Simulator",
+    subtitle: "Simulate Coin Flips for Probability Demonstrations",
+    metaTitle: "Coin Flip Simulator — Free Online Tool",
+    metaDescription:
+      "Free coin flip simulator for classroom probability lessons — flip repeatedly and watch the heads/tails split converge toward 50/50.",
+    introParagraph:
+      "Simulating many coin flips is a classic, hands-on way to demonstrate probability convergence — a small number of flips can look uneven, but the running totals shown here trend toward an even split the more you flip.",
+  },
+  {
+    slug: "random-coin-flipper",
+    toolSlug: "coin-flip",
+    h1: "Random Coin Flipper",
+    subtitle: "A Simple Random Coin Flip Tool",
+    metaTitle: "Random Coin Flipper — Free Online Tool",
+    metaDescription:
+      "Free random coin flipper for any quick 50/50 decision — no app download, works instantly in your browser.",
+    introParagraph:
+      "No download, no app — just an instant, genuinely random coin flip in the browser whenever a quick fair decision is needed.",
+  },
+  {
+    slug: "roll-a-d20",
+    toolSlug: "dice-roller",
+    h1: "Roll a D20",
+    subtitle: "Roll a Virtual 20-Sided Die",
+    metaTitle: "Roll a D20 Online — Free Dice Roller",
+    metaDescription:
+      "Free d20 dice roller for tabletop RPGs — roll a virtual 20-sided die with a genuinely uniform result across all 20 faces.",
+    introParagraph:
+      "The d20 is the workhorse die of tabletop RPGs like D&D, used for attack rolls, skill checks, and saving throws. This tool rolls one instantly with every face from 1 to 20 exactly equally likely.",
+  },
+  {
+    slug: "roll-a-d6",
+    toolSlug: "dice-roller",
+    h1: "Roll a D6",
+    subtitle: "Roll a Virtual 6-Sided Die",
+    metaTitle: "Roll a D6 Online — Free Dice Roller",
+    metaDescription:
+      "Free d6 dice roller — roll one or several virtual 6-sided dice, with the total shown automatically for multiple dice.",
+    introParagraph:
+      "The standard 6-sided die is the most common die in board games worldwide. This tool rolls one or several at once, adding up the total automatically when a game calls for combined dice results.",
+  },
+  {
+    slug: "dnd-dice-roller",
+    toolSlug: "dice-roller",
+    h1: "D&D Dice Roller",
+    subtitle: "Roll All the Dice Types D&D Uses",
+    metaTitle: "D&D Dice Roller — Free Online Tool",
+    metaDescription:
+      "Free D&D dice roller covering every polyhedral die a tabletop RPG session needs: d4, d6, d8, d10, d12, and d20.",
+    introParagraph:
+      "A full D&D session needs the whole set of polyhedral dice — d4 through d20 — for different rolls. This tool covers every die type a tabletop RPG session needs in one place, with no physical dice required.",
+  },
+  {
+    slug: "virtual-dice-roller",
+    toolSlug: "dice-roller",
+    h1: "Virtual Dice Roller",
+    subtitle: "Roll Virtual Dice of Any Common Type",
+    metaTitle: "Virtual Dice Roller — Free Online Tool",
+    metaDescription:
+      "Free virtual dice roller supporting d4 through d100 — roll up to 20 dice at once with the total calculated automatically.",
+    introParagraph:
+      "This virtual dice roller covers every common die type — d4, d6, d8, d10, d12, d20, and d100 — with uniform, unbiased results across every face, exactly matching a fair physical die's behavior.",
+  },
+  {
+    slug: "rpg-dice-roller",
+    toolSlug: "dice-roller",
+    h1: "RPG Dice Roller",
+    subtitle: "Roll Dice for Any Tabletop Role-Playing Game",
+    metaTitle: "RPG Dice Roller — Free Online Tool",
+    metaDescription:
+      "Free RPG dice roller for tabletop role-playing sessions — roll any polyhedral die type, individually or in multiples, with totals shown.",
+    introParagraph:
+      "Beyond D&D, plenty of tabletop RPG systems lean on different die types and dice-pool mechanics. This roller covers the full standard polyhedral set, making it useful across most tabletop RPG systems, not just one.",
+  },
+  {
+    slug: "random-birthday-generator",
+    toolSlug: "random-date-generator",
+    h1: "Random Birthday Generator",
+    subtitle: "Generate Random Birthdates for Test Data",
+    metaTitle: "Random Birthday Generator — Free Online Tool",
+    metaDescription:
+      "Free random birthday generator producing realistic random birthdates within any year range — ideal for test profiles and sample data.",
+    introParagraph:
+      "Test profiles need a birthdate field populated with something realistic but disconnected from any real person. Set a year range (say, spanning realistic adult ages) and generate random birthdates within it in bulk.",
+  },
+  {
+    slug: "random-date-in-a-range-generator",
+    toolSlug: "random-date-generator",
+    h1: "Random Date in a Range Generator",
+    subtitle: "Pick a Random Date Between Two Dates",
+    metaTitle: "Random Date in a Range — Free Online Tool",
+    metaDescription:
+      "Free tool to generate a random date between any two dates you choose, with every day in the range equally likely.",
+    introParagraph:
+      "Constraining a random date to a specific window — this quarter, this decade, a specific event's timeframe — is the most common real use case, which is exactly what the configurable start/end range here is built for.",
+  },
+  {
+    slug: "test-data-date-generator",
+    toolSlug: "random-date-generator",
+    h1: "Test Data Date Generator",
+    subtitle: "Generate Random Dates for Database Testing",
+    metaTitle: "Test Data Date Generator — Free Tool",
+    metaDescription:
+      "Free date generator for seeding test databases and QA environments with varied, realistic date field values.",
+    introParagraph:
+      "A test database with every date field set to the same value hides bugs that only show up with varied dates — sorting, filtering, and range queries all need genuinely different values to test properly. This generates a batch in one click.",
+  },
+  {
+    slug: "random-appointment-date-generator",
+    toolSlug: "random-date-generator",
+    h1: "Random Appointment Date Generator",
+    subtitle: "Generate Sample Appointment or Booking Dates",
+    metaTitle: "Random Appointment Date Generator — Free Tool",
+    metaDescription:
+      "Free tool to generate random sample appointment or booking dates within a chosen range, for demos and mockups.",
+    introParagraph:
+      "A booking or scheduling app demo looks more convincing with varied appointment dates rather than the same repeated placeholder. Set a realistic booking window and generate a batch of sample dates instantly.",
+  },
+  {
+    slug: "pick-a-random-date",
+    toolSlug: "random-date-generator",
+    h1: "Pick a Random Date",
+    subtitle: "Get a Single Random Date Between Two Dates",
+    metaTitle: "Pick a Random Date — Free Online Tool",
+    metaDescription:
+      "Free tool to pick one random date between a start and end date you set — quick and unbiased.",
+    introParagraph:
+      "Sometimes you just need one date — for a giveaway drawing tied to a calendar, or to randomly assign a due date within a window. Set your range and generate a single unbiased pick.",
+  },
+  {
+    slug: "random-team-picker",
+    toolSlug: "random-team-generator",
+    h1: "Random Team Picker",
+    subtitle: "Randomly Split a Name List Into Teams",
+    metaTitle: "Random Team Picker — Free Online Tool",
+    metaDescription:
+      "Free random team picker: paste your list of names and split it into evenly sized, randomly shuffled teams instantly.",
+    introParagraph:
+      "'Team picker' is exactly the searched phrase for this task: paste a full list of names, choose how many teams, and get an instantly shuffled, evenly distributed split with no manual sorting.",
+  },
+  {
+    slug: "split-into-groups-generator",
+    toolSlug: "random-team-generator",
+    h1: "Split Into Groups Generator",
+    subtitle: "Randomly Divide a List Into Any Number of Groups",
+    metaTitle: "Split Into Groups Generator — Free Tool",
+    metaDescription:
+      "Free tool to randomly split a list of names into any number of even groups — useful for classroom projects and workshops.",
+    introParagraph:
+      "Splitting a roster into groups for a project or workshop activity needs both fairness and even sizing. This tool shuffles the list and divides it round-robin across however many groups you specify.",
+  },
+  {
+    slug: "class-group-generator",
+    toolSlug: "random-team-generator",
+    h1: "Class Group Generator",
+    subtitle: "Randomly Assign Students to Project Groups",
+    metaTitle: "Class Group Generator — Free Online Tool",
+    metaDescription:
+      "Free class group generator for teachers: randomly split a student name list into fair, evenly sized project groups.",
+    introParagraph:
+      "Assigning classroom project groups by hand invites accusations of favoritism no matter how it's done. A random, verifiably impartial shuffle removes that friction entirely — paste the roster and generate the groups.",
+  },
+  {
+    slug: "sports-team-randomizer",
+    toolSlug: "random-team-generator",
+    h1: "Sports Team Randomizer",
+    subtitle: "Randomly Split Players Into Fair Teams",
+    metaTitle: "Sports Team Randomizer — Free Online Tool",
+    metaDescription:
+      "Free sports team randomizer: split a list of players into evenly sized, randomly shuffled teams for pickup games.",
+    introParagraph:
+      "Pickup games and casual sports leagues need quick, fair team splits without a captain's draft turning into a whole production. Paste the player list, pick the number of teams, and get a random even split.",
+  },
+  {
+    slug: "work-team-randomizer",
+    toolSlug: "random-team-generator",
+    h1: "Work Team Randomizer",
+    subtitle: "Randomly Assign Coworkers to Teams",
+    metaTitle: "Work Team Randomizer — Free Online Tool",
+    metaDescription:
+      "Free work team randomizer for team-building activities and office events — split a coworker list into random, even teams.",
+    introParagraph:
+      "Office team-building activities and events go smoother when team assignment is visibly random rather than manually arranged, which can read as playing favorites. This shuffles a coworker list into fair, even teams instantly.",
+  },
+  {
+    slug: "yes-or-no-generator",
+    toolSlug: "yes-no-decision-maker",
+    h1: "Yes or No Generator",
+    subtitle: "Get an Instant Random Yes or No Answer",
+    metaTitle: "Yes or No Generator — Free Online Tool",
+    metaDescription:
+      "Free yes or no generator for instant random answers to any yes-no question — perfect for quick, low-stakes decisions.",
+    introParagraph:
+      "'Yes or no generator' is a direct, honest description of what this does: a genuinely random, unbiased answer to whatever binary question you're stuck deciding, delivered instantly.",
+  },
+  {
+    slug: "random-decision-maker",
+    toolSlug: "yes-no-decision-maker",
+    h1: "Random Decision Maker",
+    subtitle: "Let Random Chance Settle a Quick Decision",
+    metaTitle: "Random Decision Maker — Free Online Tool",
+    metaDescription:
+      "Free random decision maker for quick yes-no-maybe choices — a lighthearted way to short-circuit overthinking on low-stakes decisions.",
+    introParagraph:
+      "For decisions where either outcome is genuinely fine, more deliberation just wastes time. This tool hands the choice to pure chance instead, complete with an optional Maybe for genuinely undecided situations.",
+  },
+  {
+    slug: "magic-8-ball-alternative",
+    toolSlug: "yes-no-decision-maker",
+    h1: "Magic 8-Ball Alternative",
+    subtitle: "A Browser-Based Yes-No-Maybe Answer Tool",
+    metaTitle: "Magic 8-Ball Alternative — Free Online Tool",
+    metaDescription:
+      "Free browser-based alternative to a Magic 8-Ball toy — instant random yes, no, or maybe answers for fun, low-stakes questions.",
+    introParagraph:
+      "The classic Magic 8-Ball toy runs on the same idea this tool does: a random answer for a question that doesn't have a real 'right' answer to look up. No physical toy needed — just click Decide.",
+  },
+  {
+    slug: "quick-decision-picker",
+    toolSlug: "yes-no-decision-maker",
+    h1: "Quick Decision Picker",
+    subtitle: "Break Decision Paralysis on Trivial Choices",
+    metaTitle: "Quick Decision Picker — Free Online Tool",
+    metaDescription:
+      "Free quick decision picker for breaking decision paralysis on trivial, low-stakes choices with an instant random yes or no.",
+    introParagraph:
+      "Decision paralysis on a genuinely trivial choice — which of two equally fine options to pick — is solved fastest by removing the choice from your hands entirely. This gives an instant random answer to move on.",
+  },
+  {
+    slug: "yes-no-maybe-generator",
+    toolSlug: "yes-no-decision-maker",
+    h1: "Yes No Maybe Generator",
+    subtitle: "Random Answers Including a Genuine Maybe Option",
+    metaTitle: "Yes No Maybe Generator — Free Online Tool",
+    metaDescription:
+      "Free three-way random answer generator: Yes, No, or Maybe, each equally likely — for when a forced binary feels wrong.",
+    introParagraph:
+      "A strict yes-or-no answer sometimes feels dishonest for a genuinely uncertain question. Turning on the Maybe option adds a third, equally likely outcome instead of forcing a binary pick.",
+  },
+  {
+    slug: "random-country-picker",
+    toolSlug: "random-country-generator",
+    h1: "Random Country Picker",
+    subtitle: "Pick a Random Country From Around the World",
+    metaTitle: "Random Country Picker — Free Online Tool",
+    metaDescription:
+      "Free random country picker spanning every continent — instantly pick a country along with its capital and continent.",
+    introParagraph:
+      "Picking a country 'at random' by thinking of one tends to land on the same handful of famous places. This tool actually draws from a list spanning every continent, surfacing places you might not think of unprompted.",
+  },
+  {
+    slug: "geography-quiz-country-generator",
+    toolSlug: "random-country-generator",
+    h1: "Geography Quiz Country Generator",
+    subtitle: "Generate Random Countries for Geography Quizzes",
+    metaTitle: "Geography Quiz Country Generator — Free Tool",
+    metaDescription:
+      "Free geography quiz tool: generate a random country plus its capital and continent for quiz questions or classroom practice.",
+    introParagraph:
+      "Building geography quiz questions gets easier with a random country generator that already includes the capital and continent — enough context to build a real question without separate lookups.",
+  },
+  {
+    slug: "random-travel-destination-generator",
+    toolSlug: "random-country-generator",
+    h1: "Random Travel Destination Generator",
+    subtitle: "Get a Random Country as a Travel Idea",
+    metaTitle: "Random Travel Destination Generator — Free Tool",
+    metaDescription:
+      "Free random travel destination generator: pick a random country to spark your next trip idea or bucket-list research.",
+    introParagraph:
+      "Deciding where to travel next is easier with a starting point rather than an open-ended list of every country on earth. Generate a random country and let it be the seed for your next research rabbit hole.",
+  },
+  {
+    slug: "country-capital-quiz-generator",
+    toolSlug: "random-country-generator",
+    h1: "Country Capital Quiz Generator",
+    subtitle: "Random Country and Capital Pairs for Quiz Practice",
+    metaTitle: "Country Capital Quiz Generator — Free Tool",
+    metaDescription:
+      "Free country-capital quiz generator: get a random country paired with its capital for quick geography practice.",
+    introParagraph:
+      "Practicing country-capital pairs works best with random, unpredictable order rather than a memorized list sequence. This generates a fresh random pairing every time to keep recall genuine.",
+  },
+  {
+    slug: "pick-a-random-country",
+    toolSlug: "random-country-generator",
+    h1: "Pick a Random Country",
+    subtitle: "Instantly Select One Random Country",
+    metaTitle: "Pick a Random Country — Free Online Tool",
+    metaDescription:
+      "Free tool to instantly pick one random country from a broad, globally representative list spanning every continent.",
+    introParagraph:
+      "A single click here selects one country at random from a curated, globally representative list — a quick, unbiased pick with no regional favoritism baked in.",
+  },
+  {
+    slug: "powerball-number-generator",
+    toolSlug: "lottery-number-generator",
+    h1: "Powerball Number Generator",
+    subtitle: "Generate Random Powerball Numbers",
+    metaTitle: "Powerball Number Generator — Free Online Tool",
+    metaDescription:
+      "Free Powerball number generator: 5 unique main numbers plus a Powerball, using the game's real number ranges.",
+    introParagraph:
+      "Powerball draws 5 main numbers from one range and a separate Powerball from another. This preset uses those exact ranges, so the numbers you get are properly formatted for an actual Powerball play slip.",
+  },
+  {
+    slug: "mega-millions-number-generator",
+    toolSlug: "lottery-number-generator",
+    h1: "Mega Millions Number Generator",
+    subtitle: "Generate Random Mega Millions Numbers",
+    metaTitle: "Mega Millions Number Generator — Free Tool",
+    metaDescription:
+      "Free Mega Millions number generator: 5 unique main numbers plus a Mega Ball, using the game's real number ranges.",
+    introParagraph:
+      "This preset mirrors Mega Millions' actual structure — 5 unique main numbers and a separately drawn Mega Ball — so the generated set is a valid, correctly formatted pick for the real game.",
+  },
+  {
+    slug: "lotto-649-number-generator",
+    toolSlug: "lottery-number-generator",
+    h1: "6/49 Lotto Number Generator",
+    subtitle: "Generate Random Numbers for 6/49 Style Lotto Games",
+    metaTitle: "6/49 Lotto Number Generator — Free Tool",
+    metaDescription:
+      "Free 6/49 style lotto number generator: 6 unique numbers drawn from the game's standard range.",
+    introParagraph:
+      "6/49 style games — drawing 6 unique numbers from a fixed range — are among the most common lottery formats worldwide. This preset generates a valid random set matching that exact structure.",
+  },
+  {
+    slug: "euromillions-number-generator",
+    toolSlug: "lottery-number-generator",
+    h1: "EuroMillions Number Generator",
+    subtitle: "Generate Random EuroMillions Numbers",
+    metaTitle: "EuroMillions Number Generator — Free Tool",
+    metaDescription:
+      "Free EuroMillions number generator: main numbers plus Lucky Star numbers, matching the game's real format.",
+    introParagraph:
+      "EuroMillions draws main numbers from one pool and separate Lucky Star numbers from another. This preset generates both correctly, matching the exact structure the real game uses.",
+  },
+  {
+    slug: "lucky-lottery-number-picker",
+    toolSlug: "lottery-number-generator",
+    h1: "Lucky Lottery Number Picker",
+    subtitle: "Generate Random Numbers for Any Popular Lottery",
+    metaTitle: "Lucky Lottery Number Picker — Free Tool",
+    metaDescription:
+      "Free lottery number picker covering Powerball, Mega Millions, EuroMillions, and 6/49 formats — instant, unbiased random picks.",
+    introParagraph:
+      "Rather than manually picking birthday-clustered numbers like most players do, this generates a genuinely random set for whichever popular lottery format you're playing, avoiding the low-number bias real human picks tend to show.",
+  },
+  {
+    slug: "random-emoji-picker",
+    toolSlug: "random-emoji-generator",
+    h1: "Random Emoji Picker",
+    subtitle: "Instantly Pick Random Emoji",
+    metaTitle: "Random Emoji Picker — Free Online Tool",
+    metaDescription:
+      "Free random emoji picker: generate a batch of random emoji from a broad, varied set spanning faces, animals, food, and more.",
+    introParagraph:
+      "This picks emoji genuinely at random from a broad set spanning multiple categories, rather than repeatedly landing on the same narrow handful most people default to when choosing manually.",
+  },
+  {
+    slug: "emoji-generator-for-games",
+    toolSlug: "random-emoji-generator",
+    h1: "Emoji Generator for Games",
+    subtitle: "Random Emoji Prompts for Party Games",
+    metaTitle: "Emoji Generator for Games — Free Tool",
+    metaDescription:
+      "Free emoji generator built for party games like emoji charades and emoji-guessing — generate fresh prompts instantly.",
+    introParagraph:
+      "Emoji-based party games (charades, guess-the-movie, guess-the-phrase) need a steady stream of fresh random emoji combinations. This generates a new batch in one click for every round.",
+  },
+  {
+    slug: "emoji-combo-generator",
+    toolSlug: "random-emoji-generator",
+    h1: "Emoji Combo Generator",
+    subtitle: "Generate Random Emoji Combinations",
+    metaTitle: "Emoji Combo Generator — Free Online Tool",
+    metaDescription:
+      "Free emoji combo generator: generate a random string of multiple emoji at once, ready to copy and paste anywhere.",
+    introParagraph:
+      "A random combination of several emoji together can be a fun caption, a guessing-game clue, or just a decorative flourish. Generate a batch and copy the whole combination in one click.",
+  },
+  {
+    slug: "surprise-emoji-generator",
+    toolSlug: "random-emoji-generator",
+    h1: "Surprise Emoji Generator",
+    subtitle: "Get a Surprise Random Emoji Instantly",
+    metaTitle: "Surprise Emoji Generator — Free Online Tool",
+    metaDescription:
+      "Free surprise emoji generator: click once for a genuinely random single emoji pick from a broad, varied set.",
+    introParagraph:
+      "Sometimes the appeal is just seeing what comes up — a single genuinely random emoji, no theme or category chosen in advance, purely for the small surprise of the result.",
+  },
+  {
+    slug: "emoji-charades-generator",
+    toolSlug: "random-emoji-generator",
+    h1: "Emoji Charades Generator",
+    subtitle: "Random Emoji Prompts for Emoji Charades",
+    metaTitle: "Emoji Charades Generator — Free Online Tool",
+    metaDescription:
+      "Free emoji charades generator: get a random emoji or emoji set as a prompt to act out or guess.",
+    introParagraph:
+      "Emoji charades needs a prompt neither player has seen coming. Generating the emoji randomly right before each round keeps every game genuinely unpredictable rather than reused from a memorized card set.",
+  },
+  {
+    slug: "spin-the-wheel-name-picker",
+    toolSlug: "wheel-of-names-spinner",
+    h1: "Spin the Wheel Name Picker",
+    subtitle: "Spin a Wheel to Randomly Pick a Name",
+    metaTitle: "Spin the Wheel Name Picker — Free Online Tool",
+    metaDescription:
+      "Free spin-the-wheel name picker: enter names, spin, and let the wheel land on a random winner with equal odds for everyone.",
+    introParagraph:
+      "'Spin the wheel' picks carry a visible fairness that a plain random-number pick doesn't — everyone watching can see the wheel actually land on a name, not just take your word for a random result.",
+  },
+  {
+    slug: "random-name-picker-wheel",
+    toolSlug: "wheel-of-names-spinner",
+    h1: "Random Name Picker Wheel",
+    subtitle: "A Spinning Wheel for Fair Random Name Selection",
+    metaTitle: "Random Name Picker Wheel — Free Online Tool",
+    metaDescription:
+      "Free random name picker wheel with equal-sized slices per name, so every entrant has exactly the same odds of winning.",
+    introParagraph:
+      "Every slice on this wheel is exactly equal in size, so regardless of where a name sits, its odds of being picked match every other name's odds exactly — the spin is genuinely fair, not just visually convincing.",
+  },
+  {
+    slug: "classroom-name-picker-wheel",
+    toolSlug: "wheel-of-names-spinner",
+    h1: "Classroom Name Picker Wheel",
+    subtitle: "Randomly Call on Students With a Spinning Wheel",
+    metaTitle: "Classroom Name Picker Wheel — Free Tool",
+    metaDescription:
+      "Free classroom name picker wheel for teachers: spin to randomly select a student, with visibly fair equal odds for the whole class.",
+    introParagraph:
+      "Cold-calling students fairly is easier with a visible random process the whole class can see and trust. Enter the class roster, spin, and the wheel picks a name with equal odds for everyone listed.",
+  },
+  {
+    slug: "raffle-winner-wheel",
+    toolSlug: "wheel-of-names-spinner",
+    h1: "Raffle Winner Wheel",
+    subtitle: "Spin a Wheel to Draw a Raffle Winner",
+    metaTitle: "Raffle Winner Wheel — Free Online Tool",
+    metaDescription:
+      "Free raffle winner wheel: enter entrant names and spin to draw a visibly fair random winner in front of a live audience.",
+    introParagraph:
+      "Drawing a raffle winner in front of a room benefits from a visible process, not just a printed result. This wheel spins live, landing on one name with equal odds across every entrant entered.",
+  },
+  {
+    slug: "decision-wheel-spinner",
+    toolSlug: "wheel-of-names-spinner",
+    h1: "Decision Wheel Spinner",
+    subtitle: "Spin a Wheel to Make a Random Choice",
+    metaTitle: "Decision Wheel Spinner — Free Online Tool",
+    metaDescription:
+      "Free decision wheel spinner: enter your options and spin to let random chance make the pick for you.",
+    introParagraph:
+      "Beyond picking a name, this wheel works for any list of options that need a random pick — restaurant choices, activity ideas, or turn order — with equal odds for whatever you type in.",
+  },
+  {
+    slug: "tcp-ping-test",
+    toolSlug: "ping-test",
+    h1: "TCP Ping Test",
+    subtitle: "Measure TCP Connection Latency to Any Host",
+    metaTitle: "TCP Ping Test — Free Online Tool",
+    metaDescription:
+      "Free TCP ping test measuring connection latency to any host and port — a browser-safe alternative to ICMP ping.",
+    introParagraph:
+      "Since a normal web server can't send ICMP packets, this ping test measures TCP connection latency instead — how long it takes to open a real connection to the host on a chosen port, a practical stand-in for the same reachability question.",
+  },
+  {
+    slug: "website-latency-test",
+    toolSlug: "ping-test",
+    h1: "Website Latency Test",
+    subtitle: "Check How Fast a Website Responds to Connections",
+    metaTitle: "Website Latency Test — Free Online Tool",
+    metaDescription:
+      "Free website latency test: measure connection response time to any site's server across several attempts.",
+    introParagraph:
+      "A single slow page load could be a fluke or a real pattern. Running several connection attempts and looking at the min, average, and max latency separates the two quickly.",
+  },
+  {
+    slug: "server-ping-checker",
+    toolSlug: "ping-test",
+    h1: "Server Ping Checker",
+    subtitle: "Check if a Server is Responsive and How Fast",
+    metaTitle: "Server Ping Checker — Free Online Tool",
+    metaDescription:
+      "Free server ping checker: test connection latency and reachability for any public server or API endpoint.",
+    introParagraph:
+      "Before assuming an API or backend server issue is a code problem, checking raw connection latency and reachability rules out (or confirms) a network-level cause first.",
+  },
+  {
+    slug: "network-latency-checker",
+    toolSlug: "ping-test",
+    h1: "Network Latency Checker",
+    subtitle: "Check Connection Latency to Any Public Host",
+    metaTitle: "Network Latency Checker — Free Online Tool",
+    metaDescription:
+      "Free network latency checker: test how quickly a connection opens to any public host and port.",
+    introParagraph:
+      "Latency spikes and packet loss both show up clearly across four repeated connection attempts, which is exactly what this checker runs on every test.",
+  },
+  {
+    slug: "game-server-ping-test",
+    toolSlug: "ping-test",
+    h1: "Game Server Ping Test",
+    subtitle: "Check Latency to a Game Server Before You Play",
+    metaTitle: "Game Server Ping Test — Free Online Tool",
+    metaDescription:
+      "Free ping test for checking connection latency to a game server's hostname before joining a match.",
+    introParagraph:
+      "High ping ruins online games well before a match even starts. Checking a game server's connection latency ahead of time helps explain lag issues that aren't actually your local connection's fault.",
+  },
+  {
+    slug: "dns-checker",
+    toolSlug: "dns-lookup",
+    h1: "DNS Checker",
+    subtitle: "Check All DNS Records for Any Domain",
+    metaTitle: "DNS Checker — Free Online Tool",
+    metaDescription:
+      "Free DNS checker: view A, AAAA, MX, TXT, NS, CNAME, and SOA records for any domain in one lookup.",
+    introParagraph:
+      "'DNS checker' is the direct, common way people search for this exact task — a full published-record snapshot for a domain, queried live, in one pass.",
+  },
+  {
+    slug: "domain-dns-records-checker",
+    toolSlug: "dns-lookup",
+    h1: "Domain DNS Records Checker",
+    subtitle: "View Every Published DNS Record for a Domain",
+    metaTitle: "Domain DNS Records Checker — Free Tool",
+    metaDescription:
+      "Free tool to check every published DNS record type for a domain — useful for verifying configuration after a DNS change.",
+    introParagraph:
+      "After making a DNS change, the fastest way to confirm it actually took effect is checking the live records directly rather than waiting and hoping — this pulls every record type in one query.",
+  },
+  {
+    slug: "a-record-lookup",
+    toolSlug: "dns-lookup",
+    h1: "A Record Lookup",
+    subtitle: "Find the IP Address Behind Any Domain",
+    metaTitle: "A Record Lookup — Free Online Tool",
+    metaDescription:
+      "Free A record lookup: find the IPv4 address (or addresses) a domain currently resolves to.",
+    introParagraph:
+      "The A record is the most fundamental DNS record — it's literally what maps a domain name to the server's IP address. This tool surfaces it alongside every other record type in one lookup.",
+  },
+  {
+    slug: "txt-record-lookup",
+    toolSlug: "dns-lookup",
+    h1: "TXT Record Lookup",
+    subtitle: "Check a Domain's TXT Records (SPF, DKIM, Verification)",
+    metaTitle: "TXT Record Lookup — Free Online Tool",
+    metaDescription:
+      "Free TXT record lookup for checking SPF, domain verification, and other TXT-based DNS configuration.",
+    introParagraph:
+      "TXT records quietly carry a lot of important configuration — SPF email authorization, site-ownership verification codes, and more. This tool surfaces every TXT entry currently published for a domain.",
+  },
+  {
+    slug: "dns-propagation-checker",
+    toolSlug: "dns-lookup",
+    h1: "DNS Propagation Checker",
+    subtitle: "Check if a DNS Change Has Taken Effect",
+    metaTitle: "DNS Propagation Checker — Free Online Tool",
+    metaDescription:
+      "Free tool to check whether a recent DNS change is visible yet by querying a domain's live current records.",
+    introParagraph:
+      "This queries live DNS at the moment you run it, showing exactly what's currently published — the first thing worth checking when a DNS change feels like it 'hasn't propagated yet.'",
+  },
+  {
+    slug: "mail-server-lookup",
+    toolSlug: "mx-record-lookup",
+    h1: "Mail Server Lookup",
+    subtitle: "Find Which Mail Servers Handle a Domain's Email",
+    metaTitle: "Mail Server Lookup — Free Online Tool",
+    metaDescription:
+      "Free mail server lookup: see exactly which servers are configured to receive email for any domain.",
+    introParagraph:
+      "Whether a domain uses Google Workspace, Microsoft 365, or a custom mail server is visible directly in its MX records — this looks them up along with their priority order.",
+  },
+  {
+    slug: "email-dns-checker",
+    toolSlug: "mx-record-lookup",
+    h1: "Email DNS Checker",
+    subtitle: "Verify a Domain's Email Server Configuration",
+    metaTitle: "Email DNS Checker — Free Online Tool",
+    metaDescription:
+      "Free email DNS checker: confirm a domain's MX records are correctly configured for mail delivery.",
+    introParagraph:
+      "When email isn't arriving, checking whether the domain's MX records actually point to the right mail provider is one of the first, fastest diagnostic steps.",
+  },
+  {
+    slug: "mx-record-checker",
+    toolSlug: "mx-record-lookup",
+    h1: "MX Record Checker",
+    subtitle: "Check a Domain's Mail Exchange Records",
+    metaTitle: "MX Record Checker — Free Online Tool",
+    metaDescription:
+      "Free MX record checker: view mail server hostnames and priorities for any domain instantly.",
+    introParagraph:
+      "This checks a domain's MX records directly from live DNS, showing each mail server and its priority exactly as currently published.",
+  },
+  {
+    slug: "domain-mail-setup-checker",
+    toolSlug: "mx-record-lookup",
+    h1: "Domain Mail Setup Checker",
+    subtitle: "Verify a New Domain's Email Setup is Working",
+    metaTitle: "Domain Mail Setup Checker — Free Tool",
+    metaDescription:
+      "Free tool to verify a newly configured domain's mail server records are published and correct.",
+    introParagraph:
+      "Right after setting up a new domain with a mail provider, checking that the MX records actually propagated correctly is the quickest way to confirm mail will actually arrive.",
+  },
+  {
+    slug: "mx-lookup-tool",
+    toolSlug: "mx-record-lookup",
+    h1: "MX Lookup Tool",
+    subtitle: "Look Up Any Domain's Mail Exchange Records",
+    metaTitle: "MX Lookup Tool — Free Online Tool",
+    metaDescription:
+      "Free MX lookup tool for checking a domain's mail server records and delivery priority order.",
+    introParagraph:
+      "A quick, direct MX lookup — hostname in, mail server list with priorities out, sorted lowest-priority-first exactly as delivery would try them.",
+  },
+  {
+    slug: "domain-availability-checker",
+    toolSlug: "whois-lookup",
+    h1: "Domain Registration Status Checker",
+    subtitle: "Check if a Domain is Registered and by Whom",
+    metaTitle: "Domain Registration Status Checker — Free Tool",
+    metaDescription:
+      "Free tool to check a domain's registration status via WHOIS — registrar, creation date, and expiry, when available.",
+    introParagraph:
+      "Before assuming a domain is free to register, a WHOIS lookup shows whether it's already registered and, if so, its registrar and key dates — the real record, not a guess.",
+  },
+  {
+    slug: "domain-registration-lookup",
+    toolSlug: "whois-lookup",
+    h1: "Domain Registration Lookup",
+    subtitle: "See a Domain's Registrar and Registration Dates",
+    metaTitle: "Domain Registration Lookup — Free Online Tool",
+    metaDescription:
+      "Free domain registration lookup showing registrar, creation date, and name servers via a real WHOIS query.",
+    introParagraph:
+      "This performs a genuine WHOIS query — first asking IANA which registry is authoritative, then querying that registry directly — rather than guessing at a fixed WHOIS server.",
+  },
+  {
+    slug: "domain-owner-lookup",
+    toolSlug: "whois-lookup",
+    h1: "Domain Owner Lookup",
+    subtitle: "Check Who a Domain is Registered To",
+    metaTitle: "Domain Owner Lookup — Free Online Tool",
+    metaDescription:
+      "Free domain owner lookup via WHOIS — registrar and available contact details, subject to privacy protection.",
+    introParagraph:
+      "Many registrations use privacy protection that redacts personal contact details, but the registrar, registration dates, and name servers are typically still visible in the raw WHOIS record.",
+  },
+  {
+    slug: "domain-expiry-checker",
+    toolSlug: "whois-lookup",
+    h1: "Domain Expiry Checker",
+    subtitle: "Check When a Domain's Registration Expires",
+    metaTitle: "Domain Expiry Checker — Free Online Tool",
+    metaDescription:
+      "Free domain expiry checker: look up a domain's expiration date via WHOIS before it lapses unexpectedly.",
+    introParagraph:
+      "A domain that isn't renewed in time becomes available for anyone else to register — checking the expiration date in the WHOIS record is a simple habit that avoids that risk entirely.",
+  },
+  {
+    slug: "who-owns-this-domain",
+    toolSlug: "whois-lookup",
+    h1: "Who Owns This Domain",
+    subtitle: "Find Registration Details for Any Domain",
+    metaTitle: "Who Owns This Domain — Free WHOIS Tool",
+    metaDescription:
+      "Free WHOIS tool answering 'who owns this domain' with registrar, registration dates, and name server details.",
+    introParagraph:
+      "Curiosity about who's behind a domain — before a purchase inquiry, or just out of interest — starts with a real WHOIS query, which this runs against the domain's authoritative registry.",
+  },
+  {
+    slug: "ip-geolocation-lookup",
+    toolSlug: "ip-address-lookup",
+    h1: "IP Geolocation Lookup",
+    subtitle: "Find the Approximate Location of Any IP Address",
+    metaTitle: "IP Geolocation Lookup — Free Online Tool",
+    metaDescription:
+      "Free IP geolocation lookup showing the approximate city, region, and country behind any public IP address.",
+    introParagraph:
+      "IP geolocation identifies the correct city or region for most addresses, based on how ISPs register their address blocks — useful context, though not exact-address precision.",
+  },
+  {
+    slug: "ip-to-location-lookup",
+    toolSlug: "ip-address-lookup",
+    h1: "IP to Location Lookup",
+    subtitle: "Convert an IP Address into an Approximate Location",
+    metaTitle: "IP to Location Lookup — Free Online Tool",
+    metaDescription:
+      "Free IP to location lookup tool showing city, region, country, and ISP for any public IP address.",
+    introParagraph:
+      "This turns a bare IP address into readable context — where it's registered, which ISP owns it, and what timezone it falls in — pulled from public IP registry data.",
+  },
+  {
+    slug: "trace-ip-address",
+    toolSlug: "ip-address-lookup",
+    h1: "Trace an IP Address",
+    subtitle: "Trace an IP Address to Its ISP and Location",
+    metaTitle: "Trace IP Address — Free Online Tool",
+    metaDescription:
+      "Free tool to trace any IP address back to its approximate location and internet service provider.",
+    introParagraph:
+      "Tracing an IP address here means resolving its public registration data — location and ISP — not tracking a person; that level of identification requires a legal request to the ISP.",
+  },
+  {
+    slug: "ip-address-tracker",
+    toolSlug: "ip-address-lookup",
+    h1: "IP Address Tracker",
+    subtitle: "Track Down the Origin of Any IP Address",
+    metaTitle: "IP Address Tracker — Free Online Tool",
+    metaDescription:
+      "Free IP address tracker showing location, ISP, and organization data for any public IPv4 or IPv6 address.",
+    introParagraph:
+      "Investigating a suspicious IP in server logs usually starts here — a quick check of its registered location and ISP before deciding whether it warrants further action.",
+  },
+  {
+    slug: "find-ip-location",
+    toolSlug: "ip-address-lookup",
+    h1: "Find IP Location",
+    subtitle: "Find the Location Behind Any Public IP Address",
+    metaTitle: "Find IP Location — Free Online Tool",
+    metaDescription:
+      "Free tool to find the approximate geographic location registered to any public IP address.",
+    introParagraph:
+      "A one-field lookup: enter an IP, get back its approximate city, region, country, and the ISP or organization it's registered to.",
+  },
+  {
+    slug: "what-is-my-ip",
+    toolSlug: "my-ip-address-finder",
+    h1: "What Is My IP Address",
+    subtitle: "See Your Public IP Address Right Now",
+    metaTitle: "What Is My IP Address — Free Tool",
+    metaDescription:
+      "Free tool answering 'what is my IP address' instantly, along with your approximate location and ISP.",
+    introParagraph:
+      "The most searched phrase for this exact task, answered directly and automatically the moment the page loads — no button needed.",
+  },
+  {
+    slug: "check-my-ip-address",
+    toolSlug: "my-ip-address-finder",
+    h1: "Check My IP Address",
+    subtitle: "Instantly Check Your Current Public IP Address",
+    metaTitle: "Check My IP Address — Free Online Tool",
+    metaDescription:
+      "Free tool to check your current public IP address, location, and internet service provider instantly.",
+    introParagraph:
+      "Useful right before setting up port forwarding, remote access, or contacting an ISP's support team — this shows exactly what the rest of the internet currently sees as your address.",
+  },
+  {
+    slug: "my-public-ip-address",
+    toolSlug: "my-ip-address-finder",
+    h1: "My Public IP Address",
+    subtitle: "See the Public IP Address Your Network Uses",
+    metaTitle: "My Public IP Address — Free Online Tool",
+    metaDescription:
+      "Free tool showing your network's public IP address — the one visible to every website and server you connect to.",
+    introParagraph:
+      "Your public IP is different from your device's private network address — this shows the one the wider internet actually sees when your connection reaches out.",
+  },
+  {
+    slug: "whats-my-ip-address",
+    toolSlug: "my-ip-address-finder",
+    h1: "What's My IP Address",
+    subtitle: "Find Your Current Public IP Instantly",
+    metaTitle: "What's My IP Address — Free Online Tool",
+    metaDescription:
+      "Free tool to instantly find your current public IP address plus location and ISP details.",
+    introParagraph:
+      "No form to fill in — this detects and displays your public IP address the moment the page loads, along with the location and ISP it's registered to.",
+  },
+  {
+    slug: "show-my-ip",
+    toolSlug: "my-ip-address-finder",
+    h1: "Show My IP",
+    subtitle: "Display Your Current Public IP Address",
+    metaTitle: "Show My IP — Free Online Tool",
+    metaDescription:
+      "Free tool that shows your current public IP address, ISP, and approximate location instantly.",
+    introParagraph:
+      "A direct display, nothing more: your public IP address, refreshable anytime, alongside the ISP and location data associated with it.",
+  },
+  {
+    slug: "server-response-time-test",
+    toolSlug: "website-speed-test",
+    h1: "Server Response Time Test",
+    subtitle: "Measure How Fast a Server Responds",
+    metaTitle: "Server Response Time Test — Free Tool",
+    metaDescription:
+      "Free server response time test breaking down DNS, connect, TLS, and time-to-first-byte for any URL.",
+    introParagraph:
+      "Rather than one combined number, this breaks server response time into its actual stages — DNS, connection, TLS handshake, and time to first byte — so you can see exactly where time goes.",
+  },
+  {
+    slug: "ttfb-checker",
+    toolSlug: "website-speed-test",
+    h1: "TTFB Checker",
+    subtitle: "Measure Time to First Byte for Any Website",
+    metaTitle: "TTFB Checker — Free Online Tool",
+    metaDescription:
+      "Free TTFB (time to first byte) checker for measuring how quickly a server starts responding to a request.",
+    introParagraph:
+      "Time to first byte is one of the clearest server-health signals available — a consistently high TTFB usually points to a backend bottleneck, not a front-end one.",
+  },
+  {
+    slug: "website-performance-test",
+    toolSlug: "website-speed-test",
+    h1: "Website Performance Test",
+    subtitle: "Test Server-Side Performance for Any Website",
+    metaTitle: "Website Performance Test — Free Online Tool",
+    metaDescription:
+      "Free website performance test measuring server response timing — DNS, connect, TLS, and TTFB — for any URL.",
+    introParagraph:
+      "This focuses specifically on server-side response performance, the foundation that full page-load tools like Lighthouse build their broader scores on top of.",
+  },
+  {
+    slug: "page-load-speed-test",
+    toolSlug: "website-speed-test",
+    h1: "Page Load Speed Test",
+    subtitle: "Test How Fast a Page's Server Responds",
+    metaTitle: "Page Load Speed Test — Free Online Tool",
+    metaDescription:
+      "Free page load speed test measuring the server-side timing behind how fast a page starts loading.",
+    introParagraph:
+      "Before a page can render anything, its server has to respond — this measures exactly how long that first, foundational step takes.",
+  },
+  {
+    slug: "hosting-speed-test",
+    toolSlug: "website-speed-test",
+    h1: "Hosting Speed Test",
+    subtitle: "Test Your Web Hosting's Response Performance",
+    metaTitle: "Hosting Speed Test — Free Online Tool",
+    metaDescription:
+      "Free hosting speed test to compare server response timing before and after switching hosting providers.",
+    introParagraph:
+      "Comparing DNS, connect, and TTFB timing before and after a hosting migration is a concrete way to confirm whether the switch actually improved server performance.",
+  },
+  {
+    slug: "response-header-viewer",
+    toolSlug: "http-header-checker",
+    h1: "HTTP Response Header Viewer",
+    subtitle: "View the Full Response Headers for Any URL",
+    metaTitle: "HTTP Response Header Viewer — Free Tool",
+    metaDescription:
+      "Free HTTP response header viewer showing every header a server returns for any public URL.",
+    introParagraph:
+      "This fetches a URL server-side and displays every response header exactly as sent — the same metadata your browser reads and acts on silently in the background.",
+  },
+  {
+    slug: "security-headers-checker",
+    toolSlug: "http-header-checker",
+    h1: "Security Headers Checker",
+    subtitle: "Check if Key Security Headers Are Configured",
+    metaTitle: "Security Headers Checker — Free Online Tool",
+    metaDescription:
+      "Free security headers checker: see whether HSTS, CSP, and other protective headers are set on a site.",
+    introParagraph:
+      "Security headers like HSTS, Content-Security-Policy, and X-Frame-Options are easy to forget and only visible by actually inspecting the raw response — this surfaces the full header list to check against.",
+  },
+  {
+    slug: "http-response-inspector",
+    toolSlug: "http-header-checker",
+    h1: "HTTP Response Inspector",
+    subtitle: "Inspect the Full HTTP Response for Any URL",
+    metaTitle: "HTTP Response Inspector — Free Online Tool",
+    metaDescription:
+      "Free HTTP response inspector showing status code, redirect chain, and full header list for any URL.",
+    introParagraph:
+      "Status code, final URL after redirects, and every response header — this shows the full picture of what a server actually sends back for a request.",
+  },
+  {
+    slug: "check-website-headers",
+    toolSlug: "http-header-checker",
+    h1: "Check Website Headers",
+    subtitle: "Check Any Website's HTTP Response Headers",
+    metaTitle: "Check Website Headers — Free Online Tool",
+    metaDescription:
+      "Free tool to check a website's HTTP response headers — caching, security, and server configuration.",
+    introParagraph:
+      "A direct way to see what a site's server actually sends beyond the visible page — caching rules, security policy, and server software, all in the response headers.",
+  },
+  {
+    slug: "header-analyzer-tool",
+    toolSlug: "http-header-checker",
+    h1: "HTTP Header Analyzer",
+    subtitle: "Analyze the Response Headers of Any Website",
+    metaTitle: "HTTP Header Analyzer — Free Online Tool",
+    metaDescription:
+      "Free HTTP header analyzer tool for reviewing a site's full response header configuration at a glance.",
+    introParagraph:
+      "Every response header a server sends, laid out clearly for review — useful for a quick audit or for debugging unexpected browser behavior tied to a specific header.",
+  },
+  {
+    slug: "ssl-certificate-lookup",
+    toolSlug: "ssl-certificate-checker",
+    h1: "SSL Certificate Lookup",
+    subtitle: "Look Up Any Website's Live SSL Certificate",
+    metaTitle: "SSL Certificate Lookup — Free Online Tool",
+    metaDescription:
+      "Free SSL certificate lookup showing issuer, validity dates, and expiry countdown for any HTTPS site.",
+    introParagraph:
+      "This connects directly to a domain's HTTPS port and reads its live certificate — issuer, validity window, and days remaining before it needs renewal.",
+  },
+  {
+    slug: "ssl-expiry-checker",
+    toolSlug: "ssl-certificate-checker",
+    h1: "SSL Expiry Checker",
+    subtitle: "Check How Many Days Until an SSL Certificate Expires",
+    metaTitle: "SSL Expiry Checker — Free Online Tool",
+    metaDescription:
+      "Free SSL expiry checker showing exactly how many days remain before a website's certificate expires.",
+    introParagraph:
+      "An expired certificate breaks HTTPS access for every visitor immediately — checking days-remaining before that happens is a small habit that prevents a very visible outage.",
+  },
+  {
+    slug: "https-certificate-checker",
+    toolSlug: "ssl-certificate-checker",
+    h1: "HTTPS Certificate Checker",
+    subtitle: "Check the Certificate Behind Any HTTPS Site",
+    metaTitle: "HTTPS Certificate Checker — Free Online Tool",
+    metaDescription:
+      "Free HTTPS certificate checker showing full certificate details for any secure website.",
+    introParagraph:
+      "Beyond the padlock icon, this shows exactly what's behind a site's HTTPS setup — the issuing authority, validity dates, and every domain the certificate covers.",
+  },
+  {
+    slug: "check-ssl-certificate",
+    toolSlug: "ssl-certificate-checker",
+    h1: "Check SSL Certificate",
+    subtitle: "Check the SSL Certificate Details for Any Domain",
+    metaTitle: "Check SSL Certificate — Free Online Tool",
+    metaDescription:
+      "Free tool to check a domain's SSL certificate details, validity period, and expiry status.",
+    introParagraph:
+      "A direct SSL check: enter a domain, get back its certificate's issuer, validity window, and how many days remain before renewal is needed.",
+  },
+  {
+    slug: "tls-certificate-lookup",
+    toolSlug: "ssl-certificate-checker",
+    h1: "TLS Certificate Lookup",
+    subtitle: "Look Up the TLS Certificate for Any Domain",
+    metaTitle: "TLS Certificate Lookup — Free Online Tool",
+    metaDescription:
+      "Free TLS certificate lookup showing the negotiated protocol version, issuer, and validity for any domain.",
+    introParagraph:
+      "Alongside standard certificate details, this also shows the negotiated TLS protocol version — useful when confirming a server has moved off an outdated TLS configuration.",
+  },
+  {
+    slug: "is-it-down-checker",
+    toolSlug: "website-uptime-checker",
+    h1: "Is It Down Checker",
+    subtitle: "Check if a Website is Down Right Now",
+    metaTitle: "Is It Down Checker — Free Online Tool",
+    metaDescription:
+      "Free tool to instantly check whether a website is down right now, with status code and response time.",
+    introParagraph:
+      "A live check from an independent server settles the question fast — is the site actually down, or is it just your own connection or network having trouble reaching it.",
+  },
+  {
+    slug: "site-down-checker",
+    toolSlug: "website-uptime-checker",
+    h1: "Site Down Checker",
+    subtitle: "Check if a Site is Currently Down",
+    metaTitle: "Site Down Checker — Free Online Tool",
+    metaDescription:
+      "Free site down checker: run a live check and get an instant up or down result with response time.",
+    introParagraph:
+      "One click runs a live request against the site and reports back up or down immediately, along with the status code and how long it took to respond.",
+  },
+  {
+    slug: "website-status-checker",
+    toolSlug: "website-uptime-checker",
+    h1: "Website Status Checker",
+    subtitle: "Check the Live Status of Any Website",
+    metaTitle: "Website Status Checker — Free Online Tool",
+    metaDescription:
+      "Free website status checker showing whether a site is currently reachable, its status code, and response time.",
+    introParagraph:
+      "This is a single live status check, not historical monitoring — exactly what's needed to answer 'is this site working right now' in seconds.",
+  },
+  {
+    slug: "down-for-everyone-or-just-me",
+    toolSlug: "website-uptime-checker",
+    h1: "Down for Everyone or Just Me",
+    subtitle: "Find Out if a Site is Down for Everyone",
+    metaTitle: "Down for Everyone or Just Me — Free Tool",
+    metaDescription:
+      "Free tool to check whether a website is down for everyone or just an issue on your own connection.",
+    introParagraph:
+      "Since the check runs from an entirely separate server location, it answers the classic question directly — if it shows down here too, it's not just your connection.",
+  },
+  {
+    slug: "check-website-status",
+    toolSlug: "website-uptime-checker",
+    h1: "Check Website Status",
+    subtitle: "Check if a Website is Reachable Right Now",
+    metaTitle: "Check Website Status — Free Online Tool",
+    metaDescription:
+      "Free tool to check a website's current status, HTTP response code, and response time instantly.",
+    introParagraph:
+      "A quick, live reachability check — status code and response time included — for whenever a site seems slow or unreachable and you want a fast, independent read.",
+  },
+  {
+    slug: "what-is-my-user-agent",
+    toolSlug: "user-agent-detector",
+    h1: "What Is My User Agent",
+    subtitle: "See Your Browser's Full User Agent String",
+    metaTitle: "What Is My User Agent — Free Tool",
+    metaDescription:
+      "Free tool showing your browser's exact user agent string, plus a readable breakdown of browser, OS, and device.",
+    introParagraph:
+      "Your browser sends this string to every website automatically — this shows exactly what it says, decoded into browser, engine, OS, and device instead of raw text.",
+  },
+  {
+    slug: "browser-user-agent-checker",
+    toolSlug: "user-agent-detector",
+    h1: "Browser User Agent Checker",
+    subtitle: "Check and Decode Any Browser's User Agent",
+    metaTitle: "Browser User Agent Checker — Free Tool",
+    metaDescription:
+      "Free browser user agent checker: detect your own UA automatically or paste any UA string to decode it.",
+    introParagraph:
+      "Works both ways — auto-detects your own browser's user agent, or takes any pasted UA string (from a bug report or log file) and decodes it the same way.",
+  },
+  {
+    slug: "agent-string-decoder",
+    toolSlug: "user-agent-detector",
+    h1: "User Agent String Decoder",
+    subtitle: "Decode Any User Agent String Into Plain Details",
+    metaTitle: "User Agent String Decoder — Free Tool",
+    metaDescription:
+      "Free tool to decode a dense user agent string into readable browser, engine, OS, and device details.",
+    introParagraph:
+      "A raw user agent string is dense and easy to misread — this decodes it into plain browser name, version, engine, OS, and device type instead.",
+  },
+  {
+    slug: "my-browser-info",
+    toolSlug: "user-agent-detector",
+    h1: "My Browser Info",
+    subtitle: "See Details About the Browser You're Using",
+    metaTitle: "My Browser Info — Free Online Tool",
+    metaDescription:
+      "Free tool showing details about your current browser — name, version, rendering engine, and OS.",
+    introParagraph:
+      "Detected automatically the moment the page loads: your browser's name and version, its rendering engine, and the operating system it's running on.",
+  },
+  {
+    slug: "useragent-string-parser",
+    toolSlug: "user-agent-detector",
+    h1: "User Agent String Parser",
+    subtitle: "Parse Any User Agent String Into Readable Fields",
+    metaTitle: "User Agent String Parser — Free Online Tool",
+    metaDescription:
+      "Free user agent string parser breaking a raw UA string into browser, engine, OS, and device fields.",
+    introParagraph:
+      "Paste in any user agent string — your own or one found in a server log — and get it broken into clearly labeled fields instead of one dense unreadable line.",
+  },
+  {
+    slug: "url-to-screenshot",
+    toolSlug: "website-screenshot-tool",
+    h1: "URL to Screenshot",
+    subtitle: "Turn Any URL Into a Screenshot Image",
+    metaTitle: "URL to Screenshot — Free Online Tool",
+    metaDescription:
+      "Free tool to turn any public URL into a rendered screenshot image instantly.",
+    introParagraph:
+      "Paste a URL, get back an image of how that page currently looks — no need to visit the site yourself or use a separate screenshot extension.",
+  },
+  {
+    slug: "capture-website-image",
+    toolSlug: "website-screenshot-tool",
+    h1: "Capture Website Image",
+    subtitle: "Capture a Current Image of Any Website",
+    metaTitle: "Capture Website Image — Free Online Tool",
+    metaDescription:
+      "Free tool to capture a current rendered image of any public website's homepage.",
+    introParagraph:
+      "Useful for a quick visual record before a redesign, or just to preview a link before clicking through to an unfamiliar site.",
+  },
+  {
+    slug: "free-website-screenshot",
+    toolSlug: "website-screenshot-tool",
+    h1: "Free Website Screenshot Tool",
+    subtitle: "Capture a Free Screenshot of Any Website",
+    metaTitle: "Free Website Screenshot Tool — Online",
+    metaDescription:
+      "Free website screenshot tool: capture a rendered image of any public URL at no cost, no signup.",
+    introParagraph:
+      "No signup, no watermark, no install — just a URL in and a rendered screenshot back, for any publicly accessible page.",
+  },
+  {
+    slug: "webpage-screenshot-generator",
+    toolSlug: "website-screenshot-tool",
+    h1: "Webpage Screenshot Generator",
+    subtitle: "Generate a Screenshot for Any Webpage URL",
+    metaTitle: "Webpage Screenshot Generator — Free Tool",
+    metaDescription:
+      "Free webpage screenshot generator producing a current rendered image for any public URL.",
+    introParagraph:
+      "Generates a fresh rendered capture for whatever URL you enter — handy for documentation, bug reports, or a quick visual reference without leaving the page.",
+  },
+  {
+    slug: "website-preview-image-generator",
+    toolSlug: "website-screenshot-tool",
+    h1: "Website Preview Image Generator",
+    subtitle: "Generate a Preview Image for Any Website",
+    metaTitle: "Website Preview Image Generator — Free Tool",
+    metaDescription:
+      "Free tool to generate a preview image of any website before you visit or share the link.",
+    introParagraph:
+      "A visual preview before clicking through — especially useful for unfamiliar links, or for showing someone what a page looks like without sending them to it directly.",
+  },
+  {
+    slug: "cidr-calculator",
+    toolSlug: "subnet-calculator",
+    h1: "CIDR Calculator",
+    subtitle: "Calculate Network Details from a CIDR Prefix",
+    metaTitle: "CIDR Calculator — Free Online Tool",
+    metaDescription:
+      "Free CIDR calculator: enter an IP and prefix length to get network, broadcast, and usable host range.",
+    introParagraph:
+      "CIDR notation packs a lot of network information into a short prefix — this expands it into every practical detail: network address, broadcast, mask, and usable range.",
+  },
+  {
+    slug: "ip-subnet-mask-calculator",
+    toolSlug: "subnet-calculator",
+    h1: "IP Subnet Mask Calculator",
+    subtitle: "Calculate the Subnet Mask for Any CIDR Prefix",
+    metaTitle: "IP Subnet Mask Calculator — Free Tool",
+    metaDescription:
+      "Free IP subnet mask calculator converting any CIDR prefix into its full subnet mask and wildcard mask.",
+    introParagraph:
+      "Converting between CIDR notation and dotted-decimal subnet masks is exactly the kind of binary math this calculator handles instantly instead of by hand.",
+  },
+  {
+    slug: "network-address-calculator",
+    toolSlug: "subnet-calculator",
+    h1: "Network Address Calculator",
+    subtitle: "Find the Network and Broadcast Address for Any Subnet",
+    metaTitle: "Network Address Calculator — Free Tool",
+    metaDescription:
+      "Free network address calculator showing the network and broadcast address for any IP and CIDR prefix.",
+    introParagraph:
+      "Firewall rules and routing configuration often need the exact network and broadcast address for a range — this calculates both instantly from an IP and CIDR prefix.",
+  },
+  {
+    slug: "vlsm-subnet-calculator",
+    toolSlug: "subnet-calculator",
+    h1: "VLSM Subnet Calculator",
+    subtitle: "Calculate Subnet Details for Variable-Length Subnetting",
+    metaTitle: "VLSM Subnet Calculator — Free Online Tool",
+    metaDescription:
+      "Free subnet calculator useful for VLSM planning — calculate host ranges for any subnet size instantly.",
+    introParagraph:
+      "Variable-length subnet masking means working out several different subnet sizes for one network plan — this calculator handles each individual subnet's math instantly as you plan them out.",
+  },
+  {
+    slug: "ipv4-subnet-calculator",
+    toolSlug: "subnet-calculator",
+    h1: "IPv4 Subnet Calculator",
+    subtitle: "Calculate Subnet Details for Any IPv4 Network",
+    metaTitle: "IPv4 Subnet Calculator — Free Online Tool",
+    metaDescription:
+      "Free IPv4 subnet calculator: network address, broadcast, usable range, and host count from any CIDR prefix.",
+    introParagraph:
+      "Every core IPv4 subnetting value in one place — network address, broadcast address, usable host range, and total host count — calculated instantly from any address and prefix.",
+  },
+  {
+    slug: "mac-vendor-lookup",
+    toolSlug: "mac-address-lookup-tool",
+    h1: "MAC Vendor Lookup",
+    subtitle: "Find the Vendor Behind Any MAC Address",
+    metaTitle: "MAC Vendor Lookup — Free Online Tool",
+    metaDescription:
+      "Free MAC vendor lookup tool identifying the hardware manufacturer behind any MAC address's OUI prefix.",
+    introParagraph:
+      "Every MAC address starts with a manufacturer-specific prefix — this extracts it and checks it against a curated set of verified, well-known vendor prefixes.",
+  },
+  {
+    slug: "oui-lookup-tool",
+    toolSlug: "mac-address-lookup-tool",
+    h1: "OUI Lookup Tool",
+    subtitle: "Look Up the Organizationally Unique Identifier of a MAC Address",
+    metaTitle: "OUI Lookup Tool — Free Online Tool",
+    metaDescription:
+      "Free OUI lookup tool: extract and identify the vendor prefix from any MAC address.",
+    introParagraph:
+      "The OUI is the IEEE-assigned manufacturer prefix baked into every MAC address — this extracts it directly and checks it against known vendor prefixes.",
+  },
+  {
+    slug: "find-mac-address-vendor",
+    toolSlug: "mac-address-lookup-tool",
+    h1: "Find MAC Address Vendor",
+    subtitle: "Find Which Company Made a Device from Its MAC Address",
+    metaTitle: "Find MAC Address Vendor — Free Online Tool",
+    metaDescription:
+      "Free tool to find the manufacturer of a network device from its MAC address prefix.",
+    introParagraph:
+      "An unfamiliar device on a router's client list is easier to identify once you know its manufacturer — this pulls that directly from the MAC address's vendor prefix.",
+  },
+  {
+    slug: "mac-address-manufacturer-lookup",
+    toolSlug: "mac-address-lookup-tool",
+    h1: "MAC Address Manufacturer Lookup",
+    subtitle: "Look Up the Manufacturer of Any MAC Address",
+    metaTitle: "MAC Address Manufacturer Lookup — Free Tool",
+    metaDescription:
+      "Free MAC address manufacturer lookup identifying hardware vendors from a device's network address.",
+    introParagraph:
+      "A MAC address's first three octets are a manufacturer's official IEEE-assigned identifier — this tool reads that prefix and reports the matching vendor when it's recognized.",
+  },
+  {
+    slug: "network-card-vendor-lookup",
+    toolSlug: "mac-address-lookup-tool",
+    h1: "Network Card Vendor Lookup",
+    subtitle: "Find the Vendor of a Network Card by MAC Address",
+    metaTitle: "Network Card Vendor Lookup — Free Tool",
+    metaDescription:
+      "Free tool to find a network card or device's vendor from its MAC address prefix.",
+    introParagraph:
+      "Whether it's a network card, a Raspberry Pi, or a virtual machine's virtual adapter, its MAC address prefix identifies the vendor — this looks it up directly.",
+  },
+  {
+    slug: "random-password-generator",
+    toolSlug: "password-generator",
+    h1: "Random Password Generator",
+    subtitle: "Generate a Truly Random Password Instantly",
+    metaTitle: "Random Password Generator — Free Online Tool",
+    metaDescription:
+      "Free random password generator using cryptographically secure randomness — adjust length and character types instantly.",
+    introParagraph:
+      "This generates passwords using your browser's cryptographically secure random source, not a weaker general-purpose randomizer — the correct foundation for anything security-related.",
+  },
+  {
+    slug: "strong-password-generator",
+    toolSlug: "password-generator",
+    h1: "Strong Password Generator",
+    subtitle: "Generate a Strong, High-Entropy Password",
+    metaTitle: "Strong Password Generator — Free Online Tool",
+    metaDescription:
+      "Free strong password generator with an entropy estimate shown alongside every result, so you can see exactly how strong it is.",
+    introParagraph:
+      "Rather than just claiming a password is 'strong,' this shows the actual entropy in bits behind each generated password — a concrete, honest measure of brute-force resistance.",
+  },
+  {
+    slug: "secure-password-generator",
+    toolSlug: "password-generator",
+    h1: "Secure Password Generator",
+    subtitle: "Generate a Cryptographically Secure Password",
+    metaTitle: "Secure Password Generator — Free Online Tool",
+    metaDescription:
+      "Free secure password generator built on the Web Crypto API — never Math.random(), which isn't safe for security purposes.",
+    introParagraph:
+      "Security-grade randomness matters here — this uses crypto.getRandomValues(), the same secure source browsers rely on elsewhere, not a general-purpose randomizer never meant for this job.",
+  },
+  {
+    slug: "wifi-password-generator",
+    toolSlug: "password-generator",
+    h1: "WiFi Password Generator",
+    subtitle: "Generate a Strong Password for Your WiFi Network",
+    metaTitle: "WiFi Password Generator — Free Online Tool",
+    metaDescription:
+      "Free WiFi password generator for creating a strong router password with full control over length and character types.",
+    introParagraph:
+      "A router's WiFi password is worth making genuinely strong since it protects your whole home network — generate one here with full control over length and character mix to match your router's requirements.",
+  },
+  {
+    slug: "pin-code-generator",
+    toolSlug: "password-generator",
+    h1: "PIN Code Generator",
+    subtitle: "Generate a Random Numeric PIN Code",
+    metaTitle: "PIN Code Generator — Free Online Tool",
+    metaDescription:
+      "Free PIN code generator: turn off letters and symbols to generate a random numeric-only PIN of any length.",
+    introParagraph:
+      "Turning off uppercase, lowercase, and symbols and keeping only numbers turns this into a straightforward random numeric PIN generator for any length you need.",
+  },
+  {
+    slug: "sha256-checksum-generator",
+    toolSlug: "sha256-generator",
+    h1: "SHA-256 Checksum Generator",
+    subtitle: "Generate a SHA-256 Checksum for Any Text",
+    metaTitle: "SHA-256 Checksum Generator — Free Online Tool",
+    metaDescription:
+      "Free SHA-256 checksum generator for verifying text integrity — computed using the browser's native Web Crypto API.",
+    introParagraph:
+      "SHA-256 is the current practical standard for integrity checksums — this computes it instantly using the browser's built-in, audited cryptographic implementation.",
+  },
+  {
+    slug: "sha1-generator",
+    toolSlug: "sha256-generator",
+    h1: "SHA-1 Generator",
+    subtitle: "Generate a SHA-1 Hash for Legacy Compatibility",
+    metaTitle: "SHA-1 Generator — Free Online Tool",
+    metaDescription:
+      "Free SHA-1 hash generator for legacy compatibility checks — not recommended for new security-sensitive use.",
+    introParagraph:
+      "SHA-1 is included here mainly for legacy systems that still expect it — for anything security-sensitive and new, SHA-256 is the safer default choice.",
+  },
+  {
+    slug: "sha512-generator",
+    toolSlug: "sha256-generator",
+    h1: "SHA-512 Generator",
+    subtitle: "Generate a SHA-512 Hash for Any Text",
+    metaTitle: "SHA-512 Generator — Free Online Tool",
+    metaDescription:
+      "Free SHA-512 hash generator producing a 128-character hex hash using the browser's native Web Crypto API.",
+    introParagraph:
+      "SHA-512 offers a larger output size than SHA-256 for applications wanting extra margin — computed here instantly via the browser's built-in cryptographic engine.",
+  },
+  {
+    slug: "text-hash-generator",
+    toolSlug: "sha256-generator",
+    h1: "Text Hash Generator",
+    subtitle: "Generate a Hash for Any Block of Text",
+    metaTitle: "Text Hash Generator — Free Online Tool",
+    metaDescription:
+      "Free text hash generator supporting SHA-1, SHA-256, SHA-384, and SHA-512 — pick the algorithm your use case needs.",
+    introParagraph:
+      "One tool, four algorithms — type your text once and switch between SHA-1, SHA-256, SHA-384, and SHA-512 without re-entering anything.",
+  },
+  {
+    slug: "checksum-generator",
+    toolSlug: "sha256-generator",
+    h1: "Checksum Generator",
+    subtitle: "Generate a Checksum Hash for Any Text",
+    metaTitle: "Checksum Generator — Free Online Tool",
+    metaDescription:
+      "Free checksum generator computing SHA-1, SHA-256, SHA-384, or SHA-512 hashes for text integrity verification.",
+    introParagraph:
+      "A checksum is just a hash used to verify data integrity — this generates one in whichever standard algorithm your verification process expects.",
+  },
+  {
+    slug: "md5-hash-calculator",
+    toolSlug: "md5-generator",
+    h1: "MD5 Hash Calculator",
+    subtitle: "Calculate the MD5 Hash of Any Text",
+    metaTitle: "MD5 Hash Calculator — Free Online Tool",
+    metaDescription:
+      "Free MD5 hash calculator for legacy checksum compatibility, implemented from scratch and verified against standard test vectors.",
+    introParagraph:
+      "Since browsers deliberately exclude MD5 from their built-in crypto API, this calculates it with a from-scratch implementation verified against the official RFC 1321 test vectors.",
+  },
+  {
+    slug: "md5-checksum-generator",
+    toolSlug: "md5-generator",
+    h1: "MD5 Checksum Generator",
+    subtitle: "Generate an MD5 Checksum for Text",
+    metaTitle: "MD5 Checksum Generator — Free Online Tool",
+    metaDescription:
+      "Free MD5 checksum generator for verifying text against a legacy published MD5 checksum.",
+    introParagraph:
+      "Plenty of older systems and file distributions still publish MD5 checksums — this generates one instantly for comparison, purely for legacy compatibility, not security.",
+  },
+  {
+    slug: "md5-online-generator",
+    toolSlug: "md5-generator",
+    h1: "MD5 Online Generator",
+    subtitle: "Generate an MD5 Hash Online, No Install Needed",
+    metaTitle: "MD5 Online Generator — Free Tool",
+    metaDescription:
+      "Free online MD5 hash generator — no download, no install, runs entirely in your browser.",
+    introParagraph:
+      "No command line, no install — just paste text and get its MD5 hash instantly, computed entirely client-side.",
+  },
+  {
+    slug: "legacy-hash-generator",
+    toolSlug: "md5-generator",
+    h1: "Legacy Hash Generator",
+    subtitle: "Generate MD5 Hashes for Legacy System Compatibility",
+    metaTitle: "Legacy Hash Generator — Free Online Tool",
+    metaDescription:
+      "Free legacy hash generator producing MD5 hashes for older systems and file formats still built around it.",
+    introParagraph:
+      "MD5 remains the expected format for plenty of older APIs and file formats — this generates it specifically for that legacy-compatibility use case.",
+  },
+  {
+    slug: "md5-string-generator",
+    toolSlug: "md5-generator",
+    h1: "MD5 String Generator",
+    subtitle: "Generate the MD5 Hash of Any String",
+    metaTitle: "MD5 String Generator — Free Online Tool",
+    metaDescription:
+      "Free MD5 string generator: type or paste any string to get its 32-character MD5 hash instantly.",
+    introParagraph:
+      "Type any string and get its MD5 hash back instantly — a from-scratch implementation verified against the standard published test vectors.",
+  },
+  {
+    slug: "2fa-backup-code-generator",
+    toolSlug: "two-factor-backup-code-generator",
+    h1: "2FA Backup Code Generator",
+    subtitle: "Generate Sample Two-Factor Backup Codes",
+    metaTitle: "2FA Backup Code Generator — Free Tool",
+    metaDescription:
+      "Free 2FA backup code generator producing realistic sample recovery codes for testing and development.",
+    introParagraph:
+      "For developers building a two-factor authentication flow, this generates realistic sample backup codes in the standard hyphenated format used across most platforms.",
+  },
+  {
+    slug: "mfa-recovery-code-generator",
+    toolSlug: "two-factor-backup-code-generator",
+    h1: "MFA Recovery Code Generator",
+    subtitle: "Generate Sample Multi-Factor Recovery Codes",
+    metaTitle: "MFA Recovery Code Generator — Free Tool",
+    metaDescription:
+      "Free MFA recovery code generator for testing account-recovery UI and backup code display logic.",
+    introParagraph:
+      "Recovery codes need to be both readable and unambiguous — this generates sample codes using a character set that deliberately excludes visually confusing characters.",
+  },
+  {
+    slug: "authenticator-backup-codes",
+    toolSlug: "two-factor-backup-code-generator",
+    h1: "Authenticator Backup Codes Generator",
+    subtitle: "Generate Sample Authenticator App Backup Codes",
+    metaTitle: "Authenticator Backup Codes — Free Online Tool",
+    metaDescription:
+      "Free sample backup code generator matching the format authenticator apps typically issue for account recovery.",
+    introParagraph:
+      "Matches the standard format most authenticator-based 2FA systems use — useful for demos, documentation, and testing how your own UI displays these codes.",
+  },
+  {
+    slug: "otp-backup-code-generator",
+    toolSlug: "two-factor-backup-code-generator",
+    h1: "OTP Backup Code Generator",
+    subtitle: "Generate Sample One-Time-Password Backup Codes",
+    metaTitle: "OTP Backup Code Generator — Free Tool",
+    metaDescription:
+      "Free OTP backup code generator for testing one-time-password recovery flows during development.",
+    introParagraph:
+      "Every OTP-based two-factor system needs a fallback for lost devices — this generates realistic sample codes for testing that recovery flow.",
+  },
+  {
+    slug: "account-recovery-code-generator",
+    toolSlug: "two-factor-backup-code-generator",
+    h1: "Account Recovery Code Generator",
+    subtitle: "Generate Sample Account Recovery Codes",
+    metaTitle: "Account Recovery Code Generator — Free Tool",
+    metaDescription:
+      "Free account recovery code generator producing sample one-time codes in a clear, unambiguous format.",
+    introParagraph:
+      "Whatever you call them — recovery codes, backup codes, one-time codes — this generates realistic samples in the same clear, unambiguous format real platforms use.",
+  },
+  {
+    slug: "random-token-generator",
+    toolSlug: "csrf-token-generator",
+    h1: "Random Token Generator",
+    subtitle: "Generate a Cryptographically Random Token",
+    metaTitle: "Random Token Generator — Free Online Tool",
+    metaDescription:
+      "Free random token generator for CSRF tokens, session identifiers, or any value needing genuine unpredictability.",
+    introParagraph:
+      "Whatever the token is for — CSRF protection, a session identifier, a one-off random value — this generates it using genuine cryptographic randomness, in hex or Base64URL.",
+  },
+  {
+    slug: "api-token-generator",
+    toolSlug: "csrf-token-generator",
+    h1: "API Token Generator",
+    subtitle: "Generate a Sample Random API Token",
+    metaTitle: "API Token Generator — Free Online Tool",
+    metaDescription:
+      "Free API token generator for testing and development — cryptographically random, adjustable length and format.",
+    introParagraph:
+      "Testing an API integration often just needs a realistic-looking random token — this generates one with adjustable length and format for exactly that.",
+  },
+  {
+    slug: "session-token-generator",
+    toolSlug: "csrf-token-generator",
+    h1: "Session Token Generator",
+    subtitle: "Generate a Sample Random Session Token",
+    metaTitle: "Session Token Generator — Free Online Tool",
+    metaDescription:
+      "Free session token generator for development and testing, using cryptographically secure randomness.",
+    introParagraph:
+      "A session token's security depends entirely on genuine unpredictability — this generates one using the same secure random source real session-management systems should use.",
+  },
+  {
+    slug: "security-token-generator",
+    toolSlug: "csrf-token-generator",
+    h1: "Security Token Generator",
+    subtitle: "Generate a Random Security Token",
+    metaTitle: "Security Token Generator — Free Online Tool",
+    metaDescription:
+      "Free security token generator producing cryptographically random values in hex or Base64URL format.",
+    introParagraph:
+      "A general-purpose random token generator for any security context needing genuine unpredictability — CSRF protection, API keys for testing, or one-off secure identifiers.",
+  },
+  {
+    slug: "anti-csrf-token-generator",
+    toolSlug: "csrf-token-generator",
+    h1: "Anti-CSRF Token Generator",
+    subtitle: "Generate a Sample Anti-CSRF Token",
+    metaTitle: "Anti-CSRF Token Generator — Free Online Tool",
+    metaDescription:
+      "Free anti-CSRF token generator for testing form and API request forgery protection during development.",
+    introParagraph:
+      "Testing how your form or API handles a CSRF token field is easier with a realistic sample token — this generates one using genuine cryptographic randomness.",
+  },
+  {
+    slug: "diceware-style-passphrase-generator",
+    toolSlug: "passphrase-generator",
+    h1: "Diceware-Style Passphrase Generator",
+    subtitle: "Generate a Random Word-Based Passphrase",
+    metaTitle: "Diceware-Style Passphrase Generator — Free Tool",
+    metaDescription:
+      "Free diceware-style passphrase generator combining random words from a curated wordlist, with honest entropy calculation.",
+    introParagraph:
+      "Following the same principle as classic diceware — combining several independently random words — this generates a passphrase with entropy calculated honestly from its own wordlist size.",
+  },
+  {
+    slug: "word-based-password-generator",
+    toolSlug: "passphrase-generator",
+    h1: "Word-Based Password Generator",
+    subtitle: "Generate a Password Made of Random Words",
+    metaTitle: "Word-Based Password Generator — Free Tool",
+    metaDescription:
+      "Free word-based password generator combining several random words into a memorable, high-entropy passphrase.",
+    introParagraph:
+      "Trading symbol complexity for length and memorability — this combines several genuinely random words into a passphrase that's both strong and easy to actually type.",
+  },
+  {
+    slug: "memorable-password-generator",
+    toolSlug: "passphrase-generator",
+    h1: "Memorable Password Generator",
+    subtitle: "Generate a Password That's Actually Memorable",
+    metaTitle: "Memorable Password Generator — Free Online Tool",
+    metaDescription:
+      "Free memorable password generator producing random word-based passphrases you can actually recall.",
+    introParagraph:
+      "A random string of symbols is nearly impossible to memorize; a random string of words is not — this generates the latter while keeping genuine cryptographic randomness behind every word chosen.",
+  },
+  {
+    slug: "xkcd-style-password-generator",
+    toolSlug: "passphrase-generator",
+    h1: "XKCD-Style Password Generator",
+    subtitle: "Generate a Random Multi-Word Passphrase",
+    metaTitle: "XKCD-Style Password Generator — Free Tool",
+    metaDescription:
+      "Free multi-word passphrase generator inspired by the classic 'correct horse battery staple' approach to password strength.",
+    introParagraph:
+      "The famous webcomic argument still holds: several random words beat a shorter string of substituted symbols for both strength and memorability — this generates that kind of passphrase directly.",
+  },
+  {
+    slug: "wifi-passphrase-generator",
+    toolSlug: "passphrase-generator",
+    h1: "WiFi Passphrase Generator",
+    subtitle: "Generate a Memorable WiFi Network Passphrase",
+    metaTitle: "WiFi Passphrase Generator — Free Online Tool",
+    metaDescription:
+      "Free WiFi passphrase generator producing a strong, memorable word-based password for your router.",
+    introParagraph:
+      "A WiFi password that guests actually need to type benefits from being memorable — this generates a strong multi-word passphrase that's both secure and easy to read off a card.",
+  },
+  {
+    slug: "password-security-checker",
+    toolSlug: "password-strength-checker",
+    h1: "Password Security Checker",
+    subtitle: "Check a Password's Real Security Against Known Weaknesses",
+    metaTitle: "Password Security Checker — Free Online Tool",
+    metaDescription:
+      "Free password security checker testing against leaked-password lists, sequences, and repeated characters — not just length rules.",
+    introParagraph:
+      "Real password security depends on more than meeting a site's complexity checklist — this checks against actual attacker techniques: leaked password lists, sequences, and repeated characters.",
+  },
+  {
+    slug: "how-strong-is-my-password",
+    toolSlug: "password-strength-checker",
+    h1: "How Strong Is My Password",
+    subtitle: "Find Out Exactly How Strong Your Password Is",
+    metaTitle: "How Strong Is My Password — Free Checker",
+    metaDescription:
+      "Free tool answering 'how strong is my password' with an entropy score and specific weaknesses found.",
+    introParagraph:
+      "Rather than a vague strong/weak label, this shows the actual entropy in bits and lists the specific issues found — sequences, repeats, or a match against known leaked passwords.",
+  },
+  {
+    slug: "password-entropy-checker",
+    toolSlug: "password-strength-checker",
+    h1: "Password Entropy Checker",
+    subtitle: "Calculate a Password's Entropy in Bits",
+    metaTitle: "Password Entropy Checker — Free Online Tool",
+    metaDescription:
+      "Free password entropy checker calculating bits of randomness based on length and character variety.",
+    introParagraph:
+      "Entropy in bits is the real mathematical measure of brute-force resistance — this calculates it directly from a password's length and character variety, then flags known real-world weaknesses on top.",
+  },
+  {
+    slug: "password-audit-tool",
+    toolSlug: "password-strength-checker",
+    h1: "Password Audit Tool",
+    subtitle: "Audit a Password for Real Weaknesses",
+    metaTitle: "Password Audit Tool — Free Online Tool",
+    metaDescription:
+      "Free password audit tool checking entropy, common leaked passwords, sequences, and repeated characters.",
+    introParagraph:
+      "A genuine audit goes past a checklist — this examines entropy, checks against commonly leaked passwords, and flags predictable sequences and repeated characters.",
+  },
+  {
+    slug: "weak-password-checker",
+    toolSlug: "password-strength-checker",
+    h1: "Weak Password Checker",
+    subtitle: "Find Out if a Password Is Actually Weak",
+    metaTitle: "Weak Password Checker — Free Online Tool",
+    metaDescription:
+      "Free weak password checker flagging common leaked passwords, sequences, and low-entropy patterns.",
+    introParagraph:
+      "A password can look complex and still be weak in practice — this flags the specific real-world weaknesses (leaked-password matches, sequences, low entropy) that actually matter.",
+  },
+  {
+    slug: "hmac-sha256-generator",
+    toolSlug: "hmac-generator",
+    h1: "HMAC-SHA256 Generator",
+    subtitle: "Generate an HMAC-SHA256 Signature",
+    metaTitle: "HMAC-SHA256 Generator — Free Online Tool",
+    metaDescription:
+      "Free HMAC-SHA256 generator — the same algorithm behind JWT's HS256 signing, verified against RFC 4231 test vectors.",
+    introParagraph:
+      "HMAC-SHA256 is the exact algorithm behind JWT's HS256 signing — this computes it directly, verified against the official RFC 4231 reference test vectors.",
+  },
+  {
+    slug: "webhook-signature-generator",
+    toolSlug: "hmac-generator",
+    h1: "Webhook Signature Generator",
+    subtitle: "Generate an HMAC Signature for Webhook Testing",
+    metaTitle: "Webhook Signature Generator — Free Tool",
+    metaDescription:
+      "Free webhook signature generator for testing HMAC-based webhook verification during development.",
+    introParagraph:
+      "Most webhook systems sign their payloads with HMAC so receivers can verify authenticity — this computes the same signature for testing your own verification logic.",
+  },
+  {
+    slug: "hmac-signature-tool",
+    toolSlug: "hmac-generator",
+    h1: "HMAC Signature Tool",
+    subtitle: "Compute an HMAC Signature for Any Message",
+    metaTitle: "HMAC Signature Tool — Free Online Tool",
+    metaDescription:
+      "Free HMAC signature tool supporting SHA-1, SHA-256, SHA-384, and SHA-512, using the Web Crypto API.",
+    introParagraph:
+      "Enter a secret and a message, pick an algorithm, and get the HMAC signature instantly — computed using the browser's native, audited cryptographic implementation.",
+  },
+  {
+    slug: "api-signature-generator",
+    toolSlug: "hmac-generator",
+    h1: "API Signature Generator",
+    subtitle: "Generate an HMAC Signature for API Request Signing",
+    metaTitle: "API Signature Generator — Free Online Tool",
+    metaDescription:
+      "Free API signature generator for testing HMAC-based request signing schemes during development.",
+    introParagraph:
+      "Many APIs require requests signed with HMAC using a shared secret — this computes that signature for testing your integration against the expected value.",
+  },
+  {
+    slug: "message-authentication-code-generator",
+    toolSlug: "hmac-generator",
+    h1: "Message Authentication Code Generator",
+    subtitle: "Generate a Message Authentication Code (MAC)",
+    metaTitle: "Message Authentication Code Generator — Free Tool",
+    metaDescription:
+      "Free HMAC-based message authentication code generator proving both message integrity and authenticity.",
+    introParagraph:
+      "HMAC is the standard way to compute a message authentication code — proving a message wasn't altered and came from someone who knows the shared secret.",
+  },
+  {
+    slug: "file-checksum-verifier",
+    toolSlug: "file-hash-checker",
+    h1: "File Checksum Verifier",
+    subtitle: "Verify a File Against Its Published Checksum",
+    metaTitle: "File Checksum Verifier — Free Online Tool",
+    metaDescription:
+      "Free file checksum verifier computing MD5, SHA-1, SHA-256, and SHA-512 hashes entirely in your browser.",
+    introParagraph:
+      "Paste a publisher's checksum and this instantly tells you whether your downloaded file matches — computed locally, with the file never leaving your device.",
+  },
+  {
+    slug: "verify-file-integrity",
+    toolSlug: "file-hash-checker",
+    h1: "Verify File Integrity",
+    subtitle: "Confirm a File Hasn't Been Corrupted or Altered",
+    metaTitle: "Verify File Integrity — Free Online Tool",
+    metaDescription:
+      "Free tool to verify file integrity by computing and comparing cryptographic hashes against a known checksum.",
+    introParagraph:
+      "A mismatched hash is an unambiguous signal something changed — this computes four standard hashes at once so you can confirm integrity against whichever checksum format you have.",
+  },
+  {
+    slug: "sha256-file-checker",
+    toolSlug: "file-hash-checker",
+    h1: "SHA-256 File Checker",
+    subtitle: "Check a File's SHA-256 Hash",
+    metaTitle: "SHA-256 File Checker — Free Online Tool",
+    metaDescription:
+      "Free SHA-256 file checker computing the hash of any file entirely in your browser, with optional checksum comparison.",
+    introParagraph:
+      "SHA-256 is the most commonly published checksum format for modern software downloads — this computes it directly from any file you select, alongside three other algorithms.",
+  },
+  {
+    slug: "download-checksum-verifier",
+    toolSlug: "file-hash-checker",
+    h1: "Download Checksum Verifier",
+    subtitle: "Verify a Downloaded File's Checksum",
+    metaTitle: "Download Checksum Verifier — Free Online Tool",
+    metaDescription:
+      "Free tool to verify a downloaded file's checksum matches the publisher's, confirming it wasn't corrupted or tampered with.",
+    introParagraph:
+      "Before trusting a downloaded installer or archive, confirming its checksum against the publisher's published value catches both corruption and tampering.",
+  },
+  {
+    slug: "file-integrity-checker",
+    toolSlug: "file-hash-checker",
+    h1: "File Integrity Checker",
+    subtitle: "Check Any File's Integrity via Cryptographic Hash",
+    metaTitle: "File Integrity Checker — Free Online Tool",
+    metaDescription:
+      "Free file integrity checker computing MD5, SHA-1, SHA-256, and SHA-512 hashes locally in your browser.",
+    introParagraph:
+      "Whether it's a backup, an archive, or a downloaded file, this confirms its exact integrity by computing a cryptographic fingerprint you can compare against a known-good value.",
+  },
+  {
+    slug: "aes-256-encryption-tool",
+    toolSlug: "aes-encryption-tool",
+    h1: "AES-256 Encryption Tool",
+    subtitle: "Encrypt Text with AES-256-GCM",
+    metaTitle: "AES-256 Encryption Tool — Free Online Tool",
+    metaDescription:
+      "Free AES-256-GCM encryption tool using PBKDF2 key derivation, running entirely in your browser.",
+    introParagraph:
+      "AES-256 is the strongest widely-deployed symmetric cipher in common use — this applies it in authenticated GCM mode, with your passphrase strengthened through PBKDF2 first.",
+  },
+  {
+    slug: "text-encryption-tool",
+    toolSlug: "aes-encryption-tool",
+    h1: "Text Encryption Tool",
+    subtitle: "Encrypt Any Block of Text with a Passphrase",
+    metaTitle: "Text Encryption Tool — Free Online Tool",
+    metaDescription:
+      "Free text encryption tool using AES-256-GCM — encrypt any text with a passphrase entirely in your browser.",
+    introParagraph:
+      "Encrypt a note, message, or block of text with a passphrase you choose — the encryption itself happens entirely client-side, never touching a server.",
+  },
+  {
+    slug: "encrypt-text-online",
+    toolSlug: "aes-encryption-tool",
+    h1: "Encrypt Text Online",
+    subtitle: "Encrypt Text Online with Real AES-256 Encryption",
+    metaTitle: "Encrypt Text Online — Free Tool",
+    metaDescription:
+      "Free online text encryption using real AES-256-GCM — no install, no account, runs in your browser.",
+    introParagraph:
+      "Genuine AES-256 encryption running entirely in the browser — no software install, no account required, and your plaintext never leaves your device.",
+  },
+  {
+    slug: "passphrase-encryption-tool",
+    toolSlug: "aes-encryption-tool",
+    h1: "Passphrase Encryption Tool",
+    subtitle: "Encrypt Text Using a Passphrase You Choose",
+    metaTitle: "Passphrase Encryption Tool — Free Online Tool",
+    metaDescription:
+      "Free passphrase-based encryption tool using AES-256-GCM with PBKDF2 key derivation for stronger protection.",
+    introParagraph:
+      "Your chosen passphrase is never used as the raw encryption key directly — it's strengthened through 250,000 rounds of PBKDF2 first, making it far more resistant to brute-force guessing.",
+  },
+  {
+    slug: "browser-based-encryption-tool",
+    toolSlug: "aes-encryption-tool",
+    h1: "Browser-Based Encryption Tool",
+    subtitle: "Encrypt Text Entirely Inside Your Browser",
+    metaTitle: "Browser-Based Encryption Tool — Free Tool",
+    metaDescription:
+      "Free browser-based AES-256 encryption tool — no server involved, no data ever leaves your device.",
+    introParagraph:
+      "Every step of encryption happens locally using the Web Crypto API — nothing you type, including the passphrase itself, is ever sent to a server.",
+  },
+  {
+    slug: "aes-256-decryption-tool",
+    toolSlug: "aes-decryption-tool",
+    h1: "AES-256 Decryption Tool",
+    subtitle: "Decrypt AES-256-GCM Encrypted Text",
+    metaTitle: "AES-256 Decryption Tool — Free Online Tool",
+    metaDescription:
+      "Free AES-256-GCM decryption tool — recover text encrypted with the matching AES Encryption Tool.",
+    introParagraph:
+      "Paste the encrypted Base64 text and the original passphrase to recover the exact plaintext, with tamper detection built into the authenticated GCM mode.",
+  },
+  {
+    slug: "text-decryption-tool",
+    toolSlug: "aes-decryption-tool",
+    h1: "Text Decryption Tool",
+    subtitle: "Decrypt Text Encrypted with a Passphrase",
+    metaTitle: "Text Decryption Tool — Free Online Tool",
+    metaDescription:
+      "Free text decryption tool for recovering AES-256-GCM encrypted text using the original passphrase.",
+    introParagraph:
+      "Recovers text encrypted with a matching passphrase-based AES-256-GCM tool — decryption happens entirely in your browser, nothing sent anywhere.",
+  },
+  {
+    slug: "decrypt-text-online",
+    toolSlug: "aes-decryption-tool",
+    h1: "Decrypt Text Online",
+    subtitle: "Decrypt AES-Encrypted Text Online",
+    metaTitle: "Decrypt Text Online — Free Tool",
+    metaDescription:
+      "Free online tool to decrypt AES-256-GCM encrypted text using your original passphrase — runs entirely in the browser.",
+    introParagraph:
+      "No install, no account — paste the encrypted text and passphrase, and the original plaintext is recovered instantly if both are correct.",
+  },
+  {
+    slug: "passphrase-decryption-tool",
+    toolSlug: "aes-decryption-tool",
+    h1: "Passphrase Decryption Tool",
+    subtitle: "Decrypt Text Using Its Original Passphrase",
+    metaTitle: "Passphrase Decryption Tool — Free Online Tool",
+    metaDescription:
+      "Free passphrase decryption tool reversing AES-256-GCM encryption with PBKDF2 key derivation.",
+    introParagraph:
+      "Reconstructs the exact same encryption key from your passphrase using PBKDF2 and the embedded salt, then reverses the AES-256-GCM encryption to recover the original text.",
+  },
+  {
+    slug: "browser-based-decryption-tool",
+    toolSlug: "aes-decryption-tool",
+    h1: "Browser-Based Decryption Tool",
+    subtitle: "Decrypt Text Entirely Inside Your Browser",
+    metaTitle: "Browser-Based Decryption Tool — Free Tool",
+    metaDescription:
+      "Free browser-based AES-256 decryption tool — nothing is sent to a server during decryption.",
+    introParagraph:
+      "Decryption happens entirely client-side using the Web Crypto API — neither the encrypted text nor the passphrase you enter is ever transmitted anywhere.",
+  },
+  {
+    slug: "encrypt-a-file-online",
+    toolSlug: "file-encryptor-decryptor",
+    h1: "Encrypt a File Online",
+    subtitle: "Encrypt Any File with a Passphrase in Your Browser",
+    metaTitle: "Encrypt a File Online — Free Tool",
+    metaDescription:
+      "Free tool to encrypt any file with AES-256-GCM and a passphrase, entirely in your browser — no upload.",
+    introParagraph:
+      "Select any file, choose a passphrase, and download an encrypted .enc version — the original file is never uploaded anywhere during the process.",
+  },
+  {
+    slug: "decrypt-a-file-online",
+    toolSlug: "file-encryptor-decryptor",
+    h1: "Decrypt a File Online",
+    subtitle: "Decrypt an Encrypted File in Your Browser",
+    metaTitle: "Decrypt a File Online — Free Tool",
+    metaDescription:
+      "Free tool to decrypt a .enc file back to its original form using the correct passphrase, entirely in your browser.",
+    introParagraph:
+      "Select the encrypted .enc file and enter the original passphrase to recover the exact original file, byte for byte, downloaded directly from your browser.",
+  },
+  {
+    slug: "file-encryption-tool",
+    toolSlug: "file-encryptor-decryptor",
+    h1: "File Encryption Tool",
+    subtitle: "Encrypt or Decrypt Any File with AES-256",
+    metaTitle: "File Encryption Tool — Free Online Tool",
+    metaDescription:
+      "Free file encryption tool supporting both encryption and decryption using AES-256-GCM, entirely client-side.",
+    introParagraph:
+      "One tool for both directions — encrypt a file to protect it, or decrypt a .enc file back to its original form, all without installing dedicated encryption software.",
+  },
+  {
+    slug: "secure-file-encryption",
+    toolSlug: "file-encryptor-decryptor",
+    h1: "Secure File Encryption",
+    subtitle: "Securely Encrypt Any File with a Passphrase",
+    metaTitle: "Secure File Encryption — Free Online Tool",
+    metaDescription:
+      "Free secure file encryption using AES-256-GCM authenticated encryption, with tamper detection built in.",
+    introParagraph:
+      "Authenticated encryption (AES-256-GCM) means any tampering with the encrypted file is detected immediately during decryption, not silently ignored.",
+  },
+  {
+    slug: "aes-file-encryptor",
+    toolSlug: "file-encryptor-decryptor",
+    h1: "AES File Encryptor",
+    subtitle: "Encrypt Any File Using AES-256",
+    metaTitle: "AES File Encryptor — Free Online Tool",
+    metaDescription:
+      "Free AES file encryptor producing a downloadable encrypted .enc file, protected with a passphrase you choose.",
+    introParagraph:
+      "Turns any file into an AES-256-GCM encrypted .enc file protected by your chosen passphrase — the strongest widely-deployed symmetric cipher, applied locally in your browser.",
+  },
+  {
+    slug: "rsa-key-pair-generator",
+    toolSlug: "pgp-key-pair-generator",
+    h1: "RSA Key Pair Generator",
+    subtitle: "Generate a Real RSA Public/Private Keypair",
+    metaTitle: "RSA Key Pair Generator — Free Online Tool",
+    metaDescription:
+      "Free RSA key pair generator producing real 2048-bit or 4096-bit keys in standard PEM format, using the Web Crypto API.",
+    introParagraph:
+      "Generates a genuine RSA keypair using the browser's built-in cryptography, exported in standard PEM format — the format used across TLS, SSH, and countless other systems.",
+  },
+  {
+    slug: "public-private-key-generator",
+    toolSlug: "pgp-key-pair-generator",
+    h1: "Public/Private Key Generator",
+    subtitle: "Generate a Public and Private Key Pair",
+    metaTitle: "Public/Private Key Generator — Free Tool",
+    metaDescription:
+      "Free public/private key pair generator producing real RSA keys in PEM format entirely in your browser.",
+    introParagraph:
+      "A public key you can share freely, and a private key that alone can decrypt what it encrypts — generated together as a real, mathematically linked RSA pair.",
+  },
+  {
+    slug: "rsa-keypair-generator-online",
+    toolSlug: "pgp-key-pair-generator",
+    h1: "RSA Keypair Generator Online",
+    subtitle: "Generate an RSA Keypair Online, No Install Needed",
+    metaTitle: "RSA Keypair Generator Online — Free Tool",
+    metaDescription:
+      "Free online RSA keypair generator — no software install, runs entirely in your browser using the Web Crypto API.",
+    introParagraph:
+      "No OpenSSL command line needed — generate a real RSA keypair directly in the browser, exported in the same standard PEM format OpenSSL itself would produce.",
+  },
+  {
+    slug: "generate-rsa-keys",
+    toolSlug: "pgp-key-pair-generator",
+    h1: "Generate RSA Keys",
+    subtitle: "Generate a Fresh RSA Public and Private Key",
+    metaTitle: "Generate RSA Keys — Free Online Tool",
+    metaDescription:
+      "Free tool to generate a fresh RSA public and private key pair in standard PEM format.",
+    introParagraph:
+      "Choose 2048-bit or 4096-bit and generate a fresh RSA keypair instantly, exported as standard PEM text ready to copy and use.",
+  },
+  {
+    slug: "asymmetric-key-generator",
+    toolSlug: "pgp-key-pair-generator",
+    h1: "Asymmetric Key Generator",
+    subtitle: "Generate an Asymmetric (Public/Private) Key Pair",
+    metaTitle: "Asymmetric Key Generator — Free Online Tool",
+    metaDescription:
+      "Free asymmetric key pair generator producing real RSA keys for public-key cryptography experiments and development.",
+    introParagraph:
+      "Unlike symmetric encryption's single shared key, asymmetric cryptography uses a linked public/private pair — generated here as real RSA keys via the Web Crypto API.",
+  },
+  {
+    slug: "x509-certificate-decoder",
+    toolSlug: "ssl-certificate-decoder",
+    h1: "X.509 Certificate Decoder",
+    subtitle: "Decode Any X.509 Certificate's Fields",
+    metaTitle: "X.509 Certificate Decoder — Free Online Tool",
+    metaDescription:
+      "Free X.509 certificate decoder parsing the ASN.1 DER structure to extract every standard certificate field.",
+    introParagraph:
+      "Certificates follow the X.509 standard's precise ASN.1 structure — this parses that structure directly to extract every field, verified against real certificates using OpenSSL as ground truth.",
+  },
+  {
+    slug: "pem-certificate-viewer",
+    toolSlug: "ssl-certificate-decoder",
+    h1: "PEM Certificate Viewer",
+    subtitle: "View the Fields Inside Any PEM Certificate",
+    metaTitle: "PEM Certificate Viewer — Free Online Tool",
+    metaDescription:
+      "Free PEM certificate viewer decoding subject, issuer, validity, and covered domains from any pasted certificate.",
+    introParagraph:
+      "Paste any PEM-formatted certificate and see its underlying fields laid out clearly — subject, issuer, validity dates, and every domain it covers.",
+  },
+  {
+    slug: "certificate-parser",
+    toolSlug: "ssl-certificate-decoder",
+    h1: "Certificate Parser",
+    subtitle: "Parse a Certificate's Structure and Fields",
+    metaTitle: "Certificate Parser — Free Online Tool",
+    metaDescription:
+      "Free certificate parser extracting X.509 fields from a pasted PEM certificate entirely in your browser.",
+    introParagraph:
+      "A from-scratch ASN.1 DER parser walks the certificate's binary structure directly, extracting every standard X.509 field without sending the certificate anywhere.",
+  },
+  {
+    slug: "decode-certificate-online",
+    toolSlug: "ssl-certificate-decoder",
+    h1: "Decode Certificate Online",
+    subtitle: "Decode a Certificate's Fields Online, No Install",
+    metaTitle: "Decode Certificate Online — Free Tool",
+    metaDescription:
+      "Free online certificate decoder — no install, paste a PEM certificate and see its fields instantly.",
+    introParagraph:
+      "No OpenSSL command needed — paste a certificate and see subject, issuer, validity, and covered domains decoded instantly in the browser.",
+  },
+  {
+    slug: "certificate-field-viewer",
+    toolSlug: "ssl-certificate-decoder",
+    h1: "Certificate Field Viewer",
+    subtitle: "View Every Field Inside an SSL Certificate",
+    metaTitle: "Certificate Field Viewer — Free Online Tool",
+    metaDescription:
+      "Free certificate field viewer showing subject, issuer, validity, serial number, and SANs from any pasted PEM certificate.",
+    introParagraph:
+      "Every field an X.509 certificate carries — subject, issuer, validity window, serial number, signature algorithm, and covered domains — decoded and displayed clearly.",
+  },
+  {
+    slug: "dnsbl-checker",
+    toolSlug: "ip-blacklist-checker",
+    h1: "DNSBL Checker",
+    subtitle: "Check an IP Against Public DNS Blackhole Lists",
+    metaTitle: "DNSBL Checker — Free Online Tool",
+    metaDescription:
+      "Free DNSBL checker testing an IPv4 address against several independently maintained spam blacklist zones.",
+    introParagraph:
+      "DNSBLs are the mechanism mail servers actually use to check sender reputation — this runs the same reverse-IP DNS lookup technique against several well-behaved public zones.",
+  },
+  {
+    slug: "spam-blacklist-checker",
+    toolSlug: "ip-blacklist-checker",
+    h1: "Spam Blacklist Checker",
+    subtitle: "Check if an IP Address Is on a Spam Blacklist",
+    metaTitle: "Spam Blacklist Checker — Free Online Tool",
+    metaDescription:
+      "Free spam blacklist checker testing an IP against SpamCop, Barracuda, and UCEPROTECT DNSBL zones.",
+    introParagraph:
+      "Being listed on a spam blacklist can quietly tank email deliverability — this checks an IP against several well-established, correctly-behaving public blacklists at once.",
+  },
+  {
+    slug: "email-server-reputation-checker",
+    toolSlug: "ip-blacklist-checker",
+    h1: "Email Server Reputation Checker",
+    subtitle: "Check a Mail Server's Blacklist Reputation",
+    metaTitle: "Email Server Reputation Checker — Free Tool",
+    metaDescription:
+      "Free email server reputation checker testing a mail server's IP against public DNSBL blacklists.",
+    introParagraph:
+      "A mail server's sending reputation directly affects deliverability — this checks its IP against several DNSBL zones mail providers commonly consult.",
+  },
+  {
+    slug: "is-my-ip-blacklisted",
+    toolSlug: "ip-blacklist-checker",
+    h1: "Is My IP Blacklisted",
+    subtitle: "Check if Your Server's IP Is Blacklisted",
+    metaTitle: "Is My IP Blacklisted — Free Checker",
+    metaDescription:
+      "Free tool answering 'is my IP blacklisted' by checking it against several public spam DNSBL zones.",
+    introParagraph:
+      "Enter your server's IP to check directly whether it's currently listed on any of several well-established public spam blacklists.",
+  },
+  {
+    slug: "mail-server-blacklist-checker",
+    toolSlug: "ip-blacklist-checker",
+    h1: "Mail Server Blacklist Checker",
+    subtitle: "Check if a Mail Server's IP Is Blacklisted",
+    metaTitle: "Mail Server Blacklist Checker — Free Tool",
+    metaDescription:
+      "Free mail server blacklist checker for diagnosing email deliverability problems tied to IP reputation.",
+    introParagraph:
+      "When outbound email starts landing in spam unexpectedly, checking the sending server's IP against public blacklists is one of the first, fastest diagnostic steps.",
+  },
+  {
+    slug: "pwned-password-checker",
+    toolSlug: "data-breach-email-checker",
+    h1: "Pwned Password Checker",
+    subtitle: "Check if a Password Has Been Pwned",
+    metaTitle: "Pwned Password Checker — Free Online Tool",
+    metaDescription:
+      "Free pwned password checker using Have I Been Pwned's free k-anonymity API — your password is never sent in full.",
+    introParagraph:
+      "Checks a password against Have I Been Pwned's database of over 800 million breached passwords, using k-anonymity so only a hash prefix is ever transmitted.",
+  },
+  {
+    slug: "have-i-been-pwned-password-check",
+    toolSlug: "data-breach-email-checker",
+    h1: "Have I Been Pwned Password Check",
+    subtitle: "Check a Password Against Have I Been Pwned",
+    metaTitle: "Have I Been Pwned Password Check — Free Tool",
+    metaDescription:
+      "Free tool to check a password against the Have I Been Pwned Pwned Passwords database using k-anonymity.",
+    introParagraph:
+      "Directly checks a password against Have I Been Pwned's genuinely free Pwned Passwords API, with the privacy-preserving k-anonymity technique protecting your actual password.",
+  },
+  {
+    slug: "leaked-password-checker",
+    toolSlug: "data-breach-email-checker",
+    h1: "Leaked Password Checker",
+    subtitle: "Check if a Password Has Leaked in a Data Breach",
+    metaTitle: "Leaked Password Checker — Free Online Tool",
+    metaDescription:
+      "Free leaked password checker showing how many known data breaches a password has appeared in.",
+    introParagraph:
+      "Checks whether a specific password has already appeared in a documented data breach — and shows exactly how many times, since some passwords have leaked millions of times over.",
+  },
+  {
+    slug: "compromised-password-checker",
+    toolSlug: "data-breach-email-checker",
+    h1: "Compromised Password Checker",
+    subtitle: "Check if a Password Is Already Compromised",
+    metaTitle: "Compromised Password Checker — Free Tool",
+    metaDescription:
+      "Free compromised password checker against a database of over 800 million breached passwords.",
+    introParagraph:
+      "A password can be compromised even if you were never personally hacked — plenty of people independently choose the same common passwords, all of which end up in this breach database.",
+  },
+  {
+    slug: "check-password-breach",
+    toolSlug: "data-breach-email-checker",
+    h1: "Check Password Breach Status",
+    subtitle: "Check Whether a Password Has Ever Been Breached",
+    metaTitle: "Check Password Breach Status — Free Tool",
+    metaDescription:
+      "Free tool to check a password's breach status against Have I Been Pwned's Pwned Passwords database.",
+    introParagraph:
+      "One quick check tells you whether a password is already known to attackers through documented data breaches — worth checking before using any password on a new account.",
+  },
+  {
+    slug: "one-time-secret-link-generator",
+    toolSlug: "self-destructing-secure-note-generator",
+    h1: "One-Time Secret Link Generator",
+    subtitle: "Generate a Link That Shares a Secret Once",
+    metaTitle: "One-Time Secret Link Generator — Free Tool",
+    metaDescription:
+      "Free one-time secret link generator: encrypt a note client-side and share it via a link with no server storage.",
+    introParagraph:
+      "Encrypts your note entirely in the browser and packs it into a shareable link — no server ever stores the secret, since everything lives in the link's URL fragment.",
+  },
+  {
+    slug: "burn-after-reading-note",
+    toolSlug: "self-destructing-secure-note-generator",
+    h1: "Burn After Reading Note Generator",
+    subtitle: "Create a Note That Marks Itself as Read Once Viewed",
+    metaTitle: "Burn After Reading Note — Free Online Tool",
+    metaDescription:
+      "Free burn-after-reading note generator: an encrypted, self-destructing link with no server-side storage.",
+    introParagraph:
+      "Inspired by the classic 'burn after reading' concept — the note encrypts client-side, and marks itself destroyed in the recipient's browser once they've read it.",
+  },
+  {
+    slug: "encrypted-note-link-generator",
+    toolSlug: "self-destructing-secure-note-generator",
+    h1: "Encrypted Note Link Generator",
+    subtitle: "Generate a Link to a Client-Side Encrypted Note",
+    metaTitle: "Encrypted Note Link Generator — Free Tool",
+    metaDescription:
+      "Free tool to generate a link to a note encrypted entirely in your browser, with the key held in the link itself.",
+    introParagraph:
+      "The note and its encryption key both live only in the link's URL fragment, which browsers never transmit to any server — genuinely private by construction.",
+  },
+  {
+    slug: "private-note-sharing-tool",
+    toolSlug: "self-destructing-secure-note-generator",
+    h1: "Private Note Sharing Tool",
+    subtitle: "Share a Private Note via an Encrypted Link",
+    metaTitle: "Private Note Sharing Tool — Free Online Tool",
+    metaDescription:
+      "Free private note sharing tool: encrypt a message client-side and share it as a link with no server storage.",
+    introParagraph:
+      "Share sensitive text without leaving a permanent plaintext copy in a chat or email thread — the note travels only as an encrypted link, decrypted client-side by the recipient.",
+  },
+  {
+    slug: "self-destructing-message-generator",
+    toolSlug: "self-destructing-secure-note-generator",
+    h1: "Self-Destructing Message Generator",
+    subtitle: "Generate a Self-Destructing Encrypted Message Link",
+    metaTitle: "Self-Destructing Message Generator — Free Tool",
+    metaDescription:
+      "Free self-destructing message generator producing an encrypted, client-side-only shareable link.",
+    introParagraph:
+      "Generates a link to a message that's encrypted entirely client-side and marked destroyed in the viewer's browser after reading — with the honest limitations of a no-server design clearly explained.",
+  },
+  {
+    slug: "algebra-equation-solver",
+    toolSlug: "equation-solver",
+    h1: "Algebra Equation Solver",
+    subtitle: "Solve Any Linear or Quadratic Algebra Equation",
+    metaTitle: "Algebra Equation Solver — Free Online Tool",
+    metaDescription:
+      "Free algebra equation solver for linear and quadratic equations in x, with step-by-step solving shown.",
+    introParagraph:
+      "Enter both sides of an algebra equation exactly as written — parentheses, exponents, and all — and get the exact value of x along with the key steps taken to solve it.",
+  },
+  {
+    slug: "solve-for-x-calculator",
+    toolSlug: "equation-solver",
+    h1: "Solve for X Calculator",
+    subtitle: "Solve Any Equation for the Value of X",
+    metaTitle: "Solve for X Calculator — Free Online Tool",
+    metaDescription:
+      "Free calculator to solve for x in any linear or quadratic equation, including terms on both sides.",
+    introParagraph:
+      "Handles equations with x terms on both sides, parentheses, and exponents — moving everything to one side and solving exactly, the same way a worked solution would.",
+  },
+  {
+    slug: "linear-equation-solver",
+    toolSlug: "equation-solver",
+    h1: "Linear Equation Solver",
+    subtitle: "Solve Any Linear Equation for X",
+    metaTitle: "Linear Equation Solver — Free Online Tool",
+    metaDescription:
+      "Free linear equation solver for equations with x to the first power, including terms on both sides.",
+    introParagraph:
+      "For equations where x appears only to the first power, this isolates x and returns the exact solution instantly, regardless of how many terms are on each side.",
+  },
+  {
+    slug: "math-equation-solver",
+    toolSlug: "equation-solver",
+    h1: "Math Equation Solver",
+    subtitle: "Solve Math Equations for X Instantly",
+    metaTitle: "Math Equation Solver — Free Online Tool",
+    metaDescription:
+      "Free math equation solver handling linear and quadratic equations with an exact solution and solving steps.",
+    introParagraph:
+      "A general-purpose equation solver for algebra homework, quick checks, or any situation needing an exact value of x without manual rearranging.",
+  },
+  {
+    slug: "x-value-calculator",
+    toolSlug: "equation-solver",
+    h1: "X Value Calculator",
+    subtitle: "Find the Value of X in Any Equation",
+    metaTitle: "X Value Calculator — Free Online Tool",
+    metaDescription:
+      "Free calculator to find the exact value of x in a linear or quadratic equation, with steps shown.",
+    introParagraph:
+      "Enter an equation and get the exact value (or values) of x that make it true, computed exactly rather than approximated.",
+  },
+  {
+    slug: "quadratic-formula-calculator",
+    toolSlug: "quadratic-equation-solver",
+    h1: "Quadratic Formula Calculator",
+    subtitle: "Apply the Quadratic Formula to Any Equation",
+    metaTitle: "Quadratic Formula Calculator — Free Online Tool",
+    metaDescription:
+      "Free quadratic formula calculator: enter a, b, and c to get the exact roots of ax² + bx + c = 0.",
+    introParagraph:
+      "Applies x = (−b ± √(b² − 4ac)) / 2a directly to your coefficients, working for every quadratic regardless of whether it factors nicely.",
+  },
+  {
+    slug: "discriminant-calculator",
+    toolSlug: "quadratic-equation-solver",
+    h1: "Discriminant Calculator",
+    subtitle: "Calculate a Quadratic Equation's Discriminant",
+    metaTitle: "Discriminant Calculator — Free Online Tool",
+    metaDescription:
+      "Free discriminant calculator computing b² − 4ac and showing what it means for the equation's roots.",
+    introParagraph:
+      "The discriminant's sign predicts everything about a quadratic's roots before solving — this computes it instantly and shows the full root calculation alongside it.",
+  },
+  {
+    slug: "parabola-roots-calculator",
+    toolSlug: "quadratic-equation-solver",
+    h1: "Parabola Roots Calculator",
+    subtitle: "Find Where a Parabola Crosses the X-Axis",
+    metaTitle: "Parabola Roots Calculator — Free Online Tool",
+    metaDescription:
+      "Free parabola roots calculator finding the x-intercepts of any quadratic function from its coefficients.",
+    introParagraph:
+      "A parabola's roots are exactly where it crosses the x-axis — this finds them directly from the a, b, c coefficients using the quadratic formula.",
+  },
+  {
+    slug: "ax2-bx-c-solver",
+    toolSlug: "quadratic-equation-solver",
+    h1: "ax² + bx + c Solver",
+    subtitle: "Solve Any Equation in Standard Quadratic Form",
+    metaTitle: "ax² + bx + c Solver — Free Online Tool",
+    metaDescription:
+      "Free solver for equations in standard quadratic form ax² + bx + c = 0 — enter coefficients, get exact roots.",
+    introParagraph:
+      "For any equation already in standard quadratic form, enter the three coefficients directly and get exact real or complex roots instantly.",
+  },
+  {
+    slug: "complex-roots-calculator",
+    toolSlug: "quadratic-equation-solver",
+    h1: "Complex Roots Calculator",
+    subtitle: "Find Complex Roots of a Quadratic Equation",
+    metaTitle: "Complex Roots Calculator — Free Online Tool",
+    metaDescription:
+      "Free complex roots calculator for quadratic equations with a negative discriminant — shows the full complex conjugate pair.",
+    introParagraph:
+      "When a quadratic's discriminant is negative, this computes its complex conjugate root pair directly rather than reporting 'no solution.'",
+  },
+  {
+    slug: "matrix-multiplication-calculator",
+    toolSlug: "matrix-calculator",
+    h1: "Matrix Multiplication Calculator",
+    subtitle: "Multiply Two Matrices Instantly",
+    metaTitle: "Matrix Multiplication Calculator — Free Tool",
+    metaDescription:
+      "Free matrix multiplication calculator for 2×2, 3×3, and 4×4 matrices, computed instantly as you type.",
+    introParagraph:
+      "Matrix multiplication involves summing products across rows and columns — tedious by hand, computed here instantly for matrices up to 4×4.",
+  },
+  {
+    slug: "matrix-determinant-calculator",
+    toolSlug: "matrix-calculator",
+    h1: "Matrix Determinant Calculator",
+    subtitle: "Calculate a Matrix's Determinant",
+    metaTitle: "Matrix Determinant Calculator — Free Tool",
+    metaDescription:
+      "Free matrix determinant calculator using Gaussian elimination, verified against known reference examples.",
+    introParagraph:
+      "Computed via Gaussian elimination with partial pivoting, a numerically stable method verified against classic textbook reference matrices.",
+  },
+  {
+    slug: "matrix-inverse-calculator",
+    toolSlug: "matrix-calculator",
+    h1: "Matrix Inverse Calculator",
+    subtitle: "Find the Inverse of Any Invertible Matrix",
+    metaTitle: "Matrix Inverse Calculator — Free Online Tool",
+    metaDescription:
+      "Free matrix inverse calculator for 2×2, 3×3, and 4×4 matrices, with a clear error if the matrix is singular.",
+    introParagraph:
+      "Finds the inverse of any invertible matrix up to 4×4, clearly reporting when a matrix is singular (determinant zero) and has no inverse at all.",
+  },
+  {
+    slug: "matrix-addition-calculator",
+    toolSlug: "matrix-calculator",
+    h1: "Matrix Addition Calculator",
+    subtitle: "Add or Subtract Two Matrices",
+    metaTitle: "Matrix Addition Calculator — Free Online Tool",
+    metaDescription:
+      "Free matrix addition and subtraction calculator for matrices of the same size, up to 4×4.",
+    introParagraph:
+      "Matrix addition and subtraction work entry-by-entry — enter two matrices of the same size and get the result instantly.",
+  },
+  {
+    slug: "matrix-transpose-calculator",
+    toolSlug: "matrix-calculator",
+    h1: "Matrix Transpose Calculator",
+    subtitle: "Transpose Any Matrix Instantly",
+    metaTitle: "Matrix Transpose Calculator — Free Online Tool",
+    metaDescription:
+      "Free matrix transpose calculator flipping rows and columns for matrices up to 4×4.",
+    introParagraph:
+      "Transposing flips a matrix over its diagonal, turning rows into columns — a quick, mechanical operation computed instantly here.",
+  },
+  {
+    slug: "function-plotter",
+    toolSlug: "graphing-calculator",
+    h1: "Function Plotter",
+    subtitle: "Plot Any Mathematical Function Instantly",
+    metaTitle: "Function Plotter — Free Online Tool",
+    metaDescription:
+      "Free function plotter graphing y = f(x) for any expression, with an adjustable x-axis range.",
+    introParagraph:
+      "Enter any function of x and see its shape plotted instantly, with the y-axis scaling automatically to fit the curve's actual range of values.",
+  },
+  {
+    slug: "plot-a-graph-online",
+    toolSlug: "graphing-calculator",
+    h1: "Plot a Graph Online",
+    subtitle: "Plot Any Function's Graph Online, No Install",
+    metaTitle: "Plot a Graph Online — Free Tool",
+    metaDescription:
+      "Free online graph plotter — no install, plot any function of x directly in your browser.",
+    introParagraph:
+      "No software install needed — type an equation and see it plotted instantly, right in the browser.",
+  },
+  {
+    slug: "desmos-alternative",
+    toolSlug: "graphing-calculator",
+    h1: "Free Graphing Calculator",
+    subtitle: "A Free, Simple Alternative for Plotting Functions",
+    metaTitle: "Free Graphing Calculator — Online Tool",
+    metaDescription:
+      "Free, simple online graphing calculator for plotting a single function of x quickly, no account needed.",
+    introParagraph:
+      "For quickly plotting a single function without needing a full-featured graphing suite, this gives a fast, no-account-needed alternative.",
+  },
+  {
+    slug: "online-graphing-tool",
+    toolSlug: "graphing-calculator",
+    h1: "Online Graphing Tool",
+    subtitle: "Graph Any Function of X Online",
+    metaTitle: "Online Graphing Tool — Free Tool",
+    metaDescription:
+      "Free online graphing tool supporting standard math notation, trig functions, and adjustable x-range.",
+    introParagraph:
+      "Supports standard math notation including trig, roots, and logarithms — enter an expression and see it graphed immediately.",
+  },
+  {
+    slug: "curve-plotter",
+    toolSlug: "graphing-calculator",
+    h1: "Curve Plotter",
+    subtitle: "Plot Any Curve Defined by y = f(x)",
+    metaTitle: "Curve Plotter — Free Online Tool",
+    metaDescription:
+      "Free curve plotter for any function of x, from simple lines to parabolas to trigonometric waves.",
+    introParagraph:
+      "From straight lines to parabolas to trigonometric waves, this plots any function of x you enter, scaling automatically to fit the curve.",
+  },
+  {
+    slug: "is-it-a-prime-number",
+    toolSlug: "prime-number-checker",
+    h1: "Is It a Prime Number",
+    subtitle: "Instantly Check if a Number Is Prime",
+    metaTitle: "Is It a Prime Number — Free Checker",
+    metaDescription:
+      "Free tool answering 'is it a prime number' for any whole number, of any size, instantly.",
+    introParagraph:
+      "A direct answer to the question — enter any whole number and find out immediately whether it's prime, with its factorization shown if it isn't.",
+  },
+  {
+    slug: "prime-factorization-calculator",
+    toolSlug: "prime-number-checker",
+    h1: "Prime Factorization Calculator",
+    subtitle: "Find the Prime Factors of Any Number",
+    metaTitle: "Prime Factorization Calculator — Free Tool",
+    metaDescription:
+      "Free prime factorization calculator breaking any whole number down into its prime factors.",
+    introParagraph:
+      "Every whole number greater than 1 breaks down into a unique set of prime factors — this finds that exact breakdown for any number you enter.",
+  },
+  {
+    slug: "prime-number-tester",
+    toolSlug: "prime-number-checker",
+    h1: "Prime Number Tester",
+    subtitle: "Test Whether Any Number Is Prime",
+    metaTitle: "Prime Number Tester — Free Online Tool",
+    metaDescription:
+      "Free prime number tester using trial division, accurate for numbers of any size via BigInt arithmetic.",
+    introParagraph:
+      "Uses trial division up to the square root, computed with exact BigInt arithmetic so results stay accurate no matter how large the number.",
+  },
+  {
+    slug: "large-number-prime-checker",
+    toolSlug: "prime-number-checker",
+    h1: "Large Number Prime Checker",
+    subtitle: "Check if a Very Large Number Is Prime",
+    metaTitle: "Large Number Prime Checker — Free Tool",
+    metaDescription:
+      "Free prime checker built to handle very large numbers exactly, using BigInt arithmetic rather than standard floating-point numbers.",
+    introParagraph:
+      "Standard JavaScript numbers lose precision well before most 'large' numbers of interest — this uses BigInt arithmetic instead, keeping every check exact.",
+  },
+  {
+    slug: "prime-factor-finder",
+    toolSlug: "prime-number-checker",
+    h1: "Prime Factor Finder",
+    subtitle: "Find All Prime Factors of Any Number",
+    metaTitle: "Prime Factor Finder — Free Online Tool",
+    metaDescription:
+      "Free prime factor finder listing every prime factor of any whole number, with repeats shown.",
+    introParagraph:
+      "Lists every prime factor of a number, including repeats — for example, 84 breaks down into 2 × 2 × 3 × 7.",
+  },
+  {
+    slug: "hcf-and-lcm-calculator",
+    toolSlug: "gcd-and-lcm-calculator",
+    h1: "HCF and LCM Calculator",
+    subtitle: "Calculate the HCF (GCD) and LCM of Any Numbers",
+    metaTitle: "HCF and LCM Calculator — Free Online Tool",
+    metaDescription:
+      "Free HCF (highest common factor) and LCM calculator using the Euclidean algorithm for exact results.",
+    introParagraph:
+      "HCF (highest common factor) is another name for GCD — this calculates both it and the LCM together using the Euclidean algorithm.",
+  },
+  {
+    slug: "greatest-common-factor-calculator",
+    toolSlug: "gcd-and-lcm-calculator",
+    h1: "Greatest Common Factor Calculator",
+    subtitle: "Find the Greatest Common Factor of Any Numbers",
+    metaTitle: "Greatest Common Factor Calculator — Free Tool",
+    metaDescription:
+      "Free greatest common factor calculator for two or more numbers, using the efficient Euclidean algorithm.",
+    introParagraph:
+      "Finds the largest number that divides evenly into every number you enter, using the same efficient Euclidean algorithm mathematicians have relied on for over two thousand years.",
+  },
+  {
+    slug: "least-common-multiple-calculator",
+    toolSlug: "gcd-and-lcm-calculator",
+    h1: "Least Common Multiple Calculator",
+    subtitle: "Find the Least Common Multiple of Any Numbers",
+    metaTitle: "Least Common Multiple Calculator — Free Tool",
+    metaDescription:
+      "Free least common multiple calculator for two or more numbers, computed exactly via the GCD relationship.",
+    introParagraph:
+      "Finds the smallest number that every number you enter divides into evenly — essential for adding fractions with different denominators.",
+  },
+  {
+    slug: "gcf-calculator",
+    toolSlug: "gcd-and-lcm-calculator",
+    h1: "GCF Calculator",
+    subtitle: "Calculate the Greatest Common Factor Instantly",
+    metaTitle: "GCF Calculator — Free Online Tool",
+    metaDescription:
+      "Free GCF calculator for finding the greatest common factor of two or more whole numbers instantly.",
+    introParagraph:
+      "GCF and GCD are the same concept under different names — this calculates it instantly for any set of whole numbers you enter.",
+  },
+  {
+    slug: "common-denominator-calculator",
+    toolSlug: "gcd-and-lcm-calculator",
+    h1: "Common Denominator Calculator",
+    subtitle: "Find the Least Common Denominator for Fractions",
+    metaTitle: "Common Denominator Calculator — Free Tool",
+    metaDescription:
+      "Free common denominator calculator using the LCM of your denominators to add or compare fractions.",
+    introParagraph:
+      "The least common denominator for adding or comparing fractions is exactly the LCM of the denominators — enter them here to find it directly.",
+  },
+  {
+    slug: "n-factorial-calculator",
+    toolSlug: "factorial-calculator",
+    h1: "N Factorial Calculator",
+    subtitle: "Calculate n! for Any Whole Number",
+    metaTitle: "N Factorial Calculator — Free Online Tool",
+    metaDescription:
+      "Free n! calculator computing exact factorial values using arbitrary-precision arithmetic.",
+    introParagraph:
+      "Computes n! exactly for any whole number n, using arbitrary-precision arithmetic so results never lose accuracy even for large inputs.",
+  },
+  {
+    slug: "big-factorial-calculator",
+    toolSlug: "factorial-calculator",
+    h1: "Big Factorial Calculator",
+    subtitle: "Calculate Factorials of Very Large Numbers",
+    metaTitle: "Big Factorial Calculator — Free Online Tool",
+    metaDescription:
+      "Free big factorial calculator handling numbers with hundreds or thousands of digits exactly.",
+    introParagraph:
+      "Standard calculators break down or round large factorials — this uses BigInt arithmetic to keep even huge results exact, down to the last digit.",
+  },
+  {
+    slug: "permutation-factorial-calculator",
+    toolSlug: "factorial-calculator",
+    h1: "Permutation Factorial Calculator",
+    subtitle: "Calculate Factorials for Permutation Problems",
+    metaTitle: "Permutation Factorial Calculator — Free Tool",
+    metaDescription:
+      "Free factorial calculator for permutation and arrangement counting problems in combinatorics.",
+    introParagraph:
+      "The number of ways to arrange n distinct items in order is exactly n! — this computes that value exactly for permutation and arrangement problems.",
+  },
+  {
+    slug: "combinatorics-factorial-calculator",
+    toolSlug: "factorial-calculator",
+    h1: "Combinatorics Factorial Calculator",
+    subtitle: "Calculate Factorials for Combinatorics Problems",
+    metaTitle: "Combinatorics Factorial Calculator — Free Tool",
+    metaDescription:
+      "Free factorial calculator built for combinatorics and probability coursework, with exact large-number results.",
+    introParagraph:
+      "Factorials are the building block behind combination and permutation formulas throughout combinatorics — this computes them exactly for any input size.",
+  },
+  {
+    slug: "factorial-of-a-number",
+    toolSlug: "factorial-calculator",
+    h1: "Factorial of a Number",
+    subtitle: "Calculate the Factorial of Any Number",
+    metaTitle: "Factorial of a Number — Free Online Tool",
+    metaDescription:
+      "Free tool to calculate the factorial of any whole number exactly, with the result's digit count shown.",
+    introParagraph:
+      "Enter any whole number and get its exact factorial, along with how many digits the result has — genuinely useful context once factorials get large.",
+  },
+  {
+    slug: "simplify-expression-calculator",
+    toolSlug: "algebra-calculator",
+    h1: "Simplify Expression Calculator",
+    subtitle: "Simplify Any Algebraic Expression Instantly",
+    metaTitle: "Simplify Expression Calculator — Free Tool",
+    metaDescription:
+      "Free calculator to simplify a linear or quadratic algebraic expression into its cleanest equivalent form.",
+    introParagraph:
+      "Expands parentheses and combines like terms automatically, reducing any linear or quadratic expression in x to its simplest equivalent form.",
+  },
+  {
+    slug: "expand-and-simplify-calculator",
+    toolSlug: "algebra-calculator",
+    h1: "Expand and Simplify Calculator",
+    subtitle: "Expand Parentheses and Simplify an Expression",
+    metaTitle: "Expand and Simplify Calculator — Free Tool",
+    metaDescription:
+      "Free tool to expand parentheses and simplify any linear or quadratic algebraic expression.",
+    introParagraph:
+      "Handles the two steps together — expanding any parentheses in the expression, then combining the resulting like terms into a single simplified form.",
+  },
+  {
+    slug: "algebraic-expression-simplifier",
+    toolSlug: "algebra-calculator",
+    h1: "Algebraic Expression Simplifier",
+    subtitle: "Simplify Any Algebraic Expression in X",
+    metaTitle: "Algebraic Expression Simplifier — Free Tool",
+    metaDescription:
+      "Free algebraic expression simplifier reducing any linear or quadratic expression to its cleanest form.",
+    introParagraph:
+      "Works correctly regardless of how the original expression is written, since it reconstructs the simplified form mathematically rather than symbolically rewriting term by term.",
+  },
+  {
+    slug: "combine-like-terms-calculator",
+    toolSlug: "algebra-calculator",
+    h1: "Combine Like Terms Calculator",
+    subtitle: "Combine Like Terms in Any Expression",
+    metaTitle: "Combine Like Terms Calculator — Free Tool",
+    metaDescription:
+      "Free calculator to combine like terms in a linear or quadratic algebraic expression automatically.",
+    introParagraph:
+      "Combining like terms by hand is easy to get wrong with several parentheses in play — this does it automatically and shows the clean result.",
+  },
+  {
+    slug: "evaluate-expression-calculator",
+    toolSlug: "algebra-calculator",
+    h1: "Evaluate Expression Calculator",
+    subtitle: "Evaluate an Algebraic Expression at Any X",
+    metaTitle: "Evaluate Expression Calculator — Free Tool",
+    metaDescription:
+      "Free calculator to evaluate an algebraic expression at any specific value of x instantly.",
+    introParagraph:
+      "Plug in any value of x and get the expression's exact value there — useful for checking a specific case or verifying a simplified form matches the original.",
+  },
+  {
+    slug: "sin-cos-tan-calculator",
+    toolSlug: "trigonometry-calculator",
+    h1: "Sin Cos Tan Calculator",
+    subtitle: "Calculate Sine, Cosine, and Tangent for Any Angle",
+    metaTitle: "Sin Cos Tan Calculator — Free Online Tool",
+    metaDescription:
+      "Free sin cos tan calculator for any angle in degrees or radians, with reciprocal functions included.",
+    introParagraph:
+      "The three most commonly needed trig values, plus their reciprocals, computed instantly for any angle in either degrees or radians.",
+  },
+  {
+    slug: "right-triangle-trig-calculator",
+    toolSlug: "trigonometry-calculator",
+    h1: "Right Triangle Trig Calculator",
+    subtitle: "Calculate Trig Function Values for Any Angle",
+    metaTitle: "Right Triangle Trig Calculator — Free Tool",
+    metaDescription:
+      "Free right triangle trigonometry calculator computing all six trig functions for a given angle.",
+    introParagraph:
+      "Right-triangle trigonometry problems depend on knowing sine, cosine, and tangent (and their reciprocals) precisely — this computes all six for any angle.",
+  },
+  {
+    slug: "trig-function-calculator",
+    toolSlug: "trigonometry-calculator",
+    h1: "Trig Function Calculator",
+    subtitle: "Calculate Any Trig Function for Any Angle",
+    metaTitle: "Trig Function Calculator — Free Online Tool",
+    metaDescription:
+      "Free trig function calculator covering sine, cosine, tangent, cosecant, secant, and cotangent.",
+    introParagraph:
+      "All six trigonometric functions computed together for a single angle, in either degrees or radians, with undefined values flagged clearly.",
+  },
+  {
+    slug: "degrees-to-trig-values",
+    toolSlug: "trigonometry-calculator",
+    h1: "Degrees to Trig Values",
+    subtitle: "Convert Degrees to Trig Function Values",
+    metaTitle: "Degrees to Trig Values — Free Online Tool",
+    metaDescription:
+      "Free tool to convert an angle in degrees into its full set of trigonometric function values.",
+    introParagraph:
+      "Enter an angle in degrees and get every trig function's value at once, without needing to switch a calculator into degree mode manually.",
+  },
+  {
+    slug: "unit-circle-calculator",
+    toolSlug: "trigonometry-calculator",
+    h1: "Unit Circle Calculator",
+    subtitle: "Calculate Trig Values Anywhere on the Unit Circle",
+    metaTitle: "Unit Circle Calculator — Free Online Tool",
+    metaDescription:
+      "Free unit circle calculator computing sine, cosine, tangent, and their reciprocals for any angle.",
+    introParagraph:
+      "Every point on the unit circle corresponds to a specific angle's sine and cosine values — this computes those, plus the remaining four trig functions, for any angle.",
+  },
+  {
+    slug: "percentage-increase-finder",
+    toolSlug: "percentage-change-calculator",
+    h1: "Percentage Increase Finder",
+    subtitle: "Find the Percentage Increase Between Two Values",
+    metaTitle: "Percentage Increase Finder — Free Online Tool",
+    metaDescription:
+      "Free percentage increase finder calculating exactly how much a value has grown, as a percentage.",
+    introParagraph:
+      "Enter the original and new value to find exactly how much a number has grown, expressed as a clear percentage.",
+  },
+  {
+    slug: "percentage-decrease-finder",
+    toolSlug: "percentage-change-calculator",
+    h1: "Percentage Decrease Finder",
+    subtitle: "Find the Percentage Decrease Between Two Values",
+    metaTitle: "Percentage Decrease Finder — Free Online Tool",
+    metaDescription:
+      "Free percentage decrease finder calculating exactly how much a value has dropped, as a percentage.",
+    introParagraph:
+      "Enter the original and new value to find exactly how much a number has declined, expressed as a clear percentage.",
+  },
+  {
+    slug: "percentage-difference-calculator",
+    toolSlug: "percentage-change-calculator",
+    h1: "Percentage Difference Calculator",
+    subtitle: "Calculate the Percentage Difference Between Two Values",
+    metaTitle: "Percentage Difference Calculator — Free Tool",
+    metaDescription:
+      "Free percentage difference calculator showing the relative change between an original and new value.",
+    introParagraph:
+      "Shows the relative percentage change between two values — positive for growth, negative for decline — computed with the standard percentage change formula.",
+  },
+  {
+    slug: "price-increase-percentage-calculator",
+    toolSlug: "percentage-change-calculator",
+    h1: "Price Increase Percentage Calculator",
+    subtitle: "Calculate a Price Increase as a Percentage",
+    metaTitle: "Price Increase Percentage Calculator — Free Tool",
+    metaDescription:
+      "Free tool to calculate a price increase as a percentage, given the old and new price.",
+    introParagraph:
+      "Enter the old and new price to see the exact percentage increase — useful for tracking cost changes or evaluating a price hike.",
+  },
+  {
+    slug: "growth-rate-calculator",
+    toolSlug: "percentage-change-calculator",
+    h1: "Growth Rate Calculator",
+    subtitle: "Calculate the Percentage Growth Rate Between Two Values",
+    metaTitle: "Growth Rate Calculator — Free Online Tool",
+    metaDescription:
+      "Free growth rate calculator showing percentage growth between a starting and ending value.",
+    introParagraph:
+      "Useful for tracking revenue, user counts, or any metric over time — enter the starting and ending value to see the percentage growth rate between them.",
+  },
+  {
+    slug: "round-to-decimal-places",
+    toolSlug: "number-rounding-tool",
+    h1: "Round to Decimal Places",
+    subtitle: "Round Any Number to a Chosen Number of Decimal Places",
+    metaTitle: "Round to Decimal Places — Free Online Tool",
+    metaDescription:
+      "Free tool to round any number to a chosen number of decimal places instantly.",
+    introParagraph:
+      "Enter a number and choose how many decimal places to keep — the rounded result updates instantly as you adjust either value.",
+  },
+  {
+    slug: "significant-figures-calculator",
+    toolSlug: "number-rounding-tool",
+    h1: "Significant Figures Calculator",
+    subtitle: "Round Any Number to a Chosen Number of Significant Figures",
+    metaTitle: "Significant Figures Calculator — Free Tool",
+    metaDescription:
+      "Free significant figures calculator, correctly handling the magnitude-dependent nature of sig fig rounding.",
+    introParagraph:
+      "Significant figure rounding depends on a number's magnitude, not just its decimal position — this handles that correctly for numbers of any size.",
+  },
+  {
+    slug: "round-to-nearest-calculator",
+    toolSlug: "number-rounding-tool",
+    h1: "Round to Nearest Calculator",
+    subtitle: "Round Any Number to the Nearest Chosen Multiple",
+    metaTitle: "Round to Nearest Calculator — Free Online Tool",
+    metaDescription:
+      "Free calculator to round any number to the nearest multiple of a value you choose.",
+    introParagraph:
+      "Round to the nearest 5, nearest 50, nearest 0.25, or any other multiple you need — useful for pricing, inventory, or measurement contexts.",
+  },
+  {
+    slug: "sig-fig-rounding-tool",
+    toolSlug: "number-rounding-tool",
+    h1: "Sig Fig Rounding Tool",
+    subtitle: "Round to Significant Figures Correctly",
+    metaTitle: "Sig Fig Rounding Tool — Free Online Tool",
+    metaDescription:
+      "Free significant figure rounding tool alongside decimal place and nearest-multiple rounding in one place.",
+    introParagraph:
+      "Correctly rounds to significant figures — a common source of manual rounding mistakes since it depends on where a number's first non-zero digit falls.",
+  },
+  {
+    slug: "round-up-or-down-calculator",
+    toolSlug: "number-rounding-tool",
+    h1: "Round Up or Down Calculator",
+    subtitle: "Round a Number Up, Down, or to the Nearest Value",
+    metaTitle: "Round Up or Down Calculator — Free Tool",
+    metaDescription:
+      "Free calculator showing a number rounded up (ceiling), down (floor), and to the nearest whole number at once.",
+    introParagraph:
+      "Shows all three basic rounding directions — round, floor, and ceiling — side by side, so the difference between them is immediately clear.",
+  },
+  {
+    slug: "btc-address-checker",
+    toolSlug: "bitcoin-address-validator",
+    h1: "BTC Address Checker",
+    subtitle: "Check Any Bitcoin Address's Checksum Instantly",
+    metaTitle: "BTC Address Checker — Free Online Tool",
+    metaDescription:
+      "Free BTC address checker validating Legacy, P2SH, and Bech32 addresses via their built-in checksums.",
+    introParagraph:
+      "Bitcoin addresses carry a built-in checksum specifically so typos get caught before funds are sent — this recomputes that checksum for any address format and confirms it's valid.",
+  },
+  {
+    slug: "verify-bitcoin-address",
+    toolSlug: "bitcoin-address-validator",
+    h1: "Verify Bitcoin Address",
+    subtitle: "Verify a Bitcoin Address Before Sending Funds",
+    metaTitle: "Verify Bitcoin Address — Free Online Tool",
+    metaDescription:
+      "Free tool to verify a Bitcoin address is correctly formatted before sending funds, across all address types.",
+    introParagraph:
+      "A single typo in a Bitcoin address means permanently lost funds with no way to reverse the transaction — verifying the checksum first is a simple habit that catches that mistake.",
+  },
+  {
+    slug: "bitcoin-wallet-validator",
+    toolSlug: "bitcoin-address-validator",
+    h1: "Bitcoin Wallet Validator",
+    subtitle: "Validate Any Bitcoin Wallet Address Format",
+    metaTitle: "Bitcoin Wallet Validator — Free Online Tool",
+    metaDescription:
+      "Free Bitcoin wallet address validator covering Legacy, P2SH, and native SegWit Bech32 formats.",
+    introParagraph:
+      "Whether a wallet address is Legacy, P2SH, or Bech32, this validates its checksum and identifies exactly which format it is.",
+  },
+  {
+    slug: "bech32-address-validator",
+    toolSlug: "bitcoin-address-validator",
+    h1: "Bech32 Address Validator",
+    subtitle: "Validate Native SegWit Bech32 Bitcoin Addresses",
+    metaTitle: "Bech32 Address Validator — Free Online Tool",
+    metaDescription:
+      "Free Bech32 address validator checking the BIP173 checksum for native SegWit Bitcoin addresses.",
+    introParagraph:
+      "Bech32's checksum algorithm is specifically designed to catch more error patterns than the older Base58Check format — this verifies it directly per the BIP173 specification.",
+  },
+  {
+    slug: "crypto-address-checksum-checker",
+    toolSlug: "bitcoin-address-validator",
+    h1: "Crypto Address Checksum Checker",
+    subtitle: "Check a Bitcoin Address's Built-In Checksum",
+    metaTitle: "Crypto Address Checksum Checker — Free Tool",
+    metaDescription:
+      "Free checksum checker for Bitcoin addresses, catching typos before a transaction is ever sent.",
+    introParagraph:
+      "Every Bitcoin address format has a built-in checksum precisely to catch transcription errors — this recomputes and verifies it for whichever format you paste in.",
+  },
+  {
+    slug: "bitcoin-qr-code-generator",
+    toolSlug: "crypto-wallet-address-qr-generator",
+    h1: "Bitcoin QR Code Generator",
+    subtitle: "Generate a Scannable QR Code for a Bitcoin Address",
+    metaTitle: "Bitcoin QR Code Generator — Free Online Tool",
+    metaDescription:
+      "Free Bitcoin QR code generator producing a scannable payment QR code, with an optional amount.",
+    introParagraph:
+      "Generates a bitcoin: URI QR code that wallet apps recognize and pre-fill automatically, optionally including a specific requested amount.",
+  },
+  {
+    slug: "ethereum-address-qr-generator",
+    toolSlug: "crypto-wallet-address-qr-generator",
+    h1: "Ethereum Address QR Generator",
+    subtitle: "Generate a Scannable QR Code for an Ethereum Address",
+    metaTitle: "Ethereum Address QR Generator — Free Tool",
+    metaDescription:
+      "Free Ethereum QR code generator producing a scannable payment QR code for any ETH wallet address.",
+    introParagraph:
+      "Turns any Ethereum wallet address into a scannable QR code using the ethereum: URI scheme many wallet apps recognize directly.",
+  },
+  {
+    slug: "crypto-payment-qr-generator",
+    toolSlug: "crypto-wallet-address-qr-generator",
+    h1: "Crypto Payment QR Generator",
+    subtitle: "Generate a QR Code for Receiving Crypto Payment",
+    metaTitle: "Crypto Payment QR Generator — Free Online Tool",
+    metaDescription:
+      "Free crypto payment QR generator supporting Bitcoin, Ethereum, Litecoin, and plain wallet addresses.",
+    introParagraph:
+      "Whether receiving Bitcoin, Ethereum, Litecoin, or another coin, this generates a scannable QR code for the payment request in one click.",
+  },
+  {
+    slug: "wallet-address-to-qr-code",
+    toolSlug: "crypto-wallet-address-qr-generator",
+    h1: "Wallet Address to QR Code",
+    subtitle: "Turn Any Wallet Address into a QR Code",
+    metaTitle: "Wallet Address to QR Code — Free Tool",
+    metaDescription:
+      "Free tool to turn any crypto wallet address into a scannable QR code, avoiding manual transcription errors.",
+    introParagraph:
+      "Scanning beats manually copying a long wallet address every time — this converts any address into a QR code instantly, entirely in your browser.",
+  },
+  {
+    slug: "receive-crypto-qr-generator",
+    toolSlug: "crypto-wallet-address-qr-generator",
+    h1: "Receive Crypto QR Generator",
+    subtitle: "Generate a QR Code to Receive Crypto Payments",
+    metaTitle: "Receive Crypto QR Generator — Free Online Tool",
+    metaDescription:
+      "Free QR code generator for receiving crypto payments, with support for a pre-filled requested amount.",
+    introParagraph:
+      "Perfect for a donation page, a physical display, or sharing a receiving address quickly — generates a scannable QR code with an optional pre-filled amount.",
+  },
+  {
+    slug: "btc-to-usd-converter",
+    toolSlug: "cryptocurrency-price-converter",
+    h1: "BTC to USD Converter",
+    subtitle: "Convert Bitcoin to US Dollars at Live Rates",
+    metaTitle: "BTC to USD Converter — Free Online Tool",
+    metaDescription:
+      "Free BTC to USD converter using live rates fetched directly from Coinbase's public exchange rate API.",
+    introParagraph:
+      "Converts any amount of Bitcoin into US Dollars at Coinbase's current live rate, fetched fresh directly in your browser.",
+  },
+  {
+    slug: "crypto-to-fiat-converter",
+    toolSlug: "cryptocurrency-price-converter",
+    h1: "Crypto to Fiat Converter",
+    subtitle: "Convert Cryptocurrency to Fiat Currency Live",
+    metaTitle: "Crypto to Fiat Converter — Free Online Tool",
+    metaDescription:
+      "Free crypto to fiat converter for Bitcoin, Ethereum, Solana, Dogecoin, and Tether at live market rates.",
+    introParagraph:
+      "See what any cryptocurrency holding is currently worth in USD, EUR, GBP, INR, or JPY, using live market rates fetched at the moment you check.",
+  },
+  {
+    slug: "eth-price-converter",
+    toolSlug: "cryptocurrency-price-converter",
+    h1: "ETH Price Converter",
+    subtitle: "Convert Ethereum to Any Major Currency",
+    metaTitle: "ETH Price Converter — Free Online Tool",
+    metaDescription:
+      "Free ETH price converter using live Coinbase exchange rate data for Ethereum to fiat or other crypto.",
+    introParagraph:
+      "Converts Ethereum into any supported fiat or cryptocurrency at the current live rate, fetched directly from Coinbase.",
+  },
+  {
+    slug: "live-crypto-converter",
+    toolSlug: "cryptocurrency-price-converter",
+    h1: "Live Crypto Converter",
+    subtitle: "Convert Cryptocurrency at Genuinely Live Rates",
+    metaTitle: "Live Crypto Converter — Free Online Tool",
+    metaDescription:
+      "Free live crypto converter fetching current market rates the moment you load the page or change currencies.",
+    introParagraph:
+      "Unlike a cached or delayed rate, this fetches a fresh live rate the instant you load the page or switch currencies, keeping the conversion genuinely current.",
+  },
+  {
+    slug: "crypto-currency-calculator",
+    toolSlug: "cryptocurrency-price-converter",
+    h1: "Crypto Currency Calculator",
+    subtitle: "Calculate Cryptocurrency Value in Any Currency",
+    metaTitle: "Crypto Currency Calculator — Free Online Tool",
+    metaDescription:
+      "Free crypto currency calculator converting between major cryptocurrencies and fiat currencies live.",
+    introParagraph:
+      "Handles conversions in any direction — crypto to fiat, fiat to crypto, or crypto to crypto — all using live current market rates.",
+  },
+  {
+    slug: "bitcoin-mining-calculator",
+    toolSlug: "mining-profitability-calculator",
+    h1: "Bitcoin Mining Calculator",
+    subtitle: "Calculate Bitcoin Mining Profitability",
+    metaTitle: "Bitcoin Mining Calculator — Free Online Tool",
+    metaDescription:
+      "Free Bitcoin mining calculator estimating daily, monthly, and yearly profit from hash rate and electricity cost.",
+    introParagraph:
+      "Enter your hardware's hash rate, power draw, and electricity cost alongside current network difficulty and price to estimate real mining profitability.",
+  },
+  {
+    slug: "asic-mining-profit-calculator",
+    toolSlug: "mining-profitability-calculator",
+    h1: "ASIC Mining Profit Calculator",
+    subtitle: "Calculate Profitability for Any ASIC Miner",
+    metaTitle: "ASIC Mining Profit Calculator — Free Tool",
+    metaDescription:
+      "Free ASIC mining profit calculator using your hardware's actual hash rate and power specifications.",
+    introParagraph:
+      "Enter your specific ASIC's hash rate and power draw alongside your real electricity rate to see whether it's currently profitable to run.",
+  },
+  {
+    slug: "hashrate-profit-calculator",
+    toolSlug: "mining-profitability-calculator",
+    h1: "Hash Rate Profit Calculator",
+    subtitle: "Calculate Mining Profit from Your Hash Rate",
+    metaTitle: "Hash Rate Profit Calculator — Free Online Tool",
+    metaDescription:
+      "Free hash rate profit calculator estimating your share of network rewards based on current difficulty.",
+    introParagraph:
+      "Your hash rate as a share of the total network hash rate determines your expected portion of mining rewards — this calculates that share and the resulting profit directly.",
+  },
+  {
+    slug: "mining-roi-calculator",
+    toolSlug: "mining-profitability-calculator",
+    h1: "Mining ROI Calculator",
+    subtitle: "Estimate Mining Return on Investment",
+    metaTitle: "Mining ROI Calculator — Free Online Tool",
+    metaDescription:
+      "Free mining ROI calculator estimating daily, monthly, and yearly profit from your mining setup.",
+    introParagraph:
+      "Estimates ongoing operational profit (revenue minus electricity cost) across daily, monthly, and yearly timeframes for any mining hardware setup.",
+  },
+  {
+    slug: "crypto-mining-calculator",
+    toolSlug: "mining-profitability-calculator",
+    h1: "Crypto Mining Calculator",
+    subtitle: "Calculate Cryptocurrency Mining Profitability",
+    metaTitle: "Crypto Mining Calculator — Free Online Tool",
+    metaDescription:
+      "Free crypto mining calculator combining hash rate, power cost, network difficulty, and coin price into a profit estimate.",
+    introParagraph:
+      "Combines your hardware specs, electricity cost, pool fee, and current network stats into a single profitability estimate — daily, monthly, and yearly.",
+  },
+  {
+    slug: "forex-rate-checker",
+    toolSlug: "live-currency-exchange-rate-checker",
+    h1: "Forex Rate Checker",
+    subtitle: "Check Live Foreign Exchange Rates",
+    metaTitle: "Forex Rate Checker — Free Online Tool",
+    metaDescription:
+      "Free forex rate checker showing live exchange rates for 20 major world currencies via the ECB.",
+    introParagraph:
+      "Checks live foreign exchange rates sourced from the European Central Bank across 20 major world currencies at once.",
+  },
+  {
+    slug: "currency-converter-live",
+    toolSlug: "live-currency-exchange-rate-checker",
+    h1: "Live Currency Converter",
+    subtitle: "Convert Currency Using Live Exchange Rates",
+    metaTitle: "Live Currency Converter — Free Online Tool",
+    metaDescription:
+      "Free live currency converter showing an amount converted across 19 other major currencies at once.",
+    introParagraph:
+      "Enter an amount and a base currency to see it converted across every other major currency simultaneously, using current ECB reference rates.",
+  },
+  {
+    slug: "exchange-rate-calculator",
+    toolSlug: "live-currency-exchange-rate-checker",
+    h1: "Exchange Rate Calculator",
+    subtitle: "Calculate Currency Exchange Rates Live",
+    metaTitle: "Exchange Rate Calculator — Free Online Tool",
+    metaDescription:
+      "Free exchange rate calculator for 20 major currencies, sourced from the European Central Bank.",
+    introParagraph:
+      "A direct exchange rate calculation across 20 major currencies, sourced from the same reference rates banks and financial institutions rely on.",
+  },
+  {
+    slug: "usd-to-foreign-currency-checker",
+    toolSlug: "live-currency-exchange-rate-checker",
+    h1: "USD to Foreign Currency Checker",
+    subtitle: "Check USD's Value Across Major World Currencies",
+    metaTitle: "USD to Foreign Currency Checker — Free Tool",
+    metaDescription:
+      "Free tool to check the US Dollar's live value across 19 other major world currencies at once.",
+    introParagraph:
+      "See exactly what a dollar amount is worth across 19 other major currencies simultaneously, using live ECB reference rates.",
+  },
+  {
+    slug: "ecb-exchange-rate-checker",
+    toolSlug: "live-currency-exchange-rate-checker",
+    h1: "ECB Exchange Rate Checker",
+    subtitle: "Check European Central Bank Reference Exchange Rates",
+    metaTitle: "ECB Exchange Rate Checker — Free Online Tool",
+    metaDescription:
+      "Free tool to check the European Central Bank's daily reference exchange rates for major world currencies.",
+    introParagraph:
+      "Pulls directly from the European Central Bank's daily published reference rates — the same authoritative source used widely across financial applications.",
+  },
+  {
+    slug: "reduce-image-file-size",
+    toolSlug: "image-compressor",
+    h1: "Reduce Image File Size",
+    subtitle: "Shrink Any Image's File Size Without Much Quality Loss",
+    metaTitle: "Reduce Image File Size — Free Online Tool",
+    metaDescription:
+      "Free tool to reduce an image's file size using adjustable JPEG or WebP compression, right in your browser.",
+    introParagraph:
+      "Most photos carry far more data than the eye can distinguish — this tool trims that excess with an adjustable quality slider, showing the exact size reduction as you go.",
+  },
+  {
+    slug: "jpeg-compressor",
+    toolSlug: "image-compressor",
+    h1: "JPEG Compressor",
+    subtitle: "Compress JPEG Images with an Adjustable Quality Slider",
+    metaTitle: "JPEG Compressor — Free Online Tool",
+    metaDescription:
+      "Free JPEG compressor for reducing file size with a live quality slider and before/after size comparison.",
+    introParagraph:
+      "Re-encodes any image as JPEG at your chosen quality level, showing the exact before-and-after file size so you can find the smallest size that still looks right.",
+  },
+  {
+    slug: "webp-compressor",
+    toolSlug: "image-compressor",
+    h1: "WebP Compressor",
+    subtitle: "Compress Images to WebP for Smaller File Sizes",
+    metaTitle: "WebP Compressor — Free Online Tool",
+    metaDescription:
+      "Free WebP compressor producing smaller files than JPEG at equivalent visual quality, supported by all modern browsers.",
+    introParagraph:
+      "WebP generally beats JPEG on file size at the same visual quality — this compresses any image to WebP with a live quality slider to dial in the right balance.",
+  },
+  {
+    slug: "shrink-image-size",
+    toolSlug: "image-compressor",
+    h1: "Shrink Image Size",
+    subtitle: "Shrink an Image's File Size for Faster Uploads",
+    metaTitle: "Shrink Image Size — Free Online Tool",
+    metaDescription:
+      "Free tool to shrink an image's file size for faster uploads and page loads, with adjustable quality.",
+    introParagraph:
+      "A smaller file size means faster uploads and page loads — this shrinks any image's size with a quality slider so you can see exactly how much you're trading off.",
+  },
+  {
+    slug: "optimize-image-for-web",
+    toolSlug: "image-compressor",
+    h1: "Optimize Image for Web",
+    subtitle: "Optimize Any Image for Faster Website Loading",
+    metaTitle: "Optimize Image for Web — Free Online Tool",
+    metaDescription:
+      "Free tool to optimize images for the web using JPEG or WebP compression, improving page load speed.",
+    introParagraph:
+      "Smaller image files mean faster page loads and better SEO — this optimizes any image for web use with adjustable JPEG or WebP compression.",
+  },
+  {
+    slug: "resize-photo-online",
+    toolSlug: "image-resizer",
+    h1: "Resize Photo Online",
+    subtitle: "Resize Any Photo to Exact Pixel Dimensions",
+    metaTitle: "Resize Photo Online — Free Tool",
+    metaDescription:
+      "Free online photo resizer for setting exact width and height, with an aspect ratio lock to prevent distortion.",
+    introParagraph:
+      "Set an exact width and height, with an aspect-ratio lock keeping proportions correct automatically as you adjust either dimension.",
+  },
+  {
+    slug: "change-image-dimensions",
+    toolSlug: "image-resizer",
+    h1: "Change Image Dimensions",
+    subtitle: "Change Any Image's Width and Height",
+    metaTitle: "Change Image Dimensions — Free Online Tool",
+    metaDescription:
+      "Free tool to change an image's pixel dimensions instantly, with optional aspect ratio locking.",
+    introParagraph:
+      "Enter new width and height values and the image resizes instantly, with an aspect-ratio lock available to prevent accidental stretching.",
+  },
+  {
+    slug: "scale-image-online",
+    toolSlug: "image-resizer",
+    h1: "Scale Image Online",
+    subtitle: "Scale Any Image Up or Down to a New Size",
+    metaTitle: "Scale Image Online — Free Online Tool",
+    metaDescription:
+      "Free online tool to scale an image to new pixel dimensions using high-quality canvas resampling.",
+    introParagraph:
+      "Uses high-quality image smoothing when scaling, producing noticeably better results than a naive resize, especially when scaling down significantly.",
+  },
+  {
+    slug: "resize-image-pixels",
+    toolSlug: "image-resizer",
+    h1: "Resize Image by Pixels",
+    subtitle: "Resize Any Image to an Exact Pixel Size",
+    metaTitle: "Resize Image by Pixels — Free Online Tool",
+    metaDescription:
+      "Free tool to resize an image to an exact pixel width and height, with the original dimensions shown for reference.",
+    introParagraph:
+      "Shows the original pixel dimensions alongside your new target size, making it easy to resize to exactly what a platform or layout requires.",
+  },
+  {
+    slug: "photo-resizer",
+    toolSlug: "image-resizer",
+    h1: "Photo Resizer",
+    subtitle: "Resize Any Photo to Meet Size Requirements",
+    metaTitle: "Photo Resizer — Free Online Tool",
+    metaDescription:
+      "Free photo resizer for meeting exact dimension requirements across websites, forms, and platforms.",
+    introParagraph:
+      "Meets an exact dimension requirement in seconds — enter your target width and height and download the resized result immediately.",
+  },
+  {
+    slug: "crop-photo-online",
+    toolSlug: "crop-image",
+    h1: "Crop Photo Online",
+    subtitle: "Crop Any Photo with a Draggable Selection",
+    metaTitle: "Crop Photo Online — Free Tool",
+    metaDescription:
+      "Free online photo cropper with a draggable selection and optional fixed aspect ratios.",
+    introParagraph:
+      "Drag directly on the photo to select exactly the area you want to keep, with optional fixed aspect ratios for square, 4:3, or 16:9 crops.",
+  },
+  {
+    slug: "square-crop-tool",
+    toolSlug: "crop-image",
+    h1: "Square Crop Tool",
+    subtitle: "Crop Any Image to a Perfect Square",
+    metaTitle: "Square Crop Tool — Free Online Tool",
+    metaDescription:
+      "Free square crop tool with a locked 1:1 aspect ratio for profile pictures and social media.",
+    introParagraph:
+      "Lock the crop selection to a perfect 1:1 square — ideal for profile pictures and social media posts that need square images.",
+  },
+  {
+    slug: "crop-picture-online",
+    toolSlug: "crop-image",
+    h1: "Crop Picture Online",
+    subtitle: "Crop Any Picture Directly in Your Browser",
+    metaTitle: "Crop Picture Online — Free Tool",
+    metaDescription:
+      "Free online picture cropping tool — drag to select, then crop at full source resolution.",
+    introParagraph:
+      "Crops at full source resolution regardless of how large or small the preview appears on your screen, so quality is never limited by the display size.",
+  },
+  {
+    slug: "image-cropper-free",
+    toolSlug: "crop-image",
+    h1: "Free Image Cropper",
+    subtitle: "Crop Any Image for Free, No Signup",
+    metaTitle: "Free Image Cropper — Online Tool",
+    metaDescription:
+      "Free image cropper with no signup and no watermark — drag to select and crop instantly.",
+    introParagraph:
+      "No signup, no watermark — just drag to select a crop area and download the result instantly.",
+  },
+  {
+    slug: "crop-to-aspect-ratio",
+    toolSlug: "crop-image",
+    h1: "Crop to Aspect Ratio",
+    subtitle: "Crop Any Image to a Fixed Aspect Ratio",
+    metaTitle: "Crop to Aspect Ratio — Free Online Tool",
+    metaDescription:
+      "Free tool to crop an image to a fixed aspect ratio like 1:1, 4:3, or 16:9.",
+    introParagraph:
+      "Locks your drag selection to a specific proportion — 1:1, 4:3, or 16:9 — so the crop fits exactly what a platform or layout requires.",
+  },
+  {
+    slug: "avif-to-jpeg-converter",
+    toolSlug: "avif-to-jpg",
+    h1: "AVIF to JPEG Converter",
+    subtitle: "Convert AVIF Images to Universally Compatible JPEG",
+    metaTitle: "AVIF to JPEG Converter — Free Online Tool",
+    metaDescription:
+      "Free AVIF to JPEG converter using your browser's native AVIF decoding support.",
+    introParagraph:
+      "Converts AVIF to JPEG using your browser's own native AVIF decoder, trading some of AVIF's compression efficiency for JPEG's near-universal compatibility.",
+  },
+  {
+    slug: "convert-avif-image",
+    toolSlug: "avif-to-jpg",
+    h1: "Convert AVIF Image",
+    subtitle: "Convert Any AVIF Image to JPG",
+    metaTitle: "Convert AVIF Image — Free Online Tool",
+    metaDescription:
+      "Free tool to convert an AVIF image to JPG for wider software and platform compatibility.",
+    introParagraph:
+      "For software or platforms that don't yet support AVIF, this converts it directly to the near-universally supported JPG format.",
+  },
+  {
+    slug: "avif-file-converter",
+    toolSlug: "avif-to-jpg",
+    h1: "AVIF File Converter",
+    subtitle: "Convert AVIF Files to JPG in Your Browser",
+    metaTitle: "AVIF File Converter — Free Online Tool",
+    metaDescription:
+      "Free AVIF file converter producing a JPG output entirely in your browser, no upload needed.",
+    introParagraph:
+      "Runs entirely in your browser using native AVIF decoding — no upload, no install, just a JPG file ready to download.",
+  },
+  {
+    slug: "avif-image-converter",
+    toolSlug: "avif-to-jpg",
+    h1: "AVIF Image Converter",
+    subtitle: "Convert AVIF Images for Broader Compatibility",
+    metaTitle: "AVIF Image Converter — Free Online Tool",
+    metaDescription:
+      "Free AVIF image converter for turning modern AVIF files into universally viewable JPG images.",
+    introParagraph:
+      "AVIF isn't yet supported everywhere — this converts it to JPG, a format essentially every device and program can open.",
+  },
+  {
+    slug: "next-gen-image-to-jpg",
+    toolSlug: "avif-to-jpg",
+    h1: "Next-Gen Image to JPG",
+    subtitle: "Convert Modern AVIF Images to Classic JPG",
+    metaTitle: "Next-Gen Image to JPG — Free Online Tool",
+    metaDescription:
+      "Free tool to convert next-generation AVIF images to the classic, universally supported JPG format.",
+    introParagraph:
+      "AVIF is a next-generation format still gaining full support — this bridges the gap by converting to the classic JPG format everything can display.",
+  },
+  {
+    slug: "convert-svg-to-png",
+    toolSlug: "svg-to-png",
+    h1: "Convert SVG to PNG",
+    subtitle: "Convert Any SVG File to a PNG Image",
+    metaTitle: "Convert SVG to PNG — Free Online Tool",
+    metaDescription:
+      "Free tool to convert an SVG vector file to a PNG raster image, with transparency preserved.",
+    introParagraph:
+      "Renders any SVG to a standard PNG raster image, preserving transparency for logos and icons with transparent backgrounds.",
+  },
+  {
+    slug: "svg-to-raster-converter",
+    toolSlug: "svg-to-png",
+    h1: "SVG to Raster Converter",
+    subtitle: "Convert a Vector SVG to a Raster PNG",
+    metaTitle: "SVG to Raster Converter — Free Online Tool",
+    metaDescription:
+      "Free SVG to raster converter turning a vector file into a standard PNG bitmap image.",
+    introParagraph:
+      "Turns a mathematically-described vector SVG into a standard fixed-pixel PNG bitmap that any image viewer or editor can open.",
+  },
+  {
+    slug: "vector-to-png-converter",
+    toolSlug: "svg-to-png",
+    h1: "Vector to PNG Converter",
+    subtitle: "Convert Vector Graphics to PNG",
+    metaTitle: "Vector to PNG Converter — Free Online Tool",
+    metaDescription:
+      "Free vector-to-PNG converter for turning an SVG design into a raster image for platforms that need it.",
+    introParagraph:
+      "For platforms that only accept raster images, this converts any SVG vector graphic into a standard PNG file.",
+  },
+  {
+    slug: "svg-rasterizer",
+    toolSlug: "svg-to-png",
+    h1: "SVG Rasterizer",
+    subtitle: "Rasterize Any SVG into a PNG Image",
+    metaTitle: "SVG Rasterizer — Free Online Tool",
+    metaDescription:
+      "Free SVG rasterizer converting vector files into PNG bitmaps using your browser's native SVG rendering.",
+    introParagraph:
+      "Uses your browser's own SVG rendering engine to rasterize the vector file at its natural resolution into a standard PNG.",
+  },
+  {
+    slug: "svg-image-converter",
+    toolSlug: "svg-to-png",
+    h1: "SVG Image Converter",
+    subtitle: "Convert SVG Files into Standard PNG Images",
+    metaTitle: "SVG Image Converter — Free Online Tool",
+    metaDescription:
+      "Free SVG image converter for turning vector SVG files into standard raster PNG images.",
+    introParagraph:
+      "Whether it's a logo, icon, or illustration, this converts any SVG into a standard PNG image ready for use anywhere raster images are needed.",
+  },
+  {
+    slug: "add-watermark-to-photo",
+    toolSlug: "image-watermark",
+    h1: "Add Watermark to Photo",
+    subtitle: "Add a Text Watermark to Any Photo",
+    metaTitle: "Add Watermark to Photo — Free Online Tool",
+    metaDescription:
+      "Free tool to add a text watermark to any photo, with adjustable position, size, and opacity.",
+    introParagraph:
+      "Overlays customizable watermark text with full control over position, size, and opacity — baked permanently into the exported image.",
+  },
+  {
+    slug: "copyright-watermark-tool",
+    toolSlug: "image-watermark",
+    h1: "Copyright Watermark Tool",
+    subtitle: "Add a Copyright Notice to Your Images",
+    metaTitle: "Copyright Watermark Tool — Free Online Tool",
+    metaDescription:
+      "Free copyright watermark tool for marking ownership on photos before sharing them publicly.",
+    introParagraph:
+      "Marks your photos with a copyright notice before public sharing, discouraging unauthorized reuse and marking ownership clearly.",
+  },
+  {
+    slug: "text-watermark-generator",
+    toolSlug: "image-watermark",
+    h1: "Text Watermark Generator",
+    subtitle: "Generate a Text Watermark on Any Image",
+    metaTitle: "Text Watermark Generator — Free Online Tool",
+    metaDescription:
+      "Free text watermark generator with adjustable position, opacity, and size for any image.",
+    introParagraph:
+      "Enter your watermark text, choose where it sits and how visible it is, and the result is baked permanently into the exported image.",
+  },
+  {
+    slug: "photo-watermark-maker",
+    toolSlug: "image-watermark",
+    h1: "Photo Watermark Maker",
+    subtitle: "Make a Watermark for Any Photo",
+    metaTitle: "Photo Watermark Maker — Free Online Tool",
+    metaDescription:
+      "Free photo watermark maker for branding or protecting images before sharing them.",
+    introParagraph:
+      "Built for photographers and designers who want a quick, permanent watermark on images before sharing them publicly.",
+  },
+  {
+    slug: "watermark-photos-online",
+    toolSlug: "image-watermark",
+    h1: "Watermark Photos Online",
+    subtitle: "Add a Watermark to Photos Directly in Your Browser",
+    metaTitle: "Watermark Photos Online — Free Tool",
+    metaDescription:
+      "Free online tool to watermark photos directly in your browser, no software install needed.",
+    introParagraph:
+      "No software install needed — add a text watermark to any photo directly in your browser and download the result immediately.",
+  },
+  {
+    slug: "exif-data-viewer",
+    toolSlug: "image-metadata-viewer",
+    h1: "EXIF Data Viewer",
+    subtitle: "View a Photo's Embedded EXIF Data",
+    metaTitle: "EXIF Data Viewer — Free Online Tool",
+    metaDescription:
+      "Free EXIF data viewer showing camera make, model, timestamp, and other embedded metadata.",
+    introParagraph:
+      "Reads and displays a JPEG's embedded EXIF data directly — camera make and model, timestamp, resolution, and more.",
+  },
+  {
+    slug: "photo-metadata-checker",
+    toolSlug: "image-metadata-viewer",
+    h1: "Photo Metadata Checker",
+    subtitle: "Check What Metadata a Photo Carries",
+    metaTitle: "Photo Metadata Checker — Free Online Tool",
+    metaDescription:
+      "Free photo metadata checker for reviewing embedded camera and timestamp data before sharing.",
+    introParagraph:
+      "Check exactly what hidden metadata a photo carries before sharing it publicly — camera details, timestamp, and more.",
+  },
+  {
+    slug: "view-exif-data",
+    toolSlug: "image-metadata-viewer",
+    h1: "View EXIF Data",
+    subtitle: "View the EXIF Data Embedded in Any JPEG",
+    metaTitle: "View EXIF Data — Free Online Tool",
+    metaDescription:
+      "Free tool to view a JPEG's embedded EXIF data, parsed directly from the file's binary structure.",
+    introParagraph:
+      "Parses the JPEG's binary structure directly to extract and display every embedded EXIF field it carries.",
+  },
+  {
+    slug: "jpeg-metadata-reader",
+    toolSlug: "image-metadata-viewer",
+    h1: "JPEG Metadata Reader",
+    subtitle: "Read Metadata Embedded in Any JPEG File",
+    metaTitle: "JPEG Metadata Reader — Free Online Tool",
+    metaDescription:
+      "Free JPEG metadata reader extracting camera, timestamp, and resolution data from any file.",
+    introParagraph:
+      "Reads a JPEG's embedded metadata directly from its binary structure, verified against a trusted independent imaging library for accuracy.",
+  },
+  {
+    slug: "check-photo-metadata",
+    toolSlug: "image-metadata-viewer",
+    h1: "Check Photo Metadata",
+    subtitle: "Check Any Photo's Hidden Embedded Metadata",
+    metaTitle: "Check Photo Metadata — Free Online Tool",
+    metaDescription:
+      "Free tool to check a photo's hidden embedded metadata before sharing it anywhere.",
+    introParagraph:
+      "A quick way to check exactly what's hidden inside a photo file before deciding whether it's safe to share.",
+  },
+  {
+    slug: "change-image-dpi",
+    toolSlug: "image-dpi-converter",
+    h1: "Change Image DPI",
+    subtitle: "Change Any Image's DPI for Print",
+    metaTitle: "Change Image DPI — Free Online Tool",
+    metaDescription:
+      "Free tool to change an image's DPI metadata for print, without altering pixel dimensions.",
+    introParagraph:
+      "Sets an image's DPI metadata for print sizing purposes, without resampling or changing a single pixel of the actual image content.",
+  },
+  {
+    slug: "set-print-resolution",
+    toolSlug: "image-dpi-converter",
+    h1: "Set Print Resolution",
+    subtitle: "Set an Image's Print Resolution (DPI)",
+    metaTitle: "Set Print Resolution — Free Online Tool",
+    metaDescription:
+      "Free tool to set an image's print resolution (DPI) to meet a print shop's requirements.",
+    introParagraph:
+      "Meets a print shop's specific DPI requirement instantly, patching the metadata directly without any pixel resampling.",
+  },
+  {
+    slug: "dpi-changer-for-images",
+    toolSlug: "image-dpi-converter",
+    h1: "DPI Changer for Images",
+    subtitle: "Change the DPI of Any JPEG or PNG",
+    metaTitle: "DPI Changer for Images — Free Online Tool",
+    metaDescription:
+      "Free DPI changer for JPEG and PNG images, verified against an independent imaging library for accuracy.",
+    introParagraph:
+      "Changes DPI metadata on JPEG or PNG files, with the underlying byte-patching logic verified against an independent imaging library.",
+  },
+  {
+    slug: "print-resolution-converter",
+    toolSlug: "image-dpi-converter",
+    h1: "Print Resolution Converter",
+    subtitle: "Convert an Image's Print Resolution Setting",
+    metaTitle: "Print Resolution Converter — Free Online Tool",
+    metaDescription:
+      "Free print resolution converter for setting a specific DPI value on any JPEG or PNG file.",
+    introParagraph:
+      "Converts an image's print resolution metadata to whatever DPI value your print workflow requires.",
+  },
+  {
+    slug: "adjust-image-dpi",
+    toolSlug: "image-dpi-converter",
+    h1: "Adjust Image DPI",
+    subtitle: "Adjust Any Image's DPI Setting",
+    metaTitle: "Adjust Image DPI — Free Online Tool",
+    metaDescription:
+      "Free tool to adjust an image's DPI setting instantly, with common presets or a custom value.",
+    introParagraph:
+      "Adjust to any common preset (72, 96, 150, 300, 600) or a fully custom DPI value, applied instantly.",
+  },
+  {
+    slug: "any-format-image-converter",
+    toolSlug: "universal-image-converter",
+    h1: "Any Format Image Converter",
+    subtitle: "Convert Any Image Between PNG, JPEG & WebP",
+    metaTitle: "Any Format Image Converter — Free Tool",
+    metaDescription:
+      "Free image converter supporting PNG, JPEG, and WebP output from virtually any input image format.",
+    introParagraph:
+      "One tool for converting between the three most common web image formats, whichever direction you need.",
+  },
+  {
+    slug: "all-in-one-image-converter",
+    toolSlug: "universal-image-converter",
+    h1: "All-in-One Image Converter",
+    subtitle: "Convert Images Between Every Common Web Format",
+    metaTitle: "All-in-One Image Converter — Free Tool",
+    metaDescription:
+      "Free all-in-one image converter for PNG, JPEG, and WebP, with adjustable quality for lossy formats.",
+    introParagraph:
+      "Rather than hunting for a specific converter for each format pair, this handles PNG, JPEG, and WebP conversion in one place.",
+  },
+  {
+    slug: "image-format-converter-online",
+    toolSlug: "universal-image-converter",
+    h1: "Image Format Converter Online",
+    subtitle: "Convert Image Formats Directly in Your Browser",
+    metaTitle: "Image Format Converter Online — Free Tool",
+    metaDescription:
+      "Free online image format converter running entirely in your browser, no upload required.",
+    introParagraph:
+      "Converts between PNG, JPEG, and WebP entirely in your browser — no upload, no install, no waiting on a server.",
+  },
+  {
+    slug: "convert-any-image-format",
+    toolSlug: "universal-image-converter",
+    h1: "Convert Any Image Format",
+    subtitle: "Convert Any Image to PNG, JPEG, or WebP",
+    metaTitle: "Convert Any Image Format — Free Online Tool",
+    metaDescription:
+      "Free tool to convert any image your browser can decode into PNG, JPEG, or WebP format.",
+    introParagraph:
+      "Accepts virtually any image format your browser can decode as input, converting to whichever of PNG, JPEG, or WebP you need.",
+  },
+  {
+    slug: "multi-format-image-converter",
+    toolSlug: "universal-image-converter",
+    h1: "Multi-Format Image Converter",
+    subtitle: "Convert Images Across Multiple Common Formats",
+    metaTitle: "Multi-Format Image Converter — Free Tool",
+    metaDescription:
+      "Free multi-format image converter handling PNG, JPEG, and WebP output with a single upload.",
+    introParagraph:
+      "Upload once, then pick whichever output format your platform or project requires — PNG, JPEG, or WebP.",
+  },
+  {
+    slug: "tiff-to-jpeg-converter",
+    toolSlug: "tiff-to-jpg",
+    h1: "TIFF to JPEG Converter",
+    subtitle: "Convert TIFF Files to Universally Viewable JPEG",
+    metaTitle: "TIFF to JPEG Converter — Free Online Tool",
+    metaDescription:
+      "Free TIFF to JPEG converter using a from-scratch decoder built specifically for this site.",
+    introParagraph:
+      "Since browsers have no native TIFF support, this uses a from-scratch TIFF decoder, verified against an independent imaging library.",
+  },
+  {
+    slug: "convert-tiff-image",
+    toolSlug: "tiff-to-jpg",
+    h1: "Convert TIFF Image",
+    subtitle: "Convert Any TIFF Image to JPG",
+    metaTitle: "Convert TIFF Image — Free Online Tool",
+    metaDescription:
+      "Free tool to convert a TIFF image to JPG for web-friendly viewing and sharing.",
+    introParagraph:
+      "Converts uncompressed and PackBits-compressed TIFF files to JPG for easy viewing and sharing anywhere.",
+  },
+  {
+    slug: "tiff-file-converter",
+    toolSlug: "tiff-to-jpg",
+    h1: "TIFF File Converter",
+    subtitle: "Convert TIFF Files for Web-Friendly Viewing",
+    metaTitle: "TIFF File Converter — Free Online Tool",
+    metaDescription:
+      "Free TIFF file converter turning scanner and professional photography files into standard JPG.",
+    introParagraph:
+      "Turns TIFF files from scanners and professional photography workflows into standard, universally-viewable JPG images.",
+  },
+  {
+    slug: "scanned-tiff-to-jpg",
+    toolSlug: "tiff-to-jpg",
+    h1: "Scanned TIFF to JPG",
+    subtitle: "Convert a Scanned TIFF Document to JPG",
+    metaTitle: "Scanned TIFF to JPG — Free Online Tool",
+    metaDescription:
+      "Free tool to convert a scanned TIFF document into a web-friendly JPG image.",
+    introParagraph:
+      "Scanners commonly output TIFF by default — this converts the scanned file into a JPG that's easy to view, share, or embed anywhere.",
+  },
+  {
+    slug: "tiff-image-converter",
+    toolSlug: "tiff-to-jpg",
+    h1: "TIFF Image Converter",
+    subtitle: "Convert TIFF Images to JPG in Your Browser",
+    metaTitle: "TIFF Image Converter — Free Online Tool",
+    metaDescription:
+      "Free TIFF image converter running entirely in your browser with a from-scratch TIFF decoder.",
+    introParagraph:
+      "Decodes and converts TIFF images entirely in your browser, with clear error reporting for unsupported compression types rather than a broken result.",
+  },
+  {
+    slug: "gif-to-png-converter",
+    toolSlug: "gif-to-png",
+    h1: "GIF to PNG Converter",
+    subtitle: "Convert a GIF's First Frame to PNG",
+    metaTitle: "GIF to PNG Converter — Free Online Tool",
+    metaDescription:
+      "Free GIF to PNG converter extracting the first frame with transparency preserved.",
+    introParagraph:
+      "Extracts a GIF's first frame as a standard PNG image, preserving any transparency the GIF had.",
+  },
+  {
+    slug: "extract-frame-from-gif",
+    toolSlug: "gif-to-png",
+    h1: "Extract Frame from GIF",
+    subtitle: "Extract a Static Frame from Any GIF",
+    metaTitle: "Extract Frame from GIF — Free Online Tool",
+    metaDescription:
+      "Free tool to extract a static frame from an animated or static GIF as a PNG image.",
+    introParagraph:
+      "Pulls the first frame from an animated GIF (or the whole image from a static one) as a standalone PNG file.",
+  },
+  {
+    slug: "gif-frame-to-image",
+    toolSlug: "gif-to-png",
+    h1: "GIF Frame to Image",
+    subtitle: "Convert a GIF Frame into a Standard Image",
+    metaTitle: "GIF Frame to Image — Free Online Tool",
+    metaDescription:
+      "Free tool to convert a GIF's frame into a standard static PNG image file.",
+    introParagraph:
+      "Converts a GIF's currently rendered frame into a standard static PNG, useful when only a still image is needed from an animation.",
+  },
+  {
+    slug: "convert-gif-to-image",
+    toolSlug: "gif-to-png",
+    h1: "Convert GIF to Image",
+    subtitle: "Convert Any GIF File to a Static PNG Image",
+    metaTitle: "Convert GIF to Image — Free Online Tool",
+    metaDescription:
+      "Free tool to convert a GIF file to a static PNG image, with transparency preserved.",
+    introParagraph:
+      "Whether the GIF is static or animated, this converts it into a single static PNG with transparency preserved wherever the GIF had it.",
+  },
+  {
+    slug: "static-image-from-gif",
+    toolSlug: "gif-to-png",
+    h1: "Static Image from GIF",
+    subtitle: "Get a Static Image from an Animated GIF",
+    metaTitle: "Static Image from GIF — Free Online Tool",
+    metaDescription:
+      "Free tool to get a static PNG image from an animated GIF's first frame.",
+    introParagraph:
+      "Grabs a single static image from an animated GIF, useful for a thumbnail, preview, or simple non-animated reference.",
+  },
+  {
+    slug: "png-to-gif-converter",
+    toolSlug: "png-to-gif",
+    h1: "PNG to GIF Converter",
+    subtitle: "Convert PNG Images to GIF with Real Quantization",
+    metaTitle: "PNG to GIF Converter — Free Online Tool",
+    metaDescription:
+      "Free PNG to GIF converter using median-cut color quantization for the best possible 256-color palette.",
+    introParagraph:
+      "Converts PNG to GIF using genuine median-cut color quantization, intelligently choosing the best 256-color palette rather than an arbitrary reduction.",
+  },
+  {
+    slug: "convert-png-to-gif",
+    toolSlug: "png-to-gif",
+    h1: "Convert PNG to GIF",
+    subtitle: "Convert Any PNG to the GIF Format",
+    metaTitle: "Convert PNG to GIF — Free Online Tool",
+    metaDescription:
+      "Free tool to convert a PNG image to GIF format, from a from-scratch GIF encoder built for this site.",
+    introParagraph:
+      "Uses a from-scratch GIF encoder verified against an independent imaging library, ensuring genuinely correct color quantization and compression.",
+  },
+  {
+    slug: "image-to-gif-converter",
+    toolSlug: "png-to-gif",
+    h1: "Image to GIF Converter",
+    subtitle: "Convert Any PNG Image to GIF",
+    metaTitle: "Image to GIF Converter — Free Online Tool",
+    metaDescription:
+      "Free image-to-GIF converter with automatic color quantization for images with more than 256 colors.",
+    introParagraph:
+      "Images with 256 or fewer colors convert losslessly using their exact palette; larger color counts are quantized intelligently via median-cut.",
+  },
+  {
+    slug: "png-gif-converter-online",
+    toolSlug: "png-to-gif",
+    h1: "PNG-GIF Converter Online",
+    subtitle: "Convert PNG to GIF Directly in Your Browser",
+    metaTitle: "PNG-GIF Converter Online — Free Tool",
+    metaDescription:
+      "Free online PNG-to-GIF converter running entirely in your browser using a real GIF encoder.",
+    introParagraph:
+      "No upload, no install — converts PNG to a genuine, standards-compliant GIF file entirely in your browser.",
+  },
+  {
+    slug: "make-gif-from-png",
+    toolSlug: "png-to-gif",
+    h1: "Make GIF from PNG",
+    subtitle: "Make a GIF File from Any PNG Image",
+    metaTitle: "Make GIF from PNG — Free Online Tool",
+    metaDescription:
+      "Free tool to make a GIF file from any PNG image using real color quantization and LZW compression.",
+    introParagraph:
+      "Turns any PNG into a proper GIF file using real median-cut quantization and LZW compression, not a shortcut approximation.",
+  },
+  {
+    slug: "png-to-ico-converter",
+    toolSlug: "ico-converter",
+    h1: "PNG to ICO Converter",
+    subtitle: "Convert PNG Images to Multi-Size ICO Files",
+    metaTitle: "PNG to ICO Converter — Free Online Tool",
+    metaDescription:
+      "Free PNG to ICO converter bundling multiple standard sizes into one favicon-ready file.",
+    introParagraph:
+      "Converts any PNG into a proper multi-size .ico file, bundling 16 through 256px versions for favicon and app icon use.",
+  },
+  {
+    slug: "image-to-ico-converter",
+    toolSlug: "ico-converter",
+    h1: "Image to ICO Converter",
+    subtitle: "Convert Any Image to a Windows .ico File",
+    metaTitle: "Image to ICO Converter — Free Online Tool",
+    metaDescription:
+      "Free image to ICO converter for creating favicons and Windows application icons.",
+    introParagraph:
+      "Converts any image into a standard Windows .ico file, using the modern PNG-embedded format for maximum compatibility.",
+  },
+  {
+    slug: "create-ico-file",
+    toolSlug: "ico-converter",
+    h1: "Create ICO File",
+    subtitle: "Create a Multi-Size .ico File from Any Image",
+    metaTitle: "Create ICO File — Free Online Tool",
+    metaDescription:
+      "Free tool to create a proper multi-size .ico file from any image, verified against an independent reader.",
+    introParagraph:
+      "Creates a genuine multi-size .ico file, verified against an independent imaging library to confirm every bundled size decodes correctly.",
+  },
+  {
+    slug: "ico-file-generator",
+    toolSlug: "ico-converter",
+    h1: "ICO File Generator",
+    subtitle: "Generate a Favicon-Ready .ico File",
+    metaTitle: "ICO File Generator — Free Online Tool",
+    metaDescription:
+      "Free ICO file generator bundling standard favicon sizes into a single downloadable file.",
+    introParagraph:
+      "Generates a favicon-ready .ico file bundling every standard size your browser or OS might request.",
+  },
+  {
+    slug: "convert-image-to-icon",
+    toolSlug: "ico-converter",
+    h1: "Convert Image to Icon",
+    subtitle: "Convert Any Image to a Standard Icon File",
+    metaTitle: "Convert Image to Icon — Free Online Tool",
+    metaDescription:
+      "Free tool to convert any image into a standard multi-size icon (.ico) file.",
+    introParagraph:
+      "Turns a logo or image into a proper icon file with multiple bundled sizes, ready for use as a favicon or app icon.",
+  },
+  {
+    slug: "jpg-to-pdf-converter",
+    toolSlug: "image-to-pdf",
+    h1: "JPG to PDF Converter",
+    subtitle: "Convert JPG Images to a PDF Document",
+    metaTitle: "JPG to PDF Converter — Free Online Tool",
+    metaDescription:
+      "Free JPG to PDF converter building a real, standards-compliant multi-page PDF from your images.",
+    introParagraph:
+      "Builds a genuine, standards-compliant PDF directly from your images, verified by rendering the output and confirming pixel-exact accuracy.",
+  },
+  {
+    slug: "photos-to-pdf-converter",
+    toolSlug: "image-to-pdf",
+    h1: "Photos to PDF Converter",
+    subtitle: "Combine Multiple Photos into One PDF",
+    metaTitle: "Photos to PDF Converter — Free Online Tool",
+    metaDescription:
+      "Free tool to combine multiple photos into a single multi-page PDF document.",
+    introParagraph:
+      "Add as many photos as you need, reorder them, and combine them into a single multi-page PDF ready to share or submit.",
+  },
+  {
+    slug: "combine-images-into-pdf",
+    toolSlug: "image-to-pdf",
+    h1: "Combine Images into PDF",
+    subtitle: "Combine Any Images into a Single PDF File",
+    metaTitle: "Combine Images into PDF — Free Online Tool",
+    metaDescription:
+      "Free tool to combine multiple images into a single PDF, with each image becoming its own page.",
+    introParagraph:
+      "Each image becomes its own page in the final PDF, in the order you arrange them — ideal for combining scans or a photo set.",
+  },
+  {
+    slug: "convert-images-to-pdf",
+    toolSlug: "image-to-pdf",
+    h1: "Convert Images to PDF",
+    subtitle: "Convert Multiple Images into a PDF Document",
+    metaTitle: "Convert Images to PDF — Free Online Tool",
+    metaDescription:
+      "Free tool to convert multiple images into a single PDF document, built entirely in your browser.",
+    introParagraph:
+      "Converts any set of images into a single PDF, built and assembled entirely in your browser with no upload required.",
+  },
+  {
+    slug: "multiple-images-to-pdf",
+    toolSlug: "image-to-pdf",
+    h1: "Multiple Images to PDF",
+    subtitle: "Turn Multiple Images into One PDF File",
+    metaTitle: "Multiple Images to PDF — Free Online Tool",
+    metaDescription:
+      "Free tool to turn multiple images into one PDF file, with reorderable pages before generating.",
+    introParagraph:
+      "Add and reorder multiple images before generating — each becomes a properly sized page in your final PDF.",
+  },
+  {
+    slug: "split-image-into-tiles",
+    toolSlug: "image-splitter",
+    h1: "Split Image into Tiles",
+    subtitle: "Split Any Image into an Equal Grid of Tiles",
+    metaTitle: "Split Image into Tiles — Free Online Tool",
+    metaDescription:
+      "Free tool to split an image into an equal grid of tiles, downloaded together as a ZIP.",
+    introParagraph:
+      "Divides an image into your chosen number of rows and columns, with every tile cropped precisely and packaged into one ZIP download.",
+  },
+  {
+    slug: "grid-cutter-tool",
+    toolSlug: "image-splitter",
+    h1: "Grid Cutter Tool",
+    subtitle: "Cut Any Image into a Grid of Equal Pieces",
+    metaTitle: "Grid Cutter Tool — Free Online Tool",
+    metaDescription:
+      "Free grid cutter tool for dividing an image into equal pieces for puzzles, prints, or social grids.",
+    introParagraph:
+      "Cuts an image into an evenly-sized grid — useful for puzzles, multi-panel prints, or an Instagram grid layout.",
+  },
+  {
+    slug: "cut-image-into-pieces",
+    toolSlug: "image-splitter",
+    h1: "Cut Image into Pieces",
+    subtitle: "Cut Any Image into Equal Grid Pieces",
+    metaTitle: "Cut Image into Pieces — Free Online Tool",
+    metaDescription:
+      "Free tool to cut an image into equal grid pieces, all numbered and packaged in one ZIP file.",
+    introParagraph:
+      "Every piece is numbered in reading order and packaged into one ZIP, ready to reassemble in the correct arrangement.",
+  },
+  {
+    slug: "image-grid-splitter",
+    toolSlug: "image-splitter",
+    h1: "Image Grid Splitter",
+    subtitle: "Split Any Image into a Custom Grid Layout",
+    metaTitle: "Image Grid Splitter — Free Online Tool",
+    metaDescription:
+      "Free image grid splitter with a customizable row and column count, up to 10×10.",
+    introParagraph:
+      "Choose any grid size up to 10×10, and each tile is cropped with no gaps or overlaps between adjacent pieces.",
+  },
+  {
+    slug: "divide-image-into-parts",
+    toolSlug: "image-splitter",
+    h1: "Divide Image into Parts",
+    subtitle: "Divide Any Image into Equal Parts",
+    metaTitle: "Divide Image into Parts — Free Online Tool",
+    metaDescription:
+      "Free tool to divide an image into equal parts for printing, puzzles, or grid layouts.",
+    introParagraph:
+      "Divides an image into evenly-sized parts, whether you need it for a large-format print split across pages or a creative grid project.",
+  },
+  {
+    slug: "photo-collage-maker",
+    toolSlug: "image-collage-maker",
+    h1: "Photo Collage Maker",
+    subtitle: "Combine Multiple Photos into One Grid Collage",
+    metaTitle: "Photo Collage Maker — Free Online Tool",
+    metaDescription:
+      "Free photo collage maker arranging multiple photos into an evenly-spaced grid layout.",
+    introParagraph:
+      "Arranges any number of photos into an evenly-spaced grid, automatically cropping each to fill its cell cleanly.",
+  },
+  {
+    slug: "photo-grid-maker",
+    toolSlug: "image-collage-maker",
+    h1: "Photo Grid Maker",
+    subtitle: "Make a Photo Grid from Multiple Images",
+    metaTitle: "Photo Grid Maker — Free Online Tool",
+    metaDescription:
+      "Free photo grid maker with adjustable columns and spacing for a clean multi-photo layout.",
+    introParagraph:
+      "Set your preferred column count and spacing, and every photo you add fills the grid automatically in the order added.",
+  },
+  {
+    slug: "combine-photos-into-one",
+    toolSlug: "image-collage-maker",
+    h1: "Combine Photos into One Image",
+    subtitle: "Combine Multiple Photos into a Single Image",
+    metaTitle: "Combine Photos into One Image — Free Tool",
+    metaDescription:
+      "Free tool to combine multiple photos into a single grid-arranged image.",
+    introParagraph:
+      "Turns a whole set of photos into one shareable image, arranged in a clean grid layout with your chosen spacing.",
+  },
+  {
+    slug: "collage-creator-online",
+    toolSlug: "image-collage-maker",
+    h1: "Collage Creator Online",
+    subtitle: "Create a Photo Collage Directly in Your Browser",
+    metaTitle: "Collage Creator Online — Free Tool",
+    metaDescription:
+      "Free online collage creator running entirely in your browser, no install or upload needed.",
+    introParagraph:
+      "No install, no upload — add your photos and generate a grid collage entirely in your browser.",
+  },
+  {
+    slug: "multi-photo-collage-tool",
+    toolSlug: "image-collage-maker",
+    h1: "Multi-Photo Collage Tool",
+    subtitle: "Create a Collage from Many Photos at Once",
+    metaTitle: "Multi-Photo Collage Tool — Free Online Tool",
+    metaDescription:
+      "Free multi-photo collage tool for combining any number of images into one grid layout.",
+    introParagraph:
+      "Add as many photos as you like — the grid automatically expands to fit them all in your chosen column layout.",
+  },
+  {
+    slug: "sharpen-blurry-photo",
+    toolSlug: "image-sharpener",
+    h1: "Sharpen Blurry Photo",
+    subtitle: "Sharpen a Slightly Blurry or Soft Photo",
+    metaTitle: "Sharpen Blurry Photo — Free Online Tool",
+    metaDescription:
+      "Free tool to sharpen a slightly blurry or soft photo using an adjustable unsharp mask filter.",
+    introParagraph:
+      "Boosts edge contrast to make a slightly soft photo appear crisper, with an adjustable strength slider to dial in the right amount.",
+  },
+  {
+    slug: "enhance-image-sharpness",
+    toolSlug: "image-sharpener",
+    h1: "Enhance Image Sharpness",
+    subtitle: "Enhance Any Image's Sharpness and Detail",
+    metaTitle: "Enhance Image Sharpness — Free Online Tool",
+    metaDescription:
+      "Free tool to enhance an image's apparent sharpness and edge detail with a convolution filter.",
+    introParagraph:
+      "Applies a standard sharpening convolution kernel to boost apparent detail and edge definition.",
+  },
+  {
+    slug: "fix-blurry-image",
+    toolSlug: "image-sharpener",
+    h1: "Fix Blurry Image",
+    subtitle: "Improve a Slightly Blurry Image's Crispness",
+    metaTitle: "Fix Blurry Image — Free Online Tool",
+    metaDescription:
+      "Free tool to improve a slightly blurry image's crispness — not a fix for significant focus blur.",
+    introParagraph:
+      "Improves mild softness by sharpening edge contrast — genuinely out-of-focus blur can't be recovered, but slight softness responds well.",
+  },
+  {
+    slug: "photo-sharpening-tool",
+    toolSlug: "image-sharpener",
+    h1: "Photo Sharpening Tool",
+    subtitle: "Sharpen Any Photo with Adjustable Strength",
+    metaTitle: "Photo Sharpening Tool — Free Online Tool",
+    metaDescription:
+      "Free photo sharpening tool with an adjustable strength slider from subtle to strong.",
+    introParagraph:
+      "Adjust the strength from a subtle touch-up to a strong sharpening effect, comparing results before downloading.",
+  },
+  {
+    slug: "unsharp-mask-tool",
+    toolSlug: "image-sharpener",
+    h1: "Unsharp Mask Tool",
+    subtitle: "Apply an Unsharp Mask to Any Image",
+    metaTitle: "Unsharp Mask Tool — Free Online Tool",
+    metaDescription:
+      "Free unsharp mask tool using a standard sharpening convolution kernel, verified mathematically.",
+    introParagraph:
+      "Applies the classic unsharp masking technique — a well-established sharpening approach — with a kernel verified to leave flat regions unaffected.",
+  },
+  {
+    slug: "create-a-meme",
+    toolSlug: "meme-generator",
+    h1: "Create a Meme",
+    subtitle: "Create a Classic Top/Bottom Text Meme",
+    metaTitle: "Create a Meme — Free Online Tool",
+    metaDescription:
+      "Free tool to create a classic top/bottom text meme from any image, no signup needed.",
+    introParagraph:
+      "Add classic bold, outlined top and bottom text to any image — the instantly recognizable meme format, ready in seconds.",
+  },
+  {
+    slug: "top-bottom-text-meme-maker",
+    toolSlug: "meme-generator",
+    h1: "Top/Bottom Text Meme Maker",
+    subtitle: "Make a Meme with Classic Top and Bottom Text",
+    metaTitle: "Top/Bottom Text Meme Maker — Free Tool",
+    metaDescription:
+      "Free meme maker with the classic top and bottom text format, automatically capitalized and wrapped.",
+    introParagraph:
+      "Text automatically capitalizes and wraps to fit, so your meme matches the classic format without any manual formatting.",
+  },
+  {
+    slug: "meme-text-generator",
+    toolSlug: "meme-generator",
+    h1: "Meme Text Generator",
+    subtitle: "Generate Classic Meme Text on Any Image",
+    metaTitle: "Meme Text Generator — Free Online Tool",
+    metaDescription:
+      "Free meme text generator adding bold, outlined captions to any image instantly.",
+    introParagraph:
+      "Generates bold, black-outlined white text in the classic meme style, positioned across the top and bottom of your image.",
+  },
+  {
+    slug: "free-meme-maker",
+    toolSlug: "meme-generator",
+    h1: "Free Meme Maker",
+    subtitle: "Make a Meme for Free, No Watermark",
+    metaTitle: "Free Meme Maker — Online Tool",
+    metaDescription:
+      "Free meme maker with no watermark and no signup — just upload, add text, and download.",
+    introParagraph:
+      "No watermark, no signup — upload an image, add your captions, and download your meme immediately.",
+  },
+  {
+    slug: "classic-meme-maker",
+    toolSlug: "meme-generator",
+    h1: "Classic Meme Maker",
+    subtitle: "Make a Meme in the Classic Instantly-Recognizable Style",
+    metaTitle: "Classic Meme Maker — Free Online Tool",
+    metaDescription:
+      "Free classic meme maker using the traditional bold white outlined text format.",
+    introParagraph:
+      "Sticks to the traditional, instantly-recognizable meme text style — bold, white, black-outlined, top and bottom.",
+  },
+  {
+    slug: "instagram-style-filters",
+    toolSlug: "photo-filters",
+    h1: "Instagram-Style Photo Filters",
+    subtitle: "Apply Instagram-Style Filters to Any Photo",
+    metaTitle: "Instagram-Style Photo Filters — Free Tool",
+    metaDescription:
+      "Free Instagram-style photo filters — Sepia, Vintage, Cool, Warm, Vivid, and more, one click each.",
+    introParagraph:
+      "Nine one-click presets inspired by classic social-media filter styles, each combining hue, saturation, contrast, and brightness for a distinct look.",
+  },
+  {
+    slug: "photo-effects-tool",
+    toolSlug: "photo-filters",
+    h1: "Photo Effects Tool",
+    subtitle: "Apply Creative Effects to Any Photo",
+    metaTitle: "Photo Effects Tool — Free Online Tool",
+    metaDescription:
+      "Free photo effects tool with nine creative one-click presets for quick photo styling.",
+    introParagraph:
+      "Click through nine distinct creative effects to quickly compare styles before settling on the one that fits your photo.",
+  },
+  {
+    slug: "vintage-photo-filter",
+    toolSlug: "photo-filters",
+    h1: "Vintage Photo Filter",
+    subtitle: "Give Any Photo a Vintage, Faded-Film Look",
+    metaTitle: "Vintage Photo Filter — Free Online Tool",
+    metaDescription:
+      "Free vintage photo filter combining warm sepia toning with reduced saturation for a faded-film aesthetic.",
+    introParagraph:
+      "Combines light sepia toning, reduced saturation, and boosted contrast for a subtle, faded-film vintage aesthetic.",
+  },
+  {
+    slug: "apply-photo-filter-online",
+    toolSlug: "photo-filters",
+    h1: "Apply Photo Filter Online",
+    subtitle: "Apply a Photo Filter Directly in Your Browser",
+    metaTitle: "Apply Photo Filter Online — Free Tool",
+    metaDescription:
+      "Free tool to apply a photo filter online, entirely in your browser with instant preview.",
+    introParagraph:
+      "Every filter previews instantly as you click through the options, right in your browser, before you download the result.",
+  },
+  {
+    slug: "photo-editing-filters",
+    toolSlug: "photo-filters",
+    h1: "Photo Editing Filters",
+    subtitle: "Apply Quick Photo Editing Filters and Effects",
+    metaTitle: "Photo Editing Filters — Free Online Tool",
+    metaDescription:
+      "Free photo editing filters for quick one-click styling — Sepia, Noir, Vivid, and more.",
+    introParagraph:
+      "Nine distinct editing presets, from subtle (Fade) to dramatic (Noir), each applying instantly for quick comparison.",
+  },
+  {
+    slug: "pixel-diff-tool",
+    toolSlug: "image-compare",
+    h1: "Pixel Diff Tool",
+    subtitle: "Compare Two Images Pixel by Pixel",
+    metaTitle: "Pixel Diff Tool — Free Online Tool",
+    metaDescription:
+      "Free pixel diff tool highlighting every changed pixel between two images of the same size.",
+    introParagraph:
+      "Compares two same-size images pixel by pixel, highlighting every difference in bright red for instant visual clarity.",
+  },
+  {
+    slug: "compare-two-images",
+    toolSlug: "image-compare",
+    h1: "Compare Two Images",
+    subtitle: "Compare Two Images and See Exactly What Changed",
+    metaTitle: "Compare Two Images — Free Online Tool",
+    metaDescription:
+      "Free tool to compare two images and see exactly what changed, with a percentage difference shown.",
+    introParagraph:
+      "See exactly what percentage of pixels differ between two versions of an image, with every difference highlighted visually.",
+  },
+  {
+    slug: "image-diff-checker",
+    toolSlug: "image-compare",
+    h1: "Image Diff Checker",
+    subtitle: "Check the Difference Between Two Images",
+    metaTitle: "Image Diff Checker — Free Online Tool",
+    metaDescription:
+      "Free image diff checker for spotting exact changes between two design iterations or versions.",
+    introParagraph:
+      "Spots exact changes between two design iterations or image versions that would be easy to miss scanning by eye alone.",
+  },
+  {
+    slug: "spot-the-difference-tool",
+    toolSlug: "image-compare",
+    h1: "Spot the Difference Tool",
+    subtitle: "Spot Every Difference Between Two Images Instantly",
+    metaTitle: "Spot the Difference Tool — Free Online Tool",
+    metaDescription:
+      "Free tool to spot every difference between two images instantly, highlighted in red.",
+    introParagraph:
+      "Instantly highlights every pixel that changed between two images, turning a tedious manual comparison into an immediate visual result.",
+  },
+  {
+    slug: "visual-regression-diff-tool",
+    toolSlug: "image-compare",
+    h1: "Visual Regression Diff Tool",
+    subtitle: "Catch Unintended Visual Changes Between Two Images",
+    metaTitle: "Visual Regression Diff Tool — Free Tool",
+    metaDescription:
+      "Free visual regression diff tool for catching unintended changes between a before and after image.",
+    introParagraph:
+      "Useful for catching an unintended visual regression — verify that an edit only changed what it was supposed to.",
+  },
+  {
+    slug: "passport-photo-cropper",
+    toolSlug: "passport-photo-maker",
+    h1: "Passport Photo Cropper",
+    subtitle: "Crop a Photo to Standard Passport Dimensions",
+    metaTitle: "Passport Photo Cropper — Free Online Tool",
+    metaDescription:
+      "Free passport photo cropper for US 2×2in and international 35×45mm standards.",
+    introParagraph:
+      "Crops any photo to the exact standard passport photo dimensions, with a draggable, aspect-locked crop selection.",
+  },
+  {
+    slug: "visa-photo-maker",
+    toolSlug: "passport-photo-maker",
+    h1: "Visa Photo Maker",
+    subtitle: "Make a Correctly Sized Visa Application Photo",
+    metaTitle: "Visa Photo Maker — Free Online Tool",
+    metaDescription:
+      "Free visa photo maker cropping to the standard 35×45mm size used across many countries.",
+    introParagraph:
+      "Crops to the 35×45mm size standard used for visa applications across the UK, Schengen area, and many other countries.",
+  },
+  {
+    slug: "passport-size-photo-online",
+    toolSlug: "passport-photo-maker",
+    h1: "Passport Size Photo Online",
+    subtitle: "Make a Passport Size Photo Directly in Your Browser",
+    metaTitle: "Passport Size Photo Online — Free Tool",
+    metaDescription:
+      "Free online tool to make a passport size photo, plus a printable sheet with multiple copies.",
+    introParagraph:
+      "Generates both the correctly-sized single photo and a printable 4×6in sheet tiled with multiple copies.",
+  },
+  {
+    slug: "id-photo-maker",
+    toolSlug: "passport-photo-maker",
+    h1: "ID Photo Maker",
+    subtitle: "Make a Correctly Sized ID Photo",
+    metaTitle: "ID Photo Maker — Free Online Tool",
+    metaDescription:
+      "Free ID photo maker for passport and visa-standard photo dimensions.",
+    introParagraph:
+      "Crops any photo to standard official document dimensions, ready for a passport, visa, or similar ID application.",
+  },
+  {
+    slug: "passport-photo-size-tool",
+    toolSlug: "passport-photo-maker",
+    h1: "Passport Photo Size Tool",
+    subtitle: "Get the Exact Passport Photo Size You Need",
+    metaTitle: "Passport Photo Size Tool — Free Online Tool",
+    metaDescription:
+      "Free tool to crop a photo to the exact passport size standard your application requires.",
+    introParagraph:
+      "Choose between US and international size standards, then drag to position the crop exactly where it needs to be.",
+  },
+  {
+    slug: "generate-website-favicon",
+    toolSlug: "favicon-generator",
+    h1: "Generate Website Favicon",
+    subtitle: "Generate a Complete Favicon Set for Your Website",
+    metaTitle: "Generate Website Favicon — Free Online Tool",
+    metaDescription:
+      "Free tool to generate a complete favicon set for your website — .ico, PNGs, and manifest, all bundled.",
+    introParagraph:
+      "Generates every standard favicon file a modern website needs — favicon.ico, PNG sizes, apple-touch-icon, and web manifest.",
+  },
+  {
+    slug: "favicon-package-generator",
+    toolSlug: "favicon-generator",
+    h1: "Favicon Package Generator",
+    subtitle: "Generate a Complete Favicon Package as One ZIP",
+    metaTitle: "Favicon Package Generator — Free Tool",
+    metaDescription:
+      "Free favicon package generator bundling every standard file into one downloadable ZIP.",
+    introParagraph:
+      "Bundles every standard favicon file into one ZIP download — no need to generate and download each size separately.",
+  },
+  {
+    slug: "favicon-and-app-icon-generator",
+    toolSlug: "favicon-generator",
+    h1: "Favicon and App Icon Generator",
+    subtitle: "Generate Favicons and App Icons from One Image",
+    metaTitle: "Favicon and App Icon Generator — Free Tool",
+    metaDescription:
+      "Free tool to generate favicons and app icons together — browser, iOS, and Android sizes included.",
+    introParagraph:
+      "Covers browser favicons, iOS home screen bookmarks, and Android app icons from a single source image.",
+  },
+  {
+    slug: "create-favicon-online",
+    toolSlug: "favicon-generator",
+    h1: "Create Favicon Online",
+    subtitle: "Create a Complete Favicon Set Directly in Your Browser",
+    metaTitle: "Create Favicon Online — Free Tool",
+    metaDescription:
+      "Free online tool to create a complete favicon set, no install or account required.",
+    introParagraph:
+      "No install, no account — upload a logo and get a complete favicon package back, generated entirely in your browser.",
+  },
+  {
+    slug: "website-icon-generator",
+    toolSlug: "favicon-generator",
+    h1: "Website Icon Generator",
+    subtitle: "Generate Every Icon Size a Website Needs",
+    metaTitle: "Website Icon Generator — Free Online Tool",
+    metaDescription:
+      "Free website icon generator covering every standard size from 16px favicons to 512px app icons.",
+    introParagraph:
+      "Generates every icon size a modern website needs, from a tiny 16px browser tab icon up to a 512px Android app icon.",
+  },
+  {
+    slug: "strip-exif-from-photo",
+    toolSlug: "image-exif-remover",
+    h1: "Strip EXIF from Photo",
+    subtitle: "Strip All EXIF Metadata from a Photo",
+    metaTitle: "Strip EXIF from Photo — Free Online Tool",
+    metaDescription:
+      "Free tool to strip all EXIF metadata from a photo before sharing it publicly.",
+    introParagraph:
+      "Strips camera model, timestamp, GPS coordinates, and every other embedded EXIF field before you share a photo.",
+  },
+  {
+    slug: "remove-gps-data-from-photo",
+    toolSlug: "image-exif-remover",
+    h1: "Remove GPS Data from Photo",
+    subtitle: "Remove GPS Location Data from Any Photo",
+    metaTitle: "Remove GPS Data from Photo — Free Tool",
+    metaDescription:
+      "Free tool to remove GPS location metadata from a photo before posting it publicly.",
+    introParagraph:
+      "Many phones embed exact GPS coordinates in every photo — this removes that (and all other metadata) before you post publicly.",
+  },
+  {
+    slug: "clean-photo-metadata",
+    toolSlug: "image-exif-remover",
+    h1: "Clean Photo Metadata",
+    subtitle: "Clean All Hidden Metadata from a Photo",
+    metaTitle: "Clean Photo Metadata — Free Online Tool",
+    metaDescription:
+      "Free tool to clean all hidden metadata from a photo, leaving only the visible image content.",
+    introParagraph:
+      "Re-renders the photo to strip every trace of hidden metadata, leaving only the visible pixel content behind.",
+  },
+  {
+    slug: "remove-metadata-from-image",
+    toolSlug: "image-exif-remover",
+    h1: "Remove Metadata from Image",
+    subtitle: "Remove All Metadata from Any Image",
+    metaTitle: "Remove Metadata from Image — Free Tool",
+    metaDescription:
+      "Free tool to remove all embedded metadata from an image, with a before/after size comparison shown.",
+    introParagraph:
+      "Removes every embedded metadata field completely, with a clear before/after file size comparison shown once done.",
+  },
+  {
+    slug: "privacy-safe-photo-cleaner",
+    toolSlug: "image-exif-remover",
+    h1: "Privacy-Safe Photo Cleaner",
+    subtitle: "Clean Photos of Hidden Metadata Before Sharing",
+    metaTitle: "Privacy-Safe Photo Cleaner — Free Online Tool",
+    metaDescription:
+      "Free privacy-safe photo cleaner stripping all hidden metadata before you share an image anywhere.",
+    introParagraph:
+      "A quick privacy step before sharing any photo — strips every hidden metadata field that could reveal more than you intend.",
+  },
+  {
+    slug: "remove-photo-grain",
+    toolSlug: "image-noise-reducer",
+    h1: "Remove Photo Grain",
+    subtitle: "Remove Grain and Speckle Noise from Any Photo",
+    metaTitle: "Remove Photo Grain — Free Online Tool",
+    metaDescription:
+      "Free tool to remove grain and speckle noise from a photo using a median filter.",
+    introParagraph:
+      "Removes speckle-style grain using a median filter, which eliminates noise spikes while preserving edges better than a simple blur.",
+  },
+  {
+    slug: "denoise-photo-online",
+    toolSlug: "image-noise-reducer",
+    h1: "Denoise Photo Online",
+    subtitle: "Denoise Any Photo Directly in Your Browser",
+    metaTitle: "Denoise Photo Online — Free Online Tool",
+    metaDescription:
+      "Free online photo denoiser using an adjustable median filter, no install needed.",
+    introParagraph:
+      "Cleans up grainy or noisy photos entirely in your browser, with adjustable filter strength for lighter or heavier noise.",
+  },
+  {
+    slug: "reduce-photo-graininess",
+    toolSlug: "image-noise-reducer",
+    h1: "Reduce Photo Graininess",
+    subtitle: "Reduce Graininess in Low-Light or High-ISO Photos",
+    metaTitle: "Reduce Photo Graininess — Free Online Tool",
+    metaDescription:
+      "Free tool to reduce graininess in low-light or high-ISO photos using a median filter.",
+    introParagraph:
+      "Specifically effective on the kind of speckle noise common in low-light and high-ISO photography.",
+  },
+  {
+    slug: "fix-grainy-photo",
+    toolSlug: "image-noise-reducer",
+    h1: "Fix Grainy Photo",
+    subtitle: "Fix a Grainy Photo with a Median Noise Filter",
+    metaTitle: "Fix Grainy Photo — Free Online Tool",
+    metaDescription:
+      "Free tool to fix a grainy photo, with strength adjustable from 3×3 up to 7×7 filtering.",
+    introParagraph:
+      "Adjust the filter strength from a light 3×3 touch-up to a stronger 7×7 pass for heavier grain.",
+  },
+  {
+    slug: "median-filter-denoiser",
+    toolSlug: "image-noise-reducer",
+    h1: "Median Filter Denoiser",
+    subtitle: "Denoise Images Using a Classic Median Filter",
+    metaTitle: "Median Filter Denoiser — Free Online Tool",
+    metaDescription:
+      "Free median filter denoiser — a classic, predictable signal-processing technique, not AI-based.",
+    introParagraph:
+      "Uses a well-established classical median filter rather than an AI model, giving fast, predictable results for typical speckle noise.",
+  },
+  {
+    slug: "bulk-image-resizer",
+    toolSlug: "batch-image-resizer",
+    h1: "Bulk Image Resizer",
+    subtitle: "Resize Many Images at Once, Downloaded as One ZIP",
+    metaTitle: "Bulk Image Resizer — Free Online Tool",
+    metaDescription:
+      "Free bulk image resizer applying the same maximum dimensions to every selected image.",
+    introParagraph:
+      "Select a whole batch of images, apply the same maximum dimensions to all, and download everything as one ZIP.",
+  },
+  {
+    slug: "resize-multiple-photos",
+    toolSlug: "batch-image-resizer",
+    h1: "Resize Multiple Photos",
+    subtitle: "Resize Multiple Photos in One Batch",
+    metaTitle: "Resize Multiple Photos — Free Online Tool",
+    metaDescription:
+      "Free tool to resize multiple photos in a single batch, preserving each one's own aspect ratio.",
+    introParagraph:
+      "Each photo in the batch keeps its own aspect ratio by default, so differently-shaped photos all end up properly scaled.",
+  },
+  {
+    slug: "mass-image-resizer",
+    toolSlug: "batch-image-resizer",
+    h1: "Mass Image Resizer",
+    subtitle: "Resize a Large Set of Images at Once",
+    metaTitle: "Mass Image Resizer — Free Online Tool",
+    metaDescription:
+      "Free mass image resizer for processing a large batch of images without resizing each one individually.",
+    introParagraph:
+      "No need to resize each image individually — select the whole set and process it in one pass.",
+  },
+  {
+    slug: "resize-photos-in-bulk",
+    toolSlug: "batch-image-resizer",
+    h1: "Resize Photos in Bulk",
+    subtitle: "Resize a Whole Folder of Photos in Bulk",
+    metaTitle: "Resize Photos in Bulk — Free Online Tool",
+    metaDescription:
+      "Free tool to resize a whole folder of photos in bulk, packaged into one ZIP download.",
+    introParagraph:
+      "Standardizes image sizes across a whole folder or product catalog in one batch operation.",
+  },
+  {
+    slug: "bulk-photo-resize-tool",
+    toolSlug: "batch-image-resizer",
+    h1: "Bulk Photo Resize Tool",
+    subtitle: "Resize a Batch of Photos with Consistent Dimensions",
+    metaTitle: "Bulk Photo Resize Tool — Free Online Tool",
+    metaDescription:
+      "Free bulk photo resize tool applying consistent maximum dimensions across an entire batch.",
+    introParagraph:
+      "Apply the same maximum width and height constraint across an entire batch, with each image scaled proportionally to fit.",
+  },
+  {
+    slug: "remove-solid-background",
+    toolSlug: "transparent-background-maker",
+    h1: "Remove Solid Background",
+    subtitle: "Remove a Solid Color Background from Any Image",
+    metaTitle: "Remove Solid Background — Free Online Tool",
+    metaDescription:
+      "Free tool to remove a solid color background from an image by clicking to select the color.",
+    introParagraph:
+      "Click the background to select its color, adjust tolerance, and every matching pixel becomes transparent.",
+  },
+  {
+    slug: "chroma-key-background-remover",
+    toolSlug: "transparent-background-maker",
+    h1: "Chroma Key Background Remover",
+    subtitle: "Remove a Background Using Chroma-Key Color Matching",
+    metaTitle: "Chroma Key Background Remover — Free Tool",
+    metaDescription:
+      "Free chroma-key style background remover for solid or near-solid color backgrounds.",
+    introParagraph:
+      "Uses classic chroma-key style color matching, ideal for solid or near-solid color backgrounds rather than complex photographic scenes.",
+  },
+  {
+    slug: "make-white-background-transparent",
+    toolSlug: "transparent-background-maker",
+    h1: "Make White Background Transparent",
+    subtitle: "Make a White Background Transparent Instantly",
+    metaTitle: "Make White Background Transparent — Free Tool",
+    metaDescription:
+      "Free tool to make a white product photo background transparent with adjustable tolerance.",
+    introParagraph:
+      "A common product-photo need — click the white background and it becomes transparent, with tolerance adjustable for lighting variation.",
+  },
+  {
+    slug: "color-based-background-remover",
+    toolSlug: "transparent-background-maker",
+    h1: "Color-Based Background Remover",
+    subtitle: "Remove a Background Based on Its Color",
+    metaTitle: "Color-Based Background Remover — Free Tool",
+    metaDescription:
+      "Free color-based background remover, not AI subject detection — works best on solid backgrounds.",
+    introParagraph:
+      "Works by color similarity rather than AI subject detection, making it fast, predictable, and effective for solid-color backgrounds specifically.",
+  },
+  {
+    slug: "click-to-remove-background",
+    toolSlug: "transparent-background-maker",
+    h1: "Click to Remove Background",
+    subtitle: "Click a Color to Make It Transparent",
+    metaTitle: "Click to Remove Background — Free Online Tool",
+    metaDescription:
+      "Free tool to remove a background by simply clicking the color you want to make transparent.",
+    introParagraph:
+      "As simple as it sounds — click the background color, adjust tolerance if needed, and download the transparent result.",
+  },
+  {
+    slug: "merge-pdf-online",
+    toolSlug: "pdf-merge",
+    h1: "Merge PDF Online",
+    subtitle: "Combine Multiple PDF Files Into One Document",
+    metaTitle: "Merge PDF Online — Free, Private Tool",
+    metaDescription:
+      "Free online PDF merger. Combine multiple PDF files into a single document, reorder pages, and download instantly — all in your browser.",
+    introParagraph:
+      "Combining several PDFs into one file is one of the most common document tasks there is, and doing it without installing software or uploading to a stranger's server shouldn't be hard. Add your files, arrange them in order, and merge.",
+  },
+  {
+    slug: "combine-pdf-files",
+    toolSlug: "pdf-merge",
+    h1: "Combine PDF Files",
+    subtitle: "Join Several PDFs Into a Single File",
+    metaTitle: "Combine PDF Files — Free Online Tool",
+    metaDescription:
+      "Free tool to combine PDF files into one document. Add multiple PDFs, set the order, and get a single merged file, entirely in your browser.",
+    introParagraph:
+      "Whether it's a resume and cover letter or a stack of scanned receipts, combining PDFs into one file makes sharing and reviewing far simpler than sending several separate attachments.",
+  },
+  {
+    slug: "pdf-joiner",
+    toolSlug: "pdf-merge",
+    h1: "PDF Joiner",
+    subtitle: "Join Multiple PDFs Into One File, in Any Order",
+    metaTitle: "PDF Joiner — Free Online Tool to Join PDFs",
+    metaDescription:
+      "Free PDF joiner. Upload multiple PDF files, arrange them in the order you want, and download one combined PDF instantly.",
+    introParagraph:
+      "This joins any number of PDF files into a single document, preserving original quality and text selectability since pages are copied as PDF objects, not rendered as images.",
+  },
+  {
+    slug: "join-multiple-pdfs",
+    toolSlug: "pdf-merge",
+    h1: "Join Multiple PDFs",
+    subtitle: "Turn Several PDF Files Into a Single Combined Document",
+    metaTitle: "Join Multiple PDFs Online — Free Tool",
+    metaDescription:
+      "Join multiple PDF files into one online, free and private. Reorder before merging and download a single combined PDF.",
+    introParagraph:
+      "Assembling an application packet, a set of signed forms, or a multi-part report into one file is exactly what this tool is built for — add files, reorder, merge, done.",
+  },
+  {
+    slug: "pdf-combiner-tool",
+    toolSlug: "pdf-merge",
+    h1: "PDF Combiner Tool",
+    subtitle: "Combine PDFs Without Installing Any Software",
+    metaTitle: "PDF Combiner Tool — Free, Browser-Based",
+    metaDescription:
+      "A free, browser-based PDF combiner. Merge multiple PDF files into one document without installing anything or uploading your files.",
+    introParagraph:
+      "No installation, no account, no upload — this runs entirely in your browser using pdf-lib, combining your files locally and handing you back one merged PDF.",
+  },
+  {
+    slug: "split-pdf-online",
+    toolSlug: "pdf-split",
+    h1: "Split PDF Online",
+    subtitle: "Divide a PDF Into Multiple Separate Files",
+    metaTitle: "Split PDF Online — Free, Private Tool",
+    metaDescription:
+      "Free online PDF splitter. Divide a PDF into separate files by page range or fixed page count, entirely in your browser.",
+    introParagraph:
+      "Splitting a large PDF into smaller pieces — one file per chapter, one per recipient, or any custom grouping — happens instantly here with no upload to a server.",
+  },
+  {
+    slug: "separate-pdf-pages",
+    toolSlug: "pdf-split",
+    h1: "Separate PDF Pages",
+    subtitle: "Break a PDF Into Individual or Grouped Files",
+    metaTitle: "Separate PDF Pages — Free Online Tool",
+    metaDescription:
+      "Free tool to separate PDF pages into individual or grouped files. Choose your split method and download instantly.",
+    introParagraph:
+      "Whether you need every page as its own file or the document broken into a handful of sections, this handles the split locally in your browser.",
+  },
+  {
+    slug: "pdf-page-splitter",
+    toolSlug: "pdf-split",
+    h1: "PDF Page Splitter",
+    subtitle: "Split a PDF by Page Range or Fixed Page Count",
+    metaTitle: "PDF Page Splitter — Free Online Tool",
+    metaDescription:
+      "Free PDF page splitter. Divide a document by custom page ranges or a fixed number of pages per file, all processed in your browser.",
+    introParagraph:
+      "Set how you want the document divided — specific ranges or an even page count per file — and get back a ZIP of the resulting PDFs.",
+  },
+  {
+    slug: "divide-pdf-into-parts",
+    toolSlug: "pdf-split",
+    h1: "Divide PDF Into Parts",
+    subtitle: "Break One PDF Into Several Smaller Files",
+    metaTitle: "Divide PDF Into Parts — Free Online Tool",
+    metaDescription:
+      "Free tool to divide a PDF into multiple parts. Choose page ranges or an even split, and download the resulting files as a ZIP.",
+    introParagraph:
+      "Large documents are often easier to share and review in parts — this divides yours exactly how you specify, without sending the file anywhere.",
+  },
+  {
+    slug: "pdf-splitter-free",
+    toolSlug: "pdf-split",
+    h1: "Free PDF Splitter",
+    subtitle: "Split Any PDF Into Smaller Files, No Cost, No Upload",
+    metaTitle: "Free PDF Splitter — Browser-Based, No Upload",
+    metaDescription:
+      "A completely free PDF splitter that runs in your browser. No account, no upload, no file size tricks — just split and download.",
+    introParagraph:
+      "Split by range or by page count, entirely on your device — your document never leaves your browser during the process.",
+  },
+  {
+    slug: "rotate-pdf-online",
+    toolSlug: "pdf-rotate",
+    h1: "Rotate PDF Online",
+    subtitle: "Fix Sideways or Upside-Down PDF Pages",
+    metaTitle: "Rotate PDF Online — Free, Private Tool",
+    metaDescription:
+      "Free online PDF rotator. Fix sideways or upside-down pages with a click, per page or for the whole document, in your browser.",
+    introParagraph:
+      "Scanned documents come out rotated more often than not — click any page's thumbnail to rotate it 90°, or rotate every page at once.",
+  },
+  {
+    slug: "fix-pdf-page-orientation",
+    toolSlug: "pdf-rotate",
+    h1: "Fix PDF Page Orientation",
+    subtitle: "Correct Sideways Pages Without Losing Quality",
+    metaTitle: "Fix PDF Page Orientation — Free Online Tool",
+    metaDescription:
+      "Fix incorrectly oriented PDF pages for free. Rotate individual pages or the whole document, with zero quality loss.",
+    introParagraph:
+      "This updates the PDF's page rotation property directly — a lossless, instant fix respected by every standard PDF viewer, not a re-render of the page content.",
+  },
+  {
+    slug: "pdf-page-rotator",
+    toolSlug: "pdf-rotate",
+    h1: "PDF Page Rotator",
+    subtitle: "Rotate Individual Pages or an Entire PDF",
+    metaTitle: "PDF Page Rotator — Free Online Tool",
+    metaDescription:
+      "Free PDF page rotator. Click through page thumbnails to rotate exactly the pages that need it, then download the fixed file.",
+    introParagraph:
+      "See every page as a thumbnail, rotate only the ones that need it, and download a corrected PDF — all processed locally in your browser.",
+  },
+  {
+    slug: "turn-pdf-page-right-side-up",
+    toolSlug: "pdf-rotate",
+    h1: "Turn a PDF Page Right Side Up",
+    subtitle: "Fix Rotated Pages From Scanners or Phone Photos",
+    metaTitle: "Turn PDF Pages Right Side Up — Free Tool",
+    metaDescription:
+      "Free tool to turn sideways or upside-down PDF pages right side up. Click to rotate, then download the corrected file.",
+    introParagraph:
+      "A stack fed through a scanner sideways, or a photo taken the wrong way — this fixes the orientation instantly, page by page.",
+  },
+  {
+    slug: "pdf-rotator-free",
+    toolSlug: "pdf-rotate",
+    h1: "Free PDF Rotator",
+    subtitle: "Rotate PDF Pages With No Software Install",
+    metaTitle: "Free PDF Rotator — Browser-Based Tool",
+    metaDescription:
+      "A completely free, browser-based PDF rotator. No installation or upload — rotate pages and download instantly.",
+    introParagraph:
+      "Rotation is lossless and instant, since it's a standard PDF page property rather than a re-rendered image — this tool just sets it for you.",
+  },
+  {
+    slug: "extract-pdf-pages",
+    toolSlug: "pdf-extract-pages",
+    h1: "Extract PDF Pages",
+    subtitle: "Pull Specific Pages Into a New PDF",
+    metaTitle: "Extract PDF Pages Online — Free, Private Tool",
+    metaDescription:
+      "Free tool to extract specific pages from a PDF. Select pages or type a range, and download a new PDF with just those pages.",
+    introParagraph:
+      "Pull just the pages you need — a signature page, a specific chapter, a single form — into a clean new PDF, without sending the original anywhere.",
+  },
+  {
+    slug: "pull-pages-from-pdf",
+    toolSlug: "pdf-extract-pages",
+    h1: "Pull Pages From a PDF",
+    subtitle: "Select and Save Only the Pages You Need",
+    metaTitle: "Pull Pages From a PDF — Free Online Tool",
+    metaDescription:
+      "Free tool to pull specific pages out of a PDF. Click thumbnails or type a page range, then download the extracted pages as one file.",
+    introParagraph:
+      "Click pages to select them, or type a range like 1-3,5,8-10, and get back a new PDF containing exactly those pages in order.",
+  },
+  {
+    slug: "pdf-page-picker",
+    toolSlug: "pdf-extract-pages",
+    h1: "PDF Page Picker",
+    subtitle: "Choose Exactly Which Pages to Keep",
+    metaTitle: "PDF Page Picker — Free Online Tool",
+    metaDescription:
+      "Free PDF page picker. Select the pages you want to keep from a document and download them as a new file.",
+    introParagraph:
+      "Selected pages are copied as PDF objects, not rendered as images, so text stays fully selectable and searchable in the extracted result.",
+  },
+  {
+    slug: "save-specific-pdf-pages",
+    toolSlug: "pdf-extract-pages",
+    h1: "Save Specific PDF Pages",
+    subtitle: "Get a New PDF With Only the Pages You Choose",
+    metaTitle: "Save Specific PDF Pages — Free Online Tool",
+    metaDescription:
+      "Save only the PDF pages you need. Choose pages by clicking or typing a range, then download a new file with just those pages.",
+    introParagraph:
+      "No need to send the whole document when only a page or two matters — pick what's relevant and get a smaller, focused file back.",
+  },
+  {
+    slug: "pdf-page-extractor-free",
+    toolSlug: "pdf-extract-pages",
+    h1: "Free PDF Page Extractor",
+    subtitle: "Extract Pages From Any PDF at No Cost",
+    metaTitle: "Free PDF Page Extractor — Browser-Based",
+    metaDescription:
+      "A completely free PDF page extractor running in your browser. No account, no upload, no page limits.",
+    introParagraph:
+      "Everything happens on your device — upload, select pages, extract, and download, with nothing ever sent to a server.",
+  },
+  {
+    slug: "remove-pdf-pages",
+    toolSlug: "pdf-delete-pages",
+    h1: "Remove PDF Pages",
+    subtitle: "Delete Unwanted Pages From a PDF",
+    metaTitle: "Remove PDF Pages Online — Free Tool",
+    metaDescription:
+      "Free tool to remove pages from a PDF. Mark the pages to delete and download a new file with everything else intact.",
+    introParagraph:
+      "A blank scanned page, a duplicate, an outdated cover — mark what you don't want and keep everything else exactly as it was.",
+  },
+  {
+    slug: "delete-pages-from-pdf",
+    toolSlug: "pdf-delete-pages",
+    h1: "Delete Pages From a PDF",
+    subtitle: "Remove One or More Pages Without Affecting the Rest",
+    metaTitle: "Delete Pages From a PDF — Free Online Tool",
+    metaDescription:
+      "Free tool to delete specific pages from a PDF document. Click to mark pages or type a range, then download the result.",
+    introParagraph:
+      "Click a page's thumbnail or type a range to mark pages for deletion — the remaining pages are copied through unchanged, at full quality.",
+  },
+  {
+    slug: "pdf-page-remover",
+    toolSlug: "pdf-delete-pages",
+    h1: "PDF Page Remover",
+    subtitle: "Take Out the Pages You Don't Need",
+    metaTitle: "PDF Page Remover — Free Online Tool",
+    metaDescription:
+      "Free PDF page remover. Mark pages to delete and get a new document with those pages taken out, in your browser.",
+    introParagraph:
+      "This is the inverse of extracting pages — mark what should go, keep everything else, and download the trimmed-down file.",
+  },
+  {
+    slug: "cut-pages-out-of-pdf",
+    toolSlug: "pdf-delete-pages",
+    h1: "Cut Pages Out of a PDF",
+    subtitle: "Remove Specific Pages While Preserving the Rest",
+    metaTitle: "Cut Pages Out of a PDF — Free Online Tool",
+    metaDescription:
+      "Free tool to cut unwanted pages out of a PDF. Select pages to remove and download the remaining document instantly.",
+    introParagraph:
+      "Whether it's one stray page or a whole range, this removes exactly what you mark and leaves everything else fully intact.",
+  },
+  {
+    slug: "pdf-page-deleter-free",
+    toolSlug: "pdf-delete-pages",
+    h1: "Free PDF Page Deleter",
+    subtitle: "Delete Pages From a PDF at No Cost",
+    metaTitle: "Free PDF Page Deleter — Browser-Based Tool",
+    metaDescription:
+      "A free, browser-based tool to delete pages from a PDF. No install, no upload, no cost.",
+    introParagraph:
+      "Mark the pages you don't want, keep at least one page remaining, and download — the whole process runs locally on your device.",
+  },
+  {
+    slug: "rearrange-pdf-pages",
+    toolSlug: "pdf-reorder-pages",
+    h1: "Rearrange PDF Pages",
+    subtitle: "Change the Order of Pages in a PDF",
+    metaTitle: "Rearrange PDF Pages Online — Free Tool",
+    metaDescription:
+      "Free tool to rearrange PDF pages into a new order. Move pages up or down and download the reordered document.",
+    introParagraph:
+      "Fix a scanner's out-of-order output or resequence a document before sharing — move pages with simple up/down controls.",
+  },
+  {
+    slug: "reorder-pdf-pages",
+    toolSlug: "pdf-reorder-pages",
+    h1: "Reorder PDF Pages",
+    subtitle: "Put PDF Pages Into the Right Sequence",
+    metaTitle: "Reorder PDF Pages — Free Online Tool",
+    metaDescription:
+      "Free online tool to reorder PDF pages. See every page as a thumbnail and move them into the sequence you need.",
+    introParagraph:
+      "Every page shows its current position and original page number, so you can verify the new order before downloading.",
+  },
+  {
+    slug: "pdf-page-organizer",
+    toolSlug: "pdf-reorder-pages",
+    h1: "PDF Page Organizer",
+    subtitle: "Move Pages Into Any Order You Need",
+    metaTitle: "PDF Page Organizer — Free Online Tool",
+    metaDescription:
+      "Free PDF page organizer. Shuffle pages into a new order with simple controls and download the result.",
+    introParagraph:
+      "Pages are copied as PDF objects into their new sequence, so text and image quality stay exactly as they were in the original.",
+  },
+  {
+    slug: "change-pdf-page-order",
+    toolSlug: "pdf-reorder-pages",
+    h1: "Change PDF Page Order",
+    subtitle: "Move Pages Around Without Losing Quality",
+    metaTitle: "Change PDF Page Order — Free Online Tool",
+    metaDescription:
+      "Free tool to change the order of pages in a PDF. Reorder with up/down controls and download instantly, no upload required.",
+    introParagraph:
+      "The output always has the same number of pages as the input — this only changes their sequence, nothing else.",
+  },
+  {
+    slug: "pdf-page-sorter",
+    toolSlug: "pdf-reorder-pages",
+    h1: "PDF Page Sorter",
+    subtitle: "Sort a PDF's Pages Into the Right Order",
+    metaTitle: "PDF Page Sorter — Free Online Tool",
+    metaDescription:
+      "Free PDF page sorter. Reorder pages visually with thumbnail previews and up/down controls, then download the result.",
+    introParagraph:
+      "A visual thumbnail grid makes reordering straightforward, even for documents where the original sequence got badly scrambled.",
+  },
+  {
+    slug: "add-watermark-to-pdf",
+    toolSlug: "pdf-add-watermark",
+    h1: "Add a Watermark to a PDF",
+    subtitle: "Stamp Custom Text Across Every Page",
+    metaTitle: "Add Watermark to PDF — Free Online Tool",
+    metaDescription:
+      "Free tool to add a text watermark to a PDF. Set the text, opacity, size, and angle, then download the watermarked file.",
+    introParagraph:
+      "Mark a draft, stamp confidential, or brand every page — set the text and style, apply it, and download your watermarked PDF.",
+  },
+  {
+    slug: "pdf-watermark-tool",
+    toolSlug: "pdf-add-watermark",
+    h1: "PDF Watermark Tool",
+    subtitle: "Apply a Semi-Transparent Text Stamp to Every Page",
+    metaTitle: "PDF Watermark Tool — Free Online Tool",
+    metaDescription:
+      "Free PDF watermark tool. Add a customizable diagonal or horizontal text watermark to any PDF, right in your browser.",
+    introParagraph:
+      "The watermark is drawn as real vector text, not an image, so it stays sharp at any zoom level and adds almost no file size.",
+  },
+  {
+    slug: "stamp-text-on-pdf",
+    toolSlug: "pdf-add-watermark",
+    h1: "Stamp Text on a PDF",
+    subtitle: "Apply a Text Overlay Across Every Page",
+    metaTitle: "Stamp Text on PDF — Free Online Tool",
+    metaDescription:
+      "Free tool to stamp custom text across every page of a PDF. Control opacity, size, and rotation angle.",
+    introParagraph:
+      "Whether it's DRAFT, CONFIDENTIAL, or a custom label, this stamps your text consistently across the whole document in one pass.",
+  },
+  {
+    slug: "confidential-stamp-pdf",
+    toolSlug: "pdf-add-watermark",
+    h1: "Confidential Stamp for PDF",
+    subtitle: "Mark a PDF as Confidential, Draft, or Sample",
+    metaTitle: "Confidential Stamp for PDF — Free Online Tool",
+    metaDescription:
+      "Free tool to stamp CONFIDENTIAL, DRAFT, or any custom text diagonally across a PDF's pages.",
+    introParagraph:
+      "The default 45° diagonal is the classic confidential-stamp look, but any angle, size, or opacity is available to match your needs.",
+  },
+  {
+    slug: "pdf-watermark-free",
+    toolSlug: "pdf-add-watermark",
+    h1: "Free PDF Watermark Maker",
+    subtitle: "Add a Watermark to a PDF at No Cost",
+    metaTitle: "Free PDF Watermark Maker — Browser-Based",
+    metaDescription:
+      "A completely free, browser-based PDF watermark tool. No account, no upload, no watermark on the watermark tool itself.",
+    introParagraph:
+      "Set your text and style, apply it to every page, and download — no software install, no server upload, no cost.",
+  },
+  {
+    slug: "edit-pdf-metadata",
+    toolSlug: "pdf-metadata-editor",
+    h1: "Edit PDF Metadata",
+    subtitle: "Change a PDF's Title, Author, Subject & Keywords",
+    metaTitle: "Edit PDF Metadata — Free Online Tool",
+    metaDescription:
+      "Free tool to edit PDF metadata. Update the title, author, subject, and keywords stored inside a PDF file.",
+    introParagraph:
+      "Fix a generic default title, correct the author field, or add proper keywords — all stored in the PDF's standard document info fields.",
+  },
+  {
+    slug: "pdf-properties-editor",
+    toolSlug: "pdf-metadata-editor",
+    h1: "PDF Properties Editor",
+    subtitle: "View and Update a PDF's Document Properties",
+    metaTitle: "PDF Properties Editor — Free Online Tool",
+    metaDescription:
+      "Free PDF properties editor. See and edit the title, author, subject, and keywords in a PDF's file properties.",
+    introParagraph:
+      "See exactly what's currently stored, edit any field, and save — the change shows up in file properties dialogs and PDF viewer title bars.",
+  },
+  {
+    slug: "change-pdf-title-and-author",
+    toolSlug: "pdf-metadata-editor",
+    h1: "Change PDF Title and Author",
+    subtitle: "Update the Title, Author, and Other Metadata Fields",
+    metaTitle: "Change PDF Title and Author — Free Online Tool",
+    metaDescription:
+      "Free tool to change a PDF's title, author, subject, and keywords. Update the fields and download instantly.",
+    introParagraph:
+      "A file left with a default title like \"Untitled-3\" is easy to fix — update it here along with the author, subject, and keywords.",
+  },
+  {
+    slug: "pdf-document-info-editor",
+    toolSlug: "pdf-metadata-editor",
+    h1: "PDF Document Info Editor",
+    subtitle: "Edit the Document Information Stored in a PDF",
+    metaTitle: "PDF Document Info Editor — Free Online Tool",
+    metaDescription:
+      "Free tool to edit a PDF's document information dictionary — title, author, subject, and keywords — directly in your browser.",
+    introParagraph:
+      "This edits the standard document information dictionary every PDF carries, without touching any visible page content.",
+  },
+  {
+    slug: "pdf-metadata-remover-and-editor",
+    toolSlug: "pdf-metadata-editor",
+    h1: "PDF Metadata Editor & Cleaner",
+    subtitle: "Update or Clear a PDF's Metadata Fields",
+    metaTitle: "PDF Metadata Editor & Cleaner — Free Tool",
+    metaDescription:
+      "Free tool to edit or clear a PDF's metadata fields — title, author, subject, and keywords — right in your browser.",
+    introParagraph:
+      "Leave a field blank to clear it, or fill in accurate values — either way, the change is saved directly into the file's metadata.",
+  },
+  {
+    slug: "add-page-numbers-to-pdf",
+    toolSlug: "pdf-page-numbering",
+    h1: "Add Page Numbers to a PDF",
+    subtitle: "Number Every Page in Any Position or Format",
+    metaTitle: "Add Page Numbers to PDF — Free Online Tool",
+    metaDescription:
+      "Free tool to add page numbers to a PDF. Choose the position, starting number, and format, then download instantly.",
+    introParagraph:
+      "A document without page numbers is awkward to reference — add them in any of five positions, with a custom starting number and format string.",
+  },
+  {
+    slug: "pdf-page-numbers",
+    toolSlug: "pdf-page-numbering",
+    h1: "PDF Page Numbers",
+    subtitle: "Insert Page Numbers Into an Existing PDF",
+    metaTitle: "PDF Page Numbers — Free Online Tool",
+    metaDescription:
+      "Free online tool to insert page numbers into a PDF. Pick the corner or center position and get a numbered PDF back.",
+    introParagraph:
+      "Numbers are drawn as real vector text, precisely centered using the page's actual measured width — sharp at any zoom level.",
+  },
+  {
+    slug: "pdf-pagination-tool",
+    toolSlug: "pdf-page-numbering",
+    h1: "PDF Pagination Tool",
+    subtitle: "Add \"Page X of Y\" Numbering to Any PDF",
+    metaTitle: "PDF Pagination Tool — Free Online Tool",
+    metaDescription:
+      "Free PDF pagination tool. Use a custom format like \"Page {n} of {total}\" and apply it across every page.",
+    introParagraph:
+      "The format field supports {n} for the current page and {total} for the page count, so a full \"Page 3 of 42\" style is one field away.",
+  },
+  {
+    slug: "number-pdf-pages",
+    toolSlug: "pdf-page-numbering",
+    h1: "Number PDF Pages",
+    subtitle: "Add Sequential Page Numbers to a Document",
+    metaTitle: "Number PDF Pages Online — Free Tool",
+    metaDescription:
+      "Free tool to number the pages of a PDF document. Set the starting number and position, then download the numbered file.",
+    introParagraph:
+      "Continuing a multi-volume document's numbering, or starting fresh at page 1 — either way, the start number is fully your choice.",
+  },
+  {
+    slug: "page-numbering-for-pdf",
+    toolSlug: "pdf-page-numbering",
+    h1: "Page Numbering for PDF",
+    subtitle: "Consistent Page Numbers Across a Whole PDF",
+    metaTitle: "Page Numbering for PDF — Free Online Tool",
+    metaDescription:
+      "Free tool to add consistent page numbering to a PDF file. Position, format, and starting number are all customizable.",
+    introParagraph:
+      "Numbers are added on top of your existing content as a new text layer, so nothing about the original document changes underneath.",
+  },
+  {
+    slug: "add-header-footer-pdf",
+    toolSlug: "pdf-header-and-footer-adder",
+    h1: "Add a Header and Footer to a PDF",
+    subtitle: "Insert Consistent Text at the Top and Bottom of Every Page",
+    metaTitle: "Add Header and Footer to PDF — Free Tool",
+    metaDescription:
+      "Free tool to add a header and footer to a PDF. Type the text once and apply it consistently across every page.",
+    introParagraph:
+      "A company name at the top, a confidentiality note at the bottom — set either or both, and every page gets the same treatment.",
+  },
+  {
+    slug: "pdf-header-footer-tool",
+    toolSlug: "pdf-header-and-footer-adder",
+    h1: "PDF Header & Footer Tool",
+    subtitle: "Insert a Running Header or Footer Line",
+    metaTitle: "PDF Header & Footer Tool — Free Online Tool",
+    metaDescription:
+      "Free PDF header and footer tool. Add consistent text to the top and bottom of every page in a document.",
+    introParagraph:
+      "Text is drawn as real vector Helvetica, centered and placed on top of your existing content without touching anything underneath.",
+  },
+  {
+    slug: "insert-header-footer-pdf",
+    toolSlug: "pdf-header-and-footer-adder",
+    h1: "Insert Header/Footer Into a PDF",
+    subtitle: "Add Text to the Top and Bottom of Every Page",
+    metaTitle: "Insert Header/Footer Into PDF — Free Tool",
+    metaDescription:
+      "Free tool to insert a header and/or footer into an existing PDF. Leave either field blank if you only need one.",
+    introParagraph:
+      "Only the fields you fill in get added — leave the header blank for a footer-only note, or vice versa.",
+  },
+  {
+    slug: "pdf-running-header-footer",
+    toolSlug: "pdf-header-and-footer-adder",
+    h1: "PDF Running Header and Footer",
+    subtitle: "Add the Same Header/Footer Text to Every Page",
+    metaTitle: "PDF Running Header and Footer — Free Tool",
+    metaDescription:
+      "Free tool to add a running header and footer to every page of a PDF document, applied consistently in one pass.",
+    introParagraph:
+      "This applies uniformly across the whole document — the same text at the same position on every single page.",
+  },
+  {
+    slug: "add-footer-to-pdf",
+    toolSlug: "pdf-header-and-footer-adder",
+    h1: "Add a Footer to a PDF",
+    subtitle: "Insert Footer Text Across Every Page",
+    metaTitle: "Add Footer to PDF — Free Online Tool",
+    metaDescription:
+      "Free tool to add a footer to a PDF document. Type your text and apply it to every page instantly.",
+    introParagraph:
+      "A confidentiality line, a company name, a version label — type it once and it appears centered at the bottom of every page.",
+  },
+  {
+    slug: "crop-pdf-online",
+    toolSlug: "pdf-crop",
+    h1: "Crop PDF Online",
+    subtitle: "Trim Margins From Every Page With Adjustable Sliders",
+    metaTitle: "Crop PDF Online — Free, Private Tool",
+    metaDescription:
+      "Free online PDF cropping tool. Trim margins from every page with independent top, bottom, left, and right sliders.",
+    introParagraph:
+      "Wide scanned margins or oversized whitespace around content — trim any combination of sides using simple percentage sliders.",
+  },
+  {
+    slug: "pdf-margin-cropper",
+    toolSlug: "pdf-crop",
+    h1: "PDF Margin Cropper",
+    subtitle: "Cut Down Excess Whitespace on Every Page",
+    metaTitle: "PDF Margin Cropper — Free Online Tool",
+    metaDescription:
+      "Free PDF margin cropper. Set independent margins for each side and trim excess whitespace from your document.",
+    introParagraph:
+      "This sets each page's crop box, the standard non-destructive way to crop a PDF — the original content stays intact underneath.",
+  },
+  {
+    slug: "trim-pdf-margins",
+    toolSlug: "pdf-crop",
+    h1: "Trim PDF Margins",
+    subtitle: "Remove Extra White Space Around Page Content",
+    metaTitle: "Trim PDF Margins — Free Online Tool",
+    metaDescription:
+      "Free tool to trim margins from a PDF. Adjust each side independently and download the cropped document.",
+    introParagraph:
+      "A scan that's off-center often needs more trimmed from one side than another — independent sliders make that easy.",
+  },
+  {
+    slug: "pdf-cropping-tool",
+    toolSlug: "pdf-crop",
+    h1: "PDF Cropping Tool",
+    subtitle: "Crop Every Page to a Smaller Visible Area",
+    metaTitle: "PDF Cropping Tool — Free Online Tool",
+    metaDescription:
+      "Free PDF cropping tool. Set margins as a percentage of each page and download the cropped result instantly.",
+    introParagraph:
+      "Because cropping is percentage-based, the same settings scale sensibly across different page sizes in one document.",
+  },
+  {
+    slug: "crop-pdf-pages",
+    toolSlug: "pdf-crop",
+    h1: "Crop PDF Pages",
+    subtitle: "Trim Margins Without Touching the Underlying Content",
+    metaTitle: "Crop PDF Pages — Free Online Tool",
+    metaDescription:
+      "Free tool to crop the pages of a PDF. Adjust top, bottom, left, and right margins and download the cropped file.",
+    introParagraph:
+      "Non-destructive by design — the crop box changes what's visible and printable, without deleting anything underneath.",
+  },
+  {
+    slug: "convert-pdf-to-a4",
+    toolSlug: "pdf-page-size-converter",
+    h1: "Convert PDF to A4",
+    subtitle: "Resize Any PDF's Pages to the A4 Standard",
+    metaTitle: "Convert PDF to A4 — Free Online Tool",
+    metaDescription:
+      "Free tool to convert a PDF to A4 page size. Content is scaled proportionally and centered, ready to print anywhere A4 is standard.",
+    introParagraph:
+      "A PDF sized for US Letter or Legal converts cleanly to A4 here, with content proportionally scaled and centered on the new page.",
+  },
+  {
+    slug: "pdf-to-letter-size",
+    toolSlug: "pdf-page-size-converter",
+    h1: "Convert PDF to Letter Size",
+    subtitle: "Resize a PDF's Pages to US Letter",
+    metaTitle: "Convert PDF to Letter Size — Free Tool",
+    metaDescription:
+      "Free tool to convert a PDF's page size to US Letter (8.5x11in). Content is scaled and centered proportionally.",
+    introParagraph:
+      "Documents created for A4 or Legal convert to the US Letter standard here, print-ready with no distortion.",
+  },
+  {
+    slug: "pdf-page-size-changer",
+    toolSlug: "pdf-page-size-converter",
+    h1: "PDF Page Size Changer",
+    subtitle: "Switch Between A4, Letter, and Legal",
+    metaTitle: "PDF Page Size Changer — Free Online Tool",
+    metaDescription:
+      "Free PDF page size changer. Convert between A4, US Letter, and US Legal, with content scaled proportionally.",
+    introParagraph:
+      "Pick your target size from the dropdown and every page scales to fit it, centered with equal margins on all sides.",
+  },
+  {
+    slug: "resize-pdf-page",
+    toolSlug: "pdf-page-size-converter",
+    h1: "Resize a PDF Page",
+    subtitle: "Change a PDF's Page Dimensions to a Standard Size",
+    metaTitle: "Resize PDF Page — Free Online Tool",
+    metaDescription:
+      "Free tool to resize a PDF's page dimensions to A4, US Letter, or US Legal, entirely in your browser.",
+    introParagraph:
+      "Scaling is always proportional, so your content's original aspect ratio is preserved regardless of the target size chosen.",
+  },
+  {
+    slug: "a4-to-letter-pdf",
+    toolSlug: "pdf-page-size-converter",
+    h1: "Convert A4 PDF to Letter",
+    subtitle: "Resize an A4 PDF for US Letter Printing",
+    metaTitle: "Convert A4 PDF to Letter — Free Tool",
+    metaDescription:
+      "Free tool to convert an A4-sized PDF to US Letter size for printing in the United States, with proportional scaling.",
+    introParagraph:
+      "A4 and Letter differ slightly in proportions — this scales your content to fit Letter cleanly, centered with even margins.",
+  },
+  {
+    slug: "jpg-to-pdf-online",
+    toolSlug: "jpg-to-pdf",
+    h1: "JPG to PDF Online",
+    subtitle: "Turn Multiple JPG Photos Into One PDF",
+    metaTitle: "JPG to PDF Online — Free, Private Tool",
+    metaDescription:
+      "Free online JPG to PDF converter. Combine multiple JPG images into a single PDF, one image per page, entirely in your browser.",
+    introParagraph:
+      "Add your JPG files, arrange the order, and generate one combined PDF — each image becomes its own full page at original quality.",
+  },
+  {
+    slug: "photos-to-pdf-maker",
+    toolSlug: "jpg-to-pdf",
+    h1: "Photos to PDF Maker",
+    subtitle: "Combine JPG Photos Into a Single PDF Document",
+    metaTitle: "Photos to PDF Maker — Free Online Tool",
+    metaDescription:
+      "Free tool to turn JPG photos into a PDF. Reorder before combining and download one file with all your images.",
+    introParagraph:
+      "Receipts, signed documents, or any set of JPG photos combine here into a single shareable PDF in your chosen order.",
+  },
+  {
+    slug: "convert-jpg-to-pdf",
+    toolSlug: "jpg-to-pdf",
+    h1: "Convert JPG to PDF",
+    subtitle: "Turn JPG Images Into a PDF File",
+    metaTitle: "Convert JPG to PDF — Free Online Tool",
+    metaDescription:
+      "Free tool to convert JPG images to PDF. Add multiple files, set the order, and download a single combined PDF.",
+    introParagraph:
+      "The original JPEG data is embedded directly, without re-encoding, so image quality is exactly preserved in the output PDF.",
+  },
+  {
+    slug: "jpeg-to-pdf-converter",
+    toolSlug: "jpg-to-pdf",
+    h1: "JPEG to PDF Converter",
+    subtitle: "Combine JPEG Images Into One PDF File",
+    metaTitle: "JPEG to PDF Converter — Free Online Tool",
+    metaDescription:
+      "Free JPEG to PDF converter. Upload multiple JPEG files and combine them into one PDF, processed locally in your browser.",
+    introParagraph:
+      "Each page is sized to exactly match its source image's pixel dimensions — no stretching, no unexpected white space.",
+  },
+  {
+    slug: "jpg-images-to-pdf",
+    toolSlug: "jpg-to-pdf",
+    h1: "JPG Images to PDF",
+    subtitle: "Combine Several JPG Files Into a Single Document",
+    metaTitle: "JPG Images to PDF — Free Online Tool",
+    metaDescription:
+      "Free tool to combine JPG images into a single PDF document. Set the page order and download instantly.",
+    introParagraph:
+      "No account, no upload, no page limit — combine as many JPGs as you need directly in your browser.",
+  },
+  {
+    slug: "png-to-pdf-online",
+    toolSlug: "png-to-pdf",
+    h1: "PNG to PDF Online",
+    subtitle: "Turn Multiple PNG Images Into One PDF",
+    metaTitle: "PNG to PDF Online — Free, Private Tool",
+    metaDescription:
+      "Free online PNG to PDF converter. Combine multiple PNG images into a single PDF, one image per page, entirely in your browser.",
+    introParagraph:
+      "Screenshots, diagrams, or graphics — add your PNG files, set the order, and combine them into a single downloadable PDF.",
+  },
+  {
+    slug: "convert-png-to-pdf",
+    toolSlug: "png-to-pdf",
+    h1: "Convert PNG to PDF",
+    subtitle: "Turn PNG Images Into a PDF File",
+    metaTitle: "Convert PNG to PDF — Free Online Tool",
+    metaDescription:
+      "Free tool to convert PNG images to PDF. Combine multiple PNGs into one document with lossless image quality preserved.",
+    introParagraph:
+      "PNG's lossless compression is preserved in the output — each embedded image keeps its exact original detail and any transparency data.",
+  },
+  {
+    slug: "png-images-to-pdf",
+    toolSlug: "png-to-pdf",
+    h1: "PNG Images to PDF",
+    subtitle: "Combine Several PNG Files Into One Document",
+    metaTitle: "PNG Images to PDF — Free Online Tool",
+    metaDescription:
+      "Free tool to combine PNG images into a single PDF document. Reorder before combining and download instantly.",
+    introParagraph:
+      "Each page is sized to match its source PNG exactly, so there's no stretching or unwanted white space around the content.",
+  },
+  {
+    slug: "screenshot-to-pdf",
+    toolSlug: "png-to-pdf",
+    h1: "Screenshots to PDF",
+    subtitle: "Combine Multiple Screenshots Into One PDF",
+    metaTitle: "Screenshots to PDF — Free Online Tool",
+    metaDescription:
+      "Free tool to turn PNG screenshots into a single PDF document, useful for bug reports and documentation.",
+    introParagraph:
+      "A set of screenshots documenting a bug or a process combines here into one shareable PDF, in the order you set.",
+  },
+  {
+    slug: "png-to-pdf-converter",
+    toolSlug: "png-to-pdf",
+    h1: "PNG to PDF Converter",
+    subtitle: "Convert PNG Files Into a Combined PDF",
+    metaTitle: "PNG to PDF Converter — Free Online Tool",
+    metaDescription:
+      "Free PNG to PDF converter. Upload multiple PNG files and combine them into one PDF, processed entirely in your browser.",
+    introParagraph:
+      "No software install, no upload to a server — everything from reading your PNGs to generating the PDF happens locally.",
+  },
+  {
+    slug: "phone-scan-to-pdf",
+    toolSlug: "scan-to-pdf",
+    h1: "Phone Scan to PDF",
+    subtitle: "Turn Phone Photos of Documents Into a PDF",
+    metaTitle: "Phone Scan to PDF — Free Online Tool",
+    metaDescription:
+      "Free tool to turn phone camera photos of documents into a single PDF, entirely in your browser.",
+    introParagraph:
+      "Your phone camera is the scanner — take photos or add existing images, and get a normalized, combined PDF back.",
+  },
+  {
+    slug: "camera-to-pdf",
+    toolSlug: "scan-to-pdf",
+    h1: "Camera to PDF",
+    subtitle: "Photograph Documents and Combine Them Into a PDF",
+    metaTitle: "Camera to PDF — Free Online Tool",
+    metaDescription:
+      "Free tool to photograph documents with your camera and combine the photos into a single PDF file.",
+    introParagraph:
+      "On mobile, the upload button opens your camera directly — photograph a page and it's added to the queue immediately.",
+  },
+  {
+    slug: "pdf-scanner-app",
+    toolSlug: "scan-to-pdf",
+    h1: "PDF Scanner",
+    subtitle: "Turn Any Image Into a Scanned-Style PDF",
+    metaTitle: "PDF Scanner — Free Online Tool",
+    metaDescription:
+      "A free, browser-based PDF scanner. Accepts any image format, normalizes it, and combines pages into one PDF.",
+    introParagraph:
+      "Accepts any image format your browser can decode — JPG, PNG, HEIC, and more — normalizing everything consistently.",
+  },
+  {
+    slug: "photo-to-pdf-scanner",
+    toolSlug: "scan-to-pdf",
+    h1: "Photo to PDF Scanner",
+    subtitle: "Convert Document Photos Into a Clean PDF",
+    metaTitle: "Photo to PDF Scanner — Free Online Tool",
+    metaDescription:
+      "Free tool to convert photos of documents into a clean, combined PDF file, right in your browser.",
+    introParagraph:
+      "Every photo is normalized to JPEG with a white background fill before embedding, so results stay consistent across formats.",
+  },
+  {
+    slug: "mobile-scan-to-pdf",
+    toolSlug: "scan-to-pdf",
+    h1: "Mobile Scan to PDF",
+    subtitle: "Scan Documents With Your Phone and Save as PDF",
+    metaTitle: "Mobile Scan to PDF — Free Online Tool",
+    metaDescription:
+      "Free mobile-friendly tool to scan documents with your phone's camera and save them as a single PDF.",
+    introParagraph:
+      "Built with mobile in mind — camera capture opens directly, and multiple pages combine into one ordered PDF.",
+  },
+  {
+    slug: "extract-text-from-pdf",
+    toolSlug: "pdf-to-text",
+    h1: "Extract Text From a PDF",
+    subtitle: "Pull All Text Out of a PDF Into Plain Text",
+    metaTitle: "Extract Text From PDF — Free, Private Tool",
+    metaDescription:
+      "Free tool to extract all text from a PDF. Get plain, copyable text from every page instantly, in your browser.",
+    introParagraph:
+      "Reads text directly from the PDF's internal structure across every page, giving you one continuous plain-text block.",
+  },
+  {
+    slug: "pdf-text-extractor",
+    toolSlug: "pdf-to-text",
+    h1: "PDF Text Extractor",
+    subtitle: "Get Copyable Plain Text From Any PDF",
+    metaTitle: "PDF Text Extractor — Free Online Tool",
+    metaDescription:
+      "Free PDF text extractor. Pull embedded text out of a PDF and copy or download it as a plain .txt file.",
+    introParagraph:
+      "Works on any PDF with a real text layer — documents created digitally from Word, Google Docs, or similar sources.",
+  },
+  {
+    slug: "copy-text-from-pdf",
+    toolSlug: "pdf-to-text",
+    h1: "Copy Text From a PDF",
+    subtitle: "Get All of a PDF's Text Ready to Paste",
+    metaTitle: "Copy Text From PDF — Free Online Tool",
+    metaDescription:
+      "Free tool to copy all text out of a PDF at once, instead of manually selecting text page by page.",
+    introParagraph:
+      "Manual text selection across many pages is slow — this pulls everything out in one pass, ready to copy or download.",
+  },
+  {
+    slug: "pdf-to-plain-text",
+    toolSlug: "pdf-to-text",
+    h1: "PDF to Plain Text",
+    subtitle: "Convert a PDF Into Clean, Unformatted Text",
+    metaTitle: "PDF to Plain Text — Free Online Tool",
+    metaDescription:
+      "Free tool to convert a PDF into plain, unformatted text. Strip out formatting and get clean text output.",
+    introParagraph:
+      "Formatting is intentionally stripped, giving you clean, portable text suited for pasting anywhere without leftover styling.",
+  },
+  {
+    slug: "get-text-from-pdf",
+    toolSlug: "pdf-to-text",
+    h1: "Get Text From a PDF",
+    subtitle: "Extract a PDF's Embedded Text Content",
+    metaTitle: "Get Text From PDF — Free Online Tool",
+    metaDescription:
+      "Free tool to get the embedded text content out of a PDF, ready to copy, download, or paste elsewhere.",
+    introParagraph:
+      "If your PDF has real text (not just a scanned image), this pulls it all out in seconds, no manual selecting required.",
+  },
+  {
+    slug: "pdf-to-jpg-online",
+    toolSlug: "pdf-to-jpg",
+    h1: "PDF to JPG Online",
+    subtitle: "Turn Every PDF Page Into a High-Quality JPG",
+    metaTitle: "PDF to JPG Online — Free, Private Tool",
+    metaDescription:
+      "Free online PDF to JPG converter. Render every page as a high-resolution JPG image, entirely in your browser.",
+    introParagraph:
+      "Each page renders at 2x scale using the same engine that powers PDF viewing in browsers, then exports as a sharp JPG.",
+  },
+  {
+    slug: "convert-pdf-to-jpg",
+    toolSlug: "pdf-to-jpg",
+    h1: "Convert PDF to JPG",
+    subtitle: "Turn PDF Pages Into JPG Image Files",
+    metaTitle: "Convert PDF to JPG — Free Online Tool",
+    metaDescription:
+      "Free tool to convert PDF pages to JPG images. Get a single JPG or a ZIP of all pages, processed in your browser.",
+    introParagraph:
+      "Multi-page PDFs download as one ZIP file, sequentially named page-1.jpg through the last page, so order is always clear.",
+  },
+  {
+    slug: "pdf-page-to-image",
+    toolSlug: "pdf-to-jpg",
+    h1: "PDF Page to Image",
+    subtitle: "Turn a PDF Page Into a Standalone JPG Image",
+    metaTitle: "PDF Page to Image — Free Online Tool",
+    metaDescription:
+      "Free tool to turn PDF pages into standalone JPG images, ready for slides, thumbnails, or sharing.",
+    introParagraph:
+      "Useful for pasting a page into a slide deck, posting to a platform that only accepts images, or generating a preview thumbnail.",
+  },
+  {
+    slug: "pdf-to-jpeg-converter",
+    toolSlug: "pdf-to-jpg",
+    h1: "PDF to JPEG Converter",
+    subtitle: "Render PDF Pages as JPEG Images",
+    metaTitle: "PDF to JPEG Converter — Free Online Tool",
+    metaDescription:
+      "Free PDF to JPEG converter. Convert every page of a PDF into a JPEG image at 92% quality, right in your browser.",
+    introParagraph:
+      "JPEG's efficient compression keeps file sizes reasonable while preserving strong visual quality for photo-heavy pages.",
+  },
+  {
+    slug: "pdf-image-converter",
+    toolSlug: "pdf-to-jpg",
+    h1: "PDF Image Converter",
+    subtitle: "Convert PDF Pages Into Downloadable Images",
+    metaTitle: "PDF Image Converter — Free Online Tool",
+    metaDescription:
+      "Free PDF image converter. Turn any PDF's pages into JPG images, downloadable individually or as a ZIP.",
+    introParagraph:
+      "Rendered pages are flat images — text is no longer selectable, the expected trade-off of converting a document into a picture.",
+  },
+  {
+    slug: "pdf-to-png-online",
+    toolSlug: "pdf-to-png",
+    h1: "PDF to PNG Online",
+    subtitle: "Turn Every PDF Page Into a Lossless PNG",
+    metaTitle: "PDF to PNG Online — Free, Private Tool",
+    metaDescription:
+      "Free online PDF to PNG converter. Render every page as a lossless PNG image, entirely in your browser.",
+    introParagraph:
+      "PNG preserves every pixel exactly, ideal for pages with sharp text, line art, or diagrams where JPEG artifacts would be visible.",
+  },
+  {
+    slug: "convert-pdf-to-png",
+    toolSlug: "pdf-to-png",
+    h1: "Convert PDF to PNG",
+    subtitle: "Turn PDF Pages Into PNG Image Files",
+    metaTitle: "Convert PDF to PNG — Free Online Tool",
+    metaDescription:
+      "Free tool to convert PDF pages to PNG images. Get a single PNG or a ZIP of all pages, with zero compression artifacts.",
+    introParagraph:
+      "Multi-page documents download as a ZIP, sequentially named, so the page order is clear without opening each file.",
+  },
+  {
+    slug: "pdf-to-png-converter",
+    toolSlug: "pdf-to-png",
+    h1: "PDF to PNG Converter",
+    subtitle: "Render PDF Pages as Lossless PNG Images",
+    metaTitle: "PDF to PNG Converter — Free Online Tool",
+    metaDescription:
+      "Free PDF to PNG converter. Convert every page into a crisp, artifact-free PNG image, right in your browser.",
+    introParagraph:
+      "PNG files are larger than JPG but preserve every pixel exactly — the right choice when zero compression loss matters.",
+  },
+  {
+    slug: "online-pdf-reader",
+    toolSlug: "pdf-reader-online",
+    h1: "Online PDF Reader",
+    subtitle: "Open and View Any PDF Instantly in Your Browser",
+    metaTitle: "Online PDF Reader — Free, Private Tool",
+    metaDescription:
+      "Free online PDF reader. Open any PDF instantly in your browser with page navigation and zoom, no download required.",
+    introParagraph:
+      "No software install, no upload — open a PDF, page through it, and zoom in on details, all within your browser tab.",
+  },
+  {
+    slug: "view-pdf-in-browser",
+    toolSlug: "pdf-reader-online",
+    h1: "View a PDF in Your Browser",
+    subtitle: "Open Any PDF Without Downloading a Reader App",
+    metaTitle: "View PDF in Browser — Free Online Tool",
+    metaDescription:
+      "Free tool to view a PDF directly in your browser. Navigate pages and zoom in without installing anything.",
+    introParagraph:
+      "A fast, no-commitment way to check a document's contents when installing a separate PDF application feels like overkill.",
+  },
+  {
+    slug: "pdf-viewer-online",
+    toolSlug: "pdf-reader-online",
+    h1: "PDF Viewer Online",
+    subtitle: "Read Any PDF With Page Navigation and Zoom",
+    metaTitle: "PDF Viewer Online — Free Online Tool",
+    metaDescription:
+      "Free online PDF viewer. Navigate pages and zoom from 50% to 300%, rendered entirely in your browser.",
+    introParagraph:
+      "Pages render on demand as you navigate, so even lengthy documents stay responsive while you browse through them.",
+  },
+  {
+    slug: "read-pdf-online",
+    toolSlug: "pdf-reader-online",
+    h1: "Read a PDF Online",
+    subtitle: "Open and Page Through Any PDF Instantly",
+    metaTitle: "Read PDF Online — Free Online Tool",
+    metaDescription:
+      "Free tool to read a PDF online. Open the file, navigate between pages, and adjust zoom, all without uploading it anywhere.",
+    introParagraph:
+      "Your PDF is never sent to a server — it's read and rendered entirely in your browser using JavaScript.",
+  },
+  {
+    slug: "split-pdf-by-size",
+    toolSlug: "pdf-splitter-by-file-size",
+    h1: "Split PDF by File Size",
+    subtitle: "Divide a PDF Into Parts That Each Fit a Size Limit",
+    metaTitle: "Split PDF by File Size — Free Online Tool",
+    metaDescription:
+      "Free tool to split a PDF by file size. Set a maximum size per file and get parts that each stay under your limit.",
+    introParagraph:
+      "Meeting a 5MB email attachment limit or an upload cap is easy when the split is based on actual measured output size.",
+  },
+  {
+    slug: "pdf-size-splitter",
+    toolSlug: "pdf-splitter-by-file-size",
+    h1: "PDF Size Splitter",
+    subtitle: "Break a Large PDF Into Size-Limited Files",
+    metaTitle: "PDF Size Splitter — Free Online Tool",
+    metaDescription:
+      "Free PDF size splitter. Enter a size limit in megabytes and get a ZIP of files that each stay under that limit.",
+    introParagraph:
+      "Each output file's actual saved size is measured after every page is added, so the limit is respected as precisely as page boundaries allow.",
+  },
+  {
+    slug: "reduce-pdf-parts-size",
+    toolSlug: "pdf-splitter-by-file-size",
+    h1: "Split a Large PDF Into Smaller Parts by Size",
+    subtitle: "Guarantee Every Part Stays Under Your Size Limit",
+    metaTitle: "Split PDF Into Size-Limited Parts — Free Tool",
+    metaDescription:
+      "Free tool to split a large PDF into smaller parts, each guaranteed to stay under a size limit you specify in megabytes.",
+    introParagraph:
+      "Unlike splitting by a fixed page count, this guarantees size regardless of how unevenly content is distributed across pages.",
+  },
+  {
+    slug: "compress-pdf-online",
+    toolSlug: "pdf-compress",
+    h1: "Compress PDF Online",
+    subtitle: "Shrink a Large PDF for Email or Upload Limits",
+    metaTitle: "Compress PDF Online — Free, Private Tool",
+    metaDescription:
+      "Free online PDF compressor. Shrink a large PDF's file size with adjustable quality and resolution, in your browser.",
+    introParagraph:
+      "Two sliders control the trade-off — quality and resolution — most effective on image-heavy or scanned documents.",
+  },
+  {
+    slug: "shrink-pdf-file",
+    toolSlug: "pdf-compress",
+    h1: "Shrink a PDF File",
+    subtitle: "Reduce a PDF's File Size Without Extra Software",
+    metaTitle: "Shrink PDF File — Free Online Tool",
+    metaDescription:
+      "Free tool to shrink a PDF file. Lower quality and resolution to dramatically reduce size for email or upload limits.",
+    introParagraph:
+      "See the exact before/after size once compression completes, so you can judge whether the result meets your target.",
+  },
+  {
+    slug: "pdf-file-size-reducer",
+    toolSlug: "pdf-compress",
+    h1: "PDF File Size Reducer",
+    subtitle: "Cut a PDF's Size Down for Sharing",
+    metaTitle: "PDF File Size Reducer — Free Online Tool",
+    metaDescription:
+      "Free PDF file size reducer. Re-render pages at lower quality and resolution to shrink an oversized document.",
+    introParagraph:
+      "Works by re-rendering each page as a compressed image — most effective on scanned or image-heavy PDFs with real headroom to reclaim.",
+  },
+  {
+    slug: "make-pdf-smaller",
+    toolSlug: "pdf-compress",
+    h1: "Make a PDF Smaller",
+    subtitle: "Reduce File Size With Adjustable Quality Settings",
+    metaTitle: "Make PDF Smaller — Free Online Tool",
+    metaDescription:
+      "Free tool to make a PDF smaller. Adjust quality and resolution sliders to hit the file size you need.",
+    introParagraph:
+      "Lower resolution first for the biggest size impact, then adjust quality if you need to shrink the file further.",
+  },
+  {
+    slug: "unlock-pdf-online",
+    toolSlug: "pdf-unlock",
+    h1: "Unlock PDF Online",
+    subtitle: "Remove a Known Password From a Protected PDF",
+    metaTitle: "Unlock PDF Online — Free, Private Tool",
+    metaDescription:
+      "Free online tool to unlock a password-protected PDF. Enter the known password and download an unprotected copy.",
+    introParagraph:
+      "You'll need to know the current password — this removes protection once entered correctly, it doesn't crack unknown passwords.",
+  },
+  {
+    slug: "remove-pdf-password",
+    toolSlug: "pdf-unlock",
+    h1: "Remove PDF Password",
+    subtitle: "Take Off a Known Password From a PDF File",
+    metaTitle: "Remove PDF Password — Free Online Tool",
+    metaDescription:
+      "Free tool to remove a password from a PDF. Enter the current password and get an unlocked file back.",
+    introParagraph:
+      "Once unlocked, other PDF tools (merge, split, edit) that need unencrypted input can be used on the resulting file.",
+  },
+  {
+    slug: "pdf-password-remover",
+    toolSlug: "pdf-unlock",
+    h1: "PDF Password Remover",
+    subtitle: "Decrypt a PDF Once You Know Its Password",
+    metaTitle: "PDF Password Remover — Free Online Tool",
+    metaDescription:
+      "Free PDF password remover. Decrypt a protected PDF you already have legitimate password access to.",
+    introParagraph:
+      "Decryption, rendering, and rebuilding all happen locally — neither your file nor its password is ever uploaded.",
+  },
+  {
+    slug: "decrypt-pdf-online",
+    toolSlug: "pdf-unlock",
+    h1: "Decrypt a PDF Online",
+    subtitle: "Remove Encryption From a PDF You Have the Password For",
+    metaTitle: "Decrypt PDF Online — Free Online Tool",
+    metaDescription:
+      "Free tool to decrypt a PDF online. Enter the known password and download a password-free version of the file.",
+    introParagraph:
+      "The output's text becomes non-selectable since pages are rendered and rebuilt — a real trade-off for reliable password removal.",
+  },
+  {
+    slug: "flatten-pdf-online",
+    toolSlug: "pdf-flatten",
+    h1: "Flatten PDF Online",
+    subtitle: "Lock In Form Fields and Annotations Permanently",
+    metaTitle: "Flatten PDF Online — Free, Private Tool",
+    metaDescription:
+      "Free online tool to flatten a PDF. Convert interactive form fields and annotations into permanent, non-editable content.",
+    introParagraph:
+      "Flattening merges filled-in form values and annotations into the page content itself, so they can no longer be changed.",
+  },
+  {
+    slug: "pdf-form-flattener",
+    toolSlug: "pdf-flatten",
+    h1: "PDF Form Flattener",
+    subtitle: "Make Filled Form Fields Permanent and Uneditable",
+    metaTitle: "PDF Form Flattener — Free Online Tool",
+    metaDescription:
+      "Free PDF form flattener. Lock in filled form field values so they can't be changed by whoever opens the file next.",
+    introParagraph:
+      "Once flattened, a form's values become part of the static page content, no longer live, interactive fields.",
+  },
+  {
+    slug: "lock-pdf-form-fields",
+    toolSlug: "pdf-flatten",
+    h1: "Lock PDF Form Fields",
+    subtitle: "Prevent Further Edits to a Filled-In PDF Form",
+    metaTitle: "Lock PDF Form Fields — Free Online Tool",
+    metaDescription:
+      "Free tool to lock PDF form fields after filling them in, converting the form into a finalized, non-editable document.",
+    introParagraph:
+      "Useful once a form is complete and submitted — flattening ensures the recipient sees the final values, unchangeable.",
+  },
+  {
+    slug: "fill-pdf-form-online",
+    toolSlug: "pdf-form-filler",
+    h1: "Fill a PDF Form Online",
+    subtitle: "Complete a PDF's Existing Fillable Fields",
+    metaTitle: "Fill PDF Form Online — Free, Private Tool",
+    metaDescription:
+      "Free online tool to fill in a PDF form. Complete text fields, checkboxes, and dropdowns, then download the filled file.",
+    introParagraph:
+      "Detects a PDF's real interactive form fields automatically and builds an editable web form for each one found.",
+  },
+  {
+    slug: "pdf-form-fill-tool",
+    toolSlug: "pdf-form-filler",
+    h1: "PDF Form Fill Tool",
+    subtitle: "Fill In Text Fields, Checkboxes & Dropdowns",
+    metaTitle: "PDF Form Fill Tool — Free Online Tool",
+    metaDescription:
+      "Free PDF form fill tool. Complete any PDF's existing AcroForm fields and save your entries directly into the file.",
+    introParagraph:
+      "Only works on PDFs with genuine interactive fields — a document that just looks like a form won't have any to detect.",
+  },
+  {
+    slug: "interactive-pdf-form-filler",
+    toolSlug: "pdf-form-filler",
+    h1: "Interactive PDF Form Filler",
+    subtitle: "Fill Out a PDF's Real Interactive Fields",
+    metaTitle: "Interactive PDF Form Filler — Free Tool",
+    metaDescription:
+      "Free tool to fill out a PDF's interactive form fields — text, checkboxes, dropdowns, and radio groups.",
+    introParagraph:
+      "Values are written directly into the PDF's actual form field data, opening correctly filled in in any standard PDF viewer.",
+  },
+  {
+    slug: "pdf-to-png-free",
+    toolSlug: "pdf-to-png",
+    h1: "Free PDF to PNG Converter",
+    subtitle: "Convert PDF Pages to PNG at No Cost",
+    metaTitle: "Free PDF to PNG Converter — Browser-Based",
+    metaDescription:
+      "A completely free, browser-based PDF to PNG converter. No account, no upload, no watermark on your images.",
+    introParagraph:
+      "Every page renders locally and exports as lossless PNG — nothing is sent to a server during the conversion.",
+  },
+  {
+    slug: "png-page-renderer",
+    toolSlug: "pdf-to-png",
+    h1: "PDF Page Renderer to PNG",
+    subtitle: "Render Any PDF Page as a Crisp PNG Image",
+    metaTitle: "PDF Page Renderer to PNG — Free Online Tool",
+    metaDescription:
+      "Free tool to render PDF pages as PNG images with zero compression artifacts, ideal for diagrams and line art.",
+    introParagraph:
+      "For pages that are mostly text, line art, or diagrams, PNG's lossless output avoids the artifacts JPEG can introduce around sharp edges.",
+  },
+  {
+    slug: "instant-pdf-viewer",
+    toolSlug: "pdf-reader-online",
+    h1: "Instant PDF Viewer",
+    subtitle: "Open a PDF Instantly With No Wait for Software",
+    metaTitle: "Instant PDF Viewer — Free Online Tool",
+    metaDescription:
+      "Free instant PDF viewer. Open and read any PDF the moment you upload it, no software or account needed.",
+    introParagraph:
+      "No installation, no waiting for a heavyweight application to launch — the file opens and renders immediately in your tab.",
+  },
+  {
+    slug: "free-pdf-reader",
+    toolSlug: "pdf-reader-online",
+    h1: "Free PDF Reader",
+    subtitle: "Read Any PDF Online at No Cost",
+    metaTitle: "Free PDF Reader — Browser-Based Tool",
+    metaDescription:
+      "A completely free, browser-based PDF reader with page navigation and zoom. No account or software required.",
+    introParagraph:
+      "A fast, no-commitment way to check a document's contents when you don't want to install or open a separate PDF application.",
+  },
+  {
+    slug: "pdf-splitter-file-size-limit",
+    toolSlug: "pdf-splitter-by-file-size",
+    h1: "PDF Splitter With Size Limit",
+    subtitle: "Split a PDF So Every Part Meets a Size Limit",
+    metaTitle: "PDF Splitter With Size Limit — Free Tool",
+    metaDescription:
+      "Free tool to split a PDF so every resulting file stays under a size limit you set, perfect for upload or email caps.",
+    introParagraph:
+      "The tool measures each part's actual saved size after every page, guaranteeing the limit is respected as closely as page boundaries allow.",
+  },
+  {
+    slug: "break-pdf-by-size",
+    toolSlug: "pdf-splitter-by-file-size",
+    h1: "Break a PDF Into Parts by Size",
+    subtitle: "Divide a Large PDF Based on File Size, Not Page Count",
+    metaTitle: "Break PDF Into Parts by Size — Free Tool",
+    metaDescription:
+      "Free tool to break a large PDF into smaller parts based on actual file size rather than a fixed page count.",
+    introParagraph:
+      "A fixed page count doesn't reliably meet a size limit since pages vary enormously in content — this splits by real measured size instead.",
+  },
+  {
+    slug: "compress-pdf-for-email",
+    toolSlug: "pdf-compress",
+    h1: "Compress a PDF for Email",
+    subtitle: "Shrink a PDF to Fit Under an Attachment Size Limit",
+    metaTitle: "Compress PDF for Email — Free Online Tool",
+    metaDescription:
+      "Free tool to compress a PDF so it fits under common email attachment size limits, with adjustable quality settings.",
+    introParagraph:
+      "Most email providers cap attachments around 25MB — lower the quality and resolution sliders here to get comfortably under that.",
+  },
+  {
+    slug: "pdf-unlocker-tool",
+    toolSlug: "pdf-unlock",
+    h1: "PDF Unlocker Tool",
+    subtitle: "Remove Password Protection From a PDF You Can Access",
+    metaTitle: "PDF Unlocker Tool — Free Online Tool",
+    metaDescription:
+      "Free PDF unlocker tool. Enter the known password to remove protection and download an unlocked copy.",
+    introParagraph:
+      "Once unlocked, the resulting file works with any other PDF tool that requires unencrypted input, like merge or split.",
+  },
+  {
+    slug: "pdf-flatten-annotations",
+    toolSlug: "pdf-flatten",
+    h1: "Flatten PDF Annotations",
+    subtitle: "Make Comments and Markup Permanent",
+    metaTitle: "Flatten PDF Annotations — Free Online Tool",
+    metaDescription:
+      "Free tool to flatten PDF annotations and form fields into permanent, non-editable page content.",
+    introParagraph:
+      "Flattening merges annotations and filled form values directly into the page, so a viewer can no longer toggle or edit them.",
+  },
+  {
+    slug: "pdf-finalize-form",
+    toolSlug: "pdf-flatten",
+    h1: "Finalize a PDF Form",
+    subtitle: "Convert a Filled Form Into a Locked, Final Document",
+    metaTitle: "Finalize PDF Form — Free Online Tool",
+    metaDescription:
+      "Free tool to finalize a filled-in PDF form, locking the values so the document can no longer be edited.",
+    introParagraph:
+      "Once a form is complete, flattening guarantees whoever opens the file sees the final values exactly as submitted.",
+  },
+  {
+    slug: "fillable-pdf-form-completer",
+    toolSlug: "pdf-form-filler",
+    h1: "Fillable PDF Form Completer",
+    subtitle: "Complete Any PDF's Interactive Form Fields",
+    metaTitle: "Fillable PDF Form Completer — Free Tool",
+    metaDescription:
+      "Free tool to complete a fillable PDF form. Detects text fields, checkboxes, and dropdowns automatically.",
+    introParagraph:
+      "Requires a PDF with real, structurally-defined form fields — a document that only looks like a form won't have any to detect.",
+  },
+  {
+    slug: "pdf-acroform-filler",
+    toolSlug: "pdf-form-filler",
+    h1: "PDF AcroForm Filler",
+    subtitle: "Fill In a PDF's Standard Interactive Form Fields",
+    metaTitle: "PDF AcroForm Filler — Free Online Tool",
+    metaDescription:
+      "Free tool to fill in a PDF's AcroForm fields — the standard interactive form technology built into the PDF format.",
+    introParagraph:
+      "Your entries are written into the PDF's actual field data, opening correctly filled-in in any standards-compliant PDF viewer.",
+  },
+  {
+    slug: "compare-two-pdfs",
+    toolSlug: "pdf-compare",
+    h1: "Compare Two PDFs",
+    subtitle: "Spot Visual Differences Between Two PDF Versions",
+    metaTitle: "Compare Two PDFs — Free, Private Tool",
+    metaDescription:
+      "Free tool to compare two PDF files. Upload both versions and see exactly which pages and areas differ, highlighted in red.",
+    introParagraph:
+      "Both files render page by page and get compared pixel by pixel, so even small changes jump out instead of requiring a manual read-through.",
+  },
+  {
+    slug: "pdf-diff-tool",
+    toolSlug: "pdf-compare",
+    h1: "PDF Diff Tool",
+    subtitle: "See What Changed Between Two Versions of a Document",
+    metaTitle: "PDF Diff Tool — Free Online Tool",
+    metaDescription:
+      "Free PDF diff tool. Compare two PDFs page by page and get a visual highlight of every difference found.",
+    introParagraph:
+      "Each page gets a diff percentage, so you can quickly tell which pages had real changes versus which are essentially identical.",
+  },
+  {
+    slug: "pdf-comparison-tool",
+    toolSlug: "pdf-compare",
+    h1: "PDF Comparison Tool",
+    subtitle: "Check Two PDF Versions for Visual Differences",
+    metaTitle: "PDF Comparison Tool — Free Online Tool",
+    metaDescription:
+      "Free PDF comparison tool. Upload an original and a revised PDF and see the differences highlighted page by page.",
+    introParagraph:
+      "This is a pixel-level visual comparison, not a text diff — it catches formatting and layout changes as well as text edits.",
+  },
+  {
+    slug: "spot-pdf-differences",
+    toolSlug: "pdf-compare",
+    h1: "Spot Differences Between PDFs",
+    subtitle: "Find Exactly What Changed Across Two Document Versions",
+    metaTitle: "Spot Differences Between PDFs — Free Tool",
+    metaDescription:
+      "Free tool to spot differences between two PDF files, with changed areas highlighted in red on each page.",
+    introParagraph:
+      "Download all the highlighted diff images together as a single ZIP for record-keeping or sharing with a reviewer.",
+  },
+  {
+    slug: "visual-pdf-compare",
+    toolSlug: "pdf-compare",
+    h1: "Visual PDF Compare",
+    subtitle: "Compare Two PDFs Page by Page, Visually",
+    metaTitle: "Visual PDF Compare — Free Online Tool",
+    metaDescription:
+      "Free visual PDF comparison tool. See changed regions highlighted directly on rendered page images.",
+    introParagraph:
+      "If the two files have different page counts, a note flags the mismatch and only the shared pages get compared.",
+  },
+  {
+    slug: "esign-pdf-online",
+    toolSlug: "pdf-signer",
+    h1: "eSign a PDF Online",
+    subtitle: "Draw a Signature and Place It on Any PDF Page",
+    metaTitle: "eSign PDF Online — Free, Private Tool",
+    metaDescription:
+      "Free tool to eSign a PDF online. Draw your signature and place it exactly where it needs to go, entirely in your browser.",
+    introParagraph:
+      "Draw with your mouse or finger, click where it should land, and place a visual signature directly onto the page.",
+  },
+  {
+    slug: "draw-pdf-signature",
+    toolSlug: "pdf-signer",
+    h1: "Draw a Signature on a PDF",
+    subtitle: "Add a Freehand Signature to Any PDF Page",
+    metaTitle: "Draw Signature on PDF — Free Online Tool",
+    metaDescription:
+      "Free tool to draw a signature directly onto a PDF page using your mouse or touchscreen.",
+    introParagraph:
+      "Clear and redraw as many times as you need before placing it — this is a visual signature, not a certificate-backed digital signature.",
+  },
+  {
+    slug: "sign-pdf-online",
+    toolSlug: "pdf-signer",
+    h1: "Sign a PDF Online",
+    subtitle: "Add Your Signature to a PDF Without Printing It",
+    metaTitle: "Sign PDF Online — Free Online Tool",
+    metaDescription:
+      "Free tool to sign a PDF online. Skip printing and scanning — draw and place your signature digitally instead.",
+    introParagraph:
+      "Signing a printed document just to scan it back in is unnecessary for anything that doesn't need a certified digital signature.",
+  },
+  {
+    slug: "pdf-signature-tool",
+    toolSlug: "pdf-signer",
+    h1: "PDF Signature Tool",
+    subtitle: "Place a Drawn Signature Anywhere on a PDF",
+    metaTitle: "PDF Signature Tool — Free Online Tool",
+    metaDescription:
+      "Free PDF signature tool. Draw, position, and embed a signature image onto any page of your document.",
+    introParagraph:
+      "The signature is embedded as a real image element, scaled proportionally to about a quarter of the page's width.",
+  },
+  {
+    slug: "add-signature-to-pdf",
+    toolSlug: "pdf-signer",
+    h1: "Add a Signature to a PDF",
+    subtitle: "Embed a Drawn Signature Onto a PDF Page",
+    metaTitle: "Add Signature to PDF — Free Online Tool",
+    metaDescription:
+      "Free tool to add a hand-drawn signature to a PDF document, positioned exactly where you click.",
+    introParagraph:
+      "Not a legally binding digital signature — for that, certificate-based e-signature software is the right tool instead.",
+  },
+  {
+    slug: "pdf-table-of-contents-editor",
+    toolSlug: "pdf-bookmark-editor",
+    h1: "PDF Table of Contents Editor",
+    subtitle: "Add a Clickable Table of Contents to Any PDF",
+    metaTitle: "PDF Table of Contents Editor — Free Tool",
+    metaDescription:
+      "Free tool to add a clickable table of contents (bookmarks) to a PDF, navigable from any PDF reader's sidebar.",
+    introParagraph:
+      "Build an outline entry by entry — a title and target page number — and it shows up in the standard navigation panel of any reader.",
+  },
+  {
+    slug: "add-bookmarks-to-pdf",
+    toolSlug: "pdf-bookmark-editor",
+    h1: "Add Bookmarks to a PDF",
+    subtitle: "Create Clickable Navigation Entries for Any PDF",
+    metaTitle: "Add Bookmarks to PDF — Free Online Tool",
+    metaDescription:
+      "Free tool to add bookmarks to a PDF. Create navigation entries pointing to any page, right in your browser.",
+    introParagraph:
+      "This builds a real PDF outline structure, the same underlying feature every PDF-generating application uses for bookmarks.",
+  },
+  {
+    slug: "pdf-outline-editor",
+    toolSlug: "pdf-bookmark-editor",
+    h1: "PDF Outline Editor",
+    subtitle: "Build a Navigation Outline for a PDF Document",
+    metaTitle: "PDF Outline Editor — Free Online Tool",
+    metaDescription:
+      "Free PDF outline editor. Add bookmark entries that appear in the standard navigation panel of any PDF reader.",
+    introParagraph:
+      "Creates a flat list of navigation entries — sufficient for most documents needing quick jump-to-section navigation.",
+  },
+  {
+    slug: "create-pdf-bookmarks",
+    toolSlug: "pdf-bookmark-editor",
+    h1: "Create PDF Bookmarks",
+    subtitle: "Add Navigable Bookmarks to Any PDF File",
+    metaTitle: "Create PDF Bookmarks — Free Online Tool",
+    metaDescription:
+      "Free tool to create bookmarks in a PDF, letting readers jump straight to a chapter or section from the navigation panel.",
+    introParagraph:
+      "Long documents without bookmarks force readers to scroll or page-hunt — this fixes that with real, clickable navigation.",
+  },
+  {
+    slug: "pdf-toc-maker",
+    toolSlug: "pdf-bookmark-editor",
+    h1: "PDF Table of Contents Maker",
+    subtitle: "Build a Clickable TOC Inside a PDF",
+    metaTitle: "PDF Table of Contents Maker — Free Tool",
+    metaDescription:
+      "Free tool to make a table of contents for a PDF, using the format's built-in bookmark outline feature.",
+    introParagraph:
+      "Review your full list of entries before saving — you can remove any bookmark added by mistake before committing.",
+  },
+  {
+    slug: "black-out-pdf-text",
+    toolSlug: "pdf-redact",
+    h1: "Black Out Text in a PDF",
+    subtitle: "Permanently Remove Sensitive Content, Not Just Cover It",
+    metaTitle: "Black Out PDF Text — Free, Private Tool",
+    metaDescription:
+      "Free tool to black out sensitive text in a PDF permanently. Rasterizes marked areas so nothing is recoverable underneath.",
+    introParagraph:
+      "A black box drawn on top of vector text leaves the text extractable underneath — this bakes the redaction into the pixels instead.",
+  },
+  {
+    slug: "redact-pdf-online",
+    toolSlug: "pdf-redact",
+    h1: "Redact a PDF Online",
+    subtitle: "Drag to Mark and Permanently Black Out Content",
+    metaTitle: "Redact PDF Online — Free Online Tool",
+    metaDescription:
+      "Free tool to redact a PDF online. Drag boxes over sensitive content and permanently black it out, entirely in your browser.",
+    introParagraph:
+      "Only pages you mark get rasterized — every other page keeps its original, fully selectable text intact.",
+  },
+  {
+    slug: "permanently-remove-pdf-text",
+    toolSlug: "pdf-redact",
+    h1: "Permanently Remove Text From a PDF",
+    subtitle: "True Redaction — Not a Box Drawn Over Recoverable Text",
+    metaTitle: "Permanently Remove PDF Text — Free Tool",
+    metaDescription:
+      "Free tool to permanently remove sensitive text from a PDF, avoiding the fake-redaction mistake of drawing a box on top of live text.",
+    introParagraph:
+      "Marked pages are rendered to pixels first, with the black box baked directly into the same layer as the text it covers.",
+  },
+  {
+    slug: "secure-pdf-redaction",
+    toolSlug: "pdf-redact",
+    h1: "Secure PDF Redaction",
+    subtitle: "Redact Content So It Can't Be Recovered",
+    metaTitle: "Secure PDF Redaction — Free Online Tool",
+    metaDescription:
+      "Free, secure PDF redaction tool. Mark sensitive areas and get a PDF where that content is genuinely, permanently gone.",
+    introParagraph:
+      "This avoids the common redaction mistake that has caused real information leaks — the covered text isn't just hidden, it's gone.",
+  },
+  {
+    slug: "hide-sensitive-pdf-info",
+    toolSlug: "pdf-redact",
+    h1: "Hide Sensitive Information in a PDF",
+    subtitle: "Mark and Permanently Remove Private Content",
+    metaTitle: "Hide Sensitive Info in PDF — Free Online Tool",
+    metaDescription:
+      "Free tool to hide and permanently remove sensitive information from a PDF — account numbers, names, or any private content.",
+    introParagraph:
+      "Drag a box over anything that needs to disappear completely, then download a PDF where it's genuinely unrecoverable.",
+  },
+  {
+    slug: "fix-corrupted-pdf",
+    toolSlug: "pdf-repair",
+    h1: "Fix a Corrupted PDF",
+    subtitle: "Recover a Readable File From a Broken PDF",
+    metaTitle: "Fix Corrupted PDF — Free, Private Tool",
+    metaDescription:
+      "Free tool to fix a corrupted PDF. Uses a fault-tolerant parser to recover a viewable document from a broken file.",
+    introParagraph:
+      "Leverages a deliberately lenient PDF parser, built to keep working on real-world damaged files where a strict parser would just fail.",
+  },
+  {
+    slug: "pdf-recovery-tool",
+    toolSlug: "pdf-repair",
+    h1: "PDF Recovery Tool",
+    subtitle: "Recover a Damaged or Unreadable PDF",
+    metaTitle: "PDF Recovery Tool — Free Online Tool",
+    metaDescription:
+      "Free PDF recovery tool. Rebuild a clean, viewable PDF from whatever content can still be recovered from a broken file.",
+    introParagraph:
+      "Every salvageable page is rendered and used to build a fresh, structurally valid PDF from scratch.",
+  },
+  {
+    slug: "repair-broken-pdf",
+    toolSlug: "pdf-repair",
+    h1: "Repair a Broken PDF",
+    subtitle: "Recover a Viewable Document From a File That Won't Open",
+    metaTitle: "Repair Broken PDF — Free Online Tool",
+    metaDescription:
+      "Free tool to repair a broken PDF that won't open in standard viewers. Recovers a clean, viewable copy where possible.",
+    introParagraph:
+      "If even the lenient parser can't extract anything meaningful, the file's damage is likely too severe for any repair approach.",
+  },
+  {
+    slug: "recover-damaged-pdf",
+    toolSlug: "pdf-repair",
+    h1: "Recover a Damaged PDF",
+    subtitle: "Rebuild a Clean File From a Corrupted PDF",
+    metaTitle: "Recover Damaged PDF — Free Online Tool",
+    metaDescription:
+      "Free tool to recover a damaged PDF file. Attempts repair using a fault-tolerant parsing and rebuild approach.",
+    introParagraph:
+      "Recovered pages become images rather than keeping selectable text — the trade-off that makes recovery from broken structure possible.",
+  },
+  {
+    slug: "pdf-file-fixer",
+    toolSlug: "pdf-repair",
+    h1: "PDF File Fixer",
+    subtitle: "Attempt to Fix a PDF That Fails to Open",
+    metaTitle: "PDF File Fixer — Free Online Tool",
+    metaDescription:
+      "Free PDF file fixer. Attempts to recover a viewable document from a corrupted or interrupted PDF download.",
+    introParagraph:
+      "Common causes this can help with include interrupted downloads, malformed cross-reference tables, and other structural damage.",
+  },
+  {
+    slug: "highlight-pdf-text",
+    toolSlug: "pdf-annotator",
+    h1: "Highlight Text in a PDF",
+    subtitle: "Mark Up Passages Directly on Any PDF Page",
+    metaTitle: "Highlight PDF Text — Free, Private Tool",
+    metaDescription:
+      "Free tool to highlight text in a PDF. Draw highlights directly on any page and save them permanently, in your browser.",
+    introParagraph:
+      "The highlighter draws a thick, semi-transparent yellow stroke that sits over content without obscuring it underneath.",
+  },
+  {
+    slug: "annotate-pdf-online",
+    toolSlug: "pdf-annotator",
+    h1: "Annotate a PDF Online",
+    subtitle: "Highlight and Draw Notes on Any PDF Page",
+    metaTitle: "Annotate PDF Online — Free Online Tool",
+    metaDescription:
+      "Free tool to annotate a PDF online. Highlight passages or draw freehand notes with the pen tool, page by page.",
+    introParagraph:
+      "Pages with no marks stay completely unchanged — only pages you actually annotate get their marks baked in on save.",
+  },
+  {
+    slug: "pdf-markup-tool",
+    toolSlug: "pdf-annotator",
+    h1: "PDF Markup Tool",
+    subtitle: "Draw and Highlight Directly on a PDF's Pages",
+    metaTitle: "PDF Markup Tool — Free Online Tool",
+    metaDescription:
+      "Free PDF markup tool with a highlighter and pen, for marking up documents directly in your browser.",
+    introParagraph:
+      "Once saved, annotations become part of the page image permanently, guaranteeing they display identically in every viewer.",
+  },
+  {
+    slug: "draw-on-pdf",
+    toolSlug: "pdf-annotator",
+    h1: "Draw on a PDF",
+    subtitle: "Freehand Draw and Highlight Directly on Any Page",
+    metaTitle: "Draw on PDF — Free Online Tool",
+    metaDescription:
+      "Free tool to draw freehand on a PDF page using a pen or highlighter tool, saved permanently into the document.",
+    introParagraph:
+      "Circle a figure, underline a passage, or leave a quick note — the pen tool draws a thin, solid stroke suited to freehand marks.",
+  },
+  {
+    slug: "pdf-comment-tool",
+    toolSlug: "pdf-annotator",
+    h1: "PDF Comment and Highlight Tool",
+    subtitle: "Mark Up a PDF Without a Paid Subscription",
+    metaTitle: "PDF Comment Tool — Free Online Tool",
+    metaDescription:
+      "Free PDF comment and highlight tool. Mark up a document with a highlighter or pen, no subscription required.",
+    introParagraph:
+      "Most PDF viewers make basic annotation surprisingly awkward without a paid plan — this handles it for free, in your browser.",
+  },
+  {
+    slug: "pdf-table-to-csv",
+    toolSlug: "pdf-to-csv",
+    h1: "PDF Table to CSV",
+    subtitle: "Extract a PDF's Table Into Clean CSV Rows",
+    metaTitle: "PDF Table to CSV — Free, Private Tool",
+    metaDescription:
+      "Free tool to extract a table from a PDF into CSV format, reconstructing rows and columns from text position.",
+    introParagraph:
+      "Copy-pasting from a PDF viewer often garbles column alignment — this reconstructs the table structure automatically instead.",
+  },
+  {
+    slug: "extract-table-from-pdf",
+    toolSlug: "pdf-to-csv",
+    h1: "Extract a Table From a PDF",
+    subtitle: "Pull Tabular Data Out of a PDF Into CSV",
+    metaTitle: "Extract Table From PDF — Free Online Tool",
+    metaDescription:
+      "Free tool to extract a table from a PDF and download it as clean, properly-escaped CSV, ready for any spreadsheet.",
+    introParagraph:
+      "Works well on clean, evenly-spaced tables — the kind produced by spreadsheet exports and most well-formatted reports.",
+  },
+  {
+    slug: "pdf-data-extractor",
+    toolSlug: "pdf-to-csv",
+    h1: "PDF Data Extractor",
+    subtitle: "Turn a PDF's Table Into Usable Spreadsheet Data",
+    metaTitle: "PDF Data Extractor — Free Online Tool",
+    metaDescription:
+      "Free PDF data extractor. Reconstruct rows and columns from a PDF's table and export as CSV.",
+    introParagraph:
+      "Text is clustered into rows by vertical position, then split into cells by detecting unusually large horizontal gaps.",
+  },
+  {
+    slug: "table-extraction-from-pdf",
+    toolSlug: "pdf-to-csv",
+    h1: "Table Extraction From PDF",
+    subtitle: "Reconstruct Table Structure From a PDF's Text",
+    metaTitle: "Table Extraction From PDF — Free Tool",
+    metaDescription:
+      "Free tool for table extraction from PDF files. Automatically detects rows and columns and outputs CSV.",
+    introParagraph:
+      "This technique was verified against a real generated test table, achieving perfect row and column reconstruction.",
+  },
+  {
+    slug: "pdf-to-spreadsheet-csv",
+    toolSlug: "pdf-to-csv",
+    h1: "PDF to Spreadsheet (CSV)",
+    subtitle: "Turn a PDF Table Into a CSV File for Any Spreadsheet",
+    metaTitle: "PDF to Spreadsheet CSV — Free Online Tool",
+    metaDescription:
+      "Free tool to convert a PDF table to CSV, ready to open in Excel, Google Sheets, or any spreadsheet application.",
+    introParagraph:
+      "Cell content with commas or quotes is properly escaped, so the file opens correctly without corrupted columns.",
+  },
+  {
+    slug: "pdf-to-md-converter",
+    toolSlug: "pdf-to-markdown",
+    h1: "PDF to MD Converter",
+    subtitle: "Convert a PDF's Text Into Clean Markdown",
+    metaTitle: "PDF to MD Converter — Free, Private Tool",
+    metaDescription:
+      "Free tool to convert a PDF to Markdown (.md). Headings are inferred automatically from font size, in your browser.",
+    introParagraph:
+      "Larger text on the page becomes a Markdown heading; everything else becomes a plain paragraph, verified against a real test document.",
+  },
+  {
+    slug: "convert-pdf-to-markdown",
+    toolSlug: "pdf-to-markdown",
+    h1: "Convert PDF to Markdown",
+    subtitle: "Get Clean Markdown Output From Any PDF",
+    metaTitle: "Convert PDF to Markdown — Free Online Tool",
+    metaDescription:
+      "Free tool to convert a PDF's text into Markdown, ready for documentation, README files, or note-taking apps.",
+    introParagraph:
+      "Works best on documents with a clear visual hierarchy — noticeably larger titles and headers compared to body text.",
+  },
+  {
+    slug: "pdf-markdown-export",
+    toolSlug: "pdf-to-markdown",
+    h1: "PDF Markdown Export",
+    subtitle: "Export a PDF's Content as Markdown",
+    metaTitle: "PDF Markdown Export — Free Online Tool",
+    metaDescription:
+      "Free tool to export a PDF's text content as Markdown, with automatic heading detection based on font size.",
+    introParagraph:
+      "Each page's content is separated with a horizontal rule, keeping page boundaries visible in the final Markdown output.",
+  },
+  {
+    slug: "pdf-to-md",
+    toolSlug: "pdf-to-markdown",
+    h1: "PDF to MD",
+    subtitle: "Turn a PDF Into a Markdown File",
+    metaTitle: "PDF to MD — Free Online Tool",
+    metaDescription:
+      "Free tool to turn a PDF into a Markdown (.md) file, ready to paste into any Markdown-based editor or tool.",
+    introParagraph:
+      "This requires an embedded text layer — a scanned image PDF won't produce output, since there's no text to extract.",
+  },
+  {
+    slug: "pdf-text-to-markdown",
+    toolSlug: "pdf-to-markdown",
+    h1: "PDF Text to Markdown",
+    subtitle: "Convert Extracted PDF Text Into Structured Markdown",
+    metaTitle: "PDF Text to Markdown — Free Online Tool",
+    metaDescription:
+      "Free tool to convert PDF text into structured Markdown with automatically detected headings and paragraphs.",
+    introParagraph:
+      "The heading-detection heuristic was verified against a real test document with a 24pt title and 11pt body text.",
+  },
+  {
+    slug: "pdf-to-html-converter",
+    toolSlug: "pdf-to-html",
+    h1: "PDF to HTML Converter",
+    subtitle: "Convert a PDF's Text Into Structured, Ready-to-Use HTML",
+    metaTitle: "PDF to HTML Converter — Free, Private Tool",
+    metaDescription:
+      "Free tool to convert a PDF to HTML. Get semantic h2/h3 headings and paragraphs, ready to drop into a web page.",
+    introParagraph:
+      "Heading detection uses the same font-size heuristic verified across this site's PDF text tools, producing clean, escaped HTML.",
+  },
+  {
+    slug: "convert-pdf-to-html",
+    toolSlug: "pdf-to-html",
+    h1: "Convert PDF to HTML",
+    subtitle: "Turn a PDF Into Semantic Web-Ready Markup",
+    metaTitle: "Convert PDF to HTML — Free Online Tool",
+    metaDescription:
+      "Free tool to convert a PDF into HTML markup with automatically detected heading structure, no styling included.",
+    introParagraph:
+      "The output is plain structural HTML — a clean starting point for content, not a pixel-accurate visual reproduction.",
+  },
+  {
+    slug: "pdf-html-export",
+    toolSlug: "pdf-to-html",
+    h1: "PDF HTML Export",
+    subtitle: "Export a PDF's Content as Clean HTML",
+    metaTitle: "PDF HTML Export — Free Online Tool",
+    metaDescription:
+      "Free tool to export a PDF's text content as HTML, with each page wrapped in its own section element.",
+    introParagraph:
+      "All extracted text is properly escaped, so the output is safe, valid markup ready to insert directly into a page.",
+  },
+  {
+    slug: "pdf-webpage-converter",
+    toolSlug: "pdf-to-html",
+    h1: "PDF to Webpage Converter",
+    subtitle: "Turn a PDF's Text Into Ready-to-Publish HTML",
+    metaTitle: "PDF to Webpage Converter — Free Online Tool",
+    metaDescription:
+      "Free tool to convert a PDF's text into HTML suited for publishing on a website or CMS.",
+    introParagraph:
+      "Requires a PDF with an embedded text layer — scanned image PDFs need OCR first before this can extract anything.",
+  },
+  {
+    slug: "html-code-from-pdf",
+    toolSlug: "pdf-to-html",
+    h1: "Get HTML Code From a PDF",
+    subtitle: "Extract a PDF's Text as Usable HTML Markup",
+    metaTitle: "Get HTML Code From PDF — Free Online Tool",
+    metaDescription:
+      "Free tool to get HTML code from a PDF's text content, with headings and paragraphs structured automatically.",
+    introParagraph:
+      "For embedded images or tables specifically, use the dedicated Page Extractor to Images or PDF to CSV tools instead.",
+  },
+  {
+    slug: "pdf-to-ebook",
+    toolSlug: "pdf-to-epub",
+    h1: "PDF to eBook Converter",
+    subtitle: "Convert a PDF's Text Into a Reflowable EPUB eBook",
+    metaTitle: "PDF to eBook Converter — Free, Private Tool",
+    metaDescription:
+      "Free tool to convert a PDF into an eBook (EPUB) with reflowable text, ready for any e-reader app.",
+    introParagraph:
+      "Each PDF page becomes its own chapter, with a working table of contents built using the EPUB3 standard.",
+  },
+  {
+    slug: "pdf-to-epub-converter",
+    toolSlug: "pdf-to-epub",
+    h1: "PDF to EPUB Converter",
+    subtitle: "Turn a PDF Into a Genuine, Valid EPUB File",
+    metaTitle: "PDF to EPUB Converter — Free Online Tool",
+    metaDescription:
+      "Free PDF to EPUB converter. Extracts text and builds a valid EPUB3 file, verified for structural correctness.",
+    introParagraph:
+      "This is a plain-text reflow conversion, not layout-preserving — images and exact formatting from the PDF aren't carried over.",
+  },
+  {
+    slug: "make-ebook-from-pdf",
+    toolSlug: "pdf-to-epub",
+    h1: "Make an eBook From a PDF",
+    subtitle: "Convert a Fixed-Layout PDF Into a Reflowable eBook",
+    metaTitle: "Make eBook From PDF — Free Online Tool",
+    metaDescription:
+      "Free tool to make an eBook from a PDF. Ideal for reading text-centric documents on phones and e-readers.",
+    introParagraph:
+      "PDF's fixed layout is a poor fit for small screens — EPUB's reflowable text adapts comfortably to any display size instead.",
+  },
+  {
+    slug: "convert-pdf-to-epub",
+    toolSlug: "pdf-to-epub",
+    h1: "Convert PDF to EPUB",
+    subtitle: "Get a Valid, Reflowable EPUB From Any PDF",
+    metaTitle: "Convert PDF to EPUB — Free Online Tool",
+    metaDescription:
+      "Free tool to convert a PDF to EPUB format, with a proper navigable table of contents and chapter structure.",
+    introParagraph:
+      "Best suited for text-centric documents like reports, articles, and manuscripts rather than heavily visual, image-based layouts.",
+  },
+  {
+    slug: "kindle-pdf-to-epub",
+    toolSlug: "pdf-to-epub",
+    h1: "PDF to EPUB for E-Readers",
+    subtitle: "Prepare a PDF's Text for Comfortable E-Reader Viewing",
+    metaTitle: "PDF to EPUB for E-Readers — Free Tool",
+    metaDescription:
+      "Free tool to convert a PDF's text into an EPUB file suited for e-reader apps and devices.",
+    introParagraph:
+      "Verified against Python's zipfile module and XML well-formedness checks to confirm every internal file parses correctly.",
+  },
+  {
+    slug: "pdf-to-word-converter",
+    toolSlug: "pdf-to-word",
+    h1: "PDF to Word Converter",
+    subtitle: "Extract a PDF's Text Into an Editable Word Document",
+    metaTitle: "PDF to Word Converter — Free, Private Tool",
+    metaDescription:
+      "Free PDF to Word converter. Get a genuine, editable .docx file from your PDF's text content, entirely in your browser.",
+    introParagraph:
+      "The .docx is built from scratch as a real Word Open XML document, opening natively with no compatibility warnings.",
+  },
+  {
+    slug: "convert-pdf-to-word",
+    toolSlug: "pdf-to-word",
+    h1: "Convert PDF to Word",
+    subtitle: "Turn a PDF Into an Editable .docx File",
+    metaTitle: "Convert PDF to Word — Free Online Tool",
+    metaDescription:
+      "Free tool to convert a PDF to a Word document. Basic heading detection is applied automatically to the extracted text.",
+    introParagraph:
+      "This is a plain-text extraction, not layout-preserving — columns, tables, and images from the PDF aren't reconstructed.",
+  },
+  {
+    slug: "pdf-to-doc",
+    toolSlug: "pdf-to-word",
+    h1: "PDF to DOC",
+    subtitle: "Get an Editable Word File From a PDF",
+    metaTitle: "PDF to DOC — Free Online Tool",
+    metaDescription:
+      "Free tool to convert a PDF into an editable Word document, ready to open in Microsoft Word or Google Docs.",
+    introParagraph:
+      "Text is extracted line by line across every page, with headings bolded based on relative font size in the original.",
+  },
+  {
+    slug: "pdf-to-editable-word",
+    toolSlug: "pdf-to-word",
+    h1: "PDF to Editable Word Document",
+    subtitle: "Turn a Locked-Down PDF Back Into Editable Text",
+    metaTitle: "PDF to Editable Word — Free Online Tool",
+    metaDescription:
+      "Free tool to turn a PDF back into an editable Word document, no software installation required.",
+    introParagraph:
+      "Doesn't work on scanned PDFs — those have no embedded text layer, so a dedicated OCR tool is needed first.",
+  },
+  {
+    slug: "make-pdf-editable-word",
+    toolSlug: "pdf-to-word",
+    h1: "Make a PDF Editable in Word",
+    subtitle: "Convert a PDF's Text Into a Word Document You Can Edit",
+    metaTitle: "Make PDF Editable in Word — Free Tool",
+    metaDescription:
+      "Free tool to make a PDF editable by converting its text content into a Word document, processed in your browser.",
+    introParagraph:
+      "Fast, fully private, and no-upload — a good fit when you need editable text back quickly rather than pixel-perfect layout.",
+  },
+  {
+    slug: "docx-to-pdf",
+    toolSlug: "word-to-pdf",
+    h1: "DOCX to PDF Converter",
+    subtitle: "Convert a Word Document to PDF in Your Browser",
+    metaTitle: "DOCX to PDF Converter — Free, Private Tool",
+    metaDescription:
+      "Free DOCX to PDF converter. Reads your Word document directly and rebuilds it as a paginated PDF, no Word needed.",
+    introParagraph:
+      "A built-in ZIP reader opens the .docx archive and parses its XML directly — no server, no Word installation required.",
+  },
+  {
+    slug: "convert-word-to-pdf",
+    toolSlug: "word-to-pdf",
+    h1: "Convert Word to PDF",
+    subtitle: "Turn a .docx File Into a PDF Instantly",
+    metaTitle: "Convert Word to PDF — Free Online Tool",
+    metaDescription:
+      "Free tool to convert a Word document to PDF. Text and headings are extracted and laid out into a paginated PDF.",
+    introParagraph:
+      "This is a text-only conversion — images, tables, and precise formatting from the original document aren't reconstructed.",
+  },
+  {
+    slug: "doc-to-pdf-online",
+    toolSlug: "word-to-pdf",
+    h1: "Word to PDF Online",
+    subtitle: "Convert a Word File to PDF Without Opening Word",
+    metaTitle: "Word to PDF Online — Free Online Tool",
+    metaDescription:
+      "Free online tool to convert a Word .docx file to PDF, entirely in your browser without opening Microsoft Word.",
+    introParagraph:
+      "Supports both stored and standard DEFLATE-compressed .docx files, verified against genuinely compressed test files.",
+  },
+  {
+    slug: "word-document-to-pdf",
+    toolSlug: "word-to-pdf",
+    h1: "Word Document to PDF",
+    subtitle: "Get a Shareable PDF From Any .docx File",
+    metaTitle: "Word Document to PDF — Free Online Tool",
+    metaDescription:
+      "Free tool to convert a Word document to PDF for sharing, without needing Word installed or an upload to a server.",
+    introParagraph:
+      "Word-wrapped text is laid out to fit standard page margins, flowing onto additional pages automatically as needed.",
+  },
+  {
+    slug: "ms-word-to-pdf",
+    toolSlug: "word-to-pdf",
+    h1: "MS Word to PDF",
+    subtitle: "Convert a Microsoft Word File to PDF",
+    metaTitle: "MS Word to PDF — Free Online Tool",
+    metaDescription:
+      "Free tool to convert a Microsoft Word (.docx) file to PDF, right in your browser with no upload.",
+    introParagraph:
+      "Only the modern Word Open XML (.docx) format is supported — older binary .doc files use a different internal structure.",
+  },
+  {
+    slug: "xlsx-to-pdf",
+    toolSlug: "excel-to-pdf",
+    h1: "XLSX to PDF Converter",
+    subtitle: "Convert an Excel Spreadsheet's First Sheet to PDF",
+    metaTitle: "XLSX to PDF Converter — Free, Private Tool",
+    metaDescription:
+      "Free XLSX to PDF converter. Reads your spreadsheet directly and renders its first sheet as a simple grid PDF.",
+    introParagraph:
+      "Both inline string values and Excel's shared-strings table are supported, so text comes through correctly either way.",
+  },
+  {
+    slug: "convert-excel-to-pdf",
+    toolSlug: "excel-to-pdf",
+    h1: "Convert Excel to PDF",
+    subtitle: "Turn a Spreadsheet's Data Into a Shareable PDF Table",
+    metaTitle: "Convert Excel to PDF — Free Online Tool",
+    metaDescription:
+      "Free tool to convert an Excel spreadsheet to PDF. The header row is bolded automatically for clarity.",
+    introParagraph:
+      "Formulas aren't recalculated and formatting isn't preserved — this is a simple, values-only grid conversion.",
+  },
+  {
+    slug: "spreadsheet-to-pdf",
+    toolSlug: "excel-to-pdf",
+    h1: "Spreadsheet to PDF",
+    subtitle: "Convert Spreadsheet Data Into a Printable PDF Table",
+    metaTitle: "Spreadsheet to PDF — Free Online Tool",
+    metaDescription:
+      "Free tool to convert spreadsheet data to PDF for printing or sharing, entirely in your browser.",
+    introParagraph:
+      "The page width automatically scales based on how many columns your sheet contains, so columns get reasonable space.",
+  },
+  {
+    slug: "excel-file-to-pdf",
+    toolSlug: "excel-to-pdf",
+    h1: "Excel File to PDF",
+    subtitle: "Get a PDF Version of Your Excel Spreadsheet",
+    metaTitle: "Excel File to PDF — Free Online Tool",
+    metaDescription:
+      "Free tool to turn an Excel file into a PDF, ideal for sharing a table with someone who just needs to view it.",
+    introParagraph:
+      "Only the first sheet is converted — charts, colors, and additional sheets in the workbook aren't carried over.",
+  },
+  {
+    slug: "xls-to-pdf-online",
+    toolSlug: "excel-to-pdf",
+    h1: "Excel to PDF Online",
+    subtitle: "Convert a Spreadsheet to PDF Without Opening Excel",
+    metaTitle: "Excel to PDF Online — Free Online Tool",
+    metaDescription:
+      "Free online tool to convert an Excel spreadsheet to PDF, no Excel installation or upload to a server required.",
+    introParagraph:
+      "Reads the .xlsx file's internal ZIP archive directly using a built-in reader, entirely within your browser.",
+  },
+  {
+    slug: "pdf-to-xlsx",
+    toolSlug: "pdf-to-excel",
+    h1: "PDF to XLSX Converter",
+    subtitle: "Pull a PDF's Table Into a Real Excel File",
+    metaTitle: "PDF to XLSX Converter — Free, Private Tool",
+    metaDescription:
+      "Free PDF to XLSX converter. Reconstructs table rows and columns and writes a genuine .xlsx spreadsheet.",
+    introParagraph:
+      "Uses the same verified row/column reconstruction engine as PDF to CSV, but outputs a real Excel file directly.",
+  },
+  {
+    slug: "convert-pdf-to-excel",
+    toolSlug: "pdf-to-excel",
+    h1: "Convert PDF to Excel",
+    subtitle: "Turn a PDF's Table Into a Ready-to-Use Spreadsheet",
+    metaTitle: "Convert PDF to Excel — Free Online Tool",
+    metaDescription:
+      "Free tool to convert a PDF table to Excel, opening directly with correct cell structure — no import step needed.",
+    introParagraph:
+      "Works best on clean, evenly-spaced tables, where consistent spacing gives the gap-detection heuristic a reliable signal.",
+  },
+  {
+    slug: "pdf-table-to-excel",
+    toolSlug: "pdf-to-excel",
+    h1: "PDF Table to Excel",
+    subtitle: "Extract Tabular Data From a PDF Into Excel",
+    metaTitle: "PDF Table to Excel — Free Online Tool",
+    metaDescription:
+      "Free tool to extract a table from a PDF and download it as a genuine .xlsx Excel spreadsheet.",
+    introParagraph:
+      "Only cell values are written — no formulas, formatting, or charts, since none of that exists in the original PDF to reconstruct.",
+  },
+  {
+    slug: "pdf-to-spreadsheet-excel",
+    toolSlug: "pdf-to-excel",
+    h1: "PDF to Spreadsheet (Excel)",
+    subtitle: "Get a PDF's Data Into a Real, Sortable Spreadsheet",
+    metaTitle: "PDF to Spreadsheet Excel — Free Online Tool",
+    metaDescription:
+      "Free tool to convert a PDF's table data into an Excel spreadsheet, ready to sort, filter, and calculate.",
+    introParagraph:
+      "This was verified against a real generated 3×3 test table, producing perfect row and column reconstruction.",
+  },
+  {
+    slug: "pdf-data-to-excel",
+    toolSlug: "pdf-to-excel",
+    h1: "PDF Data to Excel",
+    subtitle: "Move a PDF's Tabular Data Into Excel",
+    metaTitle: "PDF Data to Excel — Free Online Tool",
+    metaDescription:
+      "Free tool to move tabular data from a PDF directly into a genuine Excel spreadsheet file.",
+    introParagraph:
+      "Tables with merged cells or multi-line content reconstruct more approximately, since there's no ground-truth structure to reference.",
+  },
+  {
+    slug: "pdf-to-pptx",
+    toolSlug: "pdf-to-powerpoint",
+    h1: "PDF to PPTX Converter",
+    subtitle: "Turn Every PDF Page Into a Full-Slide Image in PowerPoint",
+    metaTitle: "PDF to PPTX Converter — Free, Private Tool",
+    metaDescription:
+      "Free PDF to PPTX converter. Every page becomes a high-resolution slide image in a genuine PowerPoint file.",
+    introParagraph:
+      "The visual layout carries over with complete accuracy, since each slide is a rendered image of the original page.",
+  },
+  {
+    slug: "convert-pdf-to-powerpoint",
+    toolSlug: "pdf-to-powerpoint",
+    h1: "Convert PDF to PowerPoint",
+    subtitle: "Turn a PDF Into a Real, Presentable PPTX File",
+    metaTitle: "Convert PDF to PowerPoint — Free Online Tool",
+    metaDescription:
+      "Free tool to convert a PDF into a PowerPoint presentation, one slide per page, verified for structural correctness.",
+    introParagraph:
+      "Slide content is one flat image rather than editable text boxes — the trade-off for pixel-perfect visual accuracy.",
+  },
+  {
+    slug: "pdf-slides-maker",
+    toolSlug: "pdf-to-powerpoint",
+    h1: "PDF Slides Maker",
+    subtitle: "Turn a PDF Into Slides for a Presentation",
+    metaTitle: "PDF Slides Maker — Free Online Tool",
+    metaDescription:
+      "Free tool to make presentation slides from a PDF's pages, each rendered as a high-resolution slide image.",
+    introParagraph:
+      "Opens directly in PowerPoint, Google Slides, or LibreOffice Impress with no compatibility warnings.",
+  },
+  {
+    slug: "turn-pdf-into-slides",
+    toolSlug: "pdf-to-powerpoint",
+    h1: "Turn a PDF Into Slides",
+    subtitle: "Convert Report Pages Into a Slide Deck",
+    metaTitle: "Turn PDF Into Slides — Free Online Tool",
+    metaDescription:
+      "Free tool to turn a PDF document into a slide deck, useful for presenting content that already exists as a finished document.",
+    introParagraph:
+      "Each page is scaled to fit PowerPoint's standard widescreen dimensions, centered if the aspect ratio doesn't match exactly.",
+  },
+  {
+    slug: "pdf-to-slideshow",
+    toolSlug: "pdf-to-powerpoint",
+    h1: "PDF to Slideshow",
+    subtitle: "Turn a PDF Document Into a PowerPoint Slideshow",
+    metaTitle: "PDF to Slideshow — Free Online Tool",
+    metaDescription:
+      "Free tool to turn a PDF into a PowerPoint slideshow, one image-filled slide per page.",
+    introParagraph:
+      "You can move, resize, or reorder slides afterward, though the image content itself isn't directly editable in PowerPoint.",
+  },
+  {
+    slug: "pptx-to-pdf",
+    toolSlug: "powerpoint-to-pdf",
+    h1: "PPTX to PDF Converter",
+    subtitle: "Extract Text From a PowerPoint File Into a PDF",
+    metaTitle: "PPTX to PDF Converter — Free, Private Tool",
+    metaDescription:
+      "Free PPTX to PDF converter. Reads your presentation directly and produces one landscape PDF page per slide.",
+    introParagraph:
+      "Slide order follows the actual presentation order via the internal relationship structure, not just filename order.",
+  },
+  {
+    slug: "convert-powerpoint-to-pdf",
+    toolSlug: "powerpoint-to-pdf",
+    h1: "Convert PowerPoint to PDF",
+    subtitle: "Turn a .pptx Presentation Into a Readable PDF",
+    metaTitle: "Convert PowerPoint to PDF — Free Online Tool",
+    metaDescription:
+      "Free tool to convert a PowerPoint presentation to PDF, extracting text content from every slide.",
+    introParagraph:
+      "This is a text-only conversion — images, backgrounds, and exact slide layout aren't reconstructed.",
+  },
+  {
+    slug: "ppt-to-pdf-online",
+    toolSlug: "powerpoint-to-pdf",
+    h1: "PPT to PDF Online",
+    subtitle: "Convert a Presentation to PDF Without Opening PowerPoint",
+    metaTitle: "PPT to PDF Online — Free Online Tool",
+    metaDescription:
+      "Free online tool to convert a PowerPoint file to PDF, entirely in your browser with no PowerPoint installation needed.",
+    introParagraph:
+      "The first text block on each slide (typically the title) is rendered larger and bold to distinguish it from body content.",
+  },
+  {
+    slug: "slides-to-pdf",
+    toolSlug: "powerpoint-to-pdf",
+    h1: "Slides to PDF",
+    subtitle: "Get a Presentation's Text Content as a Readable PDF",
+    metaTitle: "Slides to PDF — Free Online Tool",
+    metaDescription:
+      "Free tool to convert presentation slides to PDF, useful for reviewing or archiving talking points without opening PowerPoint.",
+    introParagraph:
+      "Useful for review, archiving, or printing handouts when the recipient needs to read rather than run a slideshow.",
+  },
+  {
+    slug: "presentation-to-pdf",
+    toolSlug: "powerpoint-to-pdf",
+    h1: "Presentation to PDF",
+    subtitle: "Convert a .pptx File's Slide Text Into a PDF",
+    metaTitle: "Presentation to PDF — Free Online Tool",
+    metaDescription:
+      "Free tool to convert a presentation file into a PDF containing the text content of every slide.",
+    introParagraph:
+      "The presentation's internal ZIP archive is read and parsed entirely in your browser — nothing is uploaded anywhere.",
+  },
+  {
+    slug: "html-to-pdf-converter",
+    toolSlug: "html-to-pdf",
+    h1: "HTML to PDF Converter",
+    subtitle: "Render HTML and Save It as a PDF Using Your Browser",
+    metaTitle: "HTML to PDF Converter — Free, Private Tool",
+    metaDescription:
+      "Free HTML to PDF converter. Paste your HTML, preview it live, and save as PDF via your browser's native print dialog.",
+    introParagraph:
+      "No extra library needed — this uses your browser's own standards-compliant print-to-PDF capability directly.",
+  },
+  {
+    slug: "convert-html-to-pdf",
+    toolSlug: "html-to-pdf",
+    h1: "Convert HTML to PDF",
+    subtitle: "Turn an HTML Snippet Into a Downloadable PDF",
+    metaTitle: "Convert HTML to PDF — Free Online Tool",
+    metaDescription:
+      "Free tool to convert HTML to PDF. See a live preview, then use your browser's print dialog to save as PDF.",
+    introParagraph:
+      "Your actual browser renders the actual HTML you provide, so the preview is about as accurate as it can get.",
+  },
+  {
+    slug: "webpage-to-pdf",
+    toolSlug: "html-to-pdf",
+    h1: "Webpage HTML to PDF",
+    subtitle: "Save Rendered HTML Content as a PDF File",
+    metaTitle: "Webpage HTML to PDF — Free Online Tool",
+    metaDescription:
+      "Free tool to save HTML content as a PDF, rendered live in your browser before saving via the print dialog.",
+    introParagraph:
+      "Print-specific CSS (like @media print rules) in your HTML source is respected the same way it would be for any web page.",
+  },
+  {
+    slug: "html-code-to-pdf",
+    toolSlug: "html-to-pdf",
+    h1: "HTML Code to PDF",
+    subtitle: "Paste HTML and Save It as a PDF",
+    metaTitle: "HTML Code to PDF — Free Online Tool",
+    metaDescription:
+      "Free tool to turn HTML code into a PDF file, using your browser's built-in print-to-PDF capability.",
+    introParagraph:
+      "Your HTML is never uploaded anywhere — it's rendered directly in an isolated frame within your browser tab.",
+  },
+  {
+    slug: "print-html-as-pdf",
+    toolSlug: "html-to-pdf",
+    h1: "Print HTML as PDF",
+    subtitle: "Use the Print Dialog to Save Rendered HTML as PDF",
+    metaTitle: "Print HTML as PDF — Free Online Tool",
+    metaDescription:
+      "Free tool to print rendered HTML as a PDF using your browser's native \"Save as PDF\" print destination.",
+    introParagraph:
+      "A deliberate design choice — browsers already contain a highly capable HTML-to-PDF pipeline, no separate library needed.",
+  },
+  {
+    slug: "pdf-ocr-online",
+    toolSlug: "pdf-ocr",
+    h1: "PDF OCR Online",
+    subtitle: "Recognize Text From Scanned or Image-Only PDF Pages",
+    metaTitle: "PDF OCR Online — Free, Private Tool",
+    metaDescription:
+      "Free online PDF OCR tool. Recognize text from scanned pages using an in-browser OCR engine, no upload required.",
+    introParagraph:
+      "Uses Tesseract, a real, well-established OCR engine, running entirely as WebAssembly directly in your browser.",
+  },
+  {
+    slug: "scanned-pdf-to-text",
+    toolSlug: "pdf-ocr",
+    h1: "Scanned PDF to Text",
+    subtitle: "Recognize and Extract Text From Scanned Documents",
+    metaTitle: "Scanned PDF to Text — Free Online Tool",
+    metaDescription:
+      "Free tool to extract text from a scanned PDF using optical character recognition, run locally in your browser.",
+    introParagraph:
+      "Only a small English language model is downloaded once — your document's actual content and text never leave your browser.",
+  },
+  {
+    slug: "ocr-pdf-online",
+    toolSlug: "pdf-ocr",
+    h1: "OCR a PDF Online",
+    subtitle: "Read Text Out of Image-Only PDF Pages",
+    metaTitle: "OCR PDF Online — Free Online Tool",
+    metaDescription:
+      "Free tool to OCR a PDF online. Recognizes text from photographed or scanned pages with no embedded text layer.",
+    introParagraph:
+      "Accuracy depends heavily on scan quality — clean, high-resolution, well-lit scans recognize most reliably.",
+  },
+  {
+    slug: "image-pdf-text-recognition",
+    toolSlug: "pdf-ocr",
+    h1: "Image PDF Text Recognition",
+    subtitle: "Recognize Text From an Image-Based PDF",
+    metaTitle: "Image PDF Text Recognition — Free Tool",
+    metaDescription:
+      "Free tool for text recognition on image-based PDFs — the same underlying OCR technology used in many commercial products.",
+    introParagraph:
+      "Regular text-extraction tools rely on an embedded text layer that image-only PDFs simply don't have — this reads the pixels instead.",
+  },
+  {
+    slug: "pdf-text-recognition",
+    toolSlug: "pdf-ocr",
+    h1: "PDF Text Recognition",
+    subtitle: "Recognize Printed Text From Any Scanned PDF Page",
+    metaTitle: "PDF Text Recognition — Free Online Tool",
+    metaDescription:
+      "Free PDF text recognition tool, built for scanned or photographed documents with no digital text layer.",
+    introParagraph:
+      "Live progress is shown as recognition proceeds — this is more computationally intensive than simple text extraction.",
+  },
+  {
+    slug: "grayscale-pdf-converter",
+    toolSlug: "pdf-grayscale-converter",
+    h1: "Grayscale PDF Converter",
+    subtitle: "Convert a Full-Color PDF to Grayscale",
+    metaTitle: "Grayscale PDF Converter — Free, Private Tool",
+    metaDescription:
+      "Free tool to convert a color PDF to grayscale, using the standard luminance formula for a natural-looking result.",
+    introParagraph:
+      "Useful for printing on a black-and-white printer or meeting a grayscale filing requirement, processed entirely in your browser.",
+  },
+  {
+    slug: "convert-pdf-to-black-and-white",
+    toolSlug: "pdf-grayscale-converter",
+    h1: "Convert PDF to Black and White",
+    subtitle: "Desaturate Every Page of a Color PDF",
+    metaTitle: "Convert PDF to Black and White — Free Tool",
+    metaDescription:
+      "Free tool to convert a PDF's pages to black and white (grayscale), for printing or reducing visual clutter.",
+    introParagraph:
+      "Every pixel is desaturated with the weighted luminance formula used by broadcast television and professional editing software.",
+  },
+  {
+    slug: "pdf-color-to-grayscale",
+    toolSlug: "pdf-grayscale-converter",
+    h1: "PDF Color to Grayscale",
+    subtitle: "Strip Color From Every Page of a PDF",
+    metaTitle: "PDF Color to Grayscale — Free Online Tool",
+    metaDescription:
+      "Free tool to strip color from a PDF and convert every page to grayscale, entirely in your browser.",
+    introParagraph:
+      "Works on both vector graphics and scanned photos, since the conversion operates on the final rendered pixels of each page.",
+  },
+  {
+    slug: "desaturate-pdf",
+    toolSlug: "pdf-grayscale-converter",
+    h1: "Desaturate a PDF",
+    subtitle: "Remove All Color From a PDF's Pages",
+    metaTitle: "Desaturate PDF — Free Online Tool",
+    metaDescription:
+      "Free tool to desaturate a PDF, converting every page to grayscale for printing or a simpler visual appearance.",
+    introParagraph:
+      "Text becomes non-selectable after conversion, since each page is rendered to an image before being desaturated.",
+  },
+  {
+    slug: "remove-color-from-pdf",
+    toolSlug: "pdf-grayscale-converter",
+    h1: "Remove Color From a PDF",
+    subtitle: "Convert a Colorful PDF to Grayscale",
+    metaTitle: "Remove Color From PDF — Free Online Tool",
+    metaDescription:
+      "Free tool to remove color from a PDF, producing a clean grayscale version of every page.",
+    introParagraph:
+      "File size typically decreases somewhat too, since grayscale images generally compress a bit more efficiently.",
+  },
+  {
+    slug: "extract-images-from-pdf",
+    toolSlug: "pdf-page-extractor-to-images",
+    h1: "Extract Images From a PDF",
+    subtitle: "Pull the Original Embedded Photos Out of a PDF",
+    metaTitle: "Extract Images From PDF — Free, Private Tool",
+    metaDescription:
+      "Free tool to extract embedded images from a PDF — the original photos, not a page render, at original quality.",
+    introParagraph:
+      "JPEGs come out byte-identical to how they were embedded, verified against a real test file down to the checksum.",
+  },
+  {
+    slug: "pdf-image-extractor",
+    toolSlug: "pdf-page-extractor-to-images",
+    h1: "PDF Image Extractor",
+    subtitle: "Pull Original Photos Out of a PDF's Internal Structure",
+    metaTitle: "PDF Image Extractor — Free Online Tool",
+    metaDescription:
+      "Free PDF image extractor. Scans every page for embedded image objects and extracts them at original quality.",
+    introParagraph:
+      "Different from PDF to JPG or PNG — those rasterize whole pages, while this pulls out the actual source images themselves.",
+  },
+  {
+    slug: "pull-photos-from-pdf",
+    toolSlug: "pdf-page-extractor-to-images",
+    h1: "Pull Photos From a PDF",
+    subtitle: "Get the Original Embedded Images Out of a Document",
+    metaTitle: "Pull Photos From PDF — Free Online Tool",
+    metaDescription:
+      "Free tool to pull the original embedded photos out of a PDF document, without re-rendering the page around them.",
+    introParagraph:
+      "Some advanced encodings (indexed-color, CMYK) are detected and skipped rather than producing garbled output.",
+  },
+  {
+    slug: "get-embedded-images-pdf",
+    toolSlug: "pdf-page-extractor-to-images",
+    h1: "Get Embedded Images From a PDF",
+    subtitle: "Extract the Actual Source Photos Inside a PDF",
+    metaTitle: "Get Embedded Images From PDF — Free Tool",
+    metaDescription:
+      "Free tool to get embedded images out of a PDF's internal structure, at their original resolution and compression.",
+    introParagraph:
+      "Multiple images extracted from a document download together as a single ZIP file for convenience.",
+  },
+  {
+    slug: "save-pdf-images",
+    toolSlug: "pdf-page-extractor-to-images",
+    h1: "Save Images From a PDF",
+    subtitle: "Download the Original Photos Embedded in a PDF",
+    metaTitle: "Save Images From PDF — Free Online Tool",
+    metaDescription:
+      "Free tool to save the original images embedded inside a PDF, rather than a screenshot of the whole page.",
+    introParagraph:
+      "Plain uncompressed RGB or grayscale images are converted to PNG format for you to use directly.",
+  },
+  {
+    slug: "ai-background-remover",
+    toolSlug: "remove-background",
+    h1: "AI Background Remover",
+    subtitle: "Automatically Cut Out the Subject From Any Photo",
+    metaTitle: "AI Background Remover — Free, Private Tool",
+    metaDescription:
+      "Free AI background remover. Automatically detects the subject and makes the background transparent, entirely in your browser.",
+    introParagraph:
+      "No clicking, no manual selection — an AI segmentation model recognizes the subject and cuts it out, running locally via WebAssembly.",
+  },
+  {
+    slug: "online-background-remover",
+    toolSlug: "remove-background",
+    h1: "Online Background Remover",
+    subtitle: "Remove a Photo's Background Automatically, No Upload",
+    metaTitle: "Online Background Remover — Free Online Tool",
+    metaDescription:
+      "Free online background remover. Upload a photo and get a transparent-background PNG back instantly, no account needed.",
+    introParagraph:
+      "Works well for people, animals, vehicles, and everyday objects against complex or textured backgrounds, not just flat colors.",
+  },
+  {
+    slug: "cut-out-subject-image",
+    toolSlug: "remove-background",
+    h1: "Cut Out a Subject From an Image",
+    subtitle: "Automatically Isolate the Main Subject in a Photo",
+    metaTitle: "Cut Out Subject From Image — Free Tool",
+    metaDescription:
+      "Free tool to cut out the main subject from a photo automatically, using an AI model that runs entirely in your browser.",
+    introParagraph:
+      "The model classifies every pixel as subject or background, keeping the subject exactly as it was and making the rest transparent.",
+  },
+  {
+    slug: "auto-background-remover",
+    toolSlug: "remove-background",
+    h1: "Automatic Background Remover",
+    subtitle: "No Manual Selection — the AI Finds the Subject",
+    metaTitle: "Automatic Background Remover — Free Tool",
+    metaDescription:
+      "Free automatic background remover. No clicking or manual masking required — an AI model detects the subject for you.",
+    introParagraph:
+      "Fine detail like loose hair strands won't be pixel-perfect, since the output is a hard cutout rather than a soft alpha matte.",
+  },
+  {
+    slug: "remove-photo-background-free",
+    toolSlug: "remove-background",
+    h1: "Remove Photo Background for Free",
+    subtitle: "AI-Powered Background Removal at No Cost",
+    metaTitle: "Remove Photo Background Free — Browser-Based",
+    metaDescription:
+      "A completely free, browser-based tool to remove a photo's background using AI subject detection, no account or upload.",
+    introParagraph:
+      "The first use downloads a small model file; after that, every image is processed entirely on your device.",
+  },
+  {
+    slug: "heic-to-jpg-online",
+    toolSlug: "heic-to-jpg",
+    h1: "HEIC to JPG Online",
+    subtitle: "Convert iPhone Photos to JPG in Your Browser",
+    metaTitle: "HEIC to JPG Online — Free, Private Tool",
+    metaDescription:
+      "Free online HEIC to JPG converter. Decode an iPhone HEIC photo and export it as a universally-supported JPG, no upload.",
+    introParagraph:
+      "A real HEIC decoder runs via WebAssembly directly in your browser — the actual image data is decoded, not approximated.",
+  },
+  {
+    slug: "convert-heic-to-jpg",
+    toolSlug: "heic-to-jpg",
+    h1: "Convert HEIC to JPG",
+    subtitle: "Turn an iPhone HEIC Photo Into a Standard JPG",
+    metaTitle: "Convert HEIC to JPG — Free Online Tool",
+    metaDescription:
+      "Free tool to convert HEIC to JPG. Works entirely in your browser, no software install or account required.",
+    introParagraph:
+      "Neither Chrome nor Firefox can display HEIC directly — this decodes it properly so the photo opens anywhere.",
+  },
+  {
+    slug: "iphone-photo-to-jpg",
+    toolSlug: "heic-to-jpg",
+    h1: "iPhone Photo to JPG",
+    subtitle: "Convert an iPhone's Default HEIC Format to JPG",
+    metaTitle: "iPhone Photo to JPG — Free Online Tool",
+    metaDescription:
+      "Free tool to convert an iPhone photo (HEIC) to JPG, the format that opens on virtually any device or website.",
+    introParagraph:
+      "The full-resolution primary image is converted, not the low-quality thumbnail some HEIC files also contain.",
+  },
+  {
+    slug: "heic-image-converter",
+    toolSlug: "heic-to-jpg",
+    h1: "HEIC Image Converter",
+    subtitle: "Convert Apple's HEIC Photo Format to JPG",
+    metaTitle: "HEIC Image Converter — Free Online Tool",
+    metaDescription:
+      "Free HEIC image converter. Decode Apple's HEIC format and export a standard JPG file, processed locally in your browser.",
+    introParagraph:
+      "Nothing about your photo is uploaded — the entire decode-and-convert process runs locally using WebAssembly.",
+  },
+  {
+    slug: "heic-jpg-converter",
+    toolSlug: "heic-to-jpg",
+    h1: "HEIC to JPG Converter",
+    subtitle: "Fix HEIC Files That Won't Open on Windows or the Web",
+    metaTitle: "HEIC to JPG Converter — Free Online Tool",
+    metaDescription:
+      "Free HEIC to JPG converter for photos that won't open on Windows, older devices, or most websites.",
+    introParagraph:
+      "HEIC compresses better than JPEG, but broad compatibility is JPEG's advantage — this bridges the two.",
+  },
+  {
+    slug: "heic-to-png-online",
+    toolSlug: "heic-to-png",
+    h1: "HEIC to PNG Online",
+    subtitle: "Convert iPhone Photos to Lossless PNG",
+    metaTitle: "HEIC to PNG Online — Free, Private Tool",
+    metaDescription:
+      "Free online HEIC to PNG converter. Decode an iPhone HEIC photo and export it as a lossless PNG, no upload required.",
+    introParagraph:
+      "Best when you need pixel-perfect output for further editing — no additional lossy compression is applied.",
+  },
+  {
+    slug: "convert-heic-to-png",
+    toolSlug: "heic-to-png",
+    h1: "Convert HEIC to PNG",
+    subtitle: "Turn an iPhone HEIC Photo Into a Lossless PNG",
+    metaTitle: "Convert HEIC to PNG — Free Online Tool",
+    metaDescription:
+      "Free tool to convert HEIC to PNG, preserving every decoded pixel with no further lossy compression.",
+    introParagraph:
+      "A real HEIC decoder runs via WebAssembly in your browser, then the pixels are exported as lossless PNG.",
+  },
+  {
+    slug: "iphone-photo-to-png",
+    toolSlug: "heic-to-png",
+    h1: "iPhone Photo to PNG",
+    subtitle: "Convert an iPhone's HEIC Format to Lossless PNG",
+    metaTitle: "iPhone Photo to PNG — Free Online Tool",
+    metaDescription:
+      "Free tool to convert an iPhone photo (HEIC) to PNG for lossless quality, ready for further editing.",
+    introParagraph:
+      "Expect a larger file than the HEIC original — PNG's lossless approach trades file size for zero further quality loss.",
+  },
+  {
+    slug: "heic-lossless-converter",
+    toolSlug: "heic-to-png",
+    h1: "HEIC Lossless Converter",
+    subtitle: "Decode HEIC to PNG With No Additional Compression",
+    metaTitle: "HEIC Lossless Converter — Free Online Tool",
+    metaDescription:
+      "Free tool to losslessly convert HEIC photos to PNG, right in your browser with no upload.",
+    introParagraph:
+      "The primary, full-resolution image inside the HEIC file is decoded and preserved exactly, pixel for pixel.",
+  },
+  {
+    slug: "heic-png-converter",
+    toolSlug: "heic-to-png",
+    h1: "HEIC to PNG Converter",
+    subtitle: "Get a Lossless PNG From an iPhone HEIC Photo",
+    metaTitle: "HEIC to PNG Converter — Free Online Tool",
+    metaDescription:
+      "Free HEIC to PNG converter, ideal for HEIC photos that need to feed into an image editor without extra compression.",
+    introParagraph:
+      "Use HEIC to JPG instead if file size matters more than lossless fidelity for everyday sharing.",
+  },
+  {
+    slug: "png-to-svg-online",
+    toolSlug: "png-to-svg",
+    h1: "PNG to SVG Online",
+    subtitle: "Trace a PNG Into Scalable Vector Paths",
+    metaTitle: "PNG to SVG Online — Free, Private Tool",
+    metaDescription:
+      "Free online PNG to SVG converter. Trace color regions into real vector paths, right in your browser.",
+    introParagraph:
+      "Best for logos, icons, and flat-color graphics — an actual color-region tracing algorithm, not an embedded raster wrapper.",
+  },
+  {
+    slug: "convert-png-to-svg",
+    toolSlug: "png-to-svg",
+    h1: "Convert PNG to SVG",
+    subtitle: "Turn a Raster Logo Into a Scalable Vector File",
+    metaTitle: "Convert PNG to SVG — Free Online Tool",
+    metaDescription:
+      "Free tool to convert PNG to SVG. Adjust the color count and download a genuine vector file that scales to any size.",
+    introParagraph:
+      "A PNG blurs when scaled up; the traced SVG stays perfectly crisp at any size, ideal for banners and large prints.",
+  },
+  {
+    slug: "vectorize-png",
+    toolSlug: "png-to-svg",
+    h1: "Vectorize a PNG",
+    subtitle: "Trace a Raster Image Into Vector Shapes",
+    metaTitle: "Vectorize PNG — Free Online Tool",
+    metaDescription:
+      "Free tool to vectorize a PNG image, tracing its color regions into scalable SVG paths.",
+    introParagraph:
+      "Works well on flat-color graphics; photos produce a messy result since they lack the flat regions this technique relies on.",
+  },
+  {
+    slug: "raster-to-vector-converter",
+    toolSlug: "png-to-svg",
+    h1: "Raster to Vector Converter",
+    subtitle: "Convert a Bitmap Image Into Vector Paths",
+    metaTitle: "Raster to Vector Converter — Free Online Tool",
+    metaDescription:
+      "Free raster to vector converter. Trace a PNG or JPG's color regions into a downloadable SVG file.",
+    introParagraph:
+      "A colors slider controls the trade-off between a simpler, smaller SVG and one that captures finer color detail.",
+  },
+  {
+    slug: "image-to-svg-tracer",
+    toolSlug: "png-to-svg",
+    h1: "Image to SVG Tracer",
+    subtitle: "Trace an Image's Colors Into a Vector SVG",
+    metaTitle: "Image to SVG Tracer — Free Online Tool",
+    metaDescription:
+      "Free image to SVG tracer. Upload a PNG or JPG and get a scalable vector file traced from its color regions.",
+    introParagraph:
+      "Runs entirely in your browser using a pure JavaScript tracing algorithm — no upload, no WebAssembly needed.",
+  },
+  {
+    slug: "convert-mp4-to-webm",
+    toolSlug: "mp4-to-webm",
+    h1: "Convert MP4 to WebM",
+    subtitle: "Get an Efficient, Web-Ready WebM From Any MP4",
+    metaTitle: "Convert MP4 to WebM — Free, Private Tool",
+    metaDescription:
+      "Free tool to convert MP4 to WebM. Re-encodes with VP8 video and Vorbis audio, entirely in your browser, no upload.",
+    introParagraph:
+      "WebM is the format most web pages prefer for embedded video — smaller, open, and natively supported. This runs a real FFmpeg build in your browser to make the switch.",
+  },
+  {
+    slug: "mp4-webm-converter",
+    toolSlug: "mp4-to-webm",
+    h1: "MP4 to WebM Converter",
+    subtitle: "Re-encode MP4 Video for the Web",
+    metaTitle: "MP4 to WebM Converter — Free Online Tool",
+    metaDescription:
+      "Free MP4 to WebM converter running entirely in your browser via WebAssembly, no server upload required.",
+    introParagraph:
+      "A genuine re-encode to VP8/Vorbis, not a fast repackage — since WebM's container can't hold MP4's typical H.264/AAC streams directly.",
+  },
+  {
+    slug: "webm-video-converter",
+    toolSlug: "mp4-to-webm",
+    h1: "WebM Video Converter",
+    subtitle: "Turn an MP4 File Into WebM",
+    metaTitle: "WebM Video Converter — Free Online Tool",
+    metaDescription:
+      "Free tool to convert video files to WebM format, processed locally in your browser with no upload.",
+    introParagraph:
+      "A live progress bar tracks the real encoding progress, since this is genuine transcoding rather than an instant container swap.",
+  },
+  {
+    slug: "free-mp4-to-webm",
+    toolSlug: "mp4-to-webm",
+    h1: "Free MP4 to WebM Converter",
+    subtitle: "Convert Video to WebM at No Cost",
+    metaTitle: "Free MP4 to WebM — Browser-Based Tool",
+    metaDescription:
+      "A completely free, browser-based MP4 to WebM converter. No account, no upload, no watermark.",
+    introParagraph:
+      "Your video never leaves your device — the whole conversion runs inside a real FFmpeg build compiled to WebAssembly.",
+  },
+  {
+    slug: "convert-webm-to-mp4",
+    toolSlug: "webm-to-mp4",
+    h1: "Convert WebM to MP4",
+    subtitle: "Get a Universally Compatible MP4 From Any WebM",
+    metaTitle: "Convert WebM to MP4 — Free, Private Tool",
+    metaDescription:
+      "Free tool to convert WebM to MP4. Re-encodes with H.264 video and AAC audio, entirely in your browser.",
+    introParagraph:
+      "WebM plays in every browser, but plenty of software and platforms still expect MP4 — this bridges that gap locally, no upload.",
+  },
+  {
+    slug: "webm-video-to-mp4",
+    toolSlug: "webm-to-mp4",
+    h1: "WebM Video to MP4",
+    subtitle: "Convert WebM Into Standard, Playable MP4",
+    metaTitle: "WebM Video to MP4 — Free Online Tool",
+    metaDescription:
+      "Free tool to convert WebM video into MP4, running entirely in your browser via a real FFmpeg build.",
+    introParagraph:
+      "Uses standard H.264/AAC settings chosen for maximum compatibility across devices and older software.",
+  },
+  {
+    slug: "free-webm-to-mp4",
+    toolSlug: "webm-to-mp4",
+    h1: "Free WebM to MP4 Converter",
+    subtitle: "Convert WebM to MP4 at No Cost",
+    metaTitle: "Free WebM to MP4 — Browser-Based Tool",
+    metaDescription:
+      "A completely free, browser-based WebM to MP4 converter. No account, no upload, no cost.",
+    introParagraph:
+      "The whole conversion runs inside your browser using a real FFmpeg build compiled to WebAssembly — nothing is sent anywhere.",
+  },
+  {
+    slug: "webm-mp4-converter",
+    toolSlug: "webm-to-mp4",
+    h1: "WebM MP4 Converter",
+    subtitle: "Re-encode WebM as Widely Compatible MP4",
+    metaTitle: "WebM MP4 Converter — Free Online Tool",
+    metaDescription:
+      "Free WebM to MP4 converter with a real re-encode to H.264/AAC, entirely client-side.",
+    introParagraph:
+      "A genuine re-encode is required since WebM's typical VP8/VP9 and Vorbis/Opus codecs aren't valid inside an MP4 container.",
+  },
+  {
+    slug: "compress-video-online",
+    toolSlug: "video-compressor",
+    h1: "Compress Video Online",
+    subtitle: "Shrink a Video File's Size With a Quality Slider",
+    metaTitle: "Compress Video Online — Free, Private Tool",
+    metaDescription:
+      "Free online video compressor. Shrink a video's file size with a CRF quality slider, entirely in your browser.",
+    introParagraph:
+      "No upload to a server — a real FFmpeg build compiled to WebAssembly compresses your video directly on your device.",
+  },
+  {
+    slug: "shrink-video-file",
+    toolSlug: "video-compressor",
+    h1: "Shrink a Video File",
+    subtitle: "Reduce File Size Without Installing Software",
+    metaTitle: "Shrink Video File — Free Online Tool",
+    metaDescription:
+      "Free tool to shrink a video file's size, with a slider controlling the quality/size trade-off.",
+    introParagraph:
+      "See the exact before/after size once compression finishes, so you can judge whether to try a different setting.",
+  },
+  {
+    slug: "reduce-video-size",
+    toolSlug: "video-compressor",
+    h1: "Reduce Video Size",
+    subtitle: "Compress a Video for Email or Upload Limits",
+    metaTitle: "Reduce Video Size — Free Online Tool",
+    metaDescription:
+      "Free tool to reduce a video's file size for email attachments or upload limits, processed locally.",
+    introParagraph:
+      "Uses H.264's CRF setting — the same adaptive, per-scene approach professional video encoders rely on.",
+  },
+  {
+    slug: "online-video-compressor",
+    toolSlug: "video-compressor",
+    h1: "Online Video Compressor",
+    subtitle: "Compress Any Video Directly in Your Browser",
+    metaTitle: "Online Video Compressor — Free Online Tool",
+    metaDescription:
+      "Free online video compressor running entirely in your browser via WebAssembly, no account needed.",
+    introParagraph:
+      "The veryfast preset trades a small amount of compression efficiency for meaningfully faster processing.",
+  },
+  {
+    slug: "trim-video-online",
+    toolSlug: "video-trimmer",
+    h1: "Trim Video Online",
+    subtitle: "Cut a Video to an Exact Start and End Time",
+    metaTitle: "Trim Video Online — Free, Private Tool",
+    metaDescription:
+      "Free online video trimmer. Set exact start and end times and get a frame-accurate cut, entirely in your browser.",
+    introParagraph:
+      "Full re-encode guarantees the trim points land exactly where you specify, not just the nearest keyframe.",
+  },
+  {
+    slug: "cut-video-clip",
+    toolSlug: "video-trimmer",
+    h1: "Cut a Video Clip",
+    subtitle: "Extract an Exact Section From a Longer Video",
+    metaTitle: "Cut Video Clip — Free Online Tool",
+    metaDescription:
+      "Free tool to cut a specific clip out of a longer video, with exact start and end time control.",
+    introParagraph:
+      "Duration is detected automatically once you upload, so you know the valid range before setting your cut points.",
+  },
+  {
+    slug: "video-clip-trimmer",
+    toolSlug: "video-trimmer",
+    h1: "Video Clip Trimmer",
+    subtitle: "Precisely Cut a Video to the Section You Need",
+    metaTitle: "Video Clip Trimmer — Free Online Tool",
+    metaDescription:
+      "Free video clip trimmer with frame-accurate start/end cutting, processed entirely in your browser.",
+    introParagraph:
+      "A real FFmpeg build compiled to WebAssembly handles the cut locally — no upload, no server involved.",
+  },
+  {
+    slug: "online-video-trimmer",
+    toolSlug: "video-trimmer",
+    h1: "Online Video Trimmer",
+    subtitle: "Trim a Video Without Installing an Editor",
+    metaTitle: "Online Video Trimmer — Free Online Tool",
+    metaDescription:
+      "Free online video trimmer for cutting a video down to an exact section, no software installation needed.",
+    introParagraph:
+      "The tool won't let you set an end time before the start, catching the most common input mistake early.",
+  },
+  {
+    slug: "pull-audio-from-video",
+    toolSlug: "extract-audio-from-video",
+    h1: "Pull Audio From a Video",
+    subtitle: "Extract Just the Sound Track as an MP3",
+    metaTitle: "Pull Audio From Video — Free, Private Tool",
+    metaDescription:
+      "Free tool to pull the audio track out of a video file, saved as MP3, entirely in your browser.",
+    introParagraph:
+      "Works regardless of the video's original audio codec, since it's decoded before being re-encoded to MP3.",
+  },
+  {
+    slug: "video-audio-extractor",
+    toolSlug: "extract-audio-from-video",
+    h1: "Video Audio Extractor",
+    subtitle: "Get Just the Audio Track Out of Any Video",
+    metaTitle: "Video Audio Extractor — Free Online Tool",
+    metaDescription:
+      "Free video audio extractor. Discards the video entirely and saves just the audio as MP3.",
+    introParagraph:
+      "Handles any video container your browser's FFmpeg build can read — MP4, WebM, MOV, AVI, MKV, and more.",
+  },
+  {
+    slug: "get-audio-from-video",
+    toolSlug: "extract-audio-from-video",
+    h1: "Get Audio From a Video",
+    subtitle: "Save a Video's Sound as a Standalone MP3",
+    metaTitle: "Get Audio From Video — Free Online Tool",
+    metaDescription:
+      "Free tool to get the audio out of a video file and save it as an MP3, no video editor required.",
+    introParagraph:
+      "A recorded lecture, a filmed performance, an interview — anything that's really audio with a picture attached.",
+  },
+  {
+    slug: "separate-audio-from-video",
+    toolSlug: "extract-audio-from-video",
+    h1: "Separate Audio From Video",
+    subtitle: "Split the Audio Track Out on Its Own",
+    metaTitle: "Separate Audio From Video — Free Online Tool",
+    metaDescription:
+      "Free tool to separate a video's audio track from its picture, saving just the sound as MP3.",
+    introParagraph:
+      "The video stream is discarded entirely during processing — the result contains only the extracted audio.",
+  },
+  {
+    slug: "convert-video-to-gif",
+    toolSlug: "video-to-gif",
+    h1: "Convert Video to GIF",
+    subtitle: "Turn a Clip Into a Looping Animated GIF",
+    metaTitle: "Convert Video to GIF — Free, Private Tool",
+    metaDescription:
+      "Free tool to convert a video clip to an animated GIF. Adjust FPS and width, entirely in your browser.",
+    introParagraph:
+      "Lanczos resampling keeps the downscaled GIF looking sharp rather than blurry at reduced dimensions.",
+  },
+  {
+    slug: "make-gif-from-video",
+    toolSlug: "video-to-gif",
+    h1: "Make a GIF From a Video",
+    subtitle: "Turn Any Video Clip Into a Shareable GIF",
+    metaTitle: "Make GIF From Video — Free Online Tool",
+    metaDescription:
+      "Free tool to make an animated GIF from a video clip, right in your browser with no upload.",
+    introParagraph:
+      "Lower FPS and a smaller width keep the file size manageable — GIFs are inherently large for anything beyond a few seconds.",
+  },
+  {
+    slug: "video-clip-to-gif",
+    toolSlug: "video-to-gif",
+    h1: "Video Clip to GIF",
+    subtitle: "Convert a Short Clip Into a Looping Animation",
+    metaTitle: "Video Clip to GIF — Free Online Tool",
+    metaDescription:
+      "Free tool to convert a short video clip into a looping GIF animation, processed locally in your browser.",
+    introParagraph:
+      "A real FFmpeg build compiled to WebAssembly runs the conversion entirely on your device.",
+  },
+  {
+    slug: "animated-gif-from-video",
+    toolSlug: "video-to-gif",
+    h1: "Animated GIF From Video",
+    subtitle: "Create a GIF From a Video Clip",
+    metaTitle: "Animated GIF From Video — Free Online Tool",
+    metaDescription:
+      "Free tool to create an animated GIF from a video file, with adjustable frame rate and width.",
+    introParagraph:
+      "Note that GIFs don't support audio at all — any sound in the source video is dropped in the conversion.",
+  },
+  {
+    slug: "convert-gif-to-video",
+    toolSlug: "gif-to-mp4",
+    h1: "Convert GIF to Video",
+    subtitle: "Turn a GIF Into a Much Smaller MP4",
+    metaTitle: "Convert GIF to Video — Free, Private Tool",
+    metaDescription:
+      "Free tool to convert a GIF to MP4 video, shrinking file size dramatically, entirely in your browser.",
+    introParagraph:
+      "GIF has no compression between frames, so the resulting video is often many times smaller than the source GIF.",
+  },
+  {
+    slug: "gif-to-video-converter",
+    toolSlug: "gif-to-mp4",
+    h1: "GIF to Video Converter",
+    subtitle: "Convert an Animated GIF Into MP4",
+    metaTitle: "GIF to Video Converter — Free Online Tool",
+    metaDescription:
+      "Free GIF to video converter. Re-encodes GIF frames as H.264 video, processed locally in your browser.",
+    introParagraph:
+      "Automatically adjusts odd pixel dimensions, since H.264 requires even width and height.",
+  },
+  {
+    slug: "animate-gif-as-mp4",
+    toolSlug: "gif-to-mp4",
+    h1: "Turn a GIF Into an MP4",
+    subtitle: "Shrink a Large GIF Into a Compact Video",
+    metaTitle: "Turn GIF Into MP4 — Free Online Tool",
+    metaDescription:
+      "Free tool to turn a large animated GIF into a much smaller MP4 video file, no upload required.",
+    introParagraph:
+      "Includes the faststart flag, so the resulting video can begin playing before it fully downloads.",
+  },
+  {
+    slug: "slow-motion-video-maker",
+    toolSlug: "change-video-speed",
+    h1: "Slow Motion Video Maker",
+    subtitle: "Slow Down a Video While Keeping Audio Pitch Natural",
+    metaTitle: "Slow Motion Video Maker — Free, Private Tool",
+    metaDescription:
+      "Free tool to create a slow-motion video effect. Audio pitch stays natural, not distorted, entirely in your browser.",
+    introParagraph:
+      "Uses a dedicated tempo filter for audio rather than simple sample-rate manipulation, avoiding the slow-motion pitch drop.",
+  },
+  {
+    slug: "fast-forward-video",
+    toolSlug: "change-video-speed",
+    h1: "Fast-Forward a Video",
+    subtitle: "Speed Up Video and Audio Together, in Sync",
+    metaTitle: "Fast-Forward Video — Free Online Tool",
+    metaDescription:
+      "Free tool to fast-forward a video, speeding up both video and audio together while keeping pitch natural.",
+    introParagraph:
+      "From 0.25x up to 4x speed, with automatic chaining for factors beyond the tempo filter's normal 0.5x-2x range.",
+  },
+  {
+    slug: "video-speed-changer",
+    toolSlug: "change-video-speed",
+    h1: "Video Speed Changer",
+    subtitle: "Adjust Playback Speed, Video and Audio in Sync",
+    metaTitle: "Video Speed Changer — Free Online Tool",
+    metaDescription:
+      "Free video speed changer. Speed up or slow down a video with audio staying perfectly synchronized.",
+    introParagraph:
+      "A real FFmpeg build compiled to WebAssembly handles the speed change entirely inside your browser.",
+  },
+  {
+    slug: "change-playback-speed",
+    toolSlug: "change-video-speed",
+    h1: "Change Video Playback Speed",
+    subtitle: "Speed Up or Slow Down a Video, No Editor Needed",
+    metaTitle: "Change Video Playback Speed — Free Tool",
+    metaDescription:
+      "Free tool to change a video's playback speed from 0.25x to 4x, video and audio synchronized throughout.",
+    introParagraph:
+      "Useful for speeding through a long screen recording or creating a dramatic slow-motion effect.",
+  },
+  {
+    slug: "remove-audio-from-video",
+    toolSlug: "mute-video",
+    h1: "Remove Audio From a Video",
+    subtitle: "Strip the Sound Track Instantly, No Quality Loss",
+    metaTitle: "Remove Audio From Video — Free, Private Tool",
+    metaDescription:
+      "Free tool to remove the audio track from a video. Fast stream-copy, zero quality loss, entirely in your browser.",
+    introParagraph:
+      "The video stream is copied byte-for-byte while only the audio is dropped — nearly instant, since no video is re-encoded.",
+  },
+  {
+    slug: "silence-video",
+    toolSlug: "mute-video",
+    h1: "Silence a Video",
+    subtitle: "Make a Video Completely Silent",
+    metaTitle: "Silence a Video — Free Online Tool",
+    metaDescription:
+      "Free tool to make a video completely silent by removing its audio track entirely.",
+    introParagraph:
+      "Truly silent — the audio track is removed from the file, not just muted, which matters for platforms that check for its presence.",
+  },
+  {
+    slug: "mute-video-online",
+    toolSlug: "mute-video",
+    h1: "Mute Video Online",
+    subtitle: "Remove Sound From Any Video File",
+    metaTitle: "Mute Video Online — Free Online Tool",
+    metaDescription:
+      "Free online tool to mute a video by removing its audio, processed entirely in your browser.",
+    introParagraph:
+      "Video quality is completely unaffected, since it's never re-encoded — only the audio stream is removed.",
+  },
+  {
+    slug: "strip-audio-from-video",
+    toolSlug: "mute-video",
+    h1: "Strip Audio From a Video",
+    subtitle: "Remove the Soundtrack Without Re-encoding",
+    metaTitle: "Strip Audio From Video — Free Online Tool",
+    metaDescription:
+      "Free tool to strip the audio out of a video file, keeping video quality exactly as it was.",
+    introParagraph:
+      "Useful for silent background footage, time-lapses, or a clip whose original audio needs replacing elsewhere.",
+  },
+  {
+    slug: "combine-videos-online",
+    toolSlug: "merge-videos",
+    h1: "Combine Videos Online",
+    subtitle: "Join Multiple Video Clips Into One File",
+    metaTitle: "Combine Videos Online — Free, Private Tool",
+    metaDescription:
+      "Free online tool to combine multiple video files into one, entirely in your browser, no upload.",
+    introParagraph:
+      "Every clip is re-encoded to a common format first, so mismatched resolutions, frame rates, or codecs still combine successfully.",
+  },
+  {
+    slug: "join-video-files",
+    toolSlug: "merge-videos",
+    h1: "Join Video Files",
+    subtitle: "Combine Several Video Clips End-to-End",
+    metaTitle: "Join Video Files — Free Online Tool",
+    metaDescription:
+      "Free tool to join multiple video files together in a chosen order, processed locally in your browser.",
+    introParagraph:
+      "Up/down controls let you set the exact sequence before merging, so clips appear in the order you want.",
+  },
+  {
+    slug: "stitch-videos-together",
+    toolSlug: "merge-videos",
+    h1: "Stitch Videos Together",
+    subtitle: "Combine Multiple Recordings Into One Continuous Video",
+    metaTitle: "Stitch Videos Together — Free Online Tool",
+    metaDescription:
+      "Free tool to stitch multiple video recordings together into one continuous file.",
+    introParagraph:
+      "Handles clips from a multi-part event or recording session, regardless of small format differences between them.",
+  },
+  {
+    slug: "video-combiner",
+    toolSlug: "merge-videos",
+    h1: "Video Combiner",
+    subtitle: "Merge Multiple Clips Into a Single Video",
+    metaTitle: "Video Combiner — Free Online Tool",
+    metaDescription:
+      "Free video combiner. Merge multiple video files into one, entirely client-side with no upload.",
+    introParagraph:
+      "A real FFmpeg build compiled to WebAssembly runs the entire merge locally on your device.",
+  },
+  {
+    slug: "mp4-audio-extractor",
+    toolSlug: "mp4-to-mp3",
+    h1: "MP4 Audio Extractor",
+    subtitle: "Pull the Sound Track Out of an MP4 File",
+    metaTitle: "MP4 Audio Extractor — Free, Private Tool",
+    metaDescription:
+      "Free MP4 audio extractor. Get just the sound track as an MP3, entirely in your browser.",
+    introParagraph:
+      "Scoped specifically to MP4 input — for other video containers, use Video to Audio Converter instead.",
+  },
+  {
+    slug: "extract-mp3-from-mp4",
+    toolSlug: "mp4-to-mp3",
+    h1: "Extract MP3 From MP4",
+    subtitle: "Get an MP3 Out of Any MP4 Video",
+    metaTitle: "Extract MP3 From MP4 — Free Online Tool",
+    metaDescription:
+      "Free tool to extract an MP3 audio file from an MP4 video, processed locally in your browser.",
+    introParagraph:
+      "A recorded meeting, a filmed performance, a video that's really just audio with a picture attached.",
+  },
+  {
+    slug: "mp4-sound-extractor",
+    toolSlug: "mp4-to-mp3",
+    h1: "MP4 Sound Extractor",
+    subtitle: "Save an MP4's Audio as a Standalone MP3",
+    metaTitle: "MP4 Sound Extractor — Free Online Tool",
+    metaDescription:
+      "Free tool to extract the sound from an MP4 file and save it as an MP3, no video editor needed.",
+    introParagraph:
+      "Works regardless of the MP4's internal audio codec, since it's decoded before being re-encoded to MP3.",
+  },
+  {
+    slug: "get-mp3-from-mp4",
+    toolSlug: "mp4-to-mp3",
+    h1: "Get MP3 From MP4",
+    subtitle: "Convert an MP4's Audio to a Downloadable MP3",
+    metaTitle: "Get MP3 From MP4 — Free Online Tool",
+    metaDescription:
+      "Free tool to get an MP3 file from an MP4 video's audio track, entirely in your browser.",
+    introParagraph:
+      "The video stream is discarded entirely — the result contains only the extracted, re-encoded audio.",
+  },
+  {
+    slug: "audio-from-video-converter",
+    toolSlug: "video-to-audio-converter",
+    h1: "Audio From Video Converter",
+    subtitle: "Extract Audio in MP3, WAV, OGG, or FLAC",
+    metaTitle: "Audio From Video Converter — Free, Private Tool",
+    metaDescription:
+      "Free tool to extract audio from a video in your choice of format — MP3, WAV, OGG, or FLAC.",
+    introParagraph:
+      "Works on any video container your browser's FFmpeg build can read, decoded before format conversion.",
+  },
+  {
+    slug: "save-video-audio",
+    toolSlug: "video-to-audio-converter",
+    h1: "Save a Video's Audio",
+    subtitle: "Choose Your Output Format for Extracted Audio",
+    metaTitle: "Save Video Audio — Free Online Tool",
+    metaDescription:
+      "Free tool to save a video's audio track in the format you need, processed entirely in your browser.",
+    introParagraph:
+      "MP3 for compatibility, WAV for lossless, OGG or FLAC for open, efficient alternatives.",
+  },
+  {
+    slug: "video-audio-to-mp3",
+    toolSlug: "video-to-audio-converter",
+    h1: "Video Audio to MP3 (or More)",
+    subtitle: "Extract a Video's Sound in Multiple Formats",
+    metaTitle: "Video Audio to MP3 — Free Online Tool",
+    metaDescription:
+      "Free tool to convert a video's audio to MP3, WAV, OGG, or FLAC, no upload required.",
+    introParagraph:
+      "Each output format uses settings appropriate to that format, not one generic setting for all.",
+  },
+  {
+    slug: "flip-video-orientation",
+    toolSlug: "video-rotator",
+    h1: "Flip Video Orientation",
+    subtitle: "Correct a Sideways or Upside-Down Video",
+    metaTitle: "Flip Video Orientation — Free, Private Tool",
+    metaDescription:
+      "Free tool to flip a video's orientation — 90°, 180°, or 270° — permanently re-rendering each frame.",
+    introParagraph:
+      "Re-encodes actual pixels rather than adding a metadata flag, so the fix displays correctly in every player.",
+  },
+  {
+    slug: "fix-sideways-video",
+    toolSlug: "video-rotator",
+    h1: "Fix a Sideways Video",
+    subtitle: "Correct a Video Recorded in the Wrong Orientation",
+    metaTitle: "Fix Sideways Video — Free Online Tool",
+    metaDescription:
+      "Free tool to fix a sideways video recorded on a phone, correcting orientation permanently.",
+    introParagraph:
+      "For 90°/270° rotations, width and height swap correctly — a landscape video becomes portrait, and vice versa.",
+  },
+  {
+    slug: "rotate-video-online",
+    toolSlug: "video-rotator",
+    h1: "Rotate Video Online",
+    subtitle: "Fix Video Orientation, Right in Your Browser",
+    metaTitle: "Rotate Video Online — Free Online Tool",
+    metaDescription:
+      "Free online video rotator. Rotate 90°, 180°, or 270°, processed locally with no upload.",
+    introParagraph:
+      "Audio passes through unmodified, since rotation is purely a visual transformation.",
+  },
+  {
+    slug: "video-orientation-fixer",
+    toolSlug: "video-rotator",
+    h1: "Video Orientation Fixer",
+    subtitle: "Permanently Fix a Video's Rotation",
+    metaTitle: "Video Orientation Fixer — Free Online Tool",
+    metaDescription:
+      "Free video orientation fixer, correcting sideways or upside-down footage permanently in every frame.",
+    introParagraph:
+      "A real FFmpeg build compiled to WebAssembly performs the rotation entirely inside your browser.",
+  },
+  {
+    slug: "crop-video-frame",
+    toolSlug: "video-cropper",
+    h1: "Crop a Video Frame",
+    subtitle: "Trim Equal Margins From All Sides",
+    metaTitle: "Crop Video Frame — Free, Private Tool",
+    metaDescription:
+      "Free tool to crop a video's frame, trimming an equal percentage from all four sides, centered.",
+    introParagraph:
+      "Percentage-based cropping scales correctly whether your source is a small recording or a large 4K file.",
+  },
+  {
+    slug: "trim-video-borders",
+    toolSlug: "video-cropper",
+    h1: "Trim Video Borders",
+    subtitle: "Remove Unwanted Edges From a Video",
+    metaTitle: "Trim Video Borders — Free Online Tool",
+    metaDescription:
+      "Free tool to trim unwanted borders or black bars from a video, entirely in your browser.",
+    introParagraph:
+      "Audio passes through unchanged — only the video frames are re-encoded during the crop.",
+  },
+  {
+    slug: "video-crop-tool",
+    toolSlug: "video-cropper",
+    h1: "Video Crop Tool",
+    subtitle: "Crop a Video's Frame Without an Editor",
+    metaTitle: "Video Crop Tool — Free Online Tool",
+    metaDescription:
+      "Free video crop tool, trimming a centered percentage margin from every side of the frame.",
+    introParagraph:
+      "For asymmetric cropping targeting a specific region, a more advanced video editor would be needed instead.",
+  },
+  {
+    slug: "remove-video-borders",
+    toolSlug: "video-cropper",
+    h1: "Remove Video Borders",
+    subtitle: "Trim Black Bars or Unwanted Edges",
+    metaTitle: "Remove Video Borders — Free Online Tool",
+    metaDescription:
+      "Free tool to remove black bars or unwanted borders from a video's frame, processed locally.",
+    introParagraph:
+      "Set the crop margin as a percentage, and every side trims by that same amount, centered.",
+  },
+  {
+    slug: "resize-video-online",
+    toolSlug: "video-resizer",
+    h1: "Resize Video Online",
+    subtitle: "Change a Video's Dimensions, Aspect Preserved",
+    metaTitle: "Resize Video Online — Free, Private Tool",
+    metaDescription:
+      "Free online video resizer. Set a target width and height scales automatically, entirely in your browser.",
+    introParagraph:
+      "Only width is set directly — height is calculated to preserve the exact original aspect ratio.",
+  },
+  {
+    slug: "change-video-dimensions",
+    toolSlug: "video-resizer",
+    h1: "Change Video Dimensions",
+    subtitle: "Resize a Video's Resolution Without Distortion",
+    metaTitle: "Change Video Dimensions — Free Online Tool",
+    metaDescription:
+      "Free tool to change a video's dimensions while keeping the original aspect ratio intact.",
+    introParagraph:
+      "Fewer total pixels means less data to encode — often a bigger size reduction than compression alone achieves.",
+  },
+  {
+    slug: "video-dimension-resizer",
+    toolSlug: "video-resizer",
+    h1: "Video Dimension Resizer",
+    subtitle: "Resize a Video to a Specific Width",
+    metaTitle: "Video Dimension Resizer — Free Online Tool",
+    metaDescription:
+      "Free video dimension resizer, scaling height automatically to preserve the original proportions.",
+    introParagraph:
+      "A real FFmpeg build compiled to WebAssembly performs the resize entirely inside your browser.",
+  },
+  {
+    slug: "shrink-video-resolution",
+    toolSlug: "video-resizer",
+    h1: "Shrink Video Resolution",
+    subtitle: "Reduce a Video's Pixel Dimensions",
+    metaTitle: "Shrink Video Resolution — Free Online Tool",
+    metaDescription:
+      "Free tool to shrink a video's resolution to a target width, no stretching or distortion.",
+    introParagraph:
+      "Useful for meeting a platform's upload dimensions or matching a specific display size.",
+  },
+  {
+    slug: "burn-in-captions",
+    toolSlug: "add-subtitles-to-video",
+    h1: "Burn In Captions",
+    subtitle: "Make Subtitles a Permanent Part of a Video's Frames",
+    metaTitle: "Burn In Captions — Free, Private Tool",
+    metaDescription:
+      "Free tool to burn captions permanently into a video from an .srt file, entirely in your browser.",
+    introParagraph:
+      "Guaranteed to display correctly everywhere, including platforms that strip or mishandle soft subtitle tracks.",
+  },
+  {
+    slug: "caption-video-online",
+    toolSlug: "add-subtitles-to-video",
+    h1: "Caption a Video Online",
+    subtitle: "Add Permanent Captions From an SRT File",
+    metaTitle: "Caption Video Online — Free Online Tool",
+    metaDescription:
+      "Free tool to caption a video online, burning in subtitles from a standard .srt file.",
+    introParagraph:
+      "Each cue's start time, end time, and text are parsed and overlaid only during its exact time window.",
+  },
+  {
+    slug: "video-caption-burner",
+    toolSlug: "add-subtitles-to-video",
+    h1: "Video Caption Burner",
+    subtitle: "Permanently Overlay Subtitles Onto a Video",
+    metaTitle: "Video Caption Burner — Free Online Tool",
+    metaDescription:
+      "Free video caption burner, using a self-hosted font to render subtitle text directly onto every frame.",
+    introParagraph:
+      "The trade-off is permanence — burned-in captions can't be turned off, but they display correctly everywhere.",
+  },
+  {
+    slug: "srt-to-video",
+    toolSlug: "add-subtitles-to-video",
+    h1: "Burn SRT Into a Video",
+    subtitle: "Add a Standard Subtitle File as Permanent Captions",
+    metaTitle: "Burn SRT Into Video — Free Online Tool",
+    metaDescription:
+      "Free tool to burn a standard .srt subtitle file permanently into a video's frames.",
+    introParagraph:
+      "Upload your video and matching .srt file, and every timed cue overlays exactly when it should.",
+  },
+  {
+    slug: "add-watermark-to-video",
+    toolSlug: "video-watermark",
+    h1: "Add a Watermark to a Video",
+    subtitle: "Burn a Permanent Text or Logo Onto Every Frame",
+    metaTitle: "Add Watermark to Video — Free, Private Tool",
+    metaDescription:
+      "Free tool to add a text or logo watermark to a video, burned permanently into every frame, in your browser.",
+    introParagraph:
+      "Choose text or an image logo, pick a corner, and the watermark bakes directly into the pixel data during re-encoding.",
+  },
+  {
+    slug: "video-logo-overlay",
+    toolSlug: "video-watermark",
+    h1: "Video Logo Overlay",
+    subtitle: "Overlay Your Logo Onto a Video Permanently",
+    metaTitle: "Video Logo Overlay — Free Online Tool",
+    metaDescription:
+      "Free tool to overlay a logo image onto a video, positioned at any corner, entirely client-side.",
+    introParagraph:
+      "A PNG with transparency works best, so the logo doesn't carry an unwanted background box.",
+  },
+  {
+    slug: "video-branding-tool",
+    toolSlug: "video-watermark",
+    h1: "Video Branding Tool",
+    subtitle: "Add Your Brand's Text or Logo to Any Video",
+    metaTitle: "Video Branding Tool — Free Online Tool",
+    metaDescription:
+      "Free video branding tool to add a permanent text or logo watermark before sharing footage publicly.",
+    introParagraph:
+      "The watermark can't be cropped or edited away afterward without visibly damaging the underlying footage.",
+  },
+  {
+    slug: "watermark-video-online",
+    toolSlug: "video-watermark",
+    h1: "Watermark a Video Online",
+    subtitle: "Protect Your Footage With a Permanent Mark",
+    metaTitle: "Watermark Video Online — Free Online Tool",
+    metaDescription:
+      "Free online tool to watermark a video with text or an image logo, no upload required.",
+    introParagraph:
+      "A real FFmpeg build compiled to WebAssembly renders the watermark entirely inside your browser.",
+  },
+  {
+    slug: "play-video-backward",
+    toolSlug: "reverse-video",
+    h1: "Play a Video Backward",
+    subtitle: "Reverse Both Video and Audio Together",
+    metaTitle: "Play Video Backward — Free, Private Tool",
+    metaDescription:
+      "Free tool to play a video backward, reversing video and audio together and keeping them in sync.",
+    introParagraph:
+      "Works best on shorter clips, since reversing requires holding the entire clip in memory at once.",
+  },
+  {
+    slug: "backward-video-maker",
+    toolSlug: "reverse-video",
+    h1: "Backward Video Maker",
+    subtitle: "Create a Reverse-Motion Effect Video",
+    metaTitle: "Backward Video Maker — Free Online Tool",
+    metaDescription:
+      "Free tool to make a backward, reverse-motion video effect, audio reversed to match.",
+    introParagraph:
+      "A real FFmpeg build compiled to WebAssembly handles the reversal entirely inside your browser.",
+  },
+  {
+    slug: "video-reverser-tool",
+    toolSlug: "reverse-video",
+    h1: "Video Reverser",
+    subtitle: "Flip a Clip to Play End to Start",
+    metaTitle: "Video Reverser — Free Online Tool",
+    metaDescription:
+      "Free video reverser tool, flipping video and audio together to play from end to start.",
+    introParagraph:
+      "There's no way to reverse via a fast stream copy, since the underlying frame order genuinely changes.",
+  },
+  {
+    slug: "browser-screen-recorder",
+    toolSlug: "screen-recorder",
+    h1: "Browser Screen Recorder",
+    subtitle: "Record Your Screen With No Software Install",
+    metaTitle: "Browser Screen Recorder — Free, Private Tool",
+    metaDescription:
+      "Free browser-based screen recorder using native browser APIs. No install, no upload.",
+    introParagraph:
+      "Click start, choose a screen, window, or tab, and record — your browser encodes the video as it happens.",
+  },
+  {
+    slug: "record-my-screen",
+    toolSlug: "screen-recorder",
+    h1: "Record My Screen",
+    subtitle: "Capture a Screen Recording Instantly",
+    metaTitle: "Record My Screen — Free Online Tool",
+    metaDescription:
+      "Free tool to record your screen directly in the browser, no app or extension needed.",
+    introParagraph:
+      "Nothing is uploaded — the recording is captured, encoded, and downloadable entirely on your device.",
+  },
+  {
+    slug: "free-screen-recorder",
+    toolSlug: "screen-recorder",
+    h1: "Free Screen Recorder",
+    subtitle: "Record Your Screen at No Cost",
+    metaTitle: "Free Screen Recorder — Browser-Based Tool",
+    metaDescription:
+      "A completely free, browser-based screen recorder. No watermark, no account, no software install.",
+    introParagraph:
+      "Uses your browser's native screen-capture API — the same one behind video conferencing screen-sharing.",
+  },
+  {
+    slug: "capture-screen-video",
+    toolSlug: "screen-recorder",
+    h1: "Capture a Screen Video",
+    subtitle: "Record a Tutorial, Demo, or Bug Report",
+    metaTitle: "Capture Screen Video — Free Online Tool",
+    metaDescription:
+      "Free tool to capture a screen recording video for tutorials, demos, or bug reports.",
+    introParagraph:
+      "The captured WebM file is ready to preview and download immediately after you stop recording.",
+  },
+  {
+    slug: "grab-video-thumbnail",
+    toolSlug: "video-thumbnail-generator",
+    h1: "Grab a Video Thumbnail",
+    subtitle: "Save a Single Frame as an Image",
+    metaTitle: "Grab Video Thumbnail — Free, Private Tool",
+    metaDescription:
+      "Free tool to grab a single frame from a video at an exact timestamp, saved as a PNG.",
+    introParagraph:
+      "Duration is detected automatically and a sensible default timestamp suggested — fully editable.",
+  },
+  {
+    slug: "video-still-image",
+    toolSlug: "video-thumbnail-generator",
+    h1: "Get a Still Image From a Video",
+    subtitle: "Extract One Frame as a PNG",
+    metaTitle: "Video Still Image — Free Online Tool",
+    metaDescription:
+      "Free tool to get a still image from a video at any timestamp you choose, saved as a lossless PNG.",
+    introParagraph:
+      "A single-purpose tool for the common need of grabbing one exact frame as an image.",
+  },
+  {
+    slug: "extract-video-thumbnail",
+    toolSlug: "video-thumbnail-generator",
+    h1: "Extract a Video Thumbnail",
+    subtitle: "Generate a Preview Image From Any Video",
+    metaTitle: "Extract Video Thumbnail — Free Online Tool",
+    metaDescription:
+      "Free tool to extract a thumbnail image from a video, entirely processed in your browser.",
+    introParagraph:
+      "The timestamp is fully editable, so you can pick any exact moment rather than just the midpoint default.",
+  },
+  {
+    slug: "extract-video-frames",
+    toolSlug: "video-frame-extractor",
+    h1: "Extract Video Frames",
+    subtitle: "Pull Multiple Frames at a Regular Interval",
+    metaTitle: "Extract Video Frames — Free, Private Tool",
+    metaDescription:
+      "Free tool to extract frames from a video at a regular interval, bundled into one ZIP file.",
+    introParagraph:
+      "Set how often to capture a frame, from every half-second up to every 10 seconds.",
+  },
+  {
+    slug: "video-frame-grabber",
+    toolSlug: "video-frame-extractor",
+    h1: "Video Frame Grabber",
+    subtitle: "Capture Many Frames From a Video Automatically",
+    metaTitle: "Video Frame Grabber — Free Online Tool",
+    metaDescription:
+      "Free video frame grabber, extracting a PNG per interval across the video's full length.",
+    introParagraph:
+      "Multiple extracted frames download together as a single ZIP file rather than triggering separate downloads.",
+  },
+  {
+    slug: "save-video-frames-as-images",
+    toolSlug: "video-frame-extractor",
+    h1: "Save Video Frames as Images",
+    subtitle: "Turn a Video Into a Sequence of Still Images",
+    metaTitle: "Save Video Frames as Images — Free Tool",
+    metaDescription:
+      "Free tool to save a video's frames as individual images at a chosen interval.",
+    introParagraph:
+      "Useful for building a contact-sheet-style overview or feeding frames into an image analysis workflow.",
+  },
+  {
+    slug: "repeat-video-clip",
+    toolSlug: "loop-video-maker",
+    h1: "Repeat a Video Clip",
+    subtitle: "Loop a Clip Back-to-Back, Fast and Lossless",
+    metaTitle: "Repeat Video Clip — Free, Private Tool",
+    metaDescription:
+      "Free tool to repeat a video clip back-to-back, from 2x up to 20x, with zero quality loss.",
+    introParagraph:
+      "Uses stream copy rather than re-encoding, so looping is fast and doesn't degrade quality at all.",
+  },
+  {
+    slug: "video-repeater",
+    toolSlug: "loop-video-maker",
+    h1: "Video Repeater",
+    subtitle: "Extend a Short Clip by Looping It",
+    metaTitle: "Video Repeater — Free Online Tool",
+    metaDescription:
+      "Free video repeater tool, extending a short clip to fill a longer duration by looping it.",
+    introParagraph:
+      "One continuous file containing the clip played back-to-back as many times as you choose.",
+  },
+  {
+    slug: "loop-clip-maker",
+    toolSlug: "loop-video-maker",
+    h1: "Loop Clip Maker",
+    subtitle: "Repeat a Short Video for Background or Display Use",
+    metaTitle: "Loop Clip Maker — Free Online Tool",
+    metaDescription:
+      "Free tool to make a looping video clip, ideal for background video or repeating animations.",
+    introParagraph:
+      "A straightforward repetition tool — the loop points remain visible if the source doesn't naturally match up.",
+  },
+  {
+    slug: "compress-video-to-size",
+    toolSlug: "video-compressor-to-target-size",
+    h1: "Compress Video to a Target Size",
+    subtitle: "Hit an Exact File Size Limit",
+    metaTitle: "Compress Video to Target Size — Free Tool",
+    metaDescription:
+      "Free tool to compress a video to a specific target file size in MB, calculating the exact bitrate needed.",
+    introParagraph:
+      "Works backward from your target size, subtracting a fixed audio bitrate before calculating video bitrate.",
+  },
+  {
+    slug: "video-size-target-compressor",
+    toolSlug: "video-compressor-to-target-size",
+    h1: "Video Size Target Compressor",
+    subtitle: "Compress a Video to Meet an Upload Limit",
+    metaTitle: "Video Size Target Compressor — Free Tool",
+    metaDescription:
+      "Free tool to compress a video to meet a specific upload or attachment size limit.",
+    introParagraph:
+      "The exact resulting size is shown after compression, so you know precisely where it landed.",
+  },
+  {
+    slug: "hit-target-video-size",
+    toolSlug: "video-compressor-to-target-size",
+    h1: "Hit a Target Video File Size",
+    subtitle: "Compress a Video to a Precise Size Goal",
+    metaTitle: "Hit Target Video Size — Free Online Tool",
+    metaDescription:
+      "Free tool to compress a video to hit a precise file size goal, entirely in your browser.",
+    introParagraph:
+      "Duration is read automatically from your file, feeding directly into the bitrate calculation.",
+  },
+  {
+    slug: "avi-video-to-mp4",
+    toolSlug: "avi-to-mp4",
+    h1: "AVI Video to MP4",
+    subtitle: "Convert an Old AVI File to Modern MP4",
+    metaTitle: "AVI Video to MP4 — Free, Private Tool",
+    metaDescription:
+      "Free tool to convert AVI video to MP4, re-encoding with H.264/AAC for universal compatibility.",
+    introParagraph:
+      "AVI can hold a wide range of old, poorly supported codecs — this fixes compatibility at the source.",
+  },
+  {
+    slug: "convert-avi-video",
+    toolSlug: "avi-to-mp4",
+    h1: "Convert AVI Video",
+    subtitle: "Modernize an Old AVI File as MP4",
+    metaTitle: "Convert AVI Video — Free Online Tool",
+    metaDescription:
+      "Free tool to convert an old AVI video file into modern, widely compatible MP4.",
+    introParagraph:
+      "Works regardless of what codec the source AVI actually uses internally, since it's decoded first.",
+  },
+  {
+    slug: "old-avi-converter",
+    toolSlug: "avi-to-mp4",
+    h1: "Old AVI Converter",
+    subtitle: "Make a Legacy AVI File Playable Again",
+    metaTitle: "Old AVI Converter — Free Online Tool",
+    metaDescription:
+      "Free tool to convert an old, legacy AVI file into standard MP4, playable on any modern device.",
+    introParagraph:
+      "A genuine re-encode, not a fast repackage, since AVI files vary widely in their internal codec.",
+  },
+  {
+    slug: "iphone-mov-to-mp4",
+    toolSlug: "mov-to-mp4",
+    h1: "iPhone MOV to MP4",
+    subtitle: "Convert an iPhone Video to Universally Compatible MP4",
+    metaTitle: "iPhone MOV to MP4 — Free, Private Tool",
+    metaDescription:
+      "Free tool to convert an iPhone .mov video to MP4, resolving both container and HEVC compatibility issues.",
+    introParagraph:
+      "iPhone videos often use HEVC inside a .mov container — this re-encodes to H.264/AAC MP4 for universal playback.",
+  },
+  {
+    slug: "quicktime-to-mp4",
+    toolSlug: "mov-to-mp4",
+    h1: "QuickTime to MP4",
+    subtitle: "Convert a .mov File to Standard MP4",
+    metaTitle: "QuickTime to MP4 — Free Online Tool",
+    metaDescription:
+      "Free tool to convert a QuickTime .mov file to MP4, entirely in your browser, no upload.",
+    introParagraph:
+      "Resolves both the .mov container mismatch and any HEVC codec compatibility gap in one step.",
+  },
+  {
+    slug: "convert-mov-video",
+    toolSlug: "mov-to-mp4",
+    h1: "Convert MOV Video",
+    subtitle: "Turn a MOV File Into Widely Playable MP4",
+    metaTitle: "Convert MOV Video — Free Online Tool",
+    metaDescription:
+      "Free tool to convert MOV video to MP4, processed entirely in your browser via WebAssembly.",
+    introParagraph:
+      "A real FFmpeg build compiled to WebAssembly handles the decode and re-encode locally on your device.",
+  },
+  {
+    slug: "mkv-video-to-mp4",
+    toolSlug: "mkv-to-mp4",
+    h1: "MKV Video to MP4",
+    subtitle: "Convert Matroska Video to Compatible MP4",
+    metaTitle: "MKV Video to MP4 — Free, Private Tool",
+    metaDescription:
+      "Free tool to convert MKV video to MP4, trading MKV's extra flexibility for near-universal playability.",
+    introParagraph:
+      "MKV supports far more codecs than most devices actually play — this re-encodes to standard H.264/AAC.",
+  },
+  {
+    slug: "convert-mkv-video",
+    toolSlug: "mkv-to-mp4",
+    h1: "Convert MKV Video",
+    subtitle: "Make an MKV File Playable on Any Device",
+    metaTitle: "Convert MKV Video — Free Online Tool",
+    metaDescription:
+      "Free tool to convert an MKV video file to MP4, playable on phones, smart TVs, and web platforms.",
+    introParagraph:
+      "Primary video and audio tracks carry over; secondary audio tracks or subtitles from the MKV don't.",
+  },
+  {
+    slug: "matroska-to-mp4",
+    toolSlug: "mkv-to-mp4",
+    h1: "Matroska to MP4",
+    subtitle: "Convert an MKV Container to Standard MP4",
+    metaTitle: "Matroska to MP4 — Free Online Tool",
+    metaDescription:
+      "Free tool to convert a Matroska (.mkv) video file to the more universally compatible MP4 format.",
+    introParagraph:
+      "A real FFmpeg build compiled to WebAssembly decodes and re-encodes entirely inside your browser.",
+  },
+  {
+    slug: "flv-video-to-mp4",
+    toolSlug: "flv-to-mp4",
+    h1: "FLV Video to MP4",
+    subtitle: "Convert Old Flash Video to Modern MP4",
+    metaTitle: "FLV Video to MP4 — Free, Private Tool",
+    metaDescription:
+      "Free tool to convert an old FLV (Flash Video) file to MP4, playable in current software.",
+    introParagraph:
+      "Since Flash's discontinuation, this is often the only practical way to make old FLV content playable again.",
+  },
+  {
+    slug: "convert-flv-video",
+    toolSlug: "flv-to-mp4",
+    h1: "Convert FLV Video",
+    subtitle: "Recover an Old Flash Video File as MP4",
+    metaTitle: "Convert FLV Video — Free Online Tool",
+    metaDescription:
+      "Free tool to convert an old FLV video file into a modern, playable MP4.",
+    introParagraph:
+      "Decodes the FLV's typically older codecs and re-encodes to standard H.264/AAC MP4.",
+  },
+  {
+    slug: "flash-video-converter",
+    toolSlug: "flv-to-mp4",
+    h1: "Flash Video Converter",
+    subtitle: "Convert FLV Files From the Flash Era to MP4",
+    metaTitle: "Flash Video Converter — Free Online Tool",
+    metaDescription:
+      "Free Flash video (FLV) converter, turning old archived files into modern MP4.",
+    introParagraph:
+      "Recovers video that would otherwise be stuck in a format essentially no current software supports.",
+  },
+  {
+    slug: "splice-video-clips",
+    toolSlug: "video-joiner-by-timeline",
+    h1: "Splice Video Clips",
+    subtitle: "Join Specific Sections From Multiple Clips",
+    metaTitle: "Splice Video Clips — Free, Private Tool",
+    metaDescription:
+      "Free tool to splice specific trimmed sections from multiple video clips into one file.",
+    introParagraph:
+      "Set an in/out point per clip, then all trimmed sections combine into one video, in order.",
+  },
+  {
+    slug: "edit-video-timeline",
+    toolSlug: "video-joiner-by-timeline",
+    h1: "Edit a Video Timeline",
+    subtitle: "Trim and Join Multiple Clips Into One Sequence",
+    metaTitle: "Edit Video Timeline — Free Online Tool",
+    metaDescription:
+      "Free tool to trim and join multiple video clips into a single sequence, entirely in your browser.",
+    introParagraph:
+      "Every clip re-encodes to a common format, so mismatched source resolutions or codecs still splice together.",
+  },
+  {
+    slug: "join-clips-with-trim",
+    toolSlug: "video-joiner-by-timeline",
+    h1: "Join Clips With Trim Points",
+    subtitle: "Build a Highlight Reel From Multiple Source Videos",
+    metaTitle: "Join Clips With Trim Points — Free Tool",
+    metaDescription:
+      "Free tool to join video clips after trimming each to a specific in/out range.",
+    introParagraph:
+      "Each clip's duration reads automatically, with editable start/end fields for the section to keep.",
+  },
+  {
+    slug: "aspect-ratio-video-converter",
+    toolSlug: "video-aspect-ratio-converter",
+    h1: "Aspect Ratio Video Converter",
+    subtitle: "Fit a Video Into a New Shape Without Cropping",
+    metaTitle: "Aspect Ratio Video Converter — Free Tool",
+    metaDescription:
+      "Free tool to convert a video's aspect ratio to 16:9, 9:16, 1:1, or 4:3, without cropping content.",
+    introParagraph:
+      "Pads with black bars to preserve the entire original frame, rather than cutting content away.",
+  },
+  {
+    slug: "fit-video-to-ratio",
+    toolSlug: "video-aspect-ratio-converter",
+    h1: "Fit a Video to a New Ratio",
+    subtitle: "Prepare a Video for a Different Platform's Shape",
+    metaTitle: "Fit Video to Ratio — Free Online Tool",
+    metaDescription:
+      "Free tool to fit a video into a new aspect ratio for a different platform, preserving all content.",
+    introParagraph:
+      "16:9 widescreen, 9:16 vertical for reels, 1:1 square, or 4:3 classic — each computed from your video's own dimensions.",
+  },
+  {
+    slug: "video-letterbox-tool",
+    toolSlug: "video-aspect-ratio-converter",
+    h1: "Video Letterbox Tool",
+    subtitle: "Add Letterbox or Pillarbox Bars to Fit a New Ratio",
+    metaTitle: "Video Letterbox Tool — Free Online Tool",
+    metaDescription:
+      "Free video letterbox tool, adding black bars to fit content into a new aspect ratio.",
+    introParagraph:
+      "None of your original visual content is ever lost or cut off — everything fits inside the new frame.",
+  },
+  {
+    slug: "vertical-video-converter",
+    toolSlug: "video-aspect-ratio-converter",
+    h1: "Vertical Video Converter",
+    subtitle: "Fit Widescreen Footage Into a 9:16 Vertical Frame",
+    metaTitle: "Vertical Video Converter — Free Online Tool",
+    metaDescription:
+      "Free tool to convert widescreen video into 9:16 vertical format for reels and stories.",
+    introParagraph:
+      "Your content centers with black bars on the sides rather than losing the top or bottom of the shot.",
+  },
+  {
+    slug: "mp3-audio-converter",
+    toolSlug: "mp3-converter",
+    h1: "MP3 Audio Converter",
+    subtitle: "Convert Any Audio File to MP3",
+    metaTitle: "MP3 Audio Converter — Free, Private Tool",
+    metaDescription:
+      "Free MP3 audio converter, decoding and re-encoding any supported audio format, entirely in your browser.",
+    introParagraph:
+      "MP3 remains the most universally compatible audio format — every device and platform accepts it.",
+  },
+  {
+    slug: "convert-audio-to-mp3",
+    toolSlug: "mp3-converter",
+    h1: "Convert Audio to MP3",
+    subtitle: "Turn Any Audio File Into a Universal MP3",
+    metaTitle: "Convert Audio to MP3 — Free Online Tool",
+    metaDescription:
+      "Free tool to convert audio to MP3, entirely in your browser with no server upload.",
+    introParagraph:
+      "Uses VBR quality level 2, adapting bitrate to the audio's actual complexity moment to moment.",
+  },
+  {
+    slug: "free-mp3-converter",
+    toolSlug: "mp3-converter",
+    h1: "Free MP3 Converter",
+    subtitle: "Convert Any Audio to MP3 at No Cost",
+    metaTitle: "Free MP3 Converter — Browser-Based Tool",
+    metaDescription:
+      "A completely free, browser-based MP3 converter. No account, no upload, no watermark.",
+    introParagraph:
+      "Your audio file never leaves your device during conversion — everything runs locally.",
+  },
+  {
+    slug: "any-audio-to-mp3",
+    toolSlug: "mp3-converter",
+    h1: "Any Audio to MP3",
+    subtitle: "Convert Nearly Any Audio Format to MP3",
+    metaTitle: "Any Audio to MP3 — Free Online Tool",
+    metaDescription:
+      "Free tool to convert nearly any audio format to MP3, using a real FFmpeg build in your browser.",
+    introParagraph:
+      "Whatever FFmpeg's underlying decoder can read, this can convert — even less common formats.",
+  },
+  {
+    slug: "wav-audio-converter",
+    toolSlug: "wav-converter",
+    h1: "WAV Audio Converter",
+    subtitle: "Convert Any Audio File to Lossless WAV",
+    metaTitle: "WAV Audio Converter — Free, Private Tool",
+    metaDescription:
+      "Free WAV audio converter, decoding any supported format into uncompressed 16-bit PCM WAV.",
+    introParagraph:
+      "The right choice whenever a downstream tool specifically expects lossless, uncompressed input.",
+  },
+  {
+    slug: "convert-audio-to-wav",
+    toolSlug: "wav-converter",
+    h1: "Convert Audio to WAV",
+    subtitle: "Get Uncompressed, Lossless Audio",
+    metaTitle: "Convert Audio to WAV — Free Online Tool",
+    metaDescription:
+      "Free tool to convert audio to WAV, entirely in your browser, no server upload required.",
+    introParagraph:
+      "Expect a larger file size — WAV's uncompressed nature trades size for guaranteed lossless output.",
+  },
+  {
+    slug: "free-wav-converter",
+    toolSlug: "wav-converter",
+    h1: "Free WAV Converter",
+    subtitle: "Convert Audio to Lossless WAV at No Cost",
+    metaTitle: "Free WAV Converter — Browser-Based Tool",
+    metaDescription:
+      "A completely free, browser-based WAV converter. No account, no upload, no cost.",
+    introParagraph:
+      "Standard 16-bit PCM output, the most broadly compatible WAV variant.",
+  },
+  {
+    slug: "lossless-audio-converter",
+    toolSlug: "wav-converter",
+    h1: "Lossless Audio Converter",
+    subtitle: "Convert Any Audio to Uncompressed WAV",
+    metaTitle: "Lossless Audio Converter — Free Online Tool",
+    metaDescription:
+      "Free lossless audio converter, decoding any format to uncompressed WAV for further editing.",
+    introParagraph:
+      "Doesn't restore quality lost during a prior lossy encode — it simply avoids introducing further loss.",
+  },
+  {
+    slug: "compress-audio-file",
+    toolSlug: "audio-compressor",
+    h1: "Compress an Audio File",
+    subtitle: "Shrink Audio Size With a Bitrate Slider",
+    metaTitle: "Compress Audio File — Free, Private Tool",
+    metaDescription:
+      "Free tool to compress an audio file's size using a bitrate slider, entirely in your browser.",
+    introParagraph:
+      "Lower bitrates shrink the file more aggressively; higher bitrates preserve more fidelity.",
+  },
+  {
+    slug: "shrink-audio-size",
+    toolSlug: "audio-compressor",
+    h1: "Shrink Audio File Size",
+    subtitle: "Reduce a Large Audio File for Email or Storage",
+    metaTitle: "Shrink Audio Size — Free Online Tool",
+    metaDescription:
+      "Free tool to shrink an audio file's size for email attachment limits or storage constraints.",
+    introParagraph:
+      "128kbps is a common good-enough balance for spoken word; 192-256kbps for music.",
+  },
+  {
+    slug: "reduce-audio-file-size",
+    toolSlug: "audio-compressor",
+    h1: "Reduce Audio File Size",
+    subtitle: "Compress a Large Recording or Music File",
+    metaTitle: "Reduce Audio File Size — Free Online Tool",
+    metaDescription:
+      "Free tool to reduce an audio file's size, with direct control over the bitrate/fidelity trade-off.",
+    introParagraph:
+      "See the exact before/after size once compression completes, to judge whether it meets your target.",
+  },
+  {
+    slug: "online-audio-compressor",
+    toolSlug: "audio-compressor",
+    h1: "Online Audio Compressor",
+    subtitle: "Compress Any Audio File in Your Browser",
+    metaTitle: "Online Audio Compressor — Free Online Tool",
+    metaDescription:
+      "Free online audio compressor running entirely in your browser via WebAssembly, no upload.",
+    introParagraph:
+      "A real FFmpeg build compiled to WebAssembly re-encodes your audio at the chosen bitrate.",
+  },
+  {
+    slug: "cut-audio-clip",
+    toolSlug: "audio-cutter",
+    h1: "Cut an Audio Clip",
+    subtitle: "Extract an Exact Section From an Audio File",
+    metaTitle: "Cut Audio Clip — Free, Private Tool",
+    metaDescription:
+      "Free tool to cut a specific section out of an audio file, with exact start and end time control.",
+    introParagraph:
+      "Duration is detected automatically, so you know the valid range before setting your cut points.",
+  },
+  {
+    slug: "trim-audio-file",
+    toolSlug: "audio-cutter",
+    h1: "Trim an Audio File",
+    subtitle: "Keep Just the Section You Need",
+    metaTitle: "Trim Audio File — Free Online Tool",
+    metaDescription:
+      "Free tool to trim an audio file down to an exact section, re-encoded as MP3.",
+    introParagraph:
+      "The cut points land exactly where you specify, not just the nearest natural boundary.",
+  },
+  {
+    slug: "extract-audio-section",
+    toolSlug: "audio-cutter",
+    h1: "Extract an Audio Section",
+    subtitle: "Pull a Specific Part Out of a Longer Recording",
+    metaTitle: "Extract Audio Section — Free Online Tool",
+    metaDescription:
+      "Free tool to extract a specific section of audio from a longer file, entirely in your browser.",
+    introParagraph:
+      "The rest of the original file is discarded entirely — the result contains only the section you keep.",
+  },
+  {
+    slug: "audio-trimmer-online",
+    toolSlug: "audio-cutter",
+    h1: "Audio Trimmer Online",
+    subtitle: "Cut Audio to an Exact Length, No Editor Needed",
+    metaTitle: "Audio Trimmer Online — Free Online Tool",
+    metaDescription:
+      "Free online audio trimmer for cutting a file down to an exact section, no software installation.",
+    introParagraph:
+      "A real FFmpeg build compiled to WebAssembly performs the cut entirely inside your browser.",
+  },
+  {
+    slug: "combine-audio-files",
+    toolSlug: "audio-joiner",
+    h1: "Combine Audio Files",
+    subtitle: "Join Multiple Tracks End-to-End",
+    metaTitle: "Combine Audio Files — Free, Private Tool",
+    metaDescription:
+      "Free tool to combine multiple audio files into one continuous track, in a chosen order.",
+    introParagraph:
+      "Files of different original formats or sample rates can be joined successfully into one MP3.",
+  },
+  {
+    slug: "join-audio-tracks",
+    toolSlug: "audio-joiner",
+    h1: "Join Audio Tracks",
+    subtitle: "Combine Several Recordings Into One File",
+    metaTitle: "Join Audio Tracks — Free Online Tool",
+    metaDescription:
+      "Free tool to join multiple audio tracks together sequentially, entirely in your browser.",
+    introParagraph:
+      "Up/down controls let you set the exact sequence before combining.",
+  },
+  {
+    slug: "stitch-audio-together",
+    toolSlug: "audio-joiner",
+    h1: "Stitch Audio Together",
+    subtitle: "Combine Separately Recorded Segments",
+    metaTitle: "Stitch Audio Together — Free Online Tool",
+    metaDescription:
+      "Free tool to stitch separately recorded audio segments together into one continuous file.",
+    introParagraph:
+      "For mixing tracks to play simultaneously instead, use the Audio Merger tool.",
+  },
+  {
+    slug: "audio-file-joiner",
+    toolSlug: "audio-joiner",
+    h1: "Audio File Joiner",
+    subtitle: "Combine Multiple Audio Files Sequentially",
+    metaTitle: "Audio File Joiner — Free Online Tool",
+    metaDescription:
+      "Free audio file joiner, combining files end-to-end using FFmpeg's concat filter.",
+    introParagraph:
+      "A real FFmpeg build compiled to WebAssembly runs the whole join entirely inside your browser.",
+  },
+  {
+    slug: "slow-down-audio",
+    toolSlug: "change-audio-speed",
+    h1: "Slow Down Audio",
+    subtitle: "Reduce Playback Speed While Keeping Pitch Natural",
+    metaTitle: "Slow Down Audio — Free, Private Tool",
+    metaDescription:
+      "Free tool to slow down audio playback speed without distorting the pitch, entirely in your browser.",
+    introParagraph:
+      "Uses a dedicated tempo filter rather than sample-rate manipulation, avoiding an unnaturally low pitch.",
+  },
+  {
+    slug: "speed-up-audio",
+    toolSlug: "change-audio-speed",
+    h1: "Speed Up Audio",
+    subtitle: "Listen Faster Without the Chipmunk Effect",
+    metaTitle: "Speed Up Audio — Free Online Tool",
+    metaDescription:
+      "Free tool to speed up audio playback, keeping pitch exactly natural — no chipmunk voice effect.",
+    introParagraph:
+      "From 0.25x up to 4x, with automatic chaining beyond the tempo filter's normal 0.5x-2x range.",
+  },
+  {
+    slug: "audio-tempo-changer",
+    toolSlug: "change-audio-speed",
+    h1: "Audio Tempo Changer",
+    subtitle: "Adjust Playback Speed Without Changing Pitch",
+    metaTitle: "Audio Tempo Changer — Free Online Tool",
+    metaDescription:
+      "Free audio tempo changer, adjusting speed independently of pitch using FFmpeg's atempo filter.",
+    introParagraph:
+      "Useful for binge-listening podcasts faster or slowing music down to learn a part.",
+  },
+  {
+    slug: "boost-audio-volume",
+    toolSlug: "audio-volume-booster",
+    h1: "Boost Audio Volume",
+    subtitle: "Increase a Quiet Recording's Loudness",
+    metaTitle: "Boost Audio Volume — Free, Private Tool",
+    metaDescription:
+      "Free tool to boost a quiet audio recording's volume by a precise decibel amount.",
+    introParagraph:
+      "Watch for clipping if the source is already close to peak level — back off the gain if distortion appears.",
+  },
+  {
+    slug: "increase-audio-volume",
+    toolSlug: "audio-volume-booster",
+    h1: "Increase Audio Volume",
+    subtitle: "Raise or Lower Volume by an Exact Amount",
+    metaTitle: "Increase Audio Volume — Free Online Tool",
+    metaDescription:
+      "Free tool to increase or decrease audio volume by a precise decibel gain, entirely in your browser.",
+    introParagraph:
+      "For audio with inconsistent volume throughout, the Audio Normalizer tool is generally the better fit.",
+  },
+  {
+    slug: "audio-gain-adjuster",
+    toolSlug: "audio-volume-booster",
+    h1: "Audio Gain Adjuster",
+    subtitle: "Apply a Precise Volume Gain in Decibels",
+    metaTitle: "Audio Gain Adjuster — Free Online Tool",
+    metaDescription:
+      "Free audio gain adjuster, applying a precise decibel gain increase or decrease.",
+    introParagraph:
+      "A real FFmpeg build compiled to WebAssembly applies the gain entirely inside your browser.",
+  },
+  {
+    slug: "edit-mp3-tags",
+    toolSlug: "audio-metadata-editor",
+    h1: "Edit MP3 Tags",
+    subtitle: "Update Title, Artist, Album & Year Without Re-encoding",
+    metaTitle: "Edit MP3 Tags — Free, Private Tool",
+    metaDescription:
+      "Free tool to edit MP3 tags — title, artist, album, year — with zero quality loss, entirely in your browser.",
+    introParagraph:
+      "Uses stream copy, so only the metadata block changes; audio data stays byte-for-byte identical.",
+  },
+  {
+    slug: "edit-song-metadata",
+    toolSlug: "audio-metadata-editor",
+    h1: "Edit Song Metadata",
+    subtitle: "Fix Missing or Incorrect Audio Tags",
+    metaTitle: "Edit Song Metadata — Free Online Tool",
+    metaDescription:
+      "Free tool to edit a song's metadata tags, fixing missing or incorrect title, artist, and album info.",
+    introParagraph:
+      "Only the fields you fill in get written — leaving a field blank skips setting it.",
+  },
+  {
+    slug: "id3-tag-editor",
+    toolSlug: "audio-metadata-editor",
+    h1: "ID3 Tag Editor",
+    subtitle: "Edit an Audio File's Metadata Tags",
+    metaTitle: "ID3 Tag Editor — Free Online Tool",
+    metaDescription:
+      "Free ID3 tag editor for MP3 and other audio formats, entirely client-side with no upload.",
+    introParagraph:
+      "FFmpeg handles the appropriate tag format automatically for whatever container you upload.",
+  },
+  {
+    slug: "convert-mp3-to-wav",
+    toolSlug: "mp3-to-wav",
+    h1: "Convert MP3 to WAV",
+    subtitle: "Decode MP3 to Uncompressed WAV",
+    metaTitle: "Convert MP3 to WAV — Free, Private Tool",
+    metaDescription:
+      "Free tool to convert MP3 to uncompressed 16-bit PCM WAV, entirely in your browser.",
+    introParagraph:
+      "Useful for editing software that expects lossless input, at the cost of a much larger file.",
+  },
+  {
+    slug: "mp3-to-wav-online",
+    toolSlug: "mp3-to-wav",
+    h1: "MP3 to WAV Online",
+    subtitle: "Get Lossless Audio From an MP3 File",
+    metaTitle: "MP3 to WAV Online — Free Online Tool",
+    metaDescription:
+      "Free online MP3 to WAV converter, decoding to uncompressed PCM audio.",
+    introParagraph:
+      "Doesn't restore quality already lost in the original MP3 encoding — it avoids further compression from here.",
+  },
+  {
+    slug: "lossless-mp3-converter",
+    toolSlug: "mp3-to-wav",
+    h1: "Convert MP3 to Lossless Format",
+    subtitle: "Turn an MP3 Into Uncompressed WAV",
+    metaTitle: "MP3 to Lossless Converter — Free Tool",
+    metaDescription:
+      "Free tool to convert MP3 into uncompressed WAV, ready for lossless editing workflows.",
+    introParagraph:
+      "A real FFmpeg build compiled to WebAssembly handles the decode-and-re-encode locally, no upload.",
+  },
+  {
+    slug: "convert-wav-to-mp3",
+    toolSlug: "wav-to-mp3",
+    h1: "Convert WAV to MP3",
+    subtitle: "Compress an Uncompressed File Down to MP3",
+    metaTitle: "Convert WAV to MP3 — Free, Private Tool",
+    metaDescription:
+      "Free tool to convert WAV to MP3, shrinking file size dramatically, entirely in your browser.",
+    introParagraph:
+      "Typically five to ten times smaller than the source WAV, at a high VBR quality setting.",
+  },
+  {
+    slug: "wav-to-mp3-online",
+    toolSlug: "wav-to-mp3",
+    h1: "WAV to MP3 Online",
+    subtitle: "Shrink an Uncompressed Audio File",
+    metaTitle: "WAV to MP3 Online — Free Online Tool",
+    metaDescription:
+      "Free online WAV to MP3 converter, encoding at a strong quality setting for general use.",
+    introParagraph:
+      "Since this converts from a lossless source, you get the cleanest possible MP3 encode available.",
+  },
+  {
+    slug: "shrink-wav-file",
+    toolSlug: "wav-to-mp3",
+    h1: "Shrink a WAV File",
+    subtitle: "Compress Uncompressed Audio for Sharing",
+    metaTitle: "Shrink WAV File — Free Online Tool",
+    metaDescription:
+      "Free tool to shrink a large WAV file down to a much smaller MP3 for sharing or storage.",
+    introParagraph:
+      "The natural finishing step after lossless editing — work in WAV, then convert to MP3 for distribution.",
+  },
+  {
+    slug: "convert-audio-to-ogg",
+    toolSlug: "ogg-converter",
+    h1: "Convert Audio to OGG",
+    subtitle: "Encode With the Open Vorbis Codec",
+    metaTitle: "Convert Audio to OGG — Free, Private Tool",
+    metaDescription:
+      "Free tool to convert audio to OGG (Vorbis), an open, patent-free codec, entirely in your browser.",
+    introParagraph:
+      "Generally achieves better quality per file size than MP3 at equivalent bitrates.",
+  },
+  {
+    slug: "vorbis-converter",
+    toolSlug: "ogg-converter",
+    h1: "Vorbis Converter",
+    subtitle: "Convert Audio to the Open OGG Format",
+    metaTitle: "Vorbis Converter — Free Online Tool",
+    metaDescription:
+      "Free Vorbis (OGG) audio converter, using FFmpeg's libvorbis encoder entirely client-side.",
+    introParagraph:
+      "The preferred format for many open-source projects, games, and platforms favoring unencumbered formats.",
+  },
+  {
+    slug: "open-format-audio-converter",
+    toolSlug: "ogg-converter",
+    h1: "Open-Format Audio Converter",
+    subtitle: "Convert Audio to Patent-Free OGG Vorbis",
+    metaTitle: "Open-Format Audio Converter — Free Tool",
+    metaDescription:
+      "Free tool to convert audio to open, patent-free OGG format, no licensing considerations.",
+    introParagraph:
+      "MP3 remains more universally recognized by simple devices — OGG suits platforms that support it well.",
+  },
+  {
+    slug: "convert-audio-to-flac",
+    toolSlug: "flac-converter",
+    h1: "Convert Audio to FLAC",
+    subtitle: "Lossless Compression, Smaller Than WAV",
+    metaTitle: "Convert Audio to FLAC — Free, Private Tool",
+    metaDescription:
+      "Free tool to convert audio to FLAC, lossless like WAV but compressed 40-60% smaller, in your browser.",
+    introParagraph:
+      "The standard choice for archiving audio when you want both compact storage and perfect fidelity.",
+  },
+  {
+    slug: "flac-audio-encoder",
+    toolSlug: "flac-converter",
+    h1: "FLAC Audio Encoder",
+    subtitle: "Encode Audio Losslessly and Compactly",
+    metaTitle: "FLAC Audio Encoder — Free Online Tool",
+    metaDescription:
+      "Free FLAC audio encoder, using FFmpeg's native lossless codec entirely in your browser.",
+    introParagraph:
+      "Decoding a FLAC file back to raw samples reproduces the exact original audio bit-for-bit.",
+  },
+  {
+    slug: "lossless-compressed-audio",
+    toolSlug: "flac-converter",
+    h1: "Lossless Compressed Audio",
+    subtitle: "Get Perfect Fidelity at a Smaller File Size",
+    metaTitle: "Lossless Compressed Audio — Free Online Tool",
+    metaDescription:
+      "Free tool to create lossless, compressed FLAC audio from any supported source format.",
+    introParagraph:
+      "Converting from an already-lossy source won't restore quality already discarded before FLAC receives it.",
+  },
+  {
+    slug: "convert-audio-to-aac",
+    toolSlug: "aac-converter",
+    h1: "Convert Audio to AAC",
+    subtitle: "Apple's Default Format, Better Quality Than MP3",
+    metaTitle: "Convert Audio to AAC — Free, Private Tool",
+    metaDescription:
+      "Free tool to convert audio to AAC (.m4a), entirely in your browser, no upload required.",
+    introParagraph:
+      "AAC generally achieves better audio quality than MP3 at the same bitrate, especially at lower bitrates.",
+  },
+  {
+    slug: "m4a-converter",
+    toolSlug: "aac-converter",
+    h1: "M4A Converter",
+    subtitle: "Convert Audio to Apple's AAC Format",
+    metaTitle: "M4A Converter — Free Online Tool",
+    metaDescription:
+      "Free M4A (AAC) converter, packaging audio in the standard container Apple software expects.",
+    introParagraph:
+      "Encoded at 192kbps, comfortably preserving strong audio quality for spoken word and music.",
+  },
+  {
+    slug: "apple-audio-format-converter",
+    toolSlug: "aac-converter",
+    h1: "Apple Audio Format Converter",
+    subtitle: "Get Audio Ready for iTunes and Apple Music",
+    metaTitle: "Apple Audio Format Converter — Free Tool",
+    metaDescription:
+      "Free tool to convert audio into Apple's default AAC/.m4a format, ready for iTunes or Apple Music.",
+    introParagraph:
+      "A real FFmpeg build compiled to WebAssembly performs the encoding entirely inside your browser.",
+  },
+  {
+    slug: "mix-audio-tracks",
+    toolSlug: "audio-merger",
+    h1: "Mix Audio Tracks",
+    subtitle: "Play Multiple Tracks Together at the Same Time",
+    metaTitle: "Mix Audio Tracks — Free, Private Tool",
+    metaDescription:
+      "Free tool to mix multiple audio tracks together to play simultaneously, entirely in your browser.",
+    introParagraph:
+      "The mixed result runs as long as the longest input track, with shorter tracks ending early within the mix.",
+  },
+  {
+    slug: "layer-audio-together",
+    toolSlug: "audio-merger",
+    h1: "Layer Audio Together",
+    subtitle: "Combine a Voice Track With Background Music",
+    metaTitle: "Layer Audio Together — Free Online Tool",
+    metaDescription:
+      "Free tool to layer audio tracks together, like a voice-over under background music.",
+    introParagraph:
+      "This is a genuine mix, not a sequential join — for joining end-to-end instead, use Audio Joiner.",
+  },
+  {
+    slug: "background-music-mixer",
+    toolSlug: "audio-merger",
+    h1: "Background Music Mixer",
+    subtitle: "Add Music Under a Voice Recording",
+    metaTitle: "Background Music Mixer — Free Online Tool",
+    metaDescription:
+      "Free tool to mix background music under a voice track, playing both simultaneously.",
+    introParagraph:
+      "If the mix sounds distorted, reduce individual track volumes with Audio Volume Booster before merging.",
+  },
+  {
+    slug: "voice-over-music-mixer",
+    toolSlug: "audio-merger",
+    h1: "Voice-Over Music Mixer",
+    subtitle: "Layer a Voice-Over Onto a Music Track",
+    metaTitle: "Voice-Over Music Mixer — Free Online Tool",
+    metaDescription:
+      "Free voice-over and music mixer, combining tracks to play together using FFmpeg's amix filter.",
+    introParagraph:
+      "A real FFmpeg build compiled to WebAssembly runs the mix entirely inside your browser.",
+  },
+  {
+    slug: "shift-audio-pitch",
+    toolSlug: "audio-pitch-changer",
+    h1: "Shift Audio Pitch",
+    subtitle: "Change Pitch in Semitones, Speed Unchanged",
+    metaTitle: "Shift Audio Pitch — Free, Private Tool",
+    metaDescription:
+      "Free tool to shift audio pitch up or down in semitones, without affecting playback speed.",
+    introParagraph:
+      "Uses the resample-then-correct-tempo technique to isolate pitch changes from speed entirely.",
+  },
+  {
+    slug: "change-song-pitch",
+    toolSlug: "audio-pitch-changer",
+    h1: "Change a Song's Pitch",
+    subtitle: "Transpose Music Into a Different Key",
+    metaTitle: "Change Song Pitch — Free Online Tool",
+    metaDescription:
+      "Free tool to change a song's pitch for transposing into a different key, entirely in your browser.",
+    introParagraph:
+      "Range covers a full octave down (-12 semitones) to a full octave up (+12 semitones).",
+  },
+  {
+    slug: "transpose-audio",
+    toolSlug: "audio-pitch-changer",
+    h1: "Transpose Audio",
+    subtitle: "Shift Pitch Up or Down by Semitones",
+    metaTitle: "Transpose Audio — Free Online Tool",
+    metaDescription:
+      "Free audio transposition tool, shifting pitch in semitones while keeping speed exactly the same.",
+    introParagraph:
+      "The opposite trade-off from Change Audio Speed, which deliberately changes speed while keeping pitch natural.",
+  },
+  {
+    slug: "pitch-shift-tool",
+    toolSlug: "audio-pitch-changer",
+    h1: "Pitch Shift Tool",
+    subtitle: "Adjust Audio Pitch Without Changing Tempo",
+    metaTitle: "Pitch Shift Tool — Free Online Tool",
+    metaDescription:
+      "Free pitch shift tool for audio, using the classic resample-and-correct-tempo technique.",
+    introParagraph:
+      "A real FFmpeg build compiled to WebAssembly performs the shift entirely inside your browser.",
+  },
+  {
+    slug: "loudness-normalizer",
+    toolSlug: "audio-normalizer",
+    h1: "Loudness Normalizer",
+    subtitle: "Even Out Volume Using the EBU R128 Standard",
+    metaTitle: "Loudness Normalizer — Free, Private Tool",
+    metaDescription:
+      "Free loudness normalizer using the EBU R128 standard, the same one broadcasters and streamers use.",
+    introParagraph:
+      "Targets -16 LUFS integrated loudness with a -1.5dB true peak ceiling, the common podcast target.",
+  },
+  {
+    slug: "even-out-audio-volume",
+    toolSlug: "audio-normalizer",
+    h1: "Even Out Audio Volume",
+    subtitle: "Fix Inconsistent Volume Automatically",
+    metaTitle: "Even Out Audio Volume — Free Online Tool",
+    metaDescription:
+      "Free tool to even out inconsistent audio volume automatically using loudness normalization.",
+    introParagraph:
+      "Smarter than a flat gain boost, since it accounts for perceived loudness across the whole track.",
+  },
+  {
+    slug: "ebu-r128-normalizer",
+    toolSlug: "audio-normalizer",
+    h1: "EBU R128 Normalizer",
+    subtitle: "Normalize Audio to Broadcast Loudness Standards",
+    metaTitle: "EBU R128 Normalizer — Free Online Tool",
+    metaDescription:
+      "Free EBU R128 loudness normalizer for podcasts and streaming content, entirely client-side.",
+    introParagraph:
+      "The true peak ceiling built into the standard specifically prevents the output from clipping.",
+  },
+  {
+    slug: "add-fade-to-audio",
+    toolSlug: "audio-fade-in-out-editor",
+    h1: "Add Fade to Audio",
+    subtitle: "Smooth Fade-In and Fade-Out Transitions",
+    metaTitle: "Add Fade to Audio — Free, Private Tool",
+    metaDescription:
+      "Free tool to add smooth fade-in and fade-out transitions to an audio clip, in your browser.",
+    introParagraph:
+      "Fade-in and fade-out durations are set independently, so you can tune each end to taste.",
+  },
+  {
+    slug: "smooth-audio-transitions",
+    toolSlug: "audio-fade-in-out-editor",
+    h1: "Smooth Audio Transitions",
+    subtitle: "Avoid Abrupt Cuts at the Start and End",
+    metaTitle: "Smooth Audio Transitions — Free Online Tool",
+    metaDescription:
+      "Free tool to smooth an audio clip's start and end with fade transitions instead of abrupt cuts.",
+    introParagraph:
+      "The fade-out start point is calculated automatically from the file's detected total duration.",
+  },
+  {
+    slug: "fade-in-fade-out-audio",
+    toolSlug: "audio-fade-in-out-editor",
+    h1: "Fade In / Fade Out Audio",
+    subtitle: "Polish a Clip's Start and End",
+    metaTitle: "Fade In Fade Out Audio — Free Online Tool",
+    metaDescription:
+      "Free tool to apply fade-in and fade-out effects to audio, a small touch for a more polished clip.",
+    introParagraph:
+      "A real FFmpeg build compiled to WebAssembly applies both fades entirely inside your browser.",
+  },
+  {
+    slug: "make-a-ringtone",
+    toolSlug: "ringtone-maker",
+    h1: "Make a Ringtone",
+    subtitle: "Trim and Fade a Song Into a Ringtone Clip",
+    metaTitle: "Make a Ringtone — Free, Private Tool",
+    metaDescription:
+      "Free tool to make a ringtone from any song, with smooth fade-in and fade-out, in your browser.",
+    introParagraph:
+      "Exported as .m4a — rename to .m4r and sync through Finder for use as an iPhone ringtone.",
+  },
+  {
+    slug: "create-iphone-ringtone",
+    toolSlug: "ringtone-maker",
+    h1: "Create an iPhone Ringtone",
+    subtitle: "Turn a Song Into a Ringtone-Ready Clip",
+    metaTitle: "Create iPhone Ringtone — Free Online Tool",
+    metaDescription:
+      "Free tool to create an iPhone ringtone from a song, trimmed and faded, exported as .m4a.",
+    introParagraph:
+      "Choose a start point and length between 5-40 seconds, the practical range most ringtones fall into.",
+  },
+  {
+    slug: "song-to-ringtone",
+    toolSlug: "ringtone-maker",
+    h1: "Turn a Song Into a Ringtone",
+    subtitle: "Extract and Polish a Short Ringtone Clip",
+    metaTitle: "Song to Ringtone — Free Online Tool",
+    metaDescription:
+      "Free tool to turn a favorite song into a short, fade-polished ringtone clip.",
+    introParagraph:
+      "Fades apply automatically — a short 0.5s fade-in and a smoother 1.5s fade-out.",
+  },
+  {
+    slug: "record-audio-online",
+    toolSlug: "voice-recorder-online",
+    h1: "Record Audio Online",
+    subtitle: "Capture a Voice Recording With No App",
+    metaTitle: "Record Audio Online — Free, Private Tool",
+    metaDescription:
+      "Free tool to record audio online using your browser's native microphone API, no app needed.",
+    introParagraph:
+      "Your voice is captured, encoded, and downloadable entirely on your device — nothing uploaded.",
+  },
+  {
+    slug: "browser-voice-recorder",
+    toolSlug: "voice-recorder-online",
+    h1: "Browser Voice Recorder",
+    subtitle: "Record From Your Microphone Directly",
+    metaTitle: "Browser Voice Recorder — Free Online Tool",
+    metaDescription:
+      "Free browser-based voice recorder using native microphone APIs, no plugin or extension.",
+    introParagraph:
+      "Click start, allow microphone access, and record — the file downloads immediately after stopping.",
+  },
+  {
+    slug: "free-voice-recorder",
+    toolSlug: "voice-recorder-online",
+    h1: "Free Voice Recorder",
+    subtitle: "Record a Voice Memo at No Cost",
+    metaTitle: "Free Voice Recorder — Browser-Based Tool",
+    metaDescription:
+      "A completely free, browser-based voice recorder. No account, no upload, no software install.",
+    introParagraph:
+      "Uses the same standard permission mechanism behind video calls and voice messaging features.",
+  },
+  {
+    slug: "microphone-recorder",
+    toolSlug: "voice-recorder-online",
+    h1: "Microphone Recorder",
+    subtitle: "Capture Audio Directly From Your Mic",
+    metaTitle: "Microphone Recorder — Free Online Tool",
+    metaDescription:
+      "Free microphone recorder running entirely in your browser, ready to preview and download immediately.",
+    introParagraph:
+      "Convert the result to MP3 afterward with the MP3 Converter tool if needed.",
+  },
+  {
+    slug: "any-to-any-audio-converter",
+    toolSlug: "universal-audio-format-converter",
+    h1: "Any-to-Any Audio Converter",
+    subtitle: "Convert Between Any Audio Format",
+    metaTitle: "Any-to-Any Audio Converter — Free Tool",
+    metaDescription:
+      "Free tool to convert between any audio format — MP3, WAV, OGG, FLAC, AAC — from one interface.",
+    introParagraph:
+      "The source format doesn't need to match any specific list — FFmpeg decodes it before re-encoding.",
+  },
+  {
+    slug: "all-in-one-audio-converter",
+    toolSlug: "universal-audio-format-converter",
+    h1: "All-in-One Audio Converter",
+    subtitle: "Every Common Audio Format, One Tool",
+    metaTitle: "All-in-One Audio Converter — Free Tool",
+    metaDescription:
+      "Free all-in-one audio converter covering MP3, WAV, OGG, FLAC, and AAC output formats.",
+    introParagraph:
+      "Each output format uses settings appropriate to that specific format, not one generic setting.",
+  },
+  {
+    slug: "audio-format-switcher",
+    toolSlug: "universal-audio-format-converter",
+    h1: "Audio Format Switcher",
+    subtitle: "Switch Between Any Two Audio Formats",
+    metaTitle: "Audio Format Switcher — Free Online Tool",
+    metaDescription:
+      "Free tool to switch an audio file's format, choosing from MP3, WAV, OGG, FLAC, or AAC.",
+    introParagraph:
+      "The most general-purpose audio conversion tool here — the dedicated format-pair tools work identically.",
+  },
+  {
+    slug: "trim-podcast-recording",
+    toolSlug: "podcast-trimmer",
+    h1: "Trim a Podcast Recording",
+    subtitle: "Remove Dead Air From the Start and End",
+    metaTitle: "Trim Podcast Recording — Free, Private Tool",
+    metaDescription:
+      "Free tool to trim dead air from a podcast recording's start and end, entirely in your browser.",
+    introParagraph:
+      "Enter seconds to remove from each end — the tool calculates the kept range automatically.",
+  },
+  {
+    slug: "remove-podcast-intro-outro",
+    toolSlug: "podcast-trimmer",
+    h1: "Remove Podcast Intro/Outro Silence",
+    subtitle: "Trim a Countdown or Trailing Dead Air",
+    metaTitle: "Remove Podcast Intro/Outro — Free Tool",
+    metaDescription:
+      "Free tool to remove a countdown or trailing dead air from a podcast recording.",
+    introParagraph:
+      "Built specifically around the common podcast-editing pattern of trimming a fixed amount off each end.",
+  },
+  {
+    slug: "cut-podcast-dead-air",
+    toolSlug: "podcast-trimmer",
+    h1: "Cut Podcast Dead Air",
+    subtitle: "Tighten Up a Recording's Edges",
+    metaTitle: "Cut Podcast Dead Air — Free Online Tool",
+    metaDescription:
+      "Free tool to cut dead air from a podcast recording's edges without specifying exact timestamps.",
+    introParagraph:
+      "For exact timestamp-based trimming instead, use the general Audio Cutter tool.",
+  },
+  {
+    slug: "remove-silence-from-audio",
+    toolSlug: "silence-remover",
+    h1: "Remove Silence From Audio",
+    subtitle: "Cut Silent Gaps Throughout an Entire Recording",
+    metaTitle: "Remove Silence From Audio — Free, Private Tool",
+    metaDescription:
+      "Free tool to remove silent gaps from anywhere in an audio recording, not just the edges.",
+    introParagraph:
+      "A threshold slider controls how quiet a passage needs to be before it's treated as removable silence.",
+  },
+  {
+    slug: "auto-trim-silence",
+    toolSlug: "silence-remover",
+    h1: "Auto-Trim Silence",
+    subtitle: "Automatically Detect and Cut Silent Stretches",
+    metaTitle: "Auto-Trim Silence — Free Online Tool",
+    metaDescription:
+      "Free tool to automatically detect and cut silent stretches throughout an audio file.",
+    introParagraph:
+      "This is volume-based detection — preview the result and adjust the threshold if content gets caught too.",
+  },
+  {
+    slug: "delete-silent-gaps",
+    toolSlug: "silence-remover",
+    h1: "Delete Silent Gaps",
+    subtitle: "Tighten a Recording by Removing Pauses",
+    metaTitle: "Delete Silent Gaps — Free Online Tool",
+    metaDescription:
+      "Free tool to delete silent gaps and pauses scattered throughout a recording, in your browser.",
+    introParagraph:
+      "A real FFmpeg build compiled to WebAssembly analyzes and removes silence entirely on your device.",
+  },
+  {
+    slug: "mp4-to-webm-online",
+    toolSlug: "mp4-to-webm",
+    h1: "MP4 to WebM Online",
+    subtitle: "Convert Video for the Web, No Install Needed",
+    metaTitle: "MP4 to WebM Online — Free Online Tool",
+    metaDescription:
+      "Free online tool to convert MP4 to WebM, right in your browser with no software to install.",
+    introParagraph:
+      "WebM plays natively in every modern browser without a plugin — this handles the conversion locally.",
+  },
+  {
+    slug: "webm-converter-tool",
+    toolSlug: "webm-to-mp4",
+    h1: "WebM Converter Tool",
+    subtitle: "Turn a WebM File Into Standard MP4",
+    metaTitle: "WebM Converter Tool — Free Online Tool",
+    metaDescription:
+      "Free WebM converter tool, re-encoding to H.264/AAC MP4 entirely in your browser.",
+    introParagraph:
+      "Handy when software or a platform specifically expects MP4 rather than WebM input.",
+  },
+  {
+    slug: "video-quality-compressor",
+    toolSlug: "video-compressor",
+    h1: "Video Quality Compressor",
+    subtitle: "Balance File Size and Visual Quality",
+    metaTitle: "Video Quality Compressor — Free Online Tool",
+    metaDescription:
+      "Free video quality compressor with a CRF slider to balance file size against visual fidelity.",
+    introParagraph:
+      "Adapts bitrate per scene based on complexity rather than forcing one flat bitrate throughout.",
+  },
+  {
+    slug: "video-cutter-online",
+    toolSlug: "video-trimmer",
+    h1: "Video Cutter Online",
+    subtitle: "Cut a Video Down to an Exact Section",
+    metaTitle: "Video Cutter Online — Free Online Tool",
+    metaDescription:
+      "Free online video cutter for trimming a clip to a precise start and end time.",
+    introParagraph:
+      "Full re-encode ensures the cut lands exactly where specified, not just the nearest keyframe.",
+  },
+  {
+    slug: "video-sound-extractor",
+    toolSlug: "extract-audio-from-video",
+    h1: "Video Sound Extractor",
+    subtitle: "Pull the Audio Out of Any Video File",
+    metaTitle: "Video Sound Extractor — Free Online Tool",
+    metaDescription:
+      "Free video sound extractor, saving just the audio track as an MP3.",
+    introParagraph:
+      "The video stream is discarded entirely — only the decoded, re-encoded audio remains.",
+  },
+  {
+    slug: "video-to-animated-gif",
+    toolSlug: "video-to-gif",
+    h1: "Video to Animated GIF",
+    subtitle: "Turn a Clip Into a Shareable Looping GIF",
+    metaTitle: "Video to Animated GIF — Free Online Tool",
+    metaDescription:
+      "Free tool to turn a video clip into an animated GIF, with adjustable FPS and width.",
+    introParagraph:
+      "GIF has no audio support — sound in the source video is dropped in the conversion.",
+  },
+  {
+    slug: "speed-up-video-clip",
+    toolSlug: "change-video-speed",
+    h1: "Speed Up a Video Clip",
+    subtitle: "Play a Video Faster, Audio Pitch Unchanged",
+    metaTitle: "Speed Up Video Clip — Free Online Tool",
+    metaDescription:
+      "Free tool to speed up a video clip while keeping audio pitch exactly natural.",
+    introParagraph:
+      "From 0.25x up to 4x, with automatic chaining for factors beyond the tempo filter's normal range.",
+  },
+  {
+    slug: "video-mute-tool",
+    toolSlug: "mute-video",
+    h1: "Video Mute Tool",
+    subtitle: "Remove a Video's Audio Instantly",
+    metaTitle: "Video Mute Tool — Free Online Tool",
+    metaDescription:
+      "Free video mute tool that strips audio with zero quality loss using fast stream copy.",
+    introParagraph:
+      "The video track is copied byte-for-byte — only the audio stream is removed.",
+  },
+  {
+    slug: "combine-video-files-online",
+    toolSlug: "merge-videos",
+    h1: "Combine Video Files Online",
+    subtitle: "Merge Multiple Clips Into One",
+    metaTitle: "Combine Video Files Online — Free Tool",
+    metaDescription:
+      "Free online tool to combine multiple video files into one continuous video.",
+    introParagraph:
+      "Every clip re-encodes to a common format, so mismatched sources still combine successfully.",
+  },
+  {
+    slug: "extract-mp3-audio",
+    toolSlug: "mp4-to-mp3",
+    h1: "Extract MP3 Audio",
+    subtitle: "Pull the Sound Track Out of an MP4 File",
+    metaTitle: "Extract MP3 Audio — Free Online Tool",
+    metaDescription:
+      "Free tool to extract MP3 audio from an MP4 video, entirely in your browser.",
+    introParagraph:
+      "A recorded meeting, a filmed performance — anything that's really audio with a picture attached.",
+  },
+  {
+    slug: "rotate-video-clip",
+    toolSlug: "video-rotator",
+    h1: "Rotate a Video Clip",
+    subtitle: "Fix Sideways Footage Permanently",
+    metaTitle: "Rotate Video Clip — Free Online Tool",
+    metaDescription:
+      "Free tool to rotate a video clip 90°, 180°, or 270°, re-encoding every frame right-side-up.",
+    introParagraph:
+      "Displays correctly in any player, since the fix is baked into the pixels, not a metadata hint.",
+  },
+  {
+    slug: "crop-video-online",
+    toolSlug: "video-cropper",
+    h1: "Crop Video Online",
+    subtitle: "Trim Unwanted Margins From a Video Frame",
+    metaTitle: "Crop Video Online — Free Online Tool",
+    metaDescription:
+      "Free online tool to crop a video's frame, trimming an equal percentage from every side.",
+    introParagraph:
+      "Percentage-based cropping scales correctly at any source resolution.",
+  },
+  {
+    slug: "resize-video-dimensions",
+    toolSlug: "video-resizer",
+    h1: "Resize Video Dimensions",
+    subtitle: "Change Resolution Without Distortion",
+    metaTitle: "Resize Video Dimensions — Free Online Tool",
+    metaDescription:
+      "Free tool to resize a video's dimensions while automatically preserving aspect ratio.",
+    introParagraph:
+      "Fewer total pixels per frame means less data to encode, shrinking file size meaningfully.",
+  },
+  {
+    slug: "add-captions-to-video",
+    toolSlug: "add-subtitles-to-video",
+    h1: "Add Captions to a Video",
+    subtitle: "Burn Subtitles Permanently Into Every Frame",
+    metaTitle: "Add Captions to Video — Free Online Tool",
+    metaDescription:
+      "Free tool to add captions to a video from a standard .srt file, burned in permanently.",
+    introParagraph:
+      "Guarantees correct display everywhere, including platforms that strip soft subtitle tracks.",
+  },
+  {
+    slug: "video-logo-watermark",
+    toolSlug: "video-watermark",
+    h1: "Video Logo Watermark",
+    subtitle: "Overlay a Logo or Text Onto Your Footage",
+    metaTitle: "Video Logo Watermark — Free Online Tool",
+    metaDescription:
+      "Free tool to add a logo or text watermark to a video, burned permanently into the frames.",
+    introParagraph:
+      "Four corner positions are available for either a text or an image-based watermark.",
+  },
+  {
+    slug: "screen-capture-tool",
+    toolSlug: "screen-recorder",
+    h1: "Screen Capture Tool",
+    subtitle: "Record Your Screen With No Install",
+    metaTitle: "Screen Capture Tool — Free Online Tool",
+    metaDescription:
+      "Free screen capture tool using your browser's native recording API, no software needed.",
+    introParagraph:
+      "Choose an entire screen, a specific window, or a single browser tab to capture.",
+  },
+  {
+    slug: "video-fit-aspect-ratio",
+    toolSlug: "video-aspect-ratio-converter",
+    h1: "Fit Video to Aspect Ratio",
+    subtitle: "Change Shape Without Cropping Content",
+    metaTitle: "Fit Video to Aspect Ratio — Free Tool",
+    metaDescription:
+      "Free tool to fit a video into a new aspect ratio, padding with black bars rather than cropping.",
+    introParagraph:
+      "16:9, 9:16, 1:1, or 4:3 — computed precisely from your video's own dimensions.",
+  },
+  {
+    slug: "mp3-file-converter",
+    toolSlug: "mp3-converter",
+    h1: "MP3 File Converter",
+    subtitle: "Convert Any Audio File to MP3",
+    metaTitle: "MP3 File Converter — Free Online Tool",
+    metaDescription:
+      "Free MP3 file converter, decoding any supported audio format entirely in your browser.",
+    introParagraph:
+      "Uses VBR quality level 2, adapting bitrate to the audio's actual complexity.",
+  },
+  {
+    slug: "uncompressed-audio-converter",
+    toolSlug: "wav-converter",
+    h1: "Uncompressed Audio Converter",
+    subtitle: "Get Lossless WAV From Any Audio File",
+    metaTitle: "Uncompressed Audio Converter — Free Tool",
+    metaDescription:
+      "Free tool to convert audio to uncompressed WAV, ideal for lossless editing workflows.",
+    introParagraph:
+      "Standard 16-bit PCM output, the most broadly compatible WAV variant available.",
+  },
+  {
+    slug: "audio-bitrate-reducer",
+    toolSlug: "audio-compressor",
+    h1: "Audio Bitrate Reducer",
+    subtitle: "Shrink an Audio File by Lowering Its Bitrate",
+    metaTitle: "Audio Bitrate Reducer — Free Online Tool",
+    metaDescription:
+      "Free audio bitrate reducer with a slider controlling the size/fidelity trade-off directly.",
+    introParagraph:
+      "128kbps is a common good-enough balance for spoken word; 192-256kbps for music.",
+  },
+  {
+    slug: "trim-song-online",
+    toolSlug: "audio-cutter",
+    h1: "Trim a Song Online",
+    subtitle: "Extract an Exact Section of a Track",
+    metaTitle: "Trim Song Online — Free Online Tool",
+    metaDescription:
+      "Free tool to trim a song down to an exact section, entirely in your browser.",
+    introParagraph:
+      "Duration is detected automatically, so you know the valid range before setting cut points.",
+  },
+  {
+    slug: "merge-audio-clips",
+    toolSlug: "audio-joiner",
+    h1: "Merge Audio Clips",
+    subtitle: "Join Multiple Recordings End-to-End",
+    metaTitle: "Merge Audio Clips — Free Online Tool",
+    metaDescription:
+      "Free tool to merge multiple audio clips together sequentially, in a chosen order.",
+    introParagraph:
+      "Files of different formats or sample rates can be joined into one consistent MP3.",
+  },
+  {
+    slug: "mix-multiple-audio-tracks",
+    toolSlug: "audio-merger",
+    h1: "Mix Multiple Audio Tracks",
+    subtitle: "Play Several Tracks Together at Once",
+    metaTitle: "Mix Multiple Audio Tracks — Free Tool",
+    metaDescription:
+      "Free tool to mix multiple audio tracks so they play simultaneously, entirely in your browser.",
+    introParagraph:
+      "Distinct from sequential joining — for that, use the Audio Joiner tool instead.",
+  },
+  {
+    slug: "change-song-pitch-tool",
+    toolSlug: "audio-pitch-changer",
+    h1: "Change Song Pitch Tool",
+    subtitle: "Transpose Audio Into a Different Key",
+    metaTitle: "Change Song Pitch Tool — Free Online Tool",
+    metaDescription:
+      "Free tool to change a song's pitch by semitones, playback speed staying exactly the same.",
+    introParagraph:
+      "Covers a full octave down to a full octave up, using resample-then-correct-tempo.",
+  },
+  {
+    slug: "capture-voice-audio",
+    toolSlug: "voice-recorder-online",
+    h1: "Capture Voice Audio",
+    subtitle: "Record From Your Microphone in the Browser",
+    metaTitle: "Capture Voice Audio — Free Online Tool",
+    metaDescription:
+      "Free tool to capture voice audio from your microphone, no app or software install needed.",
+    introParagraph:
+      "The recording is ready to preview and download immediately after you stop.",
+  },
+  {
+    slug: "gif-to-video-online",
+    toolSlug: "gif-to-mp4",
+    h1: "GIF to Video Online",
+    subtitle: "Shrink a GIF Into a Compact MP4",
+    metaTitle: "GIF to Video Online — Free, Private Tool",
+    metaDescription:
+      "Free online tool to convert a GIF to video, dramatically reducing file size.",
+    introParagraph:
+      "GIF has no compression between frames — the resulting MP4 is often many times smaller.",
+  },
+  {
+    slug: "shrink-gif-as-video",
+    toolSlug: "gif-to-mp4",
+    h1: "Shrink a GIF as Video",
+    subtitle: "Convert a Large GIF Into a Small MP4",
+    metaTitle: "Shrink GIF as Video — Free Online Tool",
+    metaDescription:
+      "Free tool to shrink a large animated GIF by converting it to MP4 video format.",
+    introParagraph:
+      "Automatically adjusts odd pixel dimensions, since H.264 requires even width and height.",
+  },
+  {
+    slug: "export-video-audio",
+    toolSlug: "video-to-audio-converter",
+    h1: "Export a Video's Audio",
+    subtitle: "Save Audio in MP3, WAV, OGG, or FLAC",
+    metaTitle: "Export Video Audio — Free, Private Tool",
+    metaDescription:
+      "Free tool to export a video's audio track in your choice of format, entirely in your browser.",
+    introParagraph:
+      "Works on any video container your browser's FFmpeg build can read.",
+  },
+  {
+    slug: "video-audio-track-converter",
+    toolSlug: "video-to-audio-converter",
+    h1: "Video Audio Track Converter",
+    subtitle: "Convert a Video's Sound to Any Audio Format",
+    metaTitle: "Video Audio Track Converter — Free Tool",
+    metaDescription:
+      "Free tool to convert a video's audio track to MP3, WAV, OGG, or FLAC.",
+    introParagraph:
+      "Video is fully discarded during processing — only the extracted audio remains.",
+  },
+  {
+    slug: "reverse-video-clip",
+    toolSlug: "reverse-video",
+    h1: "Reverse a Video Clip",
+    subtitle: "Play It Backward, Audio Included",
+    metaTitle: "Reverse Video Clip — Free, Private Tool",
+    metaDescription:
+      "Free tool to reverse a video clip so both video and audio play backward, in sync.",
+    introParagraph:
+      "Works best on shorter clips, since reversal requires holding the whole clip in memory.",
+  },
+  {
+    slug: "reverse-clip-maker",
+    toolSlug: "reverse-video",
+    h1: "Reverse Clip Maker",
+    subtitle: "Create a Backward-Playing Video Effect",
+    metaTitle: "Reverse Clip Maker — Free Online Tool",
+    metaDescription:
+      "Free tool to make a reverse-playing video clip, with matching reversed audio.",
+    introParagraph:
+      "A real FFmpeg build compiled to WebAssembly handles the reversal entirely inside your browser.",
+  },
+  {
+    slug: "video-frame-to-image",
+    toolSlug: "video-thumbnail-generator",
+    h1: "Video Frame to Image",
+    subtitle: "Save One Exact Moment as a Picture",
+    metaTitle: "Video Frame to Image — Free, Private Tool",
+    metaDescription:
+      "Free tool to save a video frame as a lossless PNG image, at any timestamp you choose.",
+    introParagraph:
+      "Duration is detected automatically, with a sensible default timestamp suggested.",
+  },
+  {
+    slug: "capture-video-still",
+    toolSlug: "video-thumbnail-generator",
+    h1: "Capture a Video Still",
+    subtitle: "Grab a Single Frame as a Thumbnail Image",
+    metaTitle: "Capture Video Still — Free Online Tool",
+    metaDescription:
+      "Free tool to capture a still image from a video at an exact timestamp.",
+    introParagraph:
+      "A fast, single-purpose tool for the common need of grabbing one exact frame as an image.",
+  },
+  {
+    slug: "video-frames-to-images",
+    toolSlug: "video-frame-extractor",
+    h1: "Video Frames to Images",
+    subtitle: "Extract Many Stills at a Regular Interval",
+    metaTitle: "Video Frames to Images — Free, Private Tool",
+    metaDescription:
+      "Free tool to extract video frames as images at a regular interval, bundled as one ZIP.",
+    introParagraph:
+      "Set how often to capture a frame, from every half-second up to every 10 seconds.",
+  },
+  {
+    slug: "extract-multiple-video-frames",
+    toolSlug: "video-frame-extractor",
+    h1: "Extract Multiple Video Frames",
+    subtitle: "Pull Many Stills Out of One Video",
+    metaTitle: "Extract Multiple Video Frames — Free Tool",
+    metaDescription:
+      "Free tool to extract multiple frames from a video automatically, downloaded as a ZIP.",
+    introParagraph:
+      "The number of frames scales directly with the video's length divided by your chosen interval.",
+  },
+  {
+    slug: "video-loop-creator",
+    toolSlug: "loop-video-maker",
+    h1: "Video Loop Creator",
+    subtitle: "Repeat a Clip Back-to-Back, Lossless",
+    metaTitle: "Video Loop Creator — Free, Private Tool",
+    metaDescription:
+      "Free tool to create a looping video by repeating a clip back-to-back, with zero quality loss.",
+    introParagraph:
+      "Uses stream copy rather than re-encoding, so looping is fast and lossless.",
+  },
+  {
+    slug: "repeat-clip-online",
+    toolSlug: "loop-video-maker",
+    h1: "Repeat a Clip Online",
+    subtitle: "Extend a Short Video by Looping It",
+    metaTitle: "Repeat Clip Online — Free Online Tool",
+    metaDescription:
+      "Free online tool to repeat a video clip up to 20 times, entirely in your browser.",
+    introParagraph:
+      "One continuous file containing the clip played back-to-back as many times as you set.",
+  },
+  {
+    slug: "video-size-limiter",
+    toolSlug: "video-compressor-to-target-size",
+    h1: "Video Size Limiter",
+    subtitle: "Compress a Video to a Precise File Size",
+    metaTitle: "Video Size Limiter — Free, Private Tool",
+    metaDescription:
+      "Free tool to limit a video's file size to a specific target in MB, calculating the exact bitrate.",
+    introParagraph:
+      "Works backward from your target size, subtracting a fixed audio bitrate before calculating video bitrate.",
+  },
+  {
+    slug: "shrink-video-to-mb",
+    toolSlug: "video-compressor-to-target-size",
+    h1: "Shrink a Video to a Target MB Size",
+    subtitle: "Meet an Exact Upload or Attachment Limit",
+    metaTitle: "Shrink Video to Target MB — Free Tool",
+    metaDescription:
+      "Free tool to shrink a video to a specific size in megabytes, meeting exact upload limits.",
+    introParagraph:
+      "The exact resulting size is shown after compression, so you know precisely where it landed.",
+  },
+  {
+    slug: "avi-file-converter",
+    toolSlug: "avi-to-mp4",
+    h1: "AVI File Converter",
+    subtitle: "Convert an Old AVI Video to MP4",
+    metaTitle: "AVI File Converter — Free, Private Tool",
+    metaDescription:
+      "Free AVI file converter, re-encoding to H.264/AAC MP4 for universal playback compatibility.",
+    introParagraph:
+      "AVI can hold a wide range of old, poorly supported codecs — this fixes compatibility at the source.",
+  },
+  {
+    slug: "legacy-avi-to-mp4",
+    toolSlug: "avi-to-mp4",
+    h1: "Legacy AVI to MP4",
+    subtitle: "Modernize an Old Video File",
+    metaTitle: "Legacy AVI to MP4 — Free Online Tool",
+    metaDescription:
+      "Free tool to convert a legacy AVI video file into a modern, playable MP4.",
+    introParagraph:
+      "Works regardless of the AVI's internal codec, since it's decoded before re-encoding.",
+  },
+  {
+    slug: "mov-file-converter",
+    toolSlug: "mov-to-mp4",
+    h1: "MOV File Converter",
+    subtitle: "Convert an iPhone or QuickTime File to MP4",
+    metaTitle: "MOV File Converter — Free, Private Tool",
+    metaDescription:
+      "Free MOV file converter, resolving both container and HEVC compatibility issues in MP4 output.",
+    introParagraph:
+      "iPhone videos often use HEVC in a .mov container — this re-encodes to universally compatible H.264/AAC.",
+  },
+  {
+    slug: "apple-mov-to-mp4",
+    toolSlug: "mov-to-mp4",
+    h1: "Apple MOV to MP4",
+    subtitle: "Fix an iPhone Video for Non-Apple Software",
+    metaTitle: "Apple MOV to MP4 — Free Online Tool",
+    metaDescription:
+      "Free tool to convert an Apple .mov video into MP4 for broader software and platform compatibility.",
+    introParagraph:
+      "Resolves both the container mismatch and any underlying HEVC codec incompatibility in one step.",
+  },
+  {
+    slug: "mkv-file-converter",
+    toolSlug: "mkv-to-mp4",
+    h1: "MKV File Converter",
+    subtitle: "Convert MKV to Widely Compatible MP4",
+    metaTitle: "MKV File Converter — Free, Private Tool",
+    metaDescription:
+      "Free MKV file converter, re-encoding to standard H.264/AAC MP4 for broad compatibility.",
+    introParagraph:
+      "MKV supports far more codecs than most devices actually play, causing common playback failures.",
+  },
+  {
+    slug: "matroska-video-converter",
+    toolSlug: "mkv-to-mp4",
+    h1: "Matroska Video Converter",
+    subtitle: "Convert an MKV Container to MP4",
+    metaTitle: "Matroska Video Converter — Free Tool",
+    metaDescription:
+      "Free tool to convert a Matroska (.mkv) video file to standard, widely playable MP4.",
+    introParagraph:
+      "Primary video and audio tracks carry over; secondary tracks or subtitles from the MKV don't.",
+  },
+  {
+    slug: "flv-file-converter",
+    toolSlug: "flv-to-mp4",
+    h1: "FLV File Converter",
+    subtitle: "Convert Old Flash Video to Modern MP4",
+    metaTitle: "FLV File Converter — Free, Private Tool",
+    metaDescription:
+      "Free FLV file converter, turning old Flash-era video into modern, playable MP4.",
+    introParagraph:
+      "Since Flash's discontinuation, this is often the only practical way to make old FLV content playable.",
+  },
+  {
+    slug: "old-flash-video-to-mp4",
+    toolSlug: "flv-to-mp4",
+    h1: "Old Flash Video to MP4",
+    subtitle: "Recover Archived FLV Content",
+    metaTitle: "Old Flash Video to MP4 — Free Online Tool",
+    metaDescription:
+      "Free tool to recover an old Flash Video (FLV) file by converting it to modern MP4.",
+    introParagraph:
+      "Decodes the FLV's typically older codecs and re-encodes to standard H.264/AAC.",
+  },
+  {
+    slug: "trim-and-join-videos",
+    toolSlug: "video-joiner-by-timeline",
+    h1: "Trim and Join Videos",
+    subtitle: "Splice Sections From Multiple Clips Into One",
+    metaTitle: "Trim and Join Videos — Free, Private Tool",
+    metaDescription:
+      "Free tool to trim and join multiple video clips, keeping only the sections you specify.",
+    introParagraph:
+      "Every clip re-encodes to a common format, so mismatched source formats still splice together.",
+  },
+  {
+    slug: "multi-clip-video-editor",
+    toolSlug: "video-joiner-by-timeline",
+    h1: "Multi-Clip Video Editor",
+    subtitle: "Build a Highlight Reel From Several Sources",
+    metaTitle: "Multi-Clip Video Editor — Free Online Tool",
+    metaDescription:
+      "Free tool to edit and join multiple video clips with per-clip trim points, in one pass.",
+    introParagraph:
+      "Each clip's duration reads automatically, with editable start/end fields for the section to keep.",
+  },
+  {
+    slug: "audio-speed-changer",
+    toolSlug: "change-audio-speed",
+    h1: "Audio Speed Changer",
+    subtitle: "Speed Up or Slow Down Without Pitch Distortion",
+    metaTitle: "Audio Speed Changer — Free, Private Tool",
+    metaDescription:
+      "Free audio speed changer keeping pitch exactly natural at any speed, entirely in your browser.",
+    introParagraph:
+      "Uses a dedicated tempo filter rather than sample-rate manipulation, avoiding the chipmunk effect.",
+  },
+  {
+    slug: "adjust-audio-tempo",
+    toolSlug: "change-audio-speed",
+    h1: "Adjust Audio Tempo",
+    subtitle: "Change Playback Speed, Pitch Unaffected",
+    metaTitle: "Adjust Audio Tempo — Free Online Tool",
+    metaDescription:
+      "Free tool to adjust an audio file's tempo/speed while keeping pitch exactly the same.",
+    introParagraph:
+      "From 0.25x up to 4x, with automatic chaining beyond the tempo filter's normal range.",
+  },
+  {
+    slug: "raise-audio-volume",
+    toolSlug: "audio-volume-booster",
+    h1: "Raise Audio Volume",
+    subtitle: "Boost a Quiet Recording by an Exact Decibel Amount",
+    metaTitle: "Raise Audio Volume — Free, Private Tool",
+    metaDescription:
+      "Free tool to raise an audio file's volume by a precise decibel gain, entirely in your browser.",
+    introParagraph:
+      "Watch for clipping if the source is already close to peak level — back off the gain if needed.",
+  },
+  {
+    slug: "audio-loudness-booster",
+    toolSlug: "audio-volume-booster",
+    h1: "Audio Loudness Booster",
+    subtitle: "Increase Volume With Precise Gain Control",
+    metaTitle: "Audio Loudness Booster — Free Online Tool",
+    metaDescription:
+      "Free audio loudness booster applying a precise decibel gain increase or decrease.",
+    introParagraph:
+      "For inconsistent volume throughout a track, the Audio Normalizer tool is generally the better fit.",
+  },
+  {
+    slug: "audio-tag-editor",
+    toolSlug: "audio-metadata-editor",
+    h1: "Audio Tag Editor",
+    subtitle: "Edit Title, Artist, Album & Year",
+    metaTitle: "Audio Tag Editor — Free, Private Tool",
+    metaDescription:
+      "Free audio tag editor with zero quality loss — only the metadata block changes.",
+    introParagraph:
+      "Uses stream copy, so audio data stays byte-for-byte identical while tags update.",
+  },
+  {
+    slug: "fix-audio-metadata",
+    toolSlug: "audio-metadata-editor",
+    h1: "Fix Audio Metadata",
+    subtitle: "Correct Missing or Wrong Tags",
+    metaTitle: "Fix Audio Metadata — Free Online Tool",
+    metaDescription:
+      "Free tool to fix an audio file's missing or incorrect metadata tags.",
+    introParagraph:
+      "Only the fields you fill in get written — leaving one blank skips setting it.",
+  },
+  {
+    slug: "mp3-to-pcm",
+    toolSlug: "mp3-to-wav",
+    h1: "MP3 to PCM",
+    subtitle: "Decode MP3 to Raw Uncompressed Audio",
+    metaTitle: "MP3 to PCM — Free, Private Tool",
+    metaDescription:
+      "Free tool to decode MP3 to raw 16-bit PCM WAV audio, entirely in your browser.",
+    introParagraph:
+      "Doesn't restore quality already lost in the original MP3 encoding — it avoids further loss from here.",
+  },
+  {
+    slug: "decode-mp3-to-wav",
+    toolSlug: "mp3-to-wav",
+    h1: "Decode MP3 to WAV",
+    subtitle: "Get Lossless Output From a Compressed File",
+    metaTitle: "Decode MP3 to WAV — Free Online Tool",
+    metaDescription:
+      "Free tool to decode an MP3 file to uncompressed WAV audio, ready for lossless editing.",
+    introParagraph:
+      "Useful when editing software or a workflow specifically requires uncompressed input.",
+  },
+  {
+    slug: "wav-file-compressor",
+    toolSlug: "wav-to-mp3",
+    h1: "WAV File Compressor",
+    subtitle: "Shrink an Uncompressed File Down to MP3",
+    metaTitle: "WAV File Compressor — Free, Private Tool",
+    metaDescription:
+      "Free tool to compress a WAV file down to MP3, shrinking file size dramatically.",
+    introParagraph:
+      "Typically five to ten times smaller, at a high VBR quality setting for the source's full fidelity.",
+  },
+  {
+    slug: "pcm-to-mp3",
+    toolSlug: "wav-to-mp3",
+    h1: "PCM to MP3",
+    subtitle: "Compress Raw Audio Into a Shareable MP3",
+    metaTitle: "PCM to MP3 — Free Online Tool",
+    metaDescription:
+      "Free tool to compress raw PCM (WAV) audio into a much smaller MP3 file.",
+    introParagraph:
+      "The natural finishing step after lossless editing — convert to MP3 once editing is complete.",
+  },
+  {
+    slug: "convert-to-ogg-vorbis",
+    toolSlug: "ogg-converter",
+    h1: "Convert to OGG Vorbis",
+    subtitle: "Encode Audio With the Open Vorbis Codec",
+    metaTitle: "Convert to OGG Vorbis — Free, Private Tool",
+    metaDescription:
+      "Free tool to convert audio to OGG Vorbis, an open, patent-free codec, entirely in your browser.",
+    introParagraph:
+      "Generally achieves better quality per file size than MP3 at equivalent bitrates.",
+  },
+  {
+    slug: "ogg-file-converter",
+    toolSlug: "ogg-converter",
+    h1: "OGG File Converter",
+    subtitle: "Convert Any Audio Into the Open OGG Format",
+    metaTitle: "OGG File Converter — Free Online Tool",
+    metaDescription:
+      "Free OGG file converter, encoding at a strong quality setting for general-purpose use.",
+    introParagraph:
+      "The preferred format for many open-source projects, games, and platforms favoring unencumbered formats.",
+  },
+  {
+    slug: "convert-to-flac",
+    toolSlug: "flac-converter",
+    h1: "Convert to FLAC",
+    subtitle: "Lossless, Compressed Audio Archiving",
+    metaTitle: "Convert to FLAC — Free, Private Tool",
+    metaDescription:
+      "Free tool to convert audio to FLAC, lossless and compressed, entirely in your browser.",
+    introParagraph:
+      "Decoding a FLAC file back to raw samples reproduces the exact original audio bit-for-bit.",
+  },
+  {
+    slug: "flac-file-converter",
+    toolSlug: "flac-converter",
+    h1: "FLAC File Converter",
+    subtitle: "Get Perfect Fidelity at a Smaller Size Than WAV",
+    metaTitle: "FLAC File Converter — Free Online Tool",
+    metaDescription:
+      "Free FLAC file converter, typically 40-60% smaller than uncompressed WAV, zero quality loss.",
+    introParagraph:
+      "The standard choice for archiving audio when you want both compact storage and perfect fidelity.",
+  },
+  {
+    slug: "convert-to-aac",
+    toolSlug: "aac-converter",
+    h1: "Convert to AAC",
+    subtitle: "Apple's Default Audio Format",
+    metaTitle: "Convert to AAC — Free, Private Tool",
+    metaDescription:
+      "Free tool to convert audio to AAC (.m4a), entirely in your browser, no upload required.",
+    introParagraph:
+      "AAC generally achieves better audio quality than MP3 at the same bitrate.",
+  },
+  {
+    slug: "aac-file-converter",
+    toolSlug: "aac-converter",
+    h1: "AAC File Converter",
+    subtitle: "Get Audio Ready for Apple Devices",
+    metaTitle: "AAC File Converter — Free Online Tool",
+    metaDescription:
+      "Free AAC file converter, packaging audio in the .m4a container Apple software expects.",
+    introParagraph:
+      "Encoded at 192kbps, comfortably preserving strong audio quality for any content type.",
+  },
+  {
+    slug: "normalize-audio-volume",
+    toolSlug: "audio-normalizer",
+    h1: "Normalize Audio Volume",
+    subtitle: "Even Out Loudness Using Broadcast Standards",
+    metaTitle: "Normalize Audio Volume — Free, Private Tool",
+    metaDescription:
+      "Free tool to normalize audio volume using the EBU R128 loudness standard, in your browser.",
+    introParagraph:
+      "Targets -16 LUFS integrated loudness with a -1.5dB true peak ceiling, the common podcast target.",
+  },
+  {
+    slug: "audio-loudness-normalizer",
+    toolSlug: "audio-normalizer",
+    h1: "Audio Loudness Normalizer",
+    subtitle: "Smarter Than a Flat Volume Boost",
+    metaTitle: "Audio Loudness Normalizer — Free Online Tool",
+    metaDescription:
+      "Free audio loudness normalizer that analyzes perceived loudness rather than a flat gain boost.",
+    introParagraph:
+      "Better suited to audio with inconsistent volume than manually picking a flat gain value.",
+  },
+  {
+    slug: "audio-fade-editor",
+    toolSlug: "audio-fade-in-out-editor",
+    h1: "Audio Fade Editor",
+    subtitle: "Smooth Transitions at the Start and End",
+    metaTitle: "Audio Fade Editor — Free, Private Tool",
+    metaDescription:
+      "Free audio fade editor for adding smooth fade-in and fade-out transitions to a clip.",
+    introParagraph:
+      "Fade-in and fade-out durations are set independently, tuned to taste for each end.",
+  },
+  {
+    slug: "add-audio-fade-effect",
+    toolSlug: "audio-fade-in-out-editor",
+    h1: "Add an Audio Fade Effect",
+    subtitle: "Polish a Clip's Start and End",
+    metaTitle: "Add Audio Fade Effect — Free Online Tool",
+    metaDescription:
+      "Free tool to add a fade-in and fade-out effect to an audio clip, entirely in your browser.",
+    introParagraph:
+      "The fade-out start point is calculated automatically from the file's detected total duration.",
+  },
+  {
+    slug: "custom-ringtone-creator",
+    toolSlug: "ringtone-maker",
+    h1: "Custom Ringtone Creator",
+    subtitle: "Trim and Fade Any Song Into a Ringtone",
+    metaTitle: "Custom Ringtone Creator — Free, Private Tool",
+    metaDescription:
+      "Free custom ringtone creator, trimming and fading a song into a ready-to-use clip.",
+    introParagraph:
+      "Exported as .m4a — rename to .m4r for use as an iPhone ringtone through Finder.",
+  },
+  {
+    slug: "mp3-to-ringtone",
+    toolSlug: "ringtone-maker",
+    h1: "MP3 to Ringtone",
+    subtitle: "Turn a Song File Into a Short Ringtone Clip",
+    metaTitle: "MP3 to Ringtone — Free Online Tool",
+    metaDescription:
+      "Free tool to turn an MP3 into a short, fade-polished ringtone clip.",
+    introParagraph:
+      "Choose a start point and length between 5 and 40 seconds for the extracted clip.",
+  },
+  {
+    slug: "convert-any-audio-format",
+    toolSlug: "universal-audio-format-converter",
+    h1: "Convert Any Audio Format",
+    subtitle: "One Tool for MP3, WAV, OGG, FLAC & AAC",
+    metaTitle: "Convert Any Audio Format — Free, Private Tool",
+    metaDescription:
+      "Free tool to convert any audio format to MP3, WAV, OGG, FLAC, or AAC, entirely in your browser.",
+    introParagraph:
+      "The source format doesn't need to match any specific list — it's decoded before re-encoding.",
+  },
+  {
+    slug: "multi-format-audio-converter",
+    toolSlug: "universal-audio-format-converter",
+    h1: "Multi-Format Audio Converter",
+    subtitle: "Every Common Audio Conversion, One Tool",
+    metaTitle: "Multi-Format Audio Converter — Free Tool",
+    metaDescription:
+      "Free multi-format audio converter covering the most common target formats from one interface.",
+    introParagraph:
+      "Each output format uses settings appropriate to that specific format, not one generic setting.",
+  },
+  {
+    slug: "podcast-editor-trim",
+    toolSlug: "podcast-trimmer",
+    h1: "Podcast Editor: Trim Dead Air",
+    subtitle: "Remove Unwanted Material From the Edges",
+    metaTitle: "Podcast Editor Trim — Free, Private Tool",
+    metaDescription:
+      "Free podcast editing tool to trim dead air from a recording's start and end.",
+    introParagraph:
+      "Enter seconds to remove from each end — the kept range calculates automatically.",
+  },
+  {
+    slug: "trim-podcast-episode",
+    toolSlug: "podcast-trimmer",
+    h1: "Trim a Podcast Episode",
+    subtitle: "Cut a Countdown or Trailing Silence",
+    metaTitle: "Trim Podcast Episode — Free Online Tool",
+    metaDescription:
+      "Free tool to trim a podcast episode's start and end without specifying exact timestamps.",
+    introParagraph:
+      "For exact timestamp-based trimming instead, use the general Audio Cutter tool.",
+  },
+  {
+    slug: "silence-cutter",
+    toolSlug: "silence-remover",
+    h1: "Silence Cutter",
+    subtitle: "Cut Quiet Gaps Throughout a Recording",
+    metaTitle: "Silence Cutter — Free, Private Tool",
+    metaDescription:
+      "Free silence cutter that removes quiet gaps anywhere in an audio file, not just the edges.",
+    introParagraph:
+      "A threshold slider controls how quiet a passage needs to be before it's treated as silence.",
+  },
+  {
+    slug: "remove-dead-air-audio",
+    toolSlug: "silence-remover",
+    h1: "Remove Dead Air From Audio",
+    subtitle: "Automatically Cut Silent Stretches",
+    metaTitle: "Remove Dead Air From Audio — Free Tool",
+    metaDescription:
+      "Free tool to remove dead air and silent stretches from an audio recording automatically.",
+    introParagraph:
+      "This is volume-based detection — preview the result and adjust threshold if content gets caught too.",
+  },
+  {
+    slug: "extract-text-from-image",
+    toolSlug: "image-to-text",
+    h1: "Extract Text From an Image",
+    subtitle: "Real OCR, Running Entirely in Your Browser",
+    metaTitle: "Extract Text From Image — Free, Private Tool",
+    metaDescription: "Free tool to extract text from any image using real OCR, entirely in your browser, no upload.",
+    introParagraph: "Upload a photo, scan, or screenshot and get back clean, copyable text — no retyping, no server involved.",
+  },
+  {
+    slug: "ocr-image-to-text",
+    toolSlug: "image-to-text",
+    h1: "OCR Image to Text",
+    subtitle: "Recognize Printed Text From Any Photo",
+    metaTitle: "OCR Image to Text — Free Online Tool",
+    metaDescription: "Free OCR tool to convert an image to text, running a real Tesseract engine locally in your browser.",
+    introParagraph: "Works best on clear, high-contrast printed text — a genuine OCR engine, not a placeholder demo.",
+  },
+  {
+    slug: "photo-to-text-converter",
+    toolSlug: "image-to-text",
+    h1: "Photo to Text Converter",
+    subtitle: "Turn a Photo's Text Into Copyable Content",
+    metaTitle: "Photo to Text Converter — Free Online Tool",
+    metaDescription: "Free tool to convert a photo into text using in-browser OCR, no account or upload required.",
+    introParagraph: "Only a one-time language model download happens over the network — recognition itself is fully local.",
+  },
+  {
+    slug: "free-ocr-tool",
+    toolSlug: "image-to-text",
+    h1: "Free OCR Tool",
+    subtitle: "Recognize Text From Any Image at No Cost",
+    metaTitle: "Free OCR Tool — Browser-Based, No Upload",
+    metaDescription: "A completely free, browser-based OCR tool. No account, no upload, no per-image cost.",
+    introParagraph: "The same class of technology behind commercial OCR products, running entirely on your device.",
+  },
+  {
+    slug: "convert-image-to-text",
+    toolSlug: "image-to-text",
+    h1: "Convert Image to Text",
+    subtitle: "Get Plain Text From Any Picture",
+    metaTitle: "Convert Image to Text — Free Online Tool",
+    metaDescription: "Free tool to convert an image to plain text, entirely in your browser via WebAssembly.",
+    introParagraph: "Accuracy depends on image quality — clean, well-lit, high-contrast text recognizes most reliably.",
+  },
+  {
+    slug: "pdf-scanned-text-extractor",
+    toolSlug: "pdf-to-text-ocr",
+    h1: "Scanned PDF Text Extractor",
+    subtitle: "Recognize Text From Image-Only PDF Pages",
+    metaTitle: "Scanned PDF Text Extractor — Free, Private Tool",
+    metaDescription: "Free tool to extract text from a scanned PDF using OCR, entirely in your browser.",
+    introParagraph: "Regular text extraction needs an embedded text layer — this reads the page images directly instead.",
+  },
+  {
+    slug: "scanned-pdf-ocr",
+    toolSlug: "pdf-to-text-ocr",
+    h1: "Scanned PDF OCR",
+    subtitle: "Read Text From a PDF With No Text Layer",
+    metaTitle: "Scanned PDF OCR — Free Online Tool",
+    metaDescription: "Free scanned PDF OCR tool. Recognizes text page by page, entirely in your browser.",
+    introParagraph: "Live progress is shown as each page renders and is recognized, since this takes real processing time.",
+  },
+  {
+    slug: "pdf-ocr-tool",
+    toolSlug: "pdf-to-text-ocr",
+    h1: "PDF OCR Tool",
+    subtitle: "Get Text Out of a Photographed or Scanned PDF",
+    metaTitle: "PDF OCR Tool — Free Online Tool",
+    metaDescription: "Free PDF OCR tool for image-only PDFs, running a real OCR engine locally in your browser.",
+    introParagraph: "Only a one-time English language model download happens over the network.",
+  },
+  {
+    slug: "ai-handwriting-reader",
+    toolSlug: "handwriting-ocr",
+    h1: "Handwriting Reader",
+    subtitle: "Recognize Neat, Printed Handwriting",
+    metaTitle: "Handwriting Reader — Free, Private Tool",
+    metaDescription: "Free tool to read handwriting from a photo, using the same OCR engine as our printed-text tools.",
+    introParagraph: "Works best on neat, clearly-separated print handwriting — cursive accuracy is genuinely lower.",
+  },
+  {
+    slug: "read-handwritten-notes",
+    toolSlug: "handwriting-ocr",
+    h1: "Read Handwritten Notes",
+    subtitle: "Turn a Photo of Handwriting Into Text",
+    metaTitle: "Read Handwritten Notes — Free Online Tool",
+    metaDescription: "Free tool to read handwritten notes from a photo, entirely in your browser, no upload.",
+    introParagraph: "No dedicated handwriting model here — this uses the same printed-text OCR engine, honestly framed.",
+  },
+  {
+    slug: "copy-text-from-screenshot",
+    toolSlug: "screenshot-ocr",
+    h1: "Copy Text From a Screenshot",
+    subtitle: "Extract Text Without Retyping It",
+    metaTitle: "Copy Text From Screenshot — Free, Private Tool",
+    metaDescription: "Free tool to copy text out of a screenshot using in-browser OCR, no upload required.",
+    introParagraph: "Screenshots are clean and high-contrast, which generally makes recognition very reliable.",
+  },
+  {
+    slug: "screenshot-text-extractor",
+    toolSlug: "screenshot-ocr",
+    h1: "Screenshot Text Extractor",
+    subtitle: "Get Copyable Text From Any Screenshot",
+    metaTitle: "Screenshot Text Extractor — Free Online Tool",
+    metaDescription: "Free screenshot text extractor supporting PNG, JPG, and WebP, entirely in your browser.",
+    introParagraph: "Recognizes error messages, chat text, or UI labels without needing to retype them.",
+  },
+  {
+    slug: "ocr-multiple-languages",
+    toolSlug: "multi-language-ocr",
+    h1: "OCR in Multiple Languages",
+    subtitle: "Recognize Text in Ten Different Languages",
+    metaTitle: "OCR Multiple Languages — Free, Private Tool",
+    metaDescription: "Free multi-language OCR tool supporting English, Spanish, French, Hindi, Chinese, and more.",
+    introParagraph: "Pick the matching language before recognizing — using the wrong model hurts accuracy significantly.",
+  },
+  {
+    slug: "foreign-language-ocr",
+    toolSlug: "multi-language-ocr",
+    h1: "Foreign Language OCR",
+    subtitle: "Recognize Text in Ten Supported Languages",
+    metaTitle: "Foreign Language OCR — Free Online Tool",
+    metaDescription: "Free foreign language OCR tool covering ten languages and scripts, entirely in your browser.",
+    introParagraph: "Each language's model downloads once, then recognition runs fully on your device.",
+  },
+  {
+    slug: "photo-table-to-excel",
+    toolSlug: "table-ocr",
+    h1: "Photo Table to Excel",
+    subtitle: "Turn a Photographed Table Into a Spreadsheet",
+    metaTitle: "Photo Table to Excel — Free, Private Tool",
+    metaDescription: "Free tool to convert a photographed table into a genuine .xlsx Excel file.",
+    introParagraph: "Reconstructs rows and columns from word position — the same heuristic used by our PDF table tools.",
+  },
+  {
+    slug: "scan-table-to-spreadsheet",
+    toolSlug: "table-ocr",
+    h1: "Scan a Table to Spreadsheet",
+    subtitle: "Digitize a Printed or Whiteboard Table",
+    metaTitle: "Scan Table to Spreadsheet — Free Online Tool",
+    metaDescription: "Free tool to scan a table from a photo and export it directly to Excel.",
+    introParagraph: "Works best on clear, evenly-spaced columns — skewed photos can merge adjacent columns.",
+  },
+  {
+    slug: "scan-receipt-online",
+    toolSlug: "receipt-ocr",
+    h1: "Scan a Receipt Online",
+    subtitle: "Extract Text and Detect the Total Automatically",
+    metaTitle: "Scan Receipt Online — Free, Private Tool",
+    metaDescription: "Free tool to scan a receipt and extract its text, with automatic total-line detection.",
+    introParagraph: "Basic text extraction with a helpful heuristic — not full structured receipt parsing.",
+  },
+  {
+    slug: "receipt-text-scanner",
+    toolSlug: "receipt-ocr",
+    h1: "Receipt Text Scanner",
+    subtitle: "Digitize a Paper Receipt for Expense Tracking",
+    metaTitle: "Receipt Text Scanner — Free Online Tool",
+    metaDescription: "Free receipt text scanner running entirely in your browser, no upload of purchase details.",
+    introParagraph: "Your receipt content never leaves your browser during recognition.",
+  },
+  {
+    slug: "id-scanner-tool",
+    toolSlug: "id-card-ocr",
+    h1: "ID Scanner Tool",
+    subtitle: "Extract Printed Text From an ID Card, On-Device",
+    metaTitle: "ID Scanner Tool — Free, Private Tool",
+    metaDescription: "Free ID scanner tool that recognizes printed text from an ID card entirely on your device.",
+    introParagraph: "Given how sensitive ID content is, on-device processing is a deliberate design choice here.",
+  },
+  {
+    slug: "scan-id-card",
+    toolSlug: "id-card-ocr",
+    h1: "Scan an ID Card",
+    subtitle: "Get Printed Text From an ID Document",
+    metaTitle: "Scan ID Card — Free Online Tool",
+    metaDescription: "Free tool to scan an ID card's printed text, no upload of your document to any server.",
+    introParagraph: "A clear, straight-on, well-lit photo recognizes far more reliably than an angled shot.",
+  },
+  {
+    slug: "plate-number-reader",
+    toolSlug: "license-plate-ocr",
+    h1: "Plate Number Reader",
+    subtitle: "Read a License Plate From a Photo",
+    metaTitle: "Plate Number Reader — Free, Private Tool",
+    metaDescription: "Free tool to read a license plate number from a photo, cleaned to letters and numbers.",
+    introParagraph: "A cropped, front-on, well-lit shot of just the plate gives the most reliable result.",
+  },
+  {
+    slug: "vehicle-plate-ocr",
+    toolSlug: "license-plate-ocr",
+    h1: "Vehicle Plate OCR",
+    subtitle: "Recognize a Plate Number Automatically",
+    metaTitle: "Vehicle Plate OCR — Free Online Tool",
+    metaDescription: "Free vehicle plate OCR tool, running entirely in your browser with no upload.",
+    introParagraph: "Always verify against the photo — OCR can misread similar characters like 0/O or 1/I.",
+  },
+  {
+    slug: "card-to-contact",
+    toolSlug: "business-card-ocr",
+    h1: "Business Card to Contact",
+    subtitle: "Scan a Card Into a Ready-to-Import .vcf File",
+    metaTitle: "Business Card to Contact — Free, Private Tool",
+    metaDescription: "Free tool to scan a business card and generate a .vcf contact file automatically.",
+    introParagraph: "Email and phone are detected by pattern matching, then bundled into a standard vCard.",
+  },
+  {
+    slug: "vcard-scanner",
+    toolSlug: "business-card-ocr",
+    h1: "vCard Scanner",
+    subtitle: "Turn a Business Card Photo Into a Contact File",
+    metaTitle: "vCard Scanner — Free Online Tool",
+    metaDescription: "Free vCard scanner for business cards, importable directly into any contacts app.",
+    introParagraph: "Field detection is heuristic — always review the generated card before importing it.",
+  },
+  {
+    slug: "image-to-word-ocr",
+    toolSlug: "ocr-to-word",
+    h1: "Image to Word (OCR)",
+    subtitle: "Recognize Text and Save It as an Editable Document",
+    metaTitle: "Image to Word OCR — Free, Private Tool",
+    metaDescription: "Free tool to recognize text from an image and save it directly as a .docx Word file.",
+    introParagraph: "Each recognized line becomes its own paragraph in a genuine, editable Word document.",
+  },
+  {
+    slug: "photo-to-docx",
+    toolSlug: "ocr-to-word",
+    h1: "Photo to DOCX",
+    subtitle: "Get an Editable Word File From a Photo",
+    metaTitle: "Photo to DOCX — Free Online Tool",
+    metaDescription: "Free tool to convert a photo into an editable .docx file via OCR, entirely in your browser.",
+    introParagraph: "A plain-text reflow into paragraphs, not a layout-preserving conversion.",
+  },
+  {
+    slug: "searchable-pdf-maker",
+    toolSlug: "ocr-to-pdf",
+    h1: "Searchable PDF Maker",
+    subtitle: "Add an Invisible, Selectable Text Layer to a Scan",
+    metaTitle: "Searchable PDF Maker — Free, Private Tool",
+    metaDescription: "Free tool to turn a scanned image into a searchable PDF, verified genuinely selectable.",
+    introParagraph: "The image stays visually unchanged; only a hidden, positioned text layer is added on top.",
+  },
+  {
+    slug: "scan-to-searchable-pdf",
+    toolSlug: "ocr-to-pdf",
+    h1: "Scan to Searchable PDF",
+    subtitle: "Make a Photographed Page Text-Selectable",
+    metaTitle: "Scan to Searchable PDF — Free Online Tool",
+    metaDescription: "Free tool to convert a scanned image into a text-searchable PDF, entirely in your browser.",
+    introParagraph: "Verified independently against a separate PDF reader — the text is genuinely extractable, not a visual trick.",
+  },
+  {
+    slug: "bulk-image-ocr",
+    toolSlug: "batch-ocr-processor",
+    h1: "Bulk Image OCR",
+    subtitle: "Run OCR on Many Images at Once",
+    metaTitle: "Bulk Image OCR — Free, Private Tool",
+    metaDescription: "Free bulk OCR tool for processing many images at once, results bundled into one ZIP.",
+    introParagraph: "Each image gets its own matching .txt file, processed one at a time to keep memory usage manageable.",
+  },
+  {
+    slug: "mass-ocr-tool",
+    toolSlug: "batch-ocr-processor",
+    h1: "Mass OCR Tool",
+    subtitle: "Digitize a Whole Folder of Images at Once",
+    metaTitle: "Mass OCR Tool — Free Online Tool",
+    metaDescription: "Free mass OCR tool for digitizing a batch of scanned pages or photos, entirely in your browser.",
+    introParagraph: "Nothing is uploaded — every image is processed entirely on your device.",
+  },
+  {
+    slug: "extract-zip-online",
+    toolSlug: "zip-extractor",
+    h1: "Extract a ZIP File Online",
+    subtitle: "Unzip Files Right in Your Browser",
+    metaTitle: "Extract ZIP Online — Free, Private Tool",
+    metaDescription: "Free tool to extract a ZIP file online, entirely in your browser, no upload to any server.",
+    introParagraph: "Upload a .zip and get every contained file back, with folder structure preserved.",
+  },
+  {
+    slug: "unzip-online-free",
+    toolSlug: "zip-extractor",
+    h1: "Unzip Files Online for Free",
+    subtitle: "Open Any ZIP Archive Without Installing Software",
+    metaTitle: "Unzip Online Free — Browser-Based Tool",
+    metaDescription: "Free online unzip tool, no software install, works entirely inside your browser.",
+    introParagraph: "No account, no watermark, no file size games — just a genuine ZIP extraction.",
+  },
+  {
+    slug: "open-zip-file-browser",
+    toolSlug: "zip-extractor",
+    h1: "Open a ZIP File in Your Browser",
+    subtitle: "View and Download Contents Without an App",
+    metaTitle: "Open ZIP File in Browser — Free Tool",
+    metaDescription: "Free tool to open and extract a ZIP file's contents directly in your browser.",
+    introParagraph: "Handy on a locked-down machine where installing an archive utility isn't an option.",
+  },
+  {
+    slug: "zip-file-opener",
+    toolSlug: "zip-extractor",
+    h1: "ZIP File Opener",
+    subtitle: "Extract Every File From a .zip Archive",
+    metaTitle: "ZIP File Opener — Free Online Tool",
+    metaDescription: "Free ZIP file opener that extracts contents entirely on your device.",
+    introParagraph: "Handles standard ZIP compression correctly, downloading each file individually or all at once.",
+  },
+  {
+    slug: "zip-extractor-online",
+    toolSlug: "zip-extractor",
+    h1: "ZIP Extractor Online",
+    subtitle: "Unzip Archives With Zero Upload",
+    metaTitle: "ZIP Extractor Online — Free, Private Tool",
+    metaDescription: "Free online ZIP extractor. Your archive never leaves your device.",
+    introParagraph: "Runs on a standard ZIP-reading library, so it handles real-world archives reliably.",
+  },
+  {
+    slug: "create-zip-file-online",
+    toolSlug: "zip-creator",
+    h1: "Create a ZIP File Online",
+    subtitle: "Bundle Files Into a Standard .zip Archive",
+    metaTitle: "Create ZIP File Online — Free, Private Tool",
+    metaDescription: "Free tool to create a ZIP file from multiple files, entirely in your browser.",
+    introParagraph: "Add any files, and get back a single .zip that opens correctly anywhere.",
+  },
+  {
+    slug: "compress-files-to-zip",
+    toolSlug: "zip-creator",
+    h1: "Compress Files to ZIP",
+    subtitle: "Bundle and Shrink Multiple Files at Once",
+    metaTitle: "Compress Files to ZIP — Free Online Tool",
+    metaDescription: "Free tool to compress multiple files into one ZIP archive, no upload required.",
+    introParagraph: "Great for emailing a group of files as a single attachment.",
+  },
+  {
+    slug: "zip-maker-online",
+    toolSlug: "zip-creator",
+    h1: "ZIP Maker Online",
+    subtitle: "Build a ZIP Archive From Any Files",
+    metaTitle: "ZIP Maker Online — Free, Private Tool",
+    metaDescription: "Free online ZIP maker that builds a standard archive entirely in your browser.",
+    introParagraph: "The resulting file opens with any standard ZIP-compatible tool, on any platform.",
+  },
+  {
+    slug: "make-zip-archive",
+    toolSlug: "zip-creator",
+    h1: "Make a ZIP Archive",
+    subtitle: "Package Multiple Files Into One Download",
+    metaTitle: "Make ZIP Archive — Free Online Tool",
+    metaDescription: "Free tool to make a ZIP archive from your files, processed entirely on your device.",
+    introParagraph: "Nothing is uploaded — the archive is built locally in your browser's memory.",
+  },
+  {
+    slug: "files-to-zip-converter",
+    toolSlug: "zip-creator",
+    h1: "Files to ZIP Converter",
+    subtitle: "Turn a Group of Files Into One ZIP",
+    metaTitle: "Files to ZIP Converter — Free, Private Tool",
+    metaDescription: "Free tool to convert a group of files into a single ZIP archive.",
+    introParagraph: "Drop in as many files as you need bundled together into one download.",
+  },
+  {
+    slug: "extract-tar-file",
+    toolSlug: "tar-extractor",
+    h1: "Extract a TAR File",
+    subtitle: "Unpack a Standard TAR Archive in Your Browser",
+    metaTitle: "Extract TAR File — Free, Private Tool",
+    metaDescription: "Free tool to extract a TAR file entirely in your browser, no upload required.",
+    introParagraph: "Uses a real 7-Zip build compiled to WebAssembly to unpack the archive correctly.",
+  },
+  {
+    slug: "tar-file-opener",
+    toolSlug: "tar-extractor",
+    h1: "TAR File Opener",
+    subtitle: "Open a .tar Archive Without Command-Line Tools",
+    metaTitle: "TAR File Opener — Free Online Tool",
+    metaDescription: "Free TAR file opener, no terminal or command-line tools needed.",
+    introParagraph: "Skip the `tar -xf` command entirely — just upload the file and download the contents.",
+  },
+  {
+    slug: "unpack-tar-archive",
+    toolSlug: "tar-extractor",
+    h1: "Unpack a TAR Archive",
+    subtitle: "Get Every File Out of a .tar Bundle",
+    metaTitle: "Unpack TAR Archive — Free, Private Tool",
+    metaDescription: "Free tool to unpack a TAR archive's contents, entirely in your browser.",
+    introParagraph: "TAR bundles files without compressing them — this reads that bundling structure directly.",
+  },
+  {
+    slug: "tar-extractor-online",
+    toolSlug: "tar-extractor",
+    h1: "TAR Extractor Online",
+    subtitle: "Extract TAR Files With No Install",
+    metaTitle: "TAR Extractor Online — Free Tool",
+    metaDescription: "Free online TAR extractor, no software install, works entirely in your browser.",
+    introParagraph: "Folder structure inside the TAR is preserved in the extracted output.",
+  },
+  {
+    slug: "open-tar-file",
+    toolSlug: "tar-extractor",
+    h1: "Open a TAR File",
+    subtitle: "View and Download a TAR Archive's Contents",
+    metaTitle: "Open TAR File — Free Online Tool",
+    metaDescription: "Free tool to open a TAR file and download its contents, no upload required.",
+    introParagraph: "Common for source code releases and Linux backup bundles.",
+  },
+  {
+    slug: "extract-gz-file",
+    toolSlug: "gzip-extractor",
+    h1: "Extract a .gz File",
+    subtitle: "Decompress GZIP Right in Your Browser",
+    metaTitle: "Extract GZ File — Free, Private Tool",
+    metaDescription: "Free tool to extract a .gz file using your browser's native decompression support.",
+    introParagraph: "Uses the browser's built-in DecompressionStream API — no external library needed.",
+  },
+  {
+    slug: "gzip-decompressor",
+    toolSlug: "gzip-extractor",
+    h1: "GZIP Decompressor",
+    subtitle: "Get the Original File Back From a .gz Archive",
+    metaTitle: "GZIP Decompressor — Free Online Tool",
+    metaDescription: "Free GZIP decompressor, running entirely in your browser with no upload.",
+    introParagraph: "GZIP compresses a single file — decompressing it restores exactly that one original file.",
+  },
+  {
+    slug: "unzip-gz-file",
+    toolSlug: "gzip-extractor",
+    h1: "Unzip a .gz File",
+    subtitle: "Decompress GZIP Without Command-Line Tools",
+    metaTitle: "Unzip GZ File — Free, Private Tool",
+    metaDescription: "Free tool to unzip a .gz file directly in your browser, no terminal needed.",
+    introParagraph: "Skip `gunzip` on the command line — upload the file and download the result directly.",
+  },
+  {
+    slug: "gz-file-extractor",
+    toolSlug: "gzip-extractor",
+    h1: "GZ File Extractor",
+    subtitle: "Decompress a Single GZIP-Compressed File",
+    metaTitle: "GZ File Extractor — Free Online Tool",
+    metaDescription: "Free GZ file extractor using native browser decompression, no server upload.",
+    introParagraph: "Nothing leaves your device — decompression runs using a native browser API.",
+  },
+  {
+    slug: "decompress-gzip-online",
+    toolSlug: "gzip-extractor",
+    h1: "Decompress GZIP Online",
+    subtitle: "Restore a File Compressed With GZIP",
+    metaTitle: "Decompress GZIP Online — Free Tool",
+    metaDescription: "Free online tool to decompress a GZIP-compressed file, entirely in your browser.",
+    introParagraph: "Often the second step after downloading a .tar.gz — decompress this layer first.",
+  },
+  {
+    slug: "extract-7z-file",
+    toolSlug: "7z-extractor",
+    h1: "Extract a 7Z File",
+    subtitle: "Unpack .7z Archives in Your Browser",
+    metaTitle: "Extract 7Z File — Free, Private Tool",
+    metaDescription: "Free tool to extract a .7z file, running a real 7-Zip build compiled to WebAssembly.",
+    introParagraph: "The 7z format compresses tighter than ZIP — this reads that format directly and correctly.",
+  },
+  {
+    slug: "7zip-extractor-online",
+    toolSlug: "7z-extractor",
+    h1: "7-Zip Extractor Online",
+    subtitle: "Open .7z Archives Without Installing 7-Zip",
+    metaTitle: "7-Zip Extractor Online — Free Tool",
+    metaDescription: "Free 7-Zip extractor, no software install, works entirely in your browser.",
+    introParagraph: "Uses the real 7-Zip engine itself, compiled to WebAssembly — not a reimplementation.",
+  },
+  {
+    slug: "open-7z-archive",
+    toolSlug: "7z-extractor",
+    h1: "Open a 7z Archive",
+    subtitle: "View and Download a .7z File's Contents",
+    metaTitle: "Open 7z Archive — Free Online Tool",
+    metaDescription: "Free tool to open a .7z archive and download its contents, no upload required.",
+    introParagraph: "Handy when you receive a .7z file but don't have 7-Zip installed.",
+  },
+  {
+    slug: "unpack-7z-file",
+    toolSlug: "7z-extractor",
+    h1: "Unpack a 7z File",
+    subtitle: "Extract Every File From a .7z Archive",
+    metaTitle: "Unpack 7z File — Free, Private Tool",
+    metaDescription: "Free tool to unpack a .7z file entirely in your browser, no server involved.",
+    introParagraph: "Extraction and file listing happen locally using WebAssembly, not on any remote server.",
+  },
+  {
+    slug: "7z-file-opener",
+    toolSlug: "7z-extractor",
+    h1: "7z File Opener",
+    subtitle: "Extract a .7z Archive With No Software",
+    metaTitle: "7z File Opener — Free Online Tool",
+    metaDescription: "Free 7z file opener, running entirely in your browser via WebAssembly.",
+    introParagraph: "Works with the standard 7z compression format, including folder structure.",
+  },
+  {
+    slug: "extract-rar-file-online",
+    toolSlug: "rar-extractor",
+    h1: "Extract a RAR File Online",
+    subtitle: "Open .rar Archives in Your Browser",
+    metaTitle: "Extract RAR File Online — Free, Private Tool",
+    metaDescription: "Free tool to extract a RAR file online, entirely in your browser, no WinRAR needed.",
+    introParagraph: "Supports both RAR4 and RAR5 formats via a real 7-Zip build compiled to WebAssembly.",
+  },
+  {
+    slug: "unrar-online-free",
+    toolSlug: "rar-extractor",
+    h1: "Unrar a File Online for Free",
+    subtitle: "Extract RAR Archives Without Installing Software",
+    metaTitle: "Unrar Online Free — Browser-Based Tool",
+    metaDescription: "Free online unrar tool, no software install, works entirely in your browser.",
+    introParagraph: "No account, no upload — extraction happens locally on your device.",
+  },
+  {
+    slug: "open-rar-file",
+    toolSlug: "rar-extractor",
+    h1: "Open a RAR File",
+    subtitle: "View and Download a .rar Archive's Contents",
+    metaTitle: "Open RAR File — Free Online Tool",
+    metaDescription: "Free tool to open a RAR file and download its contents, no software install.",
+    introParagraph: "Optional password support is included for password-protected RAR archives.",
+  },
+  {
+    slug: "rar-file-extractor",
+    toolSlug: "rar-extractor",
+    h1: "RAR File Extractor",
+    subtitle: "Extract Every File From a .rar Archive",
+    metaTitle: "RAR File Extractor — Free, Private Tool",
+    metaDescription: "Free RAR file extractor supporting both RAR4 and RAR5, entirely in your browser.",
+    introParagraph: "Verified against real RAR4 and RAR5 test archives before shipping.",
+  },
+  {
+    slug: "winrar-alternative-online",
+    toolSlug: "rar-extractor",
+    h1: "Free WinRAR Alternative Online",
+    subtitle: "Extract RAR Files Without WinRAR Installed",
+    metaTitle: "WinRAR Alternative Online — Free Tool",
+    metaDescription: "Free browser-based alternative to WinRAR for extracting RAR archives.",
+    introParagraph: "No license, no install — just upload a .rar and download the contents.",
+  },
+  {
+    slug: "remove-zip-password",
+    toolSlug: "zip-password-remover",
+    h1: "Remove a ZIP File's Password",
+    subtitle: "Decrypt a Password-Protected Archive You Own",
+    metaTitle: "Remove ZIP Password — Free, Private Tool",
+    metaDescription: "Free tool to remove a known password from a ZIP file, entirely in your browser.",
+    introParagraph: "Requires the correct password already — this decrypts, it doesn't crack or guess passwords.",
+  },
+  {
+    slug: "unlock-zip-file",
+    toolSlug: "zip-password-remover",
+    h1: "Unlock a ZIP File",
+    subtitle: "Remove Password Protection With the Correct Key",
+    metaTitle: "Unlock ZIP File — Free Online Tool",
+    metaDescription: "Free tool to unlock a password-protected ZIP file you already have the password for.",
+    introParagraph: "The password you enter is used locally to decrypt — it's never sent anywhere.",
+  },
+  {
+    slug: "zip-password-cracker-free",
+    toolSlug: "zip-password-remover",
+    h1: "ZIP Password Tool (Not a Cracker)",
+    subtitle: "Remove Encryption Using a Password You Already Know",
+    metaTitle: "ZIP Password Removal Tool — Free, Private Tool",
+    metaDescription: "Free tool to remove ZIP encryption using a known password — not a password-cracking tool.",
+    introParagraph: "This tool decrypts with a password you supply; it has no brute-force or guessing capability.",
+  },
+  {
+    slug: "crack-zip-password",
+    toolSlug: "zip-password-remover",
+    h1: "ZIP Encryption Removal (Password Required)",
+    subtitle: "Strip Password Protection From Your Own Archive",
+    metaTitle: "ZIP Encryption Removal — Free Online Tool",
+    metaDescription: "Free tool to remove password encryption from a ZIP file when you know the password.",
+    introParagraph: "Intended for archives you own and have legitimate access to — the password is required upfront.",
+  },
+  {
+    slug: "strip-zip-encryption",
+    toolSlug: "zip-password-remover",
+    h1: "Strip ZIP Encryption",
+    subtitle: "Produce an Unprotected Copy of a ZIP Archive",
+    metaTitle: "Strip ZIP Encryption — Free, Private Tool",
+    metaDescription: "Free tool to strip encryption from a ZIP file you have the password for.",
+    introParagraph: "Output is a standard, unencrypted ZIP with identical contents.",
+  },
+  {
+    slug: "add-password-to-zip",
+    toolSlug: "zip-password-protector",
+    h1: "Add a Password to a ZIP File",
+    subtitle: "Encrypt an Archive With AES-256",
+    metaTitle: "Add Password to ZIP — Free, Private Tool",
+    metaDescription: "Free tool to add AES-256 password protection to a ZIP file, entirely in your browser.",
+    introParagraph: "Uses real AES-256 encryption via a 7-Zip build compiled to WebAssembly.",
+  },
+  {
+    slug: "encrypt-zip-file",
+    toolSlug: "zip-password-protector",
+    h1: "Encrypt a ZIP File",
+    subtitle: "Protect an Archive With a Password",
+    metaTitle: "Encrypt ZIP File — Free Online Tool",
+    metaDescription: "Free tool to encrypt a ZIP file with a password, no upload to any server.",
+    introParagraph: "Remember the password — there's no recovery option once the archive is encrypted.",
+  },
+  {
+    slug: "protect-zip-with-password",
+    toolSlug: "zip-password-protector",
+    h1: "Protect a ZIP With a Password",
+    subtitle: "Lock an Archive Before Sharing It",
+    metaTitle: "Protect ZIP With Password — Free, Private Tool",
+    metaDescription: "Free tool to password-protect a ZIP archive using real AES-256 encryption.",
+    introParagraph: "Useful before emailing sensitive files bundled into one archive.",
+  },
+  {
+    slug: "zip-file-encryptor",
+    toolSlug: "zip-password-protector",
+    h1: "ZIP File Encryptor",
+    subtitle: "Build a Password-Protected Archive",
+    metaTitle: "ZIP File Encryptor — Free Online Tool",
+    metaDescription: "Free ZIP file encryptor using AES-256, entirely in your browser via WebAssembly.",
+    introParagraph: "The password and files never leave your device during encryption.",
+  },
+  {
+    slug: "lock-zip-archive",
+    toolSlug: "zip-password-protector",
+    h1: "Lock a ZIP Archive",
+    subtitle: "Require a Password to Open Your Files",
+    metaTitle: "Lock ZIP Archive — Free, Private Tool",
+    metaDescription: "Free tool to lock a ZIP archive with a password, no server upload involved.",
+    introParagraph: "Produces a genuinely encrypted ZIP, openable by any tool that supports AES-256 ZIP encryption.",
+  },
+  {
+    slug: "compress-any-file-online",
+    toolSlug: "universal-file-compressor",
+    h1: "Compress Any File Online",
+    subtitle: "Shrink a File's Size With Native Browser Compression",
+    metaTitle: "Compress Any File Online — Free, Private Tool",
+    metaDescription: "Free tool to compress any file using your browser's native GZIP compression.",
+    introParagraph: "Uses the browser's built-in CompressionStream API, no external library needed.",
+  },
+  {
+    slug: "file-compressor-online-free",
+    toolSlug: "universal-file-compressor",
+    h1: "Free Online File Compressor",
+    subtitle: "Reduce File Size With No Upload",
+    metaTitle: "File Compressor Online Free — Browser-Based",
+    metaDescription: "Free online file compressor, running entirely in your browser, no upload required.",
+    introParagraph: "Compression ratio depends heavily on file type — already-compressed files shrink little.",
+  },
+  {
+    slug: "shrink-file-size-online",
+    toolSlug: "universal-file-compressor",
+    h1: "Shrink File Size Online",
+    subtitle: "Reduce Any File's Size With GZIP",
+    metaTitle: "Shrink File Size Online — Free Tool",
+    metaDescription: "Free tool to shrink a file's size using GZIP compression, entirely in your browser.",
+    introParagraph: "Text-heavy files like logs and source code compress especially well.",
+  },
+  {
+    slug: "reduce-file-size-compressor",
+    toolSlug: "universal-file-compressor",
+    h1: "Reduce File Size Compressor",
+    subtitle: "Compress Any File Type With One Click",
+    metaTitle: "Reduce File Size Compressor — Free, Private Tool",
+    metaDescription: "Free tool to reduce file size using native browser compression, no install needed.",
+    introParagraph: "Works on any file type since it compresses raw bytes rather than a specific format.",
+  },
+  {
+    slug: "generic-file-compressor",
+    toolSlug: "universal-file-compressor",
+    h1: "Generic File Compressor",
+    subtitle: "GZIP-Compress Any File, No Matter the Type",
+    metaTitle: "Generic File Compressor — Free Online Tool",
+    metaDescription: "Free generic file compressor using GZIP, no format restrictions.",
+    introParagraph: "Unlike our PDF or image compressors, this one applies general-purpose GZIP to anything.",
+  },
+  {
+    slug: "convert-archive-format",
+    toolSlug: "archive-format-converter",
+    h1: "Convert Between Archive Formats",
+    subtitle: "Switch a File Between ZIP, 7z, and TAR",
+    metaTitle: "Convert Archive Format — Free, Private Tool",
+    metaDescription: "Free tool to convert an archive between ZIP, 7z, and TAR formats, in your browser.",
+    introParagraph: "Extracts the source archive, then repacks its contents into your chosen target format.",
+  },
+  {
+    slug: "zip-to-7z-converter",
+    toolSlug: "archive-format-converter",
+    h1: "ZIP to 7z Converter",
+    subtitle: "Repack a ZIP Archive as .7z",
+    metaTitle: "ZIP to 7z Converter — Free Online Tool",
+    metaDescription: "Free tool to convert a ZIP archive to 7z format, entirely in your browser.",
+    introParagraph: "7z typically compresses tighter than ZIP for the same contents.",
+  },
+  {
+    slug: "rar-to-zip-converter",
+    toolSlug: "archive-format-converter",
+    h1: "RAR to ZIP Converter",
+    subtitle: "Repack a RAR Archive as a Standard ZIP",
+    metaTitle: "RAR to ZIP Converter — Free, Private Tool",
+    metaDescription: "Free tool to convert a RAR archive to ZIP format, no software install needed.",
+    introParagraph: "Handy since ZIP has far broader native support across operating systems than RAR.",
+  },
+  {
+    slug: "tar-to-zip-converter",
+    toolSlug: "archive-format-converter",
+    h1: "TAR to ZIP Converter",
+    subtitle: "Repack a TAR Archive as a Standard ZIP",
+    metaTitle: "TAR to ZIP Converter — Free Online Tool",
+    metaDescription: "Free tool to convert a TAR archive to ZIP format, entirely in your browser.",
+    introParagraph: "Useful when sharing a Linux-originated TAR bundle with Windows users expecting ZIP.",
+  },
+  {
+    slug: "extract-iso-file",
+    toolSlug: "iso-extractor",
+    h1: "Extract Files From an ISO",
+    subtitle: "Get Disc Image Contents Without Mounting It",
+    metaTitle: "Extract ISO File — Free, Private Tool",
+    metaDescription: "Free tool to extract files from an ISO disc image, entirely in your browser.",
+    introParagraph: "No need to mount the ISO as a virtual drive — files come out directly as a ZIP.",
+  },
+  {
+    slug: "open-iso-image",
+    toolSlug: "iso-extractor",
+    h1: "Open an ISO Image",
+    subtitle: "View and Extract a Disc Image's Contents",
+    metaTitle: "Open ISO Image — Free Online Tool",
+    metaDescription: "Free tool to open an ISO image and extract its contents, no upload required.",
+    introParagraph: "Reads the standard ISO 9660 file system directly, including bootable installer discs.",
+  },
+  {
+    slug: "iso-file-extractor",
+    toolSlug: "iso-extractor",
+    h1: "ISO File Extractor",
+    subtitle: "Unpack a Disc Image's Files in Your Browser",
+    metaTitle: "ISO File Extractor — Free, Private Tool",
+    metaDescription: "Free ISO file extractor running entirely in your browser via WebAssembly.",
+    introParagraph: "Large multi-gigabyte ISOs will use significant browser memory during extraction.",
+  },
+  {
+    slug: "mount-iso-alternative",
+    toolSlug: "iso-extractor",
+    h1: "Alternative to Mounting an ISO",
+    subtitle: "Extract Files Without a Virtual Drive",
+    metaTitle: "Mount ISO Alternative — Free Online Tool",
+    metaDescription: "Free alternative to mounting an ISO — extracts its files directly instead.",
+    introParagraph: "Skips the mount step entirely when all you need is the files inside.",
+  },
+  {
+    slug: "unpack-iso-disc-image",
+    toolSlug: "iso-extractor",
+    h1: "Unpack an ISO Disc Image",
+    subtitle: "Get Every File Out of a CD or DVD Image",
+    metaTitle: "Unpack ISO Disc Image — Free, Private Tool",
+    metaDescription: "Free tool to unpack an ISO disc image's contents, entirely in your browser.",
+    introParagraph: "Every file's name and size is listed once extraction completes.",
+  },
+  {
+    slug: "create-tar-gz-online",
+    toolSlug: "tar-gz-creator",
+    h1: "Create a .tar.gz File Online",
+    subtitle: "Bundle and Compress Files the Unix Way",
+    metaTitle: "Create TAR.GZ Online — Free, Private Tool",
+    metaDescription: "Free tool to create a .tar.gz archive online, entirely in your browser.",
+    introParagraph: "Runs the same real TAR-then-GZIP process command-line tools use, just in your browser.",
+  },
+  {
+    slug: "make-tar-gz-archive",
+    toolSlug: "tar-gz-creator",
+    h1: "Make a .tar.gz Archive",
+    subtitle: "Bundle Files for Linux and macOS Distribution",
+    metaTitle: "Make TAR.GZ Archive — Free Online Tool",
+    metaDescription: "Free tool to make a .tar.gz archive from your files, no upload required.",
+    introParagraph: "The conventional format for source releases and backup bundles on Unix systems.",
+  },
+  {
+    slug: "tar-gz-maker",
+    toolSlug: "tar-gz-creator",
+    h1: "TAR.GZ Maker",
+    subtitle: "Build a Standard .tar.gz File From Any Files",
+    metaTitle: "TAR.GZ Maker — Free, Private Tool",
+    metaDescription: "Free TAR.GZ maker producing genuine, standard archives extractable anywhere.",
+    introParagraph: "Opens correctly with `tar -xzf` on the command line, since it's a real standard file.",
+  },
+  {
+    slug: "compress-to-tar-gz",
+    toolSlug: "tar-gz-creator",
+    h1: "Compress Files to .tar.gz",
+    subtitle: "Bundle and Compress in One Step",
+    metaTitle: "Compress to TAR.GZ — Free Online Tool",
+    metaDescription: "Free tool to compress multiple files into one .tar.gz archive, in your browser.",
+    introParagraph: "Files keep their relative folder structure through the bundling step.",
+  },
+  {
+    slug: "build-tar-gz-file",
+    toolSlug: "tar-gz-creator",
+    h1: "Build a .tar.gz File",
+    subtitle: "Package Files for Distribution or Backup",
+    metaTitle: "Build TAR.GZ File — Free, Private Tool",
+    metaDescription: "Free tool to build a .tar.gz file from your files, entirely in your browser.",
+    introParagraph: "A genuinely standard archive, produced with a real 7-Zip build compiled to WebAssembly.",
+  },
+  {
+    slug: "split-large-file-online",
+    toolSlug: "split-archive-by-size",
+    h1: "Split a Large File Online",
+    subtitle: "Break Any File Into Size-Limited Parts",
+    metaTitle: "Split Large File Online — Free, Private Tool",
+    metaDescription: "Free tool to split a large file into smaller parts, entirely in your browser.",
+    introParagraph: "Cuts the file at fixed byte boundaries into sequentially numbered parts.",
+  },
+  {
+    slug: "file-splitter-online",
+    toolSlug: "split-archive-by-size",
+    h1: "File Splitter Online",
+    subtitle: "Break a File Down to Fit Upload or Email Limits",
+    metaTitle: "File Splitter Online — Free Tool",
+    metaDescription: "Free online file splitter for fitting large files under size limits.",
+    introParagraph: "Reassemble parts later by concatenating them back together in order.",
+  },
+  {
+    slug: "break-file-into-parts",
+    toolSlug: "split-archive-by-size",
+    h1: "Break a File Into Parts",
+    subtitle: "Divide a Large File Into Manageable Chunks",
+    metaTitle: "Break File Into Parts — Free, Private Tool",
+    metaDescription: "Free tool to break a large file into numbered parts, no upload required.",
+    introParagraph: "Works on any file type — archives, videos, or disk images alike.",
+  },
+  {
+    slug: "divide-file-into-chunks",
+    toolSlug: "split-archive-by-size",
+    h1: "Divide a File Into Chunks",
+    subtitle: "Split Any File at a Size You Choose",
+    metaTitle: "Divide File Into Chunks — Free Online Tool",
+    metaDescription: "Free tool to divide a file into fixed-size chunks, entirely in your browser.",
+    introParagraph: "Choose your max size per part, then download the sequentially numbered pieces.",
+  },
+  {
+    slug: "split-file-by-size",
+    toolSlug: "split-archive-by-size",
+    h1: "Split a File by Size",
+    subtitle: "Set a Maximum Size and Split Automatically",
+    metaTitle: "Split File by Size — Free, Private Tool",
+    metaDescription: "Free tool to split a file by a maximum size limit, no server upload.",
+    introParagraph: "The final part is just whatever bytes remain — usually smaller than your chosen limit.",
+  },
+  {
+    slug: "pdf-image-to-text",
+    toolSlug: "pdf-to-text-ocr",
+    h1: "PDF Image to Text",
+    subtitle: "Recognize Text From an Image-Only PDF Page",
+    metaTitle: "PDF Image to Text — Free, Private Tool",
+    metaDescription: "Free tool to convert a PDF page image into text using in-browser OCR.",
+    introParagraph: "Renders each page as an image internally, then recognizes its text with a real OCR engine.",
+  },
+  {
+    slug: "convert-scanned-pdf",
+    toolSlug: "pdf-to-text-ocr",
+    h1: "Convert a Scanned PDF to Text",
+    subtitle: "Get Real, Selectable Text From a Scan",
+    metaTitle: "Convert Scanned PDF — Free Online Tool",
+    metaDescription: "Free tool to convert a scanned PDF to plain text, page by page, in your browser.",
+    introParagraph: "No server upload — pages render and recognize entirely on your device.",
+  },
+  {
+    slug: "handwriting-recognition-tool",
+    toolSlug: "handwriting-ocr",
+    h1: "Handwriting Recognition Tool",
+    subtitle: "Turn Print Handwriting Into Digital Text",
+    metaTitle: "Handwriting Recognition Tool — Free, Private Tool",
+    metaDescription: "Free handwriting recognition tool, running entirely in your browser, no upload.",
+    introParagraph: "Recognizes neatly printed handwriting most reliably; cursive results will vary.",
+  },
+  {
+    slug: "cursive-to-text",
+    toolSlug: "handwriting-ocr",
+    h1: "Cursive to Text",
+    subtitle: "Attempt OCR on Cursive or Print Handwriting",
+    metaTitle: "Cursive to Text — Free Online Tool",
+    metaDescription: "Free tool to attempt text recognition on cursive or print handwriting photos.",
+    introParagraph: "Honest caveat: this uses a general OCR engine, not a dedicated cursive model — results vary.",
+  },
+  {
+    slug: "handwriting-to-digital-text",
+    toolSlug: "handwriting-ocr",
+    h1: "Handwriting to Digital Text",
+    subtitle: "Digitize a Photo of Handwritten Notes",
+    metaTitle: "Handwriting to Digital Text — Free, Private Tool",
+    metaDescription: "Free tool to convert handwritten notes into digital text, no upload required.",
+    introParagraph: "Best results come from clear lighting and well-separated printed letters.",
+  },
+  {
+    slug: "screen-capture-to-text",
+    toolSlug: "screenshot-ocr",
+    h1: "Screen Capture to Text",
+    subtitle: "Extract Text From Any Screen Capture",
+    metaTitle: "Screen Capture to Text — Free, Private Tool",
+    metaDescription: "Free tool to extract text from a screen capture image, entirely in your browser.",
+    introParagraph: "Works on PNG, JPG, and WebP screenshots alike, with reliably high accuracy.",
+  },
+  {
+    slug: "pic-to-text-tool",
+    toolSlug: "screenshot-ocr",
+    h1: "Picture to Text Tool",
+    subtitle: "Get Copyable Text From Any Screenshot Image",
+    metaTitle: "Picture to Text Tool — Free Online Tool",
+    metaDescription: "Free tool to convert a picture or screenshot into copyable text.",
+    introParagraph: "No retyping error messages or chat text ever again.",
+  },
+  {
+    slug: "capture-text-from-screen",
+    toolSlug: "screenshot-ocr",
+    h1: "Capture Text From a Screen Image",
+    subtitle: "Pull Selectable Text Out of a Screenshot",
+    metaTitle: "Capture Text From Screen — Free, Private Tool",
+    metaDescription: "Free tool to capture and extract text from a screenshot, no upload needed.",
+    introParagraph: "Screenshots are clean and high-contrast, making recognition especially reliable.",
+  },
+  {
+    slug: "ocr-for-non-english",
+    toolSlug: "multi-language-ocr",
+    h1: "OCR for Non-English Text",
+    subtitle: "Recognize Text in Ten Different Languages",
+    metaTitle: "OCR for Non-English Text — Free, Private Tool",
+    metaDescription: "Free OCR tool supporting non-English languages including Hindi, Chinese, and Arabic.",
+    introParagraph: "Select the matching language model before recognizing for the best accuracy.",
+  },
+  {
+    slug: "translate-ocr-image",
+    toolSlug: "multi-language-ocr",
+    h1: "OCR an Image in Another Language",
+    subtitle: "Recognize Foreign-Language Text From a Photo",
+    metaTitle: "OCR Image in Another Language — Free Tool",
+    metaDescription: "Free tool to recognize text in a foreign language from an image, in your browser.",
+    introParagraph: "Recognition only — pair the result with a separate translator if you also need translation.",
+  },
+  {
+    slug: "multilingual-text-recognition",
+    toolSlug: "multi-language-ocr",
+    h1: "Multilingual Text Recognition",
+    subtitle: "OCR Across Ten Supported Languages and Scripts",
+    metaTitle: "Multilingual Text Recognition — Free, Private Tool",
+    metaDescription: "Free multilingual text recognition tool, entirely in your browser.",
+    introParagraph: "Each language's model downloads once on first use, then recognition runs locally.",
+  },
+  {
+    slug: "table-image-to-xlsx",
+    toolSlug: "table-ocr",
+    h1: "Table Image to XLSX",
+    subtitle: "Turn a Photographed Table Into a Real Spreadsheet",
+    metaTitle: "Table Image to XLSX — Free, Private Tool",
+    metaDescription: "Free tool to convert a table image into a genuine .xlsx file, in your browser.",
+    introParagraph: "Reconstructs rows and columns by clustering word positions from the OCR pass.",
+  },
+  {
+    slug: "photo-data-to-spreadsheet",
+    toolSlug: "table-ocr",
+    h1: "Photo Data to Spreadsheet",
+    subtitle: "Digitize a Printed Table Into Excel",
+    metaTitle: "Photo Data to Spreadsheet — Free Online Tool",
+    metaDescription: "Free tool to turn photographed table data into a spreadsheet, no upload needed.",
+    introParagraph: "Works best on clear, evenly-spaced columns with good lighting.",
+  },
+  {
+    slug: "extract-table-from-photo",
+    toolSlug: "table-ocr",
+    h1: "Extract a Table From a Photo",
+    subtitle: "Get Structured Rows and Columns From an Image",
+    metaTitle: "Extract Table From Photo — Free, Private Tool",
+    metaDescription: "Free tool to extract a table's structure from a photo, exported directly to Excel.",
+    introParagraph: "A heuristic row/column reconstruction — always double-check the exported spreadsheet.",
+  },
+  {
+    slug: "grocery-receipt-scanner",
+    toolSlug: "receipt-ocr",
+    h1: "Grocery Receipt Scanner",
+    subtitle: "Extract Text and Total From a Grocery Receipt",
+    metaTitle: "Grocery Receipt Scanner — Free, Private Tool",
+    metaDescription: "Free grocery receipt scanner with automatic total-line detection, in your browser.",
+    introParagraph: "Handy for quickly logging a grocery trip's total without retyping the whole receipt.",
+  },
+  {
+    slug: "expense-receipt-ocr",
+    toolSlug: "receipt-ocr",
+    h1: "Expense Receipt OCR",
+    subtitle: "Digitize a Receipt for Expense Reports",
+    metaTitle: "Expense Receipt OCR — Free Online Tool",
+    metaDescription: "Free expense receipt OCR tool, running entirely in your browser, no upload.",
+    introParagraph: "Extracts full text plus a best-effort detected total line.",
+  },
+  {
+    slug: "purchase-receipt-digitizer",
+    toolSlug: "receipt-ocr",
+    h1: "Purchase Receipt Digitizer",
+    subtitle: "Turn a Paper Receipt Into Searchable Text",
+    metaTitle: "Purchase Receipt Digitizer — Free, Private Tool",
+    metaDescription: "Free tool to digitize a purchase receipt's text, no server involved.",
+    introParagraph: "A basic text extraction with total-detection, not full structured line-item parsing.",
+  },
+  {
+    slug: "driver-license-ocr",
+    toolSlug: "id-card-ocr",
+    h1: "Driver's License OCR",
+    subtitle: "Extract Printed Text From a License, On-Device",
+    metaTitle: "Driver's License OCR — Free, Private Tool",
+    metaDescription: "Free driver's license OCR tool that keeps processing entirely on your device.",
+    introParagraph: "Given how sensitive license data is, this deliberately never uploads your document.",
+  },
+  {
+    slug: "passport-ocr",
+    toolSlug: "id-card-ocr",
+    h1: "Passport OCR",
+    subtitle: "Recognize Printed Text From a Passport Photo Page",
+    metaTitle: "Passport OCR — Free Online Tool",
+    metaDescription: "Free passport OCR tool, running entirely in your browser with no upload.",
+    introParagraph: "A clear, glare-free, straight-on photo of the page recognizes most reliably.",
+  },
+  {
+    slug: "identity-document-scanner",
+    toolSlug: "id-card-ocr",
+    h1: "Identity Document Scanner",
+    subtitle: "Extract Text From Any ID-Style Document",
+    metaTitle: "Identity Document Scanner — Free, Private Tool",
+    metaDescription: "Free identity document scanner, entirely on-device, no upload of your ID.",
+    introParagraph: "All recognition happens locally in your browser's WebAssembly sandbox.",
+  },
+  {
+    slug: "number-plate-scanner",
+    toolSlug: "license-plate-ocr",
+    h1: "Number Plate Scanner",
+    subtitle: "Read a Vehicle's Plate Number From a Photo",
+    metaTitle: "Number Plate Scanner — Free, Private Tool",
+    metaDescription: "Free number plate scanner tool, cleaning results to letters and digits only.",
+    introParagraph: "A cropped, front-on shot of just the plate recognizes most reliably.",
+  },
+  {
+    slug: "car-plate-recognition",
+    toolSlug: "license-plate-ocr",
+    h1: "Car Plate Recognition",
+    subtitle: "Recognize a License Plate Automatically",
+    metaTitle: "Car Plate Recognition — Free Online Tool",
+    metaDescription: "Free car plate recognition tool, entirely in your browser with no upload.",
+    introParagraph: "Always verify the result against the photo since similar characters can be misread.",
+  },
+  {
+    slug: "automatic-plate-reader-tool",
+    toolSlug: "license-plate-ocr",
+    h1: "Automatic Plate Reader Tool",
+    subtitle: "OCR a License Plate From a Single Photo",
+    metaTitle: "Automatic Plate Reader Tool — Free, Private Tool",
+    metaDescription: "Free automatic plate reader tool for single photos, in your browser.",
+    introParagraph: "A single-image reader, not a live video ALPR system.",
+  },
+  {
+    slug: "business-card-scanner",
+    toolSlug: "business-card-ocr",
+    h1: "Business Card Scanner",
+    subtitle: "Turn a Card Photo Into a Ready Contact File",
+    metaTitle: "Business Card Scanner — Free, Private Tool",
+    metaDescription: "Free business card scanner generating a .vcf file, entirely in your browser.",
+    introParagraph: "Email and phone number are detected automatically from the recognized text.",
+  },
+  {
+    slug: "card-scanner-to-vcf",
+    toolSlug: "business-card-ocr",
+    h1: "Card Scanner to VCF",
+    subtitle: "Generate a Standard vCard From a Business Card",
+    metaTitle: "Card Scanner to VCF — Free Online Tool",
+    metaDescription: "Free tool to scan a business card and export a standard .vcf contact file.",
+    introParagraph: "Import the resulting .vcf directly into any contacts app.",
+  },
+  {
+    slug: "digitize-business-card",
+    toolSlug: "business-card-ocr",
+    h1: "Digitize a Business Card",
+    subtitle: "Convert a Physical Card Into a Digital Contact",
+    metaTitle: "Digitize Business Card — Free, Private Tool",
+    metaDescription: "Free tool to digitize a business card into a contact file, no upload required.",
+    introParagraph: "Field detection is heuristic — always review before importing the generated card.",
+  },
+  {
+    slug: "ocr-document-to-word",
+    toolSlug: "ocr-to-word",
+    h1: "OCR Document to Word",
+    subtitle: "Recognize Text and Export an Editable .docx",
+    metaTitle: "OCR Document to Word — Free, Private Tool",
+    metaDescription: "Free tool to OCR a document image and save it as an editable Word file.",
+    introParagraph: "Each recognized line becomes a paragraph in a genuine, editable Word document.",
+  },
+  {
+    slug: "extract-text-to-docx",
+    toolSlug: "ocr-to-word",
+    h1: "Extract Text to DOCX",
+    subtitle: "Turn an Image's Text Into a Word Document",
+    metaTitle: "Extract Text to DOCX — Free Online Tool",
+    metaDescription: "Free tool to extract text from an image and save it as a .docx file.",
+    introParagraph: "A plain-text reflow, not a layout-preserving conversion of the original image.",
+  },
+  {
+    slug: "scanned-image-to-word",
+    toolSlug: "ocr-to-word",
+    h1: "Scanned Image to Word",
+    subtitle: "Get an Editable Document From a Scan",
+    metaTitle: "Scanned Image to Word — Free, Private Tool",
+    metaDescription: "Free tool to convert a scanned image into an editable Word document.",
+    introParagraph: "Recognition and document generation both happen entirely in your browser.",
+  },
+  {
+    slug: "pdf-ocr-searchable",
+    toolSlug: "ocr-to-pdf",
+    h1: "Make a PDF OCR-Searchable",
+    subtitle: "Add a Genuine, Invisible Text Layer to a Scan",
+    metaTitle: "PDF OCR Searchable — Free, Private Tool",
+    metaDescription: "Free tool to add an invisible searchable text layer to a scanned PDF page image.",
+    introParagraph: "Verified independently with a separate PDF reader — the text layer is genuinely extractable.",
+  },
+  {
+    slug: "make-scanned-pdf-searchable",
+    toolSlug: "ocr-to-pdf",
+    h1: "Make a Scanned PDF Searchable",
+    subtitle: "Add Selectable Text Without Changing the Look",
+    metaTitle: "Make Scanned PDF Searchable — Free Online Tool",
+    metaDescription: "Free tool to make a scanned PDF page searchable, entirely in your browser.",
+    introParagraph: "The image stays visually unchanged; only a hidden text layer is added on top.",
+  },
+  {
+    slug: "add-text-layer-to-scan",
+    toolSlug: "ocr-to-pdf",
+    h1: "Add a Text Layer to a Scan",
+    subtitle: "Turn a Flat Image Into a Searchable PDF",
+    metaTitle: "Add Text Layer to Scan — Free, Private Tool",
+    metaDescription: "Free tool to add an OCR-generated text layer to a scanned image, no upload.",
+    introParagraph: "Positioned invisible text matches the recognized words' original locations.",
+  },
+  {
+    slug: "ocr-multiple-files",
+    toolSlug: "batch-ocr-processor",
+    h1: "OCR Multiple Files at Once",
+    subtitle: "Batch-Process a Folder of Images",
+    metaTitle: "OCR Multiple Files — Free, Private Tool",
+    metaDescription: "Free tool to OCR multiple image files at once, results bundled into one ZIP.",
+    introParagraph: "Each image is processed one at a time and gets its own matching .txt file.",
+  },
+  {
+    slug: "bulk-image-text-extractor",
+    toolSlug: "batch-ocr-processor",
+    h1: "Bulk Image Text Extractor",
+    subtitle: "Run OCR on Many Images Without Doing It One by One",
+    metaTitle: "Bulk Image Text Extractor — Free Online Tool",
+    metaDescription: "Free bulk image text extractor, processing a whole batch entirely in your browser.",
+    introParagraph: "Nothing is uploaded — every image is processed locally on your device.",
+  },
+  {
+    slug: "batch-scan-to-text",
+    toolSlug: "batch-ocr-processor",
+    h1: "Batch Scan to Text",
+    subtitle: "Digitize a Whole Batch of Scans at Once",
+    metaTitle: "Batch Scan to Text — Free, Private Tool",
+    metaDescription: "Free tool to batch-convert scanned images to text, exported as a ZIP of .txt files.",
+    introParagraph: "Sequential processing keeps memory usage manageable on large batches.",
+  },
+  {
+    slug: "switch-archive-format-tool",
+    toolSlug: "archive-format-converter",
+    h1: "Switch an Archive's Format",
+    subtitle: "Repack a ZIP, 7z, TAR, or RAR Into a New Format",
+    metaTitle: "Switch Archive Format — Free, Private Tool",
+    metaDescription: "Free tool to switch an archive from one format to another, entirely in your browser.",
+    introParagraph: "Auto-detects the source format, extracts it, then repacks into your chosen target format.",
+  },
+];
+
+export function findToolVariant(slug: string): ToolVariant | undefined {
+  return TOOL_VARIANTS.find((variant) => variant.slug === slug);
+}
+
+export function getVariantsForTool(toolSlug: string): ToolVariant[] {
+  return TOOL_VARIANTS.filter((variant) => variant.toolSlug === toolSlug);
+}
