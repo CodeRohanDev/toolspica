@@ -867,6 +867,24 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
         "done": true
       },
       {
+        "name": "YAML Formatter",
+        "slug": "yaml-formatter",
+        "tier": 2,
+        "done": true
+      },
+      {
+        "name": "YAML to JSON",
+        "slug": "yaml-to-json",
+        "tier": 2,
+        "done": true
+      },
+      {
+        "name": "JSON to YAML",
+        "slug": "json-to-yaml",
+        "tier": 2,
+        "done": true
+      },
+      {
         "name": "Base64 Encode",
         "slug": "base64-encode",
         "tier": 1,
@@ -1011,6 +1029,12 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
         "done": true
       },
       {
+        "name": "GraphQL Query Formatter",
+        "slug": "graphql-query-formatter",
+        "tier": 2,
+        "done": true
+      },
+      {
         "name": "URL Parser",
         "slug": "url-parser",
         "tier": 1,
@@ -1093,30 +1117,6 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
         "slug": "environment-variable-to-json-converter",
         "tier": 1,
         "done": true
-      },
-      {
-        "name": "YAML Formatter",
-        "slug": "yaml-formatter",
-        "tier": 2,
-        "done": false
-      },
-      {
-        "name": "YAML to JSON",
-        "slug": "yaml-to-json",
-        "tier": 2,
-        "done": false
-      },
-      {
-        "name": "JSON to YAML",
-        "slug": "json-to-yaml",
-        "tier": 2,
-        "done": false
-      },
-      {
-        "name": "GraphQL Query Formatter",
-        "slug": "graphql-query-formatter",
-        "tier": 2,
-        "done": false
       },
       {
         "name": "Webhook Tester",
@@ -3681,4 +3681,4 @@ export const ALL_TOOLS: (Tool & { categoryName: string; categorySlug: string })[
   });
 
 export const TOTAL_TOOLS = 574;
-export const TOTAL_TOOLS_DONE = 419;
+export const TOTAL_TOOLS_DONE = 423;

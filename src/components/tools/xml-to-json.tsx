@@ -23,6 +23,7 @@ export function XmlToJson() {
   const [error, setError] = React.useState<string | null>(null);
 
   const json = React.useMemo(() => {
+    if (typeof window === "undefined") return "";
     try {
       const doc = new DOMParser().parseFromString(input, "application/xml");
       if (doc.querySelector("parsererror")) throw new Error("Invalid XML");

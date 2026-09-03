@@ -421,6 +421,10 @@ import { JsonDiffChecker } from "@/components/tools/json-diff-checker";
 import { JsonPathTester } from "@/components/tools/json-path-tester";
 import { UserAgentParser } from "@/components/tools/user-agent-parser";
 import { JsMinifier } from "@/components/tools/js-minifier";
+import { YamlFormatter } from "@/components/tools/yaml-formatter";
+import { YamlToJson } from "@/components/tools/yaml-to-json";
+import { JsonToYaml } from "@/components/tools/json-to-yaml";
+import { GraphqlQueryFormatter } from "@/components/tools/graphql-query-formatter";
 import { wordCounterContent } from "@/lib/tools-content/word-counter";
 import { characterCounterContent } from "@/lib/tools-content/character-counter";
 import { caseConverterContent } from "@/lib/tools-content/case-converter";
@@ -840,6 +844,10 @@ import { jsonDiffCheckerContent } from "@/lib/tools-content/json-diff-checker";
 import { jsonPathTesterContent } from "@/lib/tools-content/json-path-tester";
 import { userAgentParserContent } from "@/lib/tools-content/user-agent-parser";
 import { jsMinifierContent } from "@/lib/tools-content/js-minifier";
+import { yamlFormatterContent } from "@/lib/tools-content/yaml-formatter";
+import { yamlToJsonContent } from "@/lib/tools-content/yaml-to-json";
+import { jsonToYamlContent } from "@/lib/tools-content/json-to-yaml";
+import { graphqlQueryFormatterContent } from "@/lib/tools-content/graphql-query-formatter";
 
 export interface RegisteredTool {
   Component: ComponentType;
@@ -1629,6 +1637,10 @@ export const TOOLS_REGISTRY: Record<string, RegisteredTool> = {
   "json-path-tester": { Component: JsonPathTester, content: jsonPathTesterContent },
   "user-agent-parser": { Component: UserAgentParser, content: userAgentParserContent },
   "js-minifier": { Component: JsMinifier, content: jsMinifierContent },
+  "yaml-formatter": { Component: YamlFormatter, content: yamlFormatterContent },
+  "yaml-to-json": { Component: YamlToJson, content: yamlToJsonContent },
+  "json-to-yaml": { Component: JsonToYaml, content: jsonToYamlContent },
+  "graphql-query-formatter": { Component: GraphqlQueryFormatter, content: graphqlQueryFormatterContent },
 };
 
 export function getRegisteredTool(slug: string): RegisteredTool | undefined {

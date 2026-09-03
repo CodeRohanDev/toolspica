@@ -26,6 +26,7 @@ export function XmlFormatter() {
   const [error, setError] = React.useState<string | null>(null);
 
   const output = React.useMemo(() => {
+    if (typeof window === "undefined") return "";
     try {
       const parser = new DOMParser();
       const doc = parser.parseFromString(input, "application/xml");

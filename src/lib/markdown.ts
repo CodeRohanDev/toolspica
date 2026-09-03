@@ -103,6 +103,7 @@ function walk(node: ChildNode): string {
 }
 
 export function htmlToMarkdown(html: string): string {
+  if (typeof window === "undefined") return "";
   const doc = new DOMParser().parseFromString(html, "text/html");
   return Array.from(doc.body.childNodes)
     .map(walk)

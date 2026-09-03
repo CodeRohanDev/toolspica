@@ -380,9 +380,9 @@ otherwise. Mark `[x]` here AND flip `done` by re-running `npm run generate:tools
 - [x] CSV to JSON
 - [x] XML Formatter
 - [x] XML to JSON
-- [ ] YAML Formatter
-- [ ] YAML to JSON
-- [ ] JSON to YAML
+- [x] YAML Formatter
+- [x] YAML to JSON
+- [x] JSON to YAML
 - [x] JWT Generator
 - [x] HTML Minifier
 - [x] CSS Minifier
@@ -396,7 +396,7 @@ otherwise. Mark `[x]` here AND flip `done` by re-running `npm run generate:tools
 - [x] Code Diff Checker
 - [x] JSON Diff Checker
 - [x] JSON Path Tester
-- [ ] GraphQL Query Formatter
+- [x] GraphQL Query Formatter
 - [x] User Agent Parser
 
 ### Video Tools

@@ -18,7 +18,9 @@
     "7z-wasm": "^1.2.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "graphql": "^17.0.2",
     "imagetracerjs": "^1.2.6",
+    "js-yaml": "^5.4.1",
     "lamejs": "^1.2.1",
     "libheif-js": "^1.19.8",
     "lucide-react": "^1.38.0",
@@ -37,6 +39,7 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@tailwindcss/typography": "^0.5.20",
+    "@types/js-yaml": "^4.0.9",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
