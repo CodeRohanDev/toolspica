@@ -54,6 +54,39 @@ otherwise. Mark `[x]` here AND flip `done` by re-running `npm run generate:tools
 
 ## Tier 1
 
+### Music Tools
+- [x] BPM Tap Tempo Tool
+- [x] Online Metronome
+- [x] Music Interval & Scale Calculator
+
+### Fun & Lifestyle Tools
+- [x] Sleep Cycle Calculator
+- [x] Betting Odds Converter
+- [x] Zodiac Sign Finder
+
+### Travel Tools
+- [x] Trip Budget Calculator
+- [x] Packing List Generator
+- [x] Flight Time & Layover Calculator
+- [x] Jet Lag Adjustment Calculator
+
+### Automotive Calculators
+- [x] Car Loan Calculator
+- [x] Fuel Economy (MPG) Calculator
+- [x] Car Depreciation Estimator
+
+### Cooking & Kitchen Tools
+- [x] Recipe Scaler
+- [x] Ingredient Weight Converter
+- [x] Oven Temperature Converter
+- [x] Baking Ratio Calculator
+
+### Home & DIY Calculators
+- [x] Paint Calculator
+- [x] Tile & Flooring Calculator
+- [x] Concrete & Gravel Calculator
+- [x] Wallpaper Calculator
+
 ### PDF Tools
 - [x] PDF Editor
 - [x] PDF to EPUB
@@ -205,6 +238,7 @@ otherwise. Mark `[x]` here AND flip `done` by re-running `npm run generate:tools
 - [x] Net Worth Calculator
 - [x] Inflation Calculator
 - [x] Savings Goal Calculator
+- [x] Bill Split Calculator
 
 ### Health & Fitness Calculators
 - [x] BMR Calculator
@@ -343,6 +377,12 @@ otherwise. Mark `[x]` here AND flip `done` by re-running `npm run generate:tools
 - [x] Work Days Calculator
 
 ## Tier 2
+
+### Fun & Lifestyle Tools
+- [x] Moon Phase Calculator
+
+### Finance & Business Calculators
+- [x] Rent vs. Buy Calculator
 
 ### PDF Tools
 - [x] JPG to PDF
@@ -641,10 +681,10 @@ otherwise. Mark `[x]` here AND flip `done` by re-running `npm run generate:tools
 
 ### Language & Translation Tools
 - [x] Language Detector
-- [ ] Dictionary Lookup
-- [ ] Thesaurus / Synonym Finder
-- [ ] Text Pronunciation Guide
-- [ ] Word Definition Lookup
+- [x] Dictionary Lookup
+- [x] Thesaurus / Synonym Finder
+- [x] Text Pronunciation Guide
+- [x] Word Definition Lookup
 
 ### Crypto & Currency Tools
 - [x] Cryptocurrency Price Converter
@@ -763,7 +803,7 @@ otherwise. Mark `[x]` here AND flip `done` by re-running `npm run generate:tools
 - [x] Video Joiner by Timeline
 
 ### Finance & Business Calculators
-- [ ] Currency Converter
+- [x] Currency Converter
 
 ### Social Media Tools
 - [ ] YouTube Tags Extractor

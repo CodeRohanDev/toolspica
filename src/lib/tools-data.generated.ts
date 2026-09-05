@@ -1923,6 +1923,12 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
         "done": true
       },
       {
+        "name": "Currency Converter",
+        "slug": "currency-converter",
+        "tier": 5,
+        "done": true
+      },
+      {
         "name": "Tax Calculator",
         "slug": "tax-calculator",
         "tier": 1,
@@ -1989,10 +1995,16 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
         "done": true
       },
       {
-        "name": "Currency Converter",
-        "slug": "currency-converter",
-        "tier": 5,
-        "done": false
+        "name": "Bill Split Calculator",
+        "slug": "bill-split-calculator",
+        "tier": 1,
+        "done": true
+      },
+      {
+        "name": "Rent vs. Buy Calculator",
+        "slug": "rent-vs-buy-calculator",
+        "tier": 2,
+        "done": true
       }
     ]
   },
@@ -3621,33 +3633,33 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
         "done": true
       },
       {
-        "name": "Language Translator",
-        "slug": "language-translator",
-        "tier": 5,
-        "done": false
-      },
-      {
         "name": "Dictionary Lookup",
         "slug": "dictionary-lookup",
         "tier": 3,
-        "done": false
+        "done": true
       },
       {
         "name": "Thesaurus / Synonym Finder",
         "slug": "thesaurus-synonym-finder",
         "tier": 3,
-        "done": false
+        "done": true
       },
       {
         "name": "Text Pronunciation Guide",
         "slug": "text-pronunciation-guide",
         "tier": 3,
-        "done": false
+        "done": true
       },
       {
         "name": "Word Definition Lookup",
         "slug": "word-definition-lookup",
         "tier": 3,
+        "done": true
+      },
+      {
+        "name": "Language Translator",
+        "slug": "language-translator",
+        "tier": 5,
         "done": false
       }
     ]
@@ -3849,6 +3861,174 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
         "done": false
       }
     ]
+  },
+  {
+    "name": "Home & DIY Calculators",
+    "slug": "home-and-diy-calculators",
+    "tools": [
+      {
+        "name": "Paint Calculator",
+        "slug": "paint-calculator",
+        "tier": 1,
+        "done": true
+      },
+      {
+        "name": "Tile & Flooring Calculator",
+        "slug": "tile-and-flooring-calculator",
+        "tier": 1,
+        "done": true
+      },
+      {
+        "name": "Concrete & Gravel Calculator",
+        "slug": "concrete-and-gravel-calculator",
+        "tier": 1,
+        "done": true
+      },
+      {
+        "name": "Wallpaper Calculator",
+        "slug": "wallpaper-calculator",
+        "tier": 1,
+        "done": true
+      }
+    ]
+  },
+  {
+    "name": "Cooking & Kitchen Tools",
+    "slug": "cooking-and-kitchen-tools",
+    "tools": [
+      {
+        "name": "Recipe Scaler",
+        "slug": "recipe-scaler",
+        "tier": 1,
+        "done": true
+      },
+      {
+        "name": "Ingredient Weight Converter",
+        "slug": "ingredient-weight-converter",
+        "tier": 1,
+        "done": true
+      },
+      {
+        "name": "Oven Temperature Converter",
+        "slug": "oven-temperature-converter",
+        "tier": 1,
+        "done": true
+      },
+      {
+        "name": "Baking Ratio Calculator",
+        "slug": "baking-ratio-calculator",
+        "tier": 1,
+        "done": true
+      }
+    ]
+  },
+  {
+    "name": "Automotive Calculators",
+    "slug": "automotive-calculators",
+    "tools": [
+      {
+        "name": "Car Loan Calculator",
+        "slug": "car-loan-calculator",
+        "tier": 1,
+        "done": true
+      },
+      {
+        "name": "Fuel Economy (MPG) Calculator",
+        "slug": "fuel-economy-calculator",
+        "tier": 1,
+        "done": true
+      },
+      {
+        "name": "Car Depreciation Estimator",
+        "slug": "car-depreciation-estimator",
+        "tier": 1,
+        "done": true
+      }
+    ]
+  },
+  {
+    "name": "Travel Tools",
+    "slug": "travel-tools",
+    "tools": [
+      {
+        "name": "Trip Budget Calculator",
+        "slug": "trip-budget-calculator",
+        "tier": 1,
+        "done": true
+      },
+      {
+        "name": "Packing List Generator",
+        "slug": "packing-list-generator",
+        "tier": 1,
+        "done": true
+      },
+      {
+        "name": "Flight Time & Layover Calculator",
+        "slug": "flight-time-and-layover-calculator",
+        "tier": 1,
+        "done": true
+      },
+      {
+        "name": "Jet Lag Adjustment Calculator",
+        "slug": "jet-lag-adjustment-calculator",
+        "tier": 1,
+        "done": true
+      }
+    ]
+  },
+  {
+    "name": "Fun & Lifestyle Tools",
+    "slug": "fun-and-lifestyle-tools",
+    "tools": [
+      {
+        "name": "Sleep Cycle Calculator",
+        "slug": "sleep-cycle-calculator",
+        "tier": 1,
+        "done": true
+      },
+      {
+        "name": "Betting Odds Converter",
+        "slug": "betting-odds-converter",
+        "tier": 1,
+        "done": true
+      },
+      {
+        "name": "Moon Phase Calculator",
+        "slug": "moon-phase-calculator",
+        "tier": 2,
+        "done": true
+      },
+      {
+        "name": "Zodiac Sign Finder",
+        "slug": "zodiac-sign-finder",
+        "tier": 1,
+        "done": true
+      }
+    ]
+  },
+  {
+    "name": "Music Tools",
+    "slug": "music-tools",
+    "tools": [
+      {
+        "name": "BPM Tap Tempo Tool",
+        "slug": "bpm-tap-tempo-tool",
+        "tier": 1,
+        "done": true
+      },
+      {
+        "name": "Online Metronome",
+        "slug": "online-metronome",
+        "tier": 1,
+        "done": true
+      },
+      {
+        "name": "Music Interval & Scale Calculator",
+        "slug": "music-interval-and-scale-calculator",
+        "tier": 1,
+        "done": true
+      }
+    ]
   }
 ];
 
@@ -3866,5 +4046,5 @@ export const ALL_TOOLS: (Tool & { categoryName: string; categorySlug: string })[
     return true;
   });
 
-export const TOTAL_TOOLS = 605;
-export const TOTAL_TOOLS_DONE = 535;
+export const TOTAL_TOOLS = 629;
+export const TOTAL_TOOLS_DONE = 564;

@@ -351,6 +351,9 @@
 - Net Worth Calculator
 - Inflation Calculator
 - Savings Goal Calculator
+- Bill Split Calculator
+- Rent vs. Buy Calculator
+
 
 # Health & Fitness Calculators
 
@@ -715,6 +718,46 @@
 
 ---
 
+# Home & DIY Calculators
+
+- Paint Calculator
+- Tile & Flooring Calculator
+- Concrete & Gravel Calculator
+- Wallpaper Calculator
+
+# Cooking & Kitchen Tools
+
+- Recipe Scaler
+- Ingredient Weight Converter
+- Oven Temperature Converter
+- Baking Ratio Calculator
+
+# Automotive Calculators
+
+- Car Loan Calculator
+- Fuel Economy (MPG) Calculator
+- Car Depreciation Estimator
+
+# Travel Tools
+
+- Trip Budget Calculator
+- Packing List Generator
+- Flight Time & Layover Calculator
+- Jet Lag Adjustment Calculator
+
+# Fun & Lifestyle Tools
+
+- Sleep Cycle Calculator
+- Betting Odds Converter
+- Moon Phase Calculator
+- Zodiac Sign Finder
+
+# Music Tools
+
+- BPM Tap Tempo Tool
+- Online Metronome
+- Music Interval & Scale Calculator
+
 # Categories for Navigation
 
 1. PDF Tools
@@ -751,3 +794,9 @@
 32. Time & Productivity Tools
 33. Education Tools
 34. Presentation Tools
+35. Home & DIY Calculators
+36. Cooking & Kitchen Tools
+37. Automotive Calculators
+38. Travel Tools
+39. Fun & Lifestyle Tools
+40. Music Tools

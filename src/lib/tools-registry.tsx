@@ -1072,6 +1072,64 @@ import { ParquetViewer } from "@/components/tools/parquet-viewer";
 import { parquetViewerContent } from "@/lib/tools-content/parquet-viewer";
 import { PowerpointViewer } from "@/components/tools/powerpoint-viewer";
 import { powerpointViewerContent } from "@/lib/tools-content/powerpoint-viewer";
+import { DictionaryLookup } from "@/components/tools/dictionary-lookup";
+import { dictionaryLookupContent } from "@/lib/tools-content/dictionary-lookup";
+import { WordDefinitionLookup } from "@/components/tools/word-definition-lookup";
+import { wordDefinitionLookupContent } from "@/lib/tools-content/word-definition-lookup";
+import { TextPronunciationGuide } from "@/components/tools/text-pronunciation-guide";
+import { textPronunciationGuideContent } from "@/lib/tools-content/text-pronunciation-guide";
+import { ThesaurusSynonymFinder } from "@/components/tools/thesaurus-synonym-finder";
+import { thesaurusSynonymFinderContent } from "@/lib/tools-content/thesaurus-synonym-finder";
+import { CurrencyConverter } from "@/components/tools/currency-converter";
+import { currencyConverterContent } from "@/lib/tools-content/currency-converter";
+import { PaintCalculator } from "@/components/tools/paint-calculator";
+import { paintCalculatorContent } from "@/lib/tools-content/paint-calculator";
+import { TileAndFlooringCalculator } from "@/components/tools/tile-and-flooring-calculator";
+import { tileAndFlooringCalculatorContent } from "@/lib/tools-content/tile-and-flooring-calculator";
+import { ConcreteAndGravelCalculator } from "@/components/tools/concrete-and-gravel-calculator";
+import { concreteAndGravelCalculatorContent } from "@/lib/tools-content/concrete-and-gravel-calculator";
+import { WallpaperCalculator } from "@/components/tools/wallpaper-calculator";
+import { wallpaperCalculatorContent } from "@/lib/tools-content/wallpaper-calculator";
+import { RecipeScaler } from "@/components/tools/recipe-scaler";
+import { recipeScalerContent } from "@/lib/tools-content/recipe-scaler";
+import { IngredientWeightConverter } from "@/components/tools/ingredient-weight-converter";
+import { ingredientWeightConverterContent } from "@/lib/tools-content/ingredient-weight-converter";
+import { OvenTemperatureConverter } from "@/components/tools/oven-temperature-converter";
+import { ovenTemperatureConverterContent } from "@/lib/tools-content/oven-temperature-converter";
+import { BakingRatioCalculator } from "@/components/tools/baking-ratio-calculator";
+import { bakingRatioCalculatorContent } from "@/lib/tools-content/baking-ratio-calculator";
+import { CarLoanCalculator } from "@/components/tools/car-loan-calculator";
+import { carLoanCalculatorContent } from "@/lib/tools-content/car-loan-calculator";
+import { FuelEconomyCalculator } from "@/components/tools/fuel-economy-calculator";
+import { fuelEconomyCalculatorContent } from "@/lib/tools-content/fuel-economy-calculator";
+import { CarDepreciationEstimator } from "@/components/tools/car-depreciation-estimator";
+import { carDepreciationEstimatorContent } from "@/lib/tools-content/car-depreciation-estimator";
+import { TripBudgetCalculator } from "@/components/tools/trip-budget-calculator";
+import { tripBudgetCalculatorContent } from "@/lib/tools-content/trip-budget-calculator";
+import { PackingListGenerator } from "@/components/tools/packing-list-generator";
+import { packingListGeneratorContent } from "@/lib/tools-content/packing-list-generator";
+import { FlightTimeAndLayoverCalculator } from "@/components/tools/flight-time-and-layover-calculator";
+import { flightTimeAndLayoverCalculatorContent } from "@/lib/tools-content/flight-time-and-layover-calculator";
+import { JetLagAdjustmentCalculator } from "@/components/tools/jet-lag-adjustment-calculator";
+import { jetLagAdjustmentCalculatorContent } from "@/lib/tools-content/jet-lag-adjustment-calculator";
+import { BillSplitCalculator } from "@/components/tools/bill-split-calculator";
+import { billSplitCalculatorContent } from "@/lib/tools-content/bill-split-calculator";
+import { RentVsBuyCalculator } from "@/components/tools/rent-vs-buy-calculator";
+import { rentVsBuyCalculatorContent } from "@/lib/tools-content/rent-vs-buy-calculator";
+import { SleepCycleCalculator } from "@/components/tools/sleep-cycle-calculator";
+import { sleepCycleCalculatorContent } from "@/lib/tools-content/sleep-cycle-calculator";
+import { BettingOddsConverter } from "@/components/tools/betting-odds-converter";
+import { bettingOddsConverterContent } from "@/lib/tools-content/betting-odds-converter";
+import { ZodiacSignFinder } from "@/components/tools/zodiac-sign-finder";
+import { zodiacSignFinderContent } from "@/lib/tools-content/zodiac-sign-finder";
+import { MoonPhaseCalculator } from "@/components/tools/moon-phase-calculator";
+import { moonPhaseCalculatorContent } from "@/lib/tools-content/moon-phase-calculator";
+import { BpmTapTempoTool } from "@/components/tools/bpm-tap-tempo-tool";
+import { bpmTapTempoToolContent } from "@/lib/tools-content/bpm-tap-tempo-tool";
+import { OnlineMetronome } from "@/components/tools/online-metronome";
+import { onlineMetronomeContent } from "@/lib/tools-content/online-metronome";
+import { MusicIntervalAndScaleCalculator } from "@/components/tools/music-interval-and-scale-calculator";
+import { musicIntervalAndScaleCalculatorContent } from "@/lib/tools-content/music-interval-and-scale-calculator";
 
 export interface RegisteredTool {
   Component: ComponentType;
@@ -1977,6 +2035,35 @@ export const TOOLS_REGISTRY: Record<string, RegisteredTool> = {
   "odt-viewer": { Component: OdtViewer, content: odtViewerContent },
   "parquet-viewer": { Component: ParquetViewer, content: parquetViewerContent },
   "powerpoint-viewer": { Component: PowerpointViewer, content: powerpointViewerContent },
+  "dictionary-lookup": { Component: DictionaryLookup, content: dictionaryLookupContent },
+  "word-definition-lookup": { Component: WordDefinitionLookup, content: wordDefinitionLookupContent },
+  "text-pronunciation-guide": { Component: TextPronunciationGuide, content: textPronunciationGuideContent },
+  "thesaurus-synonym-finder": { Component: ThesaurusSynonymFinder, content: thesaurusSynonymFinderContent },
+  "currency-converter": { Component: CurrencyConverter, content: currencyConverterContent },
+  "paint-calculator": { Component: PaintCalculator, content: paintCalculatorContent },
+  "tile-and-flooring-calculator": { Component: TileAndFlooringCalculator, content: tileAndFlooringCalculatorContent },
+  "concrete-and-gravel-calculator": { Component: ConcreteAndGravelCalculator, content: concreteAndGravelCalculatorContent },
+  "wallpaper-calculator": { Component: WallpaperCalculator, content: wallpaperCalculatorContent },
+  "recipe-scaler": { Component: RecipeScaler, content: recipeScalerContent },
+  "ingredient-weight-converter": { Component: IngredientWeightConverter, content: ingredientWeightConverterContent },
+  "oven-temperature-converter": { Component: OvenTemperatureConverter, content: ovenTemperatureConverterContent },
+  "baking-ratio-calculator": { Component: BakingRatioCalculator, content: bakingRatioCalculatorContent },
+  "car-loan-calculator": { Component: CarLoanCalculator, content: carLoanCalculatorContent },
+  "fuel-economy-calculator": { Component: FuelEconomyCalculator, content: fuelEconomyCalculatorContent },
+  "car-depreciation-estimator": { Component: CarDepreciationEstimator, content: carDepreciationEstimatorContent },
+  "trip-budget-calculator": { Component: TripBudgetCalculator, content: tripBudgetCalculatorContent },
+  "packing-list-generator": { Component: PackingListGenerator, content: packingListGeneratorContent },
+  "flight-time-and-layover-calculator": { Component: FlightTimeAndLayoverCalculator, content: flightTimeAndLayoverCalculatorContent },
+  "jet-lag-adjustment-calculator": { Component: JetLagAdjustmentCalculator, content: jetLagAdjustmentCalculatorContent },
+  "bill-split-calculator": { Component: BillSplitCalculator, content: billSplitCalculatorContent },
+  "rent-vs-buy-calculator": { Component: RentVsBuyCalculator, content: rentVsBuyCalculatorContent },
+  "sleep-cycle-calculator": { Component: SleepCycleCalculator, content: sleepCycleCalculatorContent },
+  "betting-odds-converter": { Component: BettingOddsConverter, content: bettingOddsConverterContent },
+  "zodiac-sign-finder": { Component: ZodiacSignFinder, content: zodiacSignFinderContent },
+  "moon-phase-calculator": { Component: MoonPhaseCalculator, content: moonPhaseCalculatorContent },
+  "bpm-tap-tempo-tool": { Component: BpmTapTempoTool, content: bpmTapTempoToolContent },
+  "online-metronome": { Component: OnlineMetronome, content: onlineMetronomeContent },
+  "music-interval-and-scale-calculator": { Component: MusicIntervalAndScaleCalculator, content: musicIntervalAndScaleCalculatorContent },
 };
 
 export function getRegisteredTool(slug: string): RegisteredTool | undefined {

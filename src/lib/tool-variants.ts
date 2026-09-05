@@ -18978,6 +18978,111 @@ TOOL_VARIANTS.push(
   },
 );
 
+TOOL_VARIANTS.push(
+  {
+    slug: "edit-pdf-text-online",
+    toolSlug: "pdf-editor",
+    h1: "Edit PDF Text Online",
+    subtitle: "Add or Change Text in a PDF Directly in Your Browser",
+    metaTitle: "Edit PDF Text Online — Free Tool",
+    metaDescription: "Free tool to edit text, shapes, and annotations in a PDF directly in your browser, no sign-up.",
+    introParagraph: "For actively changing a document's content, not just marking it up — add, move, or edit text and shapes directly.",
+  },
+  {
+    slug: "jwt-encoder",
+    toolSlug: "jwt-generator",
+    h1: "JWT Encoder",
+    subtitle: "Encode a Custom Payload into a Signed JWT",
+    metaTitle: "JWT Encoder — Free Online Tool",
+    metaDescription: "Free JWT encoder — build and sign a JSON Web Token from a custom header and payload.",
+    introParagraph: "Same underlying tool as the JWT generator, for anyone searching by the more technical term \"encode\" rather than \"generate.\"",
+  },
+  {
+    slug: "html-compressor",
+    toolSlug: "html-minifier",
+    h1: "HTML Compressor",
+    subtitle: "Shrink HTML File Size by Removing Whitespace",
+    metaTitle: "HTML Compressor — Free Online Tool",
+    metaDescription: "Free HTML compressor — reduce file size by stripping whitespace and comments, instantly in your browser.",
+    introParagraph: "\"Compress\" and \"minify\" mean the same thing here — this covers whichever term you searched.",
+  },
+  {
+    slug: "css-compressor",
+    toolSlug: "css-minifier",
+    h1: "CSS Compressor",
+    subtitle: "Shrink CSS File Size by Removing Whitespace",
+    metaTitle: "CSS Compressor — Free Online Tool",
+    metaDescription: "Free CSS compressor — reduce stylesheet file size by stripping whitespace and comments.",
+    introParagraph: "\"Compress\" and \"minify\" mean the same thing here — this covers whichever term you searched.",
+  },
+  {
+    slug: "sql-beautifier",
+    toolSlug: "sql-formatter",
+    h1: "SQL Beautifier",
+    subtitle: "Clean Up Messy SQL Queries Instantly",
+    metaTitle: "SQL Beautifier — Free Online Formatter",
+    metaDescription: "Free SQL beautifier — turn a minified or messy query into clean, properly indented SQL.",
+    introParagraph: "\"Beautify\" and \"format\" mean the same thing here — this covers whichever term you searched.",
+  },
+  {
+    slug: "markdown-viewer-online",
+    toolSlug: "markdown-previewer",
+    h1: "Markdown Viewer Online",
+    subtitle: "See Rendered Markdown Without Writing Any",
+    metaTitle: "Markdown Viewer Online — Free Tool",
+    metaDescription: "Free online Markdown viewer — paste Markdown and see the rendered result instantly.",
+    introParagraph: "For just viewing already-written Markdown (a README, a note) rather than actively drafting it.",
+  },
+);
+
+TOOL_VARIANTS.push(
+  {
+    slug: "online-dictionary",
+    toolSlug: "dictionary-lookup",
+    h1: "Online Dictionary",
+    subtitle: "Look Up Any Word's Full Definition, Pronunciation & Examples",
+    metaTitle: "Online Dictionary — Free, No Ads",
+    metaDescription: "Free online dictionary — look up any word's definitions, pronunciation, and examples, no ads or sign-up.",
+    introParagraph: "Every part of speech, real usage examples, and audio pronunciation in one clean lookup — no ad-cluttered dictionary site required.",
+  },
+  {
+    slug: "define-a-word",
+    toolSlug: "word-definition-lookup",
+    h1: "Define a Word",
+    subtitle: "Get a Fast, Single Definition — No Extra Clutter",
+    metaTitle: "Define a Word — Free Online Tool",
+    metaDescription: "Free tool to define any word instantly — just the single most relevant definition, nothing else.",
+    introParagraph: "For when you just need the meaning of one word right now, not a full dictionary entry to scroll through.",
+  },
+  {
+    slug: "how-to-pronounce-a-word",
+    toolSlug: "text-pronunciation-guide",
+    h1: "How to Pronounce a Word",
+    subtitle: "Hear Any Word Spoken Aloud with Phonetic Spelling",
+    metaTitle: "How to Pronounce a Word — Free Audio Guide",
+    metaDescription: "Free tool showing how to pronounce any word — phonetic spelling plus real audio pronunciation.",
+    introParagraph: "Real recorded pronunciation audio, not synthesized speech, for the words that are hardest to guess from spelling alone.",
+  },
+  {
+    slug: "online-thesaurus",
+    toolSlug: "thesaurus-synonym-finder",
+    h1: "Online Thesaurus",
+    subtitle: "Find Synonyms and Antonyms for Any Word, Free",
+    metaTitle: "Online Thesaurus — Free Synonym Finder",
+    metaDescription: "Free online thesaurus — find synonyms and antonyms ranked by relevance, no sign-up needed.",
+    introParagraph: "Ranked by how closely related each word actually is, not an alphabetical dump of loosely connected words.",
+  },
+  {
+    slug: "money-converter",
+    toolSlug: "currency-converter",
+    h1: "Money Converter",
+    subtitle: "Convert Between Currencies with Live Exchange Rates",
+    metaTitle: "Money Converter — Free Online Tool",
+    metaDescription: "Free money converter — convert between major currencies using live, regularly updated exchange rates.",
+    introParagraph: "Updates instantly as you type — no page reload, no ads, just the live rate and your converted amount.",
+  },
+);
+
 export function findToolVariant(slug: string): ToolVariant | undefined {
   return TOOL_VARIANTS.find((variant) => variant.slug === slug);
 }
