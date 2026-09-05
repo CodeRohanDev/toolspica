@@ -77,6 +77,7 @@ otherwise. Mark `[x]` here AND flip `done` by re-running `npm run generate:tools
 - [x] Image Pixelator
 - [x] Social Media Image Resizer
 - [x] Image Rotator by Angle
+- [x] SVG Viewer
 
 ### Text Tools
 - [x] Word Counter
@@ -138,6 +139,13 @@ otherwise. Mark `[x]` here AND flip `done` by re-running `npm run generate:tools
 - [x] API Response Formatter
 - [x] Number Base Converter (Bin/Oct/Dec/Hex)
 - [x] Environment Variable (.env) to JSON Converter
+- [x] JSON Tree Viewer
+- [x] XML Tree Viewer
+- [x] Log File Viewer
+- [x] Hex Viewer
+- [x] .env File Viewer
+- [x] Git Patch/Diff File Viewer
+- [x] Cookie File Viewer
 
 ### Audio Tools
 - [x] Voice Recorder Online
@@ -299,6 +307,8 @@ otherwise. Mark `[x]` here AND flip `done` by re-running `npm run generate:tools
 ### Website & Network Tools
 - [x] User Agent Detector
 - [x] Subnet Calculator
+- [x] Robots.txt Viewer
+- [x] Sitemap Viewer
 
 ### Font & Typography Tools
 - [x] Fancy Text Generator
@@ -310,6 +320,7 @@ otherwise. Mark `[x]` here AND flip `done` by re-running `npm run generate:tools
 ### Email Tools
 - [x] Email Validator
 - [x] Email Address Extractor
+- [x] vCard (.vcf) Viewer
 
 ### Math Tools
 - [x] Quadratic Equation Solver
@@ -368,12 +379,13 @@ otherwise. Mark `[x]` here AND flip `done` by re-running `npm run generate:tools
 - [x] Favicon Generator
 - [x] Image EXIF Remover
 - [x] Batch Image Resizer
+- [x] ICO Viewer
 
 ### Text Tools
-- [ ] Text Diff Checker
-- [ ] Text to Speech
-- [ ] Speech to Text
-- [ ] Text Encryptor / Decryptor
+- [x] Text Diff Checker
+- [x] Text to Speech
+- [x] Speech to Text
+- [x] Text Encryptor / Decryptor
 
 ### Developer Tools
 - [x] JSON to CSV
@@ -398,10 +410,13 @@ otherwise. Mark `[x]` here AND flip `done` by re-running `npm run generate:tools
 - [x] JSON Path Tester
 - [x] GraphQL Query Formatter
 - [x] User Agent Parser
+- [x] YAML Tree Viewer
+- [x] HAR File Viewer
 
 ### Video Tools
 - [x] Screen Recorder
 - [x] Video Thumbnail Generator
+- [x] Video Metadata Viewer
 
 ### Audio Tools
 - [x] WAV Converter
@@ -410,6 +425,7 @@ otherwise. Mark `[x]` here AND flip `done` by re-running `npm run generate:tools
 - [x] Audio Fade In/Out Editor
 - [x] Ringtone Maker
 - [x] Podcast Trimmer
+- [x] Audio Waveform Viewer
 
 ### Archive Tools
 - [x] ZIP Extractor
@@ -417,9 +433,9 @@ otherwise. Mark `[x]` here AND flip `done` by re-running `npm run generate:tools
 - [x] GZIP Extractor
 
 ### Social Media Tools
-- [ ] YouTube Thumbnail Downloader
-- [ ] Hashtag Generator
-- [ ] Instagram Caption Generator
+- [x] YouTube Thumbnail Downloader
+- [x] Hashtag Generator
+- [x] Instagram Caption Generator
 
 ### Security Tools
 - [x] Password Strength Checker
@@ -430,33 +446,35 @@ otherwise. Mark `[x]` here AND flip `done` by re-running `npm run generate:tools
 - [x] File Encryptor / Decryptor
 
 ### Document & Office Tools
-- [ ] Excel to CSV
-- [ ] TXT to DOCX
-- [ ] Resume Builder
-- [ ] Cover Letter Generator
-- [ ] Invoice Template Generator
-- [ ] Certificate Generator
-- [ ] Letterhead Generator
+- [x] Excel to CSV
+- [x] TXT to DOCX
+- [x] Resume Builder
+- [x] Cover Letter Generator
+- [x] Invoice Template Generator
+- [x] Certificate Generator
+- [x] Letterhead Generator
 
 ### Spreadsheet & Data Tools
-- [ ] CSV Merger
-- [ ] CSV Splitter
-- [ ] Excel to JSON
-- [ ] JSON to Excel
-- [ ] Duplicate Row Remover
-- [ ] Chart Generator from CSV
-- [ ] Excel Formula Generator
+- [x] CSV Merger
+- [x] CSV Splitter
+- [x] Excel to JSON
+- [x] JSON to Excel
+- [x] Duplicate Row Remover
+- [x] Chart Generator from CSV
+- [x] Excel Formula Generator
+- [x] Excel Viewer
 
 ### Color Tools
-- [ ] Color Palette Generator
-- [ ] Color Blindness Simulator
-- [ ] Image Color Palette Extractor
+- [x] Color Palette Generator
+- [x] Color Blindness Simulator
+- [x] Image Color Palette Extractor
 
 ### QR Code & Barcode Tools
 - [ ] QR Code Scanner
 - [ ] Barcode Scanner
-- [ ] QR Code with Logo Generator
-- [ ] Bulk QR Code Generator
+- [x] QR Code with Logo Generator
+- [x] Bulk QR Code Generator
+- [x] QR Code Decoder (from Image)
 
 ### Website & Network Tools
 - [x] IP Address Lookup
@@ -464,54 +482,60 @@ otherwise. Mark `[x]` here AND flip `done` by re-running `npm run generate:tools
 - [x] MAC Address Lookup Tool
 
 ### Font & Typography Tools
-- [ ] Font Pairing Generator
-- [ ] Google Fonts Previewer
+- [x] Font Pairing Generator
+- [x] Google Fonts Previewer
+- [x] Font File Previewer (TTF/OTF/WOFF)
 
 ### Writing & Citation Tools
-- [ ] Citation Generator (APA/MLA/Chicago)
-- [ ] Bibliography Generator
+- [x] Citation Generator (APA/MLA/Chicago)
+- [x] Bibliography Generator
 
 ### Email Tools
-- [ ] Mail Header Analyzer
-- [ ] Email Signature Generator
-- [ ] Email Subject Line Tester
+- [x] Mail Header Analyzer
+- [x] Email Signature Generator
+- [x] Email Subject Line Tester
+- [x] EML File Viewer
 
 ### Legal & Business Document Tools
-- [ ] Privacy Policy Generator
-- [ ] Terms & Conditions Generator
-- [ ] NDA (Non-Disclosure Agreement) Generator
-- [ ] Disclaimer Generator
-- [ ] Refund Policy Generator
-- [ ] Cookie Policy Generator
-- [ ] Employment Contract Generator
-- [ ] Rental/Lease Agreement Generator
-- [ ] Freelance Contract Generator
-- [ ] Affidavit Template Generator
+- [x] Privacy Policy Generator
+- [x] Terms & Conditions Generator
+- [x] NDA (Non-Disclosure Agreement) Generator
+- [x] Disclaimer Generator
+- [x] Refund Policy Generator
+- [x] Cookie Policy Generator
+- [x] Employment Contract Generator
+- [x] Rental/Lease Agreement Generator
+- [x] Freelance Contract Generator
+- [x] Affidavit Template Generator
 
 ### Math Tools
 - [x] Matrix Calculator
 
 ### Signature Tools
-- [ ] Digital Signature Maker
-- [ ] Handwritten Signature Generator
-- [ ] Signature to Transparent PNG Converter
-- [ ] Initials Logo Generator
+- [x] Digital Signature Maker
+- [x] Handwritten Signature Generator
+- [x] Signature to Transparent PNG Converter
+- [x] Initials Logo Generator
 
 ### Time & Productivity Tools
-- [ ] Meeting Time Planner (Time Zone Overlap)
-- [ ] Habit Tracker Sheet Generator
+- [x] Meeting Time Planner (Time Zone Overlap)
+- [x] Habit Tracker Sheet Generator
+- [x] ICS Calendar File Viewer
 
 ### Education Tools
-- [ ] Flashcard Maker
-- [ ] Quiz Generator
-- [ ] Multiple Choice Test Generator
-- [ ] Graph Paper Generator
-- [ ] Timetable / Schedule Generator
+- [x] Flashcard Maker
+- [x] Quiz Generator
+- [x] Multiple Choice Test Generator
+- [x] Graph Paper Generator
+- [x] Timetable / Schedule Generator
 
 ### Presentation Tools
-- [ ] Slide Text Extractor
+- [x] Slide Text Extractor
 
 ## Tier 3
+
+### QR Code & Barcode Tools
+- [x] Barcode Decoder (from Image)
 
 ### PDF Tools
 - [x] PDF Merge
@@ -555,6 +579,7 @@ otherwise. Mark `[x]` here AND flip `done` by re-running `npm run generate:tools
 - [x] Audio Merger
 - [ ] Text to Speech Audio Exporter
 - [x] Audio Normalizer
+- [x] Audio Spectrogram Viewer
 
 ### OCR Tools
 - [x] Image to Text
@@ -568,42 +593,46 @@ otherwise. Mark `[x]` here AND flip `done` by re-running `npm run generate:tools
 - [x] Universal File Compressor
 - [x] TAR.GZ Creator
 - [x] Split Archive by Size
+- [x] Archive Content Viewer
 
 ### Social Media Tools
-- [ ] YouTube Title Generator
-- [ ] YouTube Description Generator
+- [x] YouTube Title Generator
+- [x] YouTube Description Generator
 
 ### SEO Tools
-- [ ] Sitemap Generator
-- [ ] Schema Markup Generator
-- [ ] XML Sitemap Validator
-- [ ] Readability Checker
+- [x] Sitemap Generator
+- [x] Schema Markup Generator
+- [x] XML Sitemap Validator
+- [x] Readability Checker
 
 ### Security Tools
 - [x] PGP Key Pair Generator
 - [x] SSL Certificate Decoder
+- [x] PGP Key Viewer
+- [x] Certificate Chain Viewer
 
 ### Document & Office Tools
-- [ ] CSV to Excel
-- [ ] DOCX to TXT
-- [ ] Business Card Designer
+- [x] CSV to Excel
+- [x] DOCX to TXT
+- [x] Business Card Designer
+- [x] EPUB Viewer
 
 ### Spreadsheet & Data Tools
-- [ ] Data Cleaner
+- [x] Data Cleaner
 
 ### Website & Network Tools
 - [x] DNS Lookup
 - [x] MX Record Lookup
 
 ### GIF & Meme Tools
-- [ ] GIF Maker from Images
-- [ ] GIF Resizer
-- [ ] GIF Splitter (Frame Extractor)
-- [ ] Meme Caption Generator
+- [x] GIF Maker from Images
+- [x] GIF Resizer
+- [x] GIF Splitter (Frame Extractor)
+- [x] Meme Caption Generator
 
 ### Writing & Citation Tools
-- [ ] Essay Outline Generator
-- [ ] Thesis Statement Generator
+- [x] Essay Outline Generator
+- [x] Thesis Statement Generator
 
 ### Math Tools
 - [x] Equation Solver
@@ -611,7 +640,7 @@ otherwise. Mark `[x]` here AND flip `done` by re-running `npm run generate:tools
 - [x] Algebra Calculator
 
 ### Language & Translation Tools
-- [ ] Language Detector
+- [x] Language Detector
 - [ ] Dictionary Lookup
 - [ ] Thesaurus / Synonym Finder
 - [ ] Text Pronunciation Guide
@@ -623,10 +652,10 @@ otherwise. Mark `[x]` here AND flip `done` by re-running `npm run generate:tools
 - [x] Live Currency Exchange Rate Checker
 
 ### Education Tools
-- [ ] Handwriting Practice Sheet Generator
+- [x] Handwriting Practice Sheet Generator
 
 ### Presentation Tools
-- [ ] Presentation Template Generator
+- [x] Presentation Template Generator
 
 ## Tier 4
 
@@ -693,22 +722,27 @@ otherwise. Mark `[x]` here AND flip `done` by re-running `npm run generate:tools
 - [ ] Redirect Checker
 
 ### Document & Office Tools
-- [ ] Document Merger
+- [x] Document Merger
+- [x] Word Document Viewer
+- [x] ODT Viewer
 
 ### Spreadsheet & Data Tools
-- [ ] Pivot Table Generator
+- [x] Pivot Table Generator
 
 ### GIF & Meme Tools
-- [ ] GIF Maker from Video
-- [ ] GIF Compressor
-- [ ] GIF to Video Converter
-- [ ] GIF Speed Changer
-- [ ] Reverse GIF Maker
+- [x] GIF Maker from Video
+- [x] GIF Compressor
+- [x] GIF to Video Converter
+- [x] GIF Speed Changer
+- [x] Reverse GIF Maker
 
 ### Font & Typography Tools
 - [ ] Font Format Converter (TTF/WOFF/OTF)
 
 ## Tier 5
+
+### Spreadsheet & Data Tools
+- [x] Parquet Viewer
 
 ### PDF Tools
 - [x] Word to PDF
@@ -774,6 +808,9 @@ otherwise. Mark `[x]` here AND flip `done` by re-running `npm run generate:tools
 - [ ] Slide Background Remover
 
 ## Tier 6
+
+### Document & Office Tools
+- [x] PowerPoint Viewer
 
 ### PDF Tools
 - [x] PDF to Word

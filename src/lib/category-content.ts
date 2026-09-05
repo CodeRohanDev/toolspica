@@ -47,8 +47,19 @@ export function buildCategoryFaqs(category: ToolCategory) {
 }
 
 export function buildCategorySeoParagraphs(category: ToolCategory): string[] {
+  const nextBatch = category.tools.slice(3, 7).map((t) => t.name);
+  const nextBatchText =
+    nextBatch.length > 1
+      ? `${nextBatch.slice(0, -1).join(", ")} and ${nextBatch.at(-1)}`
+      : nextBatch[0];
+
   return [
     `${category.name} brings together every tool you're likely to need for this kind of task in one place, so you don't have to bounce between different websites — each with their own upload limits, ads, and account walls — to get a simple job done.`,
     `Wherever technically possible, tools in this category are built to run entirely in your browser using modern web technology such as WebAssembly and Web Workers. That means faster results (no upload wait) and stronger privacy (your file never leaves your device). For the rare tool that needs server-side processing, we clearly label it and apply strict automatic deletion — see our Data Processing Policy for details.`,
+    ...(nextBatchText
+      ? [
+          `Beyond the basics, the category also covers more specific needs like ${nextBatchText} — so whether you're doing a one-off task or something you do regularly, there's a dedicated tool for it rather than a single do-everything form that handles none of your use cases particularly well.`,
+        ]
+      : []),
   ];
 }

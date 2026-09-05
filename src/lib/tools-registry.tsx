@@ -848,6 +848,230 @@ import { yamlFormatterContent } from "@/lib/tools-content/yaml-formatter";
 import { yamlToJsonContent } from "@/lib/tools-content/yaml-to-json";
 import { jsonToYamlContent } from "@/lib/tools-content/json-to-yaml";
 import { graphqlQueryFormatterContent } from "@/lib/tools-content/graphql-query-formatter";
+import { HashtagGenerator } from "@/components/tools/hashtag-generator";
+import { hashtagGeneratorContent } from "@/lib/tools-content/hashtag-generator";
+import { InstagramCaptionGenerator } from "@/components/tools/instagram-caption-generator";
+import { instagramCaptionGeneratorContent } from "@/lib/tools-content/instagram-caption-generator";
+import { TextDiffChecker } from "@/components/tools/text-diff-checker";
+import { textDiffCheckerContent } from "@/lib/tools-content/text-diff-checker";
+import { YoutubeThumbnailDownloader } from "@/components/tools/youtube-thumbnail-downloader";
+import { youtubeThumbnailDownloaderContent } from "@/lib/tools-content/youtube-thumbnail-downloader";
+import { PrivacyPolicyGenerator } from "@/components/tools/privacy-policy-generator";
+import { privacyPolicyGeneratorContent } from "@/lib/tools-content/privacy-policy-generator";
+import { TermsAndConditionsGenerator } from "@/components/tools/terms-and-conditions-generator";
+import { termsAndConditionsGeneratorContent } from "@/lib/tools-content/terms-and-conditions-generator";
+import { NdaGenerator } from "@/components/tools/nda-generator";
+import { ndaGeneratorContent } from "@/lib/tools-content/nda-generator";
+import { DisclaimerGenerator } from "@/components/tools/disclaimer-generator";
+import { disclaimerGeneratorContent } from "@/lib/tools-content/disclaimer-generator";
+import { RefundPolicyGenerator } from "@/components/tools/refund-policy-generator";
+import { refundPolicyGeneratorContent } from "@/lib/tools-content/refund-policy-generator";
+import { CookiePolicyGenerator } from "@/components/tools/cookie-policy-generator";
+import { cookiePolicyGeneratorContent } from "@/lib/tools-content/cookie-policy-generator";
+import { TextToSpeech } from "@/components/tools/text-to-speech";
+import { textToSpeechContent } from "@/lib/tools-content/text-to-speech";
+import { SpeechToText } from "@/components/tools/speech-to-text";
+import { speechToTextContent } from "@/lib/tools-content/speech-to-text";
+import { TextEncryptorDecryptor } from "@/components/tools/text-encryptor-decryptor";
+import { textEncryptorDecryptorContent } from "@/lib/tools-content/text-encryptor-decryptor";
+import { CitationGenerator } from "@/components/tools/citation-generator";
+import { citationGeneratorContent } from "@/lib/tools-content/citation-generator";
+import { BibliographyGenerator } from "@/components/tools/bibliography-generator";
+import { bibliographyGeneratorContent } from "@/lib/tools-content/bibliography-generator";
+import { SitemapGenerator } from "@/components/tools/sitemap-generator";
+import { sitemapGeneratorContent } from "@/lib/tools-content/sitemap-generator";
+import { SchemaMarkupGenerator } from "@/components/tools/schema-markup-generator";
+import { schemaMarkupGeneratorContent } from "@/lib/tools-content/schema-markup-generator";
+import { ReadabilityChecker } from "@/components/tools/readability-checker";
+import { readabilityCheckerContent } from "@/lib/tools-content/readability-checker";
+import { ColorPaletteGenerator } from "@/components/tools/color-palette-generator";
+import { colorPaletteGeneratorContent } from "@/lib/tools-content/color-palette-generator";
+import { DigitalSignatureMaker } from "@/components/tools/digital-signature-maker";
+import { digitalSignatureMakerContent } from "@/lib/tools-content/digital-signature-maker";
+import { QrCodeWithLogoGenerator } from "@/components/tools/qr-code-with-logo-generator";
+import { qrCodeWithLogoGeneratorContent } from "@/lib/tools-content/qr-code-with-logo-generator";
+import { BulkQrCodeGenerator } from "@/components/tools/bulk-qr-code-generator";
+import { bulkQrCodeGeneratorContent } from "@/lib/tools-content/bulk-qr-code-generator";
+import { EmploymentContractGenerator } from "@/components/tools/employment-contract-generator";
+import { employmentContractGeneratorContent } from "@/lib/tools-content/employment-contract-generator";
+import { RentalAgreementGenerator } from "@/components/tools/rental-agreement-generator";
+import { rentalLeaseAgreementGeneratorContent } from "@/lib/tools-content/rental-lease-agreement-generator";
+import { FreelanceContractGenerator } from "@/components/tools/freelance-contract-generator";
+import { freelanceContractGeneratorContent } from "@/lib/tools-content/freelance-contract-generator";
+import { AffidavitGenerator } from "@/components/tools/affidavit-generator";
+import { affidavitTemplateGeneratorContent } from "@/lib/tools-content/affidavit-template-generator";
+import { ExcelFormulaGenerator } from "@/components/tools/excel-formula-generator";
+import { excelFormulaGeneratorContent } from "@/lib/tools-content/excel-formula-generator";
+import { EssayOutlineGenerator } from "@/components/tools/essay-outline-generator";
+import { essayOutlineGeneratorContent } from "@/lib/tools-content/essay-outline-generator";
+import { ThesisStatementGenerator } from "@/components/tools/thesis-statement-generator";
+import { thesisStatementGeneratorContent } from "@/lib/tools-content/thesis-statement-generator";
+import { YoutubeTitleGenerator } from "@/components/tools/youtube-title-generator";
+import { youtubeTitleGeneratorContent } from "@/lib/tools-content/youtube-title-generator";
+import { YoutubeDescriptionGenerator } from "@/components/tools/youtube-description-generator";
+import { youtubeDescriptionGeneratorContent } from "@/lib/tools-content/youtube-description-generator";
+import { EmailSignatureGenerator } from "@/components/tools/email-signature-generator";
+import { emailSignatureGeneratorContent } from "@/lib/tools-content/email-signature-generator";
+import { EmailSubjectLineTester } from "@/components/tools/email-subject-line-tester";
+import { emailSubjectLineTesterContent } from "@/lib/tools-content/email-subject-line-tester";
+import { MailHeaderAnalyzer } from "@/components/tools/mail-header-analyzer";
+import { mailHeaderAnalyzerContent } from "@/lib/tools-content/mail-header-analyzer";
+import { MeetingTimePlanner } from "@/components/tools/meeting-time-planner";
+import { meetingTimePlannerContent } from "@/lib/tools-content/meeting-time-planner";
+import { LanguageDetector } from "@/components/tools/language-detector";
+import { languageDetectorContent } from "@/lib/tools-content/language-detector";
+import { XmlSitemapValidator } from "@/components/tools/xml-sitemap-validator";
+import { xmlSitemapValidatorContent } from "@/lib/tools-content/xml-sitemap-validator";
+import { HandwrittenSignatureGenerator } from "@/components/tools/handwritten-signature-generator";
+import { handwrittenSignatureGeneratorContent } from "@/lib/tools-content/handwritten-signature-generator";
+import { SignatureToTransparentPngConverter } from "@/components/tools/signature-to-transparent-png-converter";
+import { signatureToTransparentPngConverterContent } from "@/lib/tools-content/signature-to-transparent-png-converter";
+import { InitialsLogoGenerator } from "@/components/tools/initials-logo-generator";
+import { initialsLogoGeneratorContent } from "@/lib/tools-content/initials-logo-generator";
+import { ColorBlindnessSimulator } from "@/components/tools/color-blindness-simulator";
+import { colorBlindnessSimulatorContent } from "@/lib/tools-content/color-blindness-simulator";
+import { ImageColorPaletteExtractor } from "@/components/tools/image-color-palette-extractor";
+import { imageColorPaletteExtractorContent } from "@/lib/tools-content/image-color-palette-extractor";
+import { GraphPaperGenerator } from "@/components/tools/graph-paper-generator";
+import { graphPaperGeneratorContent } from "@/lib/tools-content/graph-paper-generator";
+import { MemeCaptionGenerator } from "@/components/tools/meme-caption-generator";
+import { memeCaptionGeneratorContent } from "@/lib/tools-content/meme-caption-generator";
+import { BusinessCardDesigner } from "@/components/tools/business-card-designer";
+import { businessCardDesignerContent } from "@/lib/tools-content/business-card-designer";
+import { FlashcardMaker } from "@/components/tools/flashcard-maker";
+import { flashcardMakerContent } from "@/lib/tools-content/flashcard-maker";
+import { QuizGenerator } from "@/components/tools/quiz-generator";
+import { quizGeneratorContent } from "@/lib/tools-content/quiz-generator";
+import { MultipleChoiceTestGenerator } from "@/components/tools/multiple-choice-test-generator";
+import { multipleChoiceTestGeneratorContent } from "@/lib/tools-content/multiple-choice-test-generator";
+import { TimetableScheduleGenerator } from "@/components/tools/timetable-schedule-generator";
+import { timetableScheduleGeneratorContent } from "@/lib/tools-content/timetable-schedule-generator";
+import { HabitTrackerSheetGenerator } from "@/components/tools/habit-tracker-sheet-generator";
+import { habitTrackerSheetGeneratorContent } from "@/lib/tools-content/habit-tracker-sheet-generator";
+import { HandwritingPracticeSheetGenerator } from "@/components/tools/handwriting-practice-sheet-generator";
+import { handwritingPracticeSheetGeneratorContent } from "@/lib/tools-content/handwriting-practice-sheet-generator";
+import { ExcelToCsv } from "@/components/tools/excel-to-csv";
+import { excelToCsvContent } from "@/lib/tools-content/excel-to-csv";
+import { CsvToExcel } from "@/components/tools/csv-to-excel";
+import { csvToExcelContent } from "@/lib/tools-content/csv-to-excel";
+import { ExcelToJson } from "@/components/tools/excel-to-json";
+import { excelToJsonContent } from "@/lib/tools-content/excel-to-json";
+import { JsonToExcel } from "@/components/tools/json-to-excel";
+import { jsonToExcelContent } from "@/lib/tools-content/json-to-excel";
+import { TxtToDocx } from "@/components/tools/txt-to-docx";
+import { txtToDocxContent } from "@/lib/tools-content/txt-to-docx";
+import { DocxToTxt } from "@/components/tools/docx-to-txt";
+import { docxToTxtContent } from "@/lib/tools-content/docx-to-txt";
+import { CsvMerger } from "@/components/tools/csv-merger";
+import { csvMergerContent } from "@/lib/tools-content/csv-merger";
+import { CsvSplitter } from "@/components/tools/csv-splitter";
+import { csvSplitterContent } from "@/lib/tools-content/csv-splitter";
+import { DuplicateRowRemover } from "@/components/tools/duplicate-row-remover";
+import { duplicateRowRemoverContent } from "@/lib/tools-content/duplicate-row-remover";
+import { ChartGeneratorFromCsv } from "@/components/tools/chart-generator-from-csv";
+import { chartGeneratorFromCsvContent } from "@/lib/tools-content/chart-generator-from-csv";
+import { DataCleaner } from "@/components/tools/data-cleaner";
+import { dataCleanerContent } from "@/lib/tools-content/data-cleaner";
+import { ResumeBuilder } from "@/components/tools/resume-builder";
+import { resumeBuilderContent } from "@/lib/tools-content/resume-builder";
+import { CoverLetterGenerator } from "@/components/tools/cover-letter-generator";
+import { coverLetterGeneratorContent } from "@/lib/tools-content/cover-letter-generator";
+import { InvoiceTemplateGenerator } from "@/components/tools/invoice-template-generator";
+import { invoiceTemplateGeneratorContent } from "@/lib/tools-content/invoice-template-generator";
+import { CertificateGenerator } from "@/components/tools/certificate-generator";
+import { certificateGeneratorContent } from "@/lib/tools-content/certificate-generator";
+import { LetterheadGenerator } from "@/components/tools/letterhead-generator";
+import { letterheadGeneratorContent } from "@/lib/tools-content/letterhead-generator";
+import { GifMakerFromImages } from "@/components/tools/gif-maker-from-images";
+import { gifMakerFromImagesContent } from "@/lib/tools-content/gif-maker-from-images";
+import { GifResizer } from "@/components/tools/gif-resizer";
+import { gifResizerContent } from "@/lib/tools-content/gif-resizer";
+import { GifSplitter } from "@/components/tools/gif-splitter";
+import { gifSplitterContent } from "@/lib/tools-content/gif-splitter";
+import { GifMakerFromVideo } from "@/components/tools/gif-maker-from-video";
+import { gifMakerFromVideoContent } from "@/lib/tools-content/gif-maker-from-video";
+import { GifCompressor } from "@/components/tools/gif-compressor";
+import { gifCompressorContent } from "@/lib/tools-content/gif-compressor";
+import { GifToVideoConverter } from "@/components/tools/gif-to-video-converter";
+import { gifToVideoConverterContent } from "@/lib/tools-content/gif-to-video-converter";
+import { GifSpeedChanger } from "@/components/tools/gif-speed-changer";
+import { gifSpeedChangerContent } from "@/lib/tools-content/gif-speed-changer";
+import { ReverseGifMaker } from "@/components/tools/reverse-gif-maker";
+import { reverseGifMakerContent } from "@/lib/tools-content/reverse-gif-maker";
+import { FontPairingGenerator } from "@/components/tools/font-pairing-generator";
+import { fontPairingGeneratorContent } from "@/lib/tools-content/font-pairing-generator";
+import { GoogleFontsPreviewer } from "@/components/tools/google-fonts-previewer";
+import { googleFontsPreviewerContent } from "@/lib/tools-content/google-fonts-previewer";
+import { SlideTextExtractor } from "@/components/tools/slide-text-extractor";
+import { slideTextExtractorContent } from "@/lib/tools-content/slide-text-extractor";
+import { PresentationTemplateGenerator } from "@/components/tools/presentation-template-generator";
+import { presentationTemplateGeneratorContent } from "@/lib/tools-content/presentation-template-generator";
+import { DocumentMerger } from "@/components/tools/document-merger";
+import { documentMergerContent } from "@/lib/tools-content/document-merger";
+import { PivotTableGenerator } from "@/components/tools/pivot-table-generator";
+import { pivotTableGeneratorContent } from "@/lib/tools-content/pivot-table-generator";
+import { JsonTreeViewer } from "@/components/tools/json-tree-viewer";
+import { jsonTreeViewerContent } from "@/lib/tools-content/json-tree-viewer";
+import { XmlTreeViewer } from "@/components/tools/xml-tree-viewer";
+import { xmlTreeViewerContent } from "@/lib/tools-content/xml-tree-viewer";
+import { LogFileViewer } from "@/components/tools/log-file-viewer";
+import { logFileViewerContent } from "@/lib/tools-content/log-file-viewer";
+import { HexViewer } from "@/components/tools/hex-viewer";
+import { hexViewerContent } from "@/lib/tools-content/hex-viewer";
+import { EnvFileViewer } from "@/components/tools/env-file-viewer";
+import { envFileViewerContent } from "@/lib/tools-content/env-file-viewer";
+import { GitPatchDiffFileViewer } from "@/components/tools/git-patch-diff-file-viewer";
+import { gitPatchDiffFileViewerContent } from "@/lib/tools-content/git-patch-diff-file-viewer";
+import { CookieFileViewer } from "@/components/tools/cookie-file-viewer";
+import { cookieFileViewerContent } from "@/lib/tools-content/cookie-file-viewer";
+import { SvgViewer } from "@/components/tools/svg-viewer";
+import { svgViewerContent } from "@/lib/tools-content/svg-viewer";
+import { RobotsTxtViewer } from "@/components/tools/robots-txt-viewer";
+import { robotsTxtViewerContent } from "@/lib/tools-content/robots-txt-viewer";
+import { SitemapViewer } from "@/components/tools/sitemap-viewer";
+import { sitemapViewerContent } from "@/lib/tools-content/sitemap-viewer";
+import { VcardViewer } from "@/components/tools/vcard-viewer";
+import { vcardViewerContent } from "@/lib/tools-content/vcard-viewer";
+import { YamlTreeViewer } from "@/components/tools/yaml-tree-viewer";
+import { yamlTreeViewerContent } from "@/lib/tools-content/yaml-tree-viewer";
+import { HarFileViewer } from "@/components/tools/har-file-viewer";
+import { harFileViewerContent } from "@/lib/tools-content/har-file-viewer";
+import { ExcelViewer } from "@/components/tools/excel-viewer";
+import { excelViewerContent } from "@/lib/tools-content/excel-viewer";
+import { IcoViewer } from "@/components/tools/ico-viewer";
+import { icoViewerContent } from "@/lib/tools-content/ico-viewer";
+import { AudioWaveformViewer } from "@/components/tools/audio-waveform-viewer";
+import { audioWaveformViewerContent } from "@/lib/tools-content/audio-waveform-viewer";
+import { VideoMetadataViewer } from "@/components/tools/video-metadata-viewer";
+import { videoMetadataViewerContent } from "@/lib/tools-content/video-metadata-viewer";
+import { FontFilePreviewer } from "@/components/tools/font-file-previewer";
+import { fontFilePreviewerContent } from "@/lib/tools-content/font-file-previewer";
+import { QrCodeDecoder } from "@/components/tools/qr-code-decoder";
+import { qrCodeDecoderContent } from "@/lib/tools-content/qr-code-decoder";
+import { EmlFileViewer } from "@/components/tools/eml-file-viewer";
+import { emlFileViewerContent } from "@/lib/tools-content/eml-file-viewer";
+import { IcsCalendarFileViewer } from "@/components/tools/ics-calendar-file-viewer";
+import { icsCalendarFileViewerContent } from "@/lib/tools-content/ics-calendar-file-viewer";
+import { EpubViewer } from "@/components/tools/epub-viewer";
+import { epubViewerContent } from "@/lib/tools-content/epub-viewer";
+import { ArchiveContentViewer } from "@/components/tools/archive-content-viewer";
+import { archiveContentViewerContent } from "@/lib/tools-content/archive-content-viewer";
+import { AudioSpectrogramViewer } from "@/components/tools/audio-spectrogram-viewer";
+import { audioSpectrogramViewerContent } from "@/lib/tools-content/audio-spectrogram-viewer";
+import { PgpKeyViewer } from "@/components/tools/pgp-key-viewer";
+import { pgpKeyViewerContent } from "@/lib/tools-content/pgp-key-viewer";
+import { CertificateChainViewer } from "@/components/tools/certificate-chain-viewer";
+import { certificateChainViewerContent } from "@/lib/tools-content/certificate-chain-viewer";
+import { BarcodeDecoder } from "@/components/tools/barcode-decoder";
+import { barcodeDecoderContent } from "@/lib/tools-content/barcode-decoder";
+import { WordDocumentViewer } from "@/components/tools/word-document-viewer";
+import { wordDocumentViewerContent } from "@/lib/tools-content/word-document-viewer";
+import { OdtViewer } from "@/components/tools/odt-viewer";
+import { odtViewerContent } from "@/lib/tools-content/odt-viewer";
+import { ParquetViewer } from "@/components/tools/parquet-viewer";
+import { parquetViewerContent } from "@/lib/tools-content/parquet-viewer";
+import { PowerpointViewer } from "@/components/tools/powerpoint-viewer";
+import { powerpointViewerContent } from "@/lib/tools-content/powerpoint-viewer";
 
 export interface RegisteredTool {
   Component: ComponentType;
@@ -1641,6 +1865,118 @@ export const TOOLS_REGISTRY: Record<string, RegisteredTool> = {
   "yaml-to-json": { Component: YamlToJson, content: yamlToJsonContent },
   "json-to-yaml": { Component: JsonToYaml, content: jsonToYamlContent },
   "graphql-query-formatter": { Component: GraphqlQueryFormatter, content: graphqlQueryFormatterContent },
+  "hashtag-generator": { Component: HashtagGenerator, content: hashtagGeneratorContent },
+  "instagram-caption-generator": { Component: InstagramCaptionGenerator, content: instagramCaptionGeneratorContent },
+  "text-diff-checker": { Component: TextDiffChecker, content: textDiffCheckerContent },
+  "youtube-thumbnail-downloader": { Component: YoutubeThumbnailDownloader, content: youtubeThumbnailDownloaderContent },
+  "privacy-policy-generator": { Component: PrivacyPolicyGenerator, content: privacyPolicyGeneratorContent },
+  "terms-and-conditions-generator": { Component: TermsAndConditionsGenerator, content: termsAndConditionsGeneratorContent },
+  "nda-generator": { Component: NdaGenerator, content: ndaGeneratorContent },
+  "disclaimer-generator": { Component: DisclaimerGenerator, content: disclaimerGeneratorContent },
+  "refund-policy-generator": { Component: RefundPolicyGenerator, content: refundPolicyGeneratorContent },
+  "cookie-policy-generator": { Component: CookiePolicyGenerator, content: cookiePolicyGeneratorContent },
+  "text-to-speech": { Component: TextToSpeech, content: textToSpeechContent },
+  "speech-to-text": { Component: SpeechToText, content: speechToTextContent },
+  "text-encryptor-decryptor": { Component: TextEncryptorDecryptor, content: textEncryptorDecryptorContent },
+  "citation-generator": { Component: CitationGenerator, content: citationGeneratorContent },
+  "bibliography-generator": { Component: BibliographyGenerator, content: bibliographyGeneratorContent },
+  "sitemap-generator": { Component: SitemapGenerator, content: sitemapGeneratorContent },
+  "schema-markup-generator": { Component: SchemaMarkupGenerator, content: schemaMarkupGeneratorContent },
+  "readability-checker": { Component: ReadabilityChecker, content: readabilityCheckerContent },
+  "color-palette-generator": { Component: ColorPaletteGenerator, content: colorPaletteGeneratorContent },
+  "digital-signature-maker": { Component: DigitalSignatureMaker, content: digitalSignatureMakerContent },
+  "qr-code-with-logo-generator": { Component: QrCodeWithLogoGenerator, content: qrCodeWithLogoGeneratorContent },
+  "bulk-qr-code-generator": { Component: BulkQrCodeGenerator, content: bulkQrCodeGeneratorContent },
+  "employment-contract-generator": { Component: EmploymentContractGenerator, content: employmentContractGeneratorContent },
+  "rental-lease-agreement-generator": { Component: RentalAgreementGenerator, content: rentalLeaseAgreementGeneratorContent },
+  "freelance-contract-generator": { Component: FreelanceContractGenerator, content: freelanceContractGeneratorContent },
+  "affidavit-template-generator": { Component: AffidavitGenerator, content: affidavitTemplateGeneratorContent },
+  "excel-formula-generator": { Component: ExcelFormulaGenerator, content: excelFormulaGeneratorContent },
+  "essay-outline-generator": { Component: EssayOutlineGenerator, content: essayOutlineGeneratorContent },
+  "thesis-statement-generator": { Component: ThesisStatementGenerator, content: thesisStatementGeneratorContent },
+  "youtube-title-generator": { Component: YoutubeTitleGenerator, content: youtubeTitleGeneratorContent },
+  "youtube-description-generator": { Component: YoutubeDescriptionGenerator, content: youtubeDescriptionGeneratorContent },
+  "email-signature-generator": { Component: EmailSignatureGenerator, content: emailSignatureGeneratorContent },
+  "email-subject-line-tester": { Component: EmailSubjectLineTester, content: emailSubjectLineTesterContent },
+  "mail-header-analyzer": { Component: MailHeaderAnalyzer, content: mailHeaderAnalyzerContent },
+  "meeting-time-planner": { Component: MeetingTimePlanner, content: meetingTimePlannerContent },
+  "language-detector": { Component: LanguageDetector, content: languageDetectorContent },
+  "xml-sitemap-validator": { Component: XmlSitemapValidator, content: xmlSitemapValidatorContent },
+  "handwritten-signature-generator": { Component: HandwrittenSignatureGenerator, content: handwrittenSignatureGeneratorContent },
+  "signature-to-transparent-png-converter": { Component: SignatureToTransparentPngConverter, content: signatureToTransparentPngConverterContent },
+  "initials-logo-generator": { Component: InitialsLogoGenerator, content: initialsLogoGeneratorContent },
+  "color-blindness-simulator": { Component: ColorBlindnessSimulator, content: colorBlindnessSimulatorContent },
+  "image-color-palette-extractor": { Component: ImageColorPaletteExtractor, content: imageColorPaletteExtractorContent },
+  "graph-paper-generator": { Component: GraphPaperGenerator, content: graphPaperGeneratorContent },
+  "meme-caption-generator": { Component: MemeCaptionGenerator, content: memeCaptionGeneratorContent },
+  "business-card-designer": { Component: BusinessCardDesigner, content: businessCardDesignerContent },
+  "flashcard-maker": { Component: FlashcardMaker, content: flashcardMakerContent },
+  "quiz-generator": { Component: QuizGenerator, content: quizGeneratorContent },
+  "multiple-choice-test-generator": { Component: MultipleChoiceTestGenerator, content: multipleChoiceTestGeneratorContent },
+  "timetable-schedule-generator": { Component: TimetableScheduleGenerator, content: timetableScheduleGeneratorContent },
+  "habit-tracker-sheet-generator": { Component: HabitTrackerSheetGenerator, content: habitTrackerSheetGeneratorContent },
+  "handwriting-practice-sheet-generator": { Component: HandwritingPracticeSheetGenerator, content: handwritingPracticeSheetGeneratorContent },
+  "excel-to-csv": { Component: ExcelToCsv, content: excelToCsvContent },
+  "csv-to-excel": { Component: CsvToExcel, content: csvToExcelContent },
+  "excel-to-json": { Component: ExcelToJson, content: excelToJsonContent },
+  "json-to-excel": { Component: JsonToExcel, content: jsonToExcelContent },
+  "txt-to-docx": { Component: TxtToDocx, content: txtToDocxContent },
+  "docx-to-txt": { Component: DocxToTxt, content: docxToTxtContent },
+  "csv-merger": { Component: CsvMerger, content: csvMergerContent },
+  "csv-splitter": { Component: CsvSplitter, content: csvSplitterContent },
+  "duplicate-row-remover": { Component: DuplicateRowRemover, content: duplicateRowRemoverContent },
+  "chart-generator-from-csv": { Component: ChartGeneratorFromCsv, content: chartGeneratorFromCsvContent },
+  "data-cleaner": { Component: DataCleaner, content: dataCleanerContent },
+  "resume-builder": { Component: ResumeBuilder, content: resumeBuilderContent },
+  "cover-letter-generator": { Component: CoverLetterGenerator, content: coverLetterGeneratorContent },
+  "invoice-template-generator": { Component: InvoiceTemplateGenerator, content: invoiceTemplateGeneratorContent },
+  "certificate-generator": { Component: CertificateGenerator, content: certificateGeneratorContent },
+  "letterhead-generator": { Component: LetterheadGenerator, content: letterheadGeneratorContent },
+  "gif-maker-from-images": { Component: GifMakerFromImages, content: gifMakerFromImagesContent },
+  "gif-resizer": { Component: GifResizer, content: gifResizerContent },
+  "gif-splitter": { Component: GifSplitter, content: gifSplitterContent },
+  "gif-maker-from-video": { Component: GifMakerFromVideo, content: gifMakerFromVideoContent },
+  "gif-compressor": { Component: GifCompressor, content: gifCompressorContent },
+  "gif-to-video-converter": { Component: GifToVideoConverter, content: gifToVideoConverterContent },
+  "gif-speed-changer": { Component: GifSpeedChanger, content: gifSpeedChangerContent },
+  "reverse-gif-maker": { Component: ReverseGifMaker, content: reverseGifMakerContent },
+  "font-pairing-generator": { Component: FontPairingGenerator, content: fontPairingGeneratorContent },
+  "google-fonts-previewer": { Component: GoogleFontsPreviewer, content: googleFontsPreviewerContent },
+  "slide-text-extractor": { Component: SlideTextExtractor, content: slideTextExtractorContent },
+  "presentation-template-generator": { Component: PresentationTemplateGenerator, content: presentationTemplateGeneratorContent },
+  "document-merger": { Component: DocumentMerger, content: documentMergerContent },
+  "pivot-table-generator": { Component: PivotTableGenerator, content: pivotTableGeneratorContent },
+  "json-tree-viewer": { Component: JsonTreeViewer, content: jsonTreeViewerContent },
+  "xml-tree-viewer": { Component: XmlTreeViewer, content: xmlTreeViewerContent },
+  "log-file-viewer": { Component: LogFileViewer, content: logFileViewerContent },
+  "hex-viewer": { Component: HexViewer, content: hexViewerContent },
+  "env-file-viewer": { Component: EnvFileViewer, content: envFileViewerContent },
+  "git-patch-diff-file-viewer": { Component: GitPatchDiffFileViewer, content: gitPatchDiffFileViewerContent },
+  "cookie-file-viewer": { Component: CookieFileViewer, content: cookieFileViewerContent },
+  "svg-viewer": { Component: SvgViewer, content: svgViewerContent },
+  "robots-txt-viewer": { Component: RobotsTxtViewer, content: robotsTxtViewerContent },
+  "sitemap-viewer": { Component: SitemapViewer, content: sitemapViewerContent },
+  "vcard-viewer": { Component: VcardViewer, content: vcardViewerContent },
+  "yaml-tree-viewer": { Component: YamlTreeViewer, content: yamlTreeViewerContent },
+  "har-file-viewer": { Component: HarFileViewer, content: harFileViewerContent },
+  "excel-viewer": { Component: ExcelViewer, content: excelViewerContent },
+  "ico-viewer": { Component: IcoViewer, content: icoViewerContent },
+  "audio-waveform-viewer": { Component: AudioWaveformViewer, content: audioWaveformViewerContent },
+  "video-metadata-viewer": { Component: VideoMetadataViewer, content: videoMetadataViewerContent },
+  "font-file-previewer": { Component: FontFilePreviewer, content: fontFilePreviewerContent },
+  "qr-code-decoder": { Component: QrCodeDecoder, content: qrCodeDecoderContent },
+  "eml-file-viewer": { Component: EmlFileViewer, content: emlFileViewerContent },
+  "ics-calendar-file-viewer": { Component: IcsCalendarFileViewer, content: icsCalendarFileViewerContent },
+  "epub-viewer": { Component: EpubViewer, content: epubViewerContent },
+  "archive-content-viewer": { Component: ArchiveContentViewer, content: archiveContentViewerContent },
+  "audio-spectrogram-viewer": { Component: AudioSpectrogramViewer, content: audioSpectrogramViewerContent },
+  "pgp-key-viewer": { Component: PgpKeyViewer, content: pgpKeyViewerContent },
+  "certificate-chain-viewer": { Component: CertificateChainViewer, content: certificateChainViewerContent },
+  "barcode-decoder": { Component: BarcodeDecoder, content: barcodeDecoderContent },
+  "word-document-viewer": { Component: WordDocumentViewer, content: wordDocumentViewerContent },
+  "odt-viewer": { Component: OdtViewer, content: odtViewerContent },
+  "parquet-viewer": { Component: ParquetViewer, content: parquetViewerContent },
+  "powerpoint-viewer": { Component: PowerpointViewer, content: powerpointViewerContent },
 };
 
 export function getRegisteredTool(slug: string): RegisteredTool | undefined {

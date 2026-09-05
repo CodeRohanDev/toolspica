@@ -17,6 +17,10 @@ export async function GET() {
     `${SITE.name} is built by ${SITE.parentBrand} (${SITE.parentUrl}). It offers ${ALL_TOOLS.length}+ planned utilities across ${TOOL_CATEGORIES.length} categories; ${liveTools.length} are live today, with new ones shipping regularly. Every tool runs free, with no sign-up. Wherever technically possible, files are processed entirely in the visitor's browser and are never uploaded — see ${SITE.url}/data-processing-policy and ${SITE.url}/file-retention-policy for the small set of tools that use temporary, auto-deleting cloud processing instead.`
   );
   lines.push("");
+  lines.push(
+    `Full per-tool descriptions and FAQs: ${SITE.url}/llms-full.txt`
+  );
+  lines.push("");
 
   lines.push("## Categories");
   for (const category of TOOL_CATEGORIES) {

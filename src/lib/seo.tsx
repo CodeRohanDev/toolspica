@@ -100,10 +100,14 @@ export function breadcrumbJsonLd(items: { name: string; path: string }[]) {
   };
 }
 
-export function faqJsonLd(faqs: { question: string; answer: string }[]) {
+export function faqJsonLd(
+  faqs: { question: string; answer: string }[],
+  dateModified?: string
+) {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
+    ...(dateModified && { dateModified }),
     mainEntity: faqs.map((faq) => ({
       "@type": "Question",
       name: faq.question,
@@ -120,6 +124,7 @@ export function softwareApplicationJsonLd(input: {
   description: string;
   path: string;
   categoryName: string;
+  dateModified?: string;
 }) {
   return {
     "@context": "https://schema.org",
@@ -129,6 +134,7 @@ export function softwareApplicationJsonLd(input: {
     url: `${SITE.url}${input.path}`,
     applicationCategory: input.categoryName,
     operatingSystem: "Any (runs in browser)",
+    ...(input.dateModified && { dateModified: input.dateModified }),
     offers: {
       "@type": "Offer",
       price: "0",
@@ -161,6 +167,7 @@ export function collectionPageJsonLd(input: {
   description: string;
   path: string;
   itemNames: string[];
+  dateModified?: string;
 }) {
   return {
     "@context": "https://schema.org",
@@ -168,6 +175,7 @@ export function collectionPageJsonLd(input: {
     name: input.name,
     description: input.description,
     url: `${SITE.url}${input.path}`,
+    ...(input.dateModified && { dateModified: input.dateModified }),
     mainEntity: {
       "@type": "ItemList",
       itemListElement: input.itemNames.map((name, index) => ({

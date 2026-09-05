@@ -2,6 +2,10 @@ import type { MetadataRoute } from "next";
 import { SITE } from "@/lib/site";
 import { ALL_TOOLS, TOOL_CATEGORIES } from "@/lib/tools-data.generated";
 import { TOOL_VARIANTS } from "@/lib/tool-variants";
+import {
+  getToolContentLastModified,
+  getMostRecent,
+} from "@/lib/content-freshness";
 
 const STATIC_PAGES: { path: string; priority: number }[] = [
   { path: "/", priority: 1 },
@@ -16,11 +20,17 @@ const STATIC_PAGES: { path: string; priority: number }[] = [
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
+  // Real per-file last-commit dates, not a fabricated "now" on every build —
+  // search engines discount lastModified signals that never vary.
+  const homeDate = getMostRecent(
+    ALL_TOOLS.filter((t) => t.done).map((t) => getToolContentLastModified(t.slug))
+  );
 
   const staticEntries: MetadataRoute.Sitemap = STATIC_PAGES.map((page) => ({
     url: `${SITE.url}${page.path}`,
-    lastModified: now,
+    ...((page.path === "/" || page.path === "/categories") && {
+      lastModified: homeDate,
+    }),
     changeFrequency: "weekly",
     priority: page.priority,
   }));
@@ -28,7 +38,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const categoryEntries: MetadataRoute.Sitemap = TOOL_CATEGORIES.map(
     (category) => ({
       url: `${SITE.url}/${category.slug}`,
-      lastModified: now,
+      lastModified: getMostRecent(
+        category.tools
+          .filter((t) => t.done)
+          .map((t) => getToolContentLastModified(t.slug))
+      ),
       changeFrequency: "weekly",
       priority: 0.8,
     })
@@ -40,7 +54,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     (tool) => tool.done
   ).map((tool) => ({
     url: `${SITE.url}/tools/${tool.slug}`,
-    lastModified: now,
+    lastModified: getToolContentLastModified(tool.slug),
     changeFrequency: "monthly",
     priority: 0.7,
   }));
@@ -51,7 +65,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ALL_TOOLS.some((tool) => tool.slug === v.toolSlug && tool.done)
   ).map((variant) => ({
     url: `${SITE.url}/${variant.slug}`,
-    lastModified: now,
+    lastModified: getToolContentLastModified(variant.toolSlug),
     changeFrequency: "monthly",
     priority: 0.65,
   }));

@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import yaml from "js-yaml";
+import * as yaml from "js-yaml";
 import { Textarea } from "@/components/ui/textarea";
 import { CopyButton } from "@/components/tools/copy-button";
 

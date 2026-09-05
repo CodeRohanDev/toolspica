@@ -3,6 +3,7 @@ import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { SmoothScroll } from "@/components/smooth-scroll";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { JsonLd, organizationJsonLd, websiteJsonLd } from "@/lib/seo";
@@ -86,6 +87,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           crossOrigin="anonymous"
           strategy="beforeInteractive"
         />
+        <SmoothScroll />
         <TooltipProvider delay={150}>
           <SiteHeader />
           <main className="flex-1">{children}</main>

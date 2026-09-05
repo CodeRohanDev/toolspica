@@ -98,6 +98,8 @@
 - Batch Image Resizer
 - Image Rotator by Angle
 - Transparent Background Maker
+- SVG Viewer
+- ICO Viewer
 
 # Text Tools
 
@@ -192,6 +194,15 @@
 - Environment Variable (.env) to JSON Converter
 
 ---
+- JSON Tree Viewer
+- XML Tree Viewer
+- Log File Viewer
+- Hex Viewer
+- .env File Viewer
+- Git Patch/Diff File Viewer
+- Cookie File Viewer
+- YAML Tree Viewer
+- HAR File Viewer
 
 # Video Tools
 
@@ -224,6 +235,7 @@
 - FLV to MP4
 - Video Joiner by Timeline
 - Video Aspect Ratio Converter
+- Video Metadata Viewer
 
 # Audio Tools
 
@@ -250,6 +262,8 @@
 - Universal Audio Format Converter
 - Podcast Trimmer
 - Silence Remover (Audio)
+- Audio Waveform Viewer
+- Audio Spectrogram Viewer
 
 # OCR Tools
 
@@ -284,6 +298,7 @@
 - Split Archive by Size
 
 ---
+- Archive Content Viewer
 
 # Calculators
 
@@ -472,6 +487,8 @@
 - Self-Destructing Secure Note Generator
 
 ---
+- PGP Key Viewer
+- Certificate Chain Viewer
 
 # Document & Office Tools
 
@@ -488,6 +505,10 @@
 - Certificate Generator
 - Letterhead Generator
 - Business Card Designer
+- EPUB Viewer
+- Word Document Viewer
+- ODT Viewer
+- PowerPoint Viewer
 
 # Spreadsheet & Data Tools
 
@@ -502,6 +523,8 @@
 - Chart Generator from CSV
 - Excel Formula Generator
 - VLOOKUP Formula Generator
+- Excel Viewer
+- Parquet Viewer
 
 # Color Tools
 
@@ -530,6 +553,8 @@
 - UPC/EAN Generator
 - QR Code with Logo Generator
 - Bulk QR Code Generator
+- QR Code Decoder (from Image)
+- Barcode Decoder (from Image)
 
 # Random Generators
 
@@ -563,6 +588,8 @@
 - MX Record Lookup
 - Subnet Calculator
 - MAC Address Lookup Tool
+- Robots.txt Viewer
+- Sitemap Viewer
 
 # GIF & Meme Tools
 
@@ -584,6 +611,7 @@
 - Fancy Text Generator
 - Font Format Converter (TTF/WOFF/OTF)
 - Typography Scale Generator
+- Font File Previewer (TTF/OTF/WOFF)
 
 # Writing & Citation Tools
 
@@ -603,6 +631,8 @@
 - Email Signature Generator
 - Bulk Email List Verifier
 - Email Subject Line Tester
+- vCard (.vcf) Viewer
+- EML File Viewer
 
 # Legal & Business Document Tools
 
@@ -664,6 +694,7 @@
 - Countdown to Date Widget
 - Work Days Calculator
 - Habit Tracker Sheet Generator
+- ICS Calendar File Viewer
 
 # Education Tools
 

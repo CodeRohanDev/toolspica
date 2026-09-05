@@ -2,31 +2,37 @@ import Link from "next/link";
 import { ShieldCheck, Zap, Lock } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { ToolSearch } from "@/components/tool-search";
-import { TOTAL_TOOLS } from "@/lib/tools-data.generated";
+import { HeroField } from "@/components/home/hero-field";
+import { ALL_TOOLS, TOTAL_TOOLS } from "@/lib/tools-data.generated";
 
-const QUICK_CATEGORIES = [
-  { name: "PDF Tools", slug: "pdf-tools" },
-  { name: "Image Tools", slug: "image-tools" },
-  { name: "Developer Tools", slug: "developer-tools" },
-  { name: "Calculators", slug: "calculators" },
-  { name: "AI Tools", slug: "ai-tools" },
+const QUICK_TOOL_SLUGS = [
+  "pdf-merge",
+  "image-compressor",
+  "remove-background",
+  "json-formatter",
+  "qr-code-generator",
 ];
 
 export function Hero() {
+  const quickTools = QUICK_TOOL_SLUGS.map((slug) =>
+    ALL_TOOLS.find((tool) => tool.slug === slug)
+  ).filter((tool): tool is NonNullable<typeof tool> => Boolean(tool));
+
   return (
-    <section className="relative overflow-hidden border-b">
+    <section className="relative border-b">
       <div
         aria-hidden
-        className="pointer-events-none absolute left-1/2 top-[-10rem] h-[36rem] w-[64rem] -translate-x-1/2 rounded-full opacity-[0.15] blur-3xl"
+        className="pointer-events-none absolute inset-0 overflow-hidden"
         style={{
-          background:
-            "radial-gradient(closest-side, var(--brand), transparent)",
+          maskImage:
+            "radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%)",
+          WebkitMaskImage:
+            "radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%)",
         }}
-      />
-      <div
-        aria-hidden
-        className="bg-grid-fade pointer-events-none absolute inset-0"
-      />
+      >
+        <HeroField />
+        <div className="bg-grid-fade absolute inset-0 opacity-60" />
+      </div>
       <div className="relative mx-auto max-w-5xl px-4 pb-20 pt-20 text-center sm:px-6 sm:pt-28 lg:px-8">
         <Badge className="mb-6 gap-1.5 rounded-full border-none bg-brand-soft px-3 py-1 text-xs font-medium text-brand hover:bg-brand-soft">
           <ShieldCheck className="size-3.5" />
@@ -50,13 +56,14 @@ export function Hero() {
         </div>
 
         <div className="mx-auto mt-4 flex max-w-2xl flex-wrap items-center justify-center gap-2">
-          {QUICK_CATEGORIES.map((category) => (
+          <span className="text-xs text-muted-foreground">Try:</span>
+          {quickTools.map((tool) => (
             <Link
-              key={category.slug}
-              href={`/${category.slug}`}
+              key={tool.slug}
+              href={`/tools/${tool.slug}`}
               className="rounded-full border bg-background px-3 py-1 text-xs font-medium text-muted-foreground transition-colors hover:border-brand/40 hover:text-brand"
             >
-              {category.name}
+              {tool.name}
             </Link>
           ))}
         </div>

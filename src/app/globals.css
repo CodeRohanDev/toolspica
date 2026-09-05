@@ -9,6 +9,9 @@
   --color-brand: var(--brand);
   --color-brand-foreground: var(--brand-foreground);
   --color-brand-soft: var(--brand-soft);
+  --animate-aurora-a: aurora-drift-a 28s ease-in-out infinite alternate;
+  --animate-aurora-b: aurora-drift-b 34s ease-in-out infinite alternate;
+  --animate-aurora-c: aurora-drift-c 24s ease-in-out infinite alternate;
   --font-sans: var(--font-site-sans);
   --font-mono: var(--font-site-mono);
   --font-heading: var(--font-site-sans);
@@ -97,7 +100,33 @@
   }
   html {
     @apply font-sans;
-    scroll-behavior: smooth;
+  }
+}
+
+@keyframes aurora-drift-a {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    transform: translate(12%, 18%) scale(1.15);
+  }
+}
+
+@keyframes aurora-drift-b {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    transform: translate(-15%, 12%) scale(0.9);
+  }
+}
+
+@keyframes aurora-drift-c {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    transform: translate(-8%, 20%) scale(1.1);
   }
 }
 

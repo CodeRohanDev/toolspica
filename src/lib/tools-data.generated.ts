@@ -585,6 +585,18 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
         "done": true
       },
       {
+        "name": "SVG Viewer",
+        "slug": "svg-viewer",
+        "tier": 1,
+        "done": true
+      },
+      {
+        "name": "ICO Viewer",
+        "slug": "ico-viewer",
+        "tier": 2,
+        "done": true
+      },
+      {
         "name": "JPG to HEIC",
         "slug": "jpg-to-heic",
         "tier": 4,
@@ -663,6 +675,12 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
         "done": true
       },
       {
+        "name": "Text Diff Checker",
+        "slug": "text-diff-checker",
+        "tier": 2,
+        "done": true
+      },
+      {
         "name": "Text Cleaner",
         "slug": "text-cleaner",
         "tier": 1,
@@ -687,9 +705,27 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
         "done": true
       },
       {
+        "name": "Text to Speech",
+        "slug": "text-to-speech",
+        "tier": 2,
+        "done": true
+      },
+      {
+        "name": "Speech to Text",
+        "slug": "speech-to-text",
+        "tier": 2,
+        "done": true
+      },
+      {
         "name": "Word Frequency Counter",
         "slug": "word-frequency-counter",
         "tier": 1,
+        "done": true
+      },
+      {
+        "name": "Text Encryptor / Decryptor",
+        "slug": "text-encryptor-decryptor",
+        "tier": 2,
         "done": true
       },
       {
@@ -793,30 +829,6 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
         "slug": "text-to-slug-bulk-converter",
         "tier": 1,
         "done": true
-      },
-      {
-        "name": "Text Diff Checker",
-        "slug": "text-diff-checker",
-        "tier": 2,
-        "done": false
-      },
-      {
-        "name": "Text to Speech",
-        "slug": "text-to-speech",
-        "tier": 2,
-        "done": false
-      },
-      {
-        "name": "Speech to Text",
-        "slug": "speech-to-text",
-        "tier": 2,
-        "done": false
-      },
-      {
-        "name": "Text Encryptor / Decryptor",
-        "slug": "text-encryptor-decryptor",
-        "tier": 2,
-        "done": false
       }
     ]
   },
@@ -1119,6 +1131,60 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
         "done": true
       },
       {
+        "name": "JSON Tree Viewer",
+        "slug": "json-tree-viewer",
+        "tier": 1,
+        "done": true
+      },
+      {
+        "name": "XML Tree Viewer",
+        "slug": "xml-tree-viewer",
+        "tier": 1,
+        "done": true
+      },
+      {
+        "name": "Log File Viewer",
+        "slug": "log-file-viewer",
+        "tier": 1,
+        "done": true
+      },
+      {
+        "name": "Hex Viewer",
+        "slug": "hex-viewer",
+        "tier": 1,
+        "done": true
+      },
+      {
+        "name": ".env File Viewer",
+        "slug": "env-file-viewer",
+        "tier": 1,
+        "done": true
+      },
+      {
+        "name": "Git Patch/Diff File Viewer",
+        "slug": "git-patch-diff-file-viewer",
+        "tier": 1,
+        "done": true
+      },
+      {
+        "name": "Cookie File Viewer",
+        "slug": "cookie-file-viewer",
+        "tier": 1,
+        "done": true
+      },
+      {
+        "name": "YAML Tree Viewer",
+        "slug": "yaml-tree-viewer",
+        "tier": 2,
+        "done": true
+      },
+      {
+        "name": "HAR File Viewer",
+        "slug": "har-file-viewer",
+        "tier": 2,
+        "done": true
+      },
+      {
         "name": "Webhook Tester",
         "slug": "webhook-tester",
         "tier": 5,
@@ -1303,6 +1369,12 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
         "slug": "video-aspect-ratio-converter",
         "tier": 4,
         "done": true
+      },
+      {
+        "name": "Video Metadata Viewer",
+        "slug": "video-metadata-viewer",
+        "tier": 2,
+        "done": true
       }
     ]
   },
@@ -1440,6 +1512,18 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
         "name": "Silence Remover (Audio)",
         "slug": "silence-remover",
         "tier": 1,
+        "done": true
+      },
+      {
+        "name": "Audio Waveform Viewer",
+        "slug": "audio-waveform-viewer",
+        "tier": 2,
+        "done": true
+      },
+      {
+        "name": "Audio Spectrogram Viewer",
+        "slug": "audio-spectrogram-viewer",
+        "tier": 3,
         "done": true
       },
       {
@@ -1613,6 +1697,12 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
       {
         "name": "Split Archive by Size",
         "slug": "split-archive-by-size",
+        "tier": 3,
+        "done": true
+      },
+      {
+        "name": "Archive Content Viewer",
+        "slug": "archive-content-viewer",
         "tier": 3,
         "done": true
       }
@@ -2259,6 +2349,36 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
     "slug": "social-media-tools",
     "tools": [
       {
+        "name": "YouTube Thumbnail Downloader",
+        "slug": "youtube-thumbnail-downloader",
+        "tier": 2,
+        "done": true
+      },
+      {
+        "name": "YouTube Title Generator",
+        "slug": "youtube-title-generator",
+        "tier": 3,
+        "done": true
+      },
+      {
+        "name": "YouTube Description Generator",
+        "slug": "youtube-description-generator",
+        "tier": 3,
+        "done": true
+      },
+      {
+        "name": "Hashtag Generator",
+        "slug": "hashtag-generator",
+        "tier": 2,
+        "done": true
+      },
+      {
+        "name": "Instagram Caption Generator",
+        "slug": "instagram-caption-generator",
+        "tier": 2,
+        "done": true
+      },
+      {
         "name": "Instagram Story Size Guide",
         "slug": "instagram-story-size-guide",
         "tier": 1,
@@ -2289,27 +2409,9 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
         "done": true
       },
       {
-        "name": "YouTube Thumbnail Downloader",
-        "slug": "youtube-thumbnail-downloader",
-        "tier": 2,
-        "done": false
-      },
-      {
         "name": "YouTube Tags Extractor",
         "slug": "youtube-tags-extractor",
         "tier": 5,
-        "done": false
-      },
-      {
-        "name": "YouTube Title Generator",
-        "slug": "youtube-title-generator",
-        "tier": 3,
-        "done": false
-      },
-      {
-        "name": "YouTube Description Generator",
-        "slug": "youtube-description-generator",
-        "tier": 3,
         "done": false
       },
       {
@@ -2328,18 +2430,6 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
         "name": "YouTube Channel ID Finder",
         "slug": "youtube-channel-id-finder",
         "tier": 5,
-        "done": false
-      },
-      {
-        "name": "Hashtag Generator",
-        "slug": "hashtag-generator",
-        "tier": 2,
-        "done": false
-      },
-      {
-        "name": "Instagram Caption Generator",
-        "slug": "instagram-caption-generator",
-        "tier": 2,
         "done": false
       },
       {
@@ -2397,6 +2487,12 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
         "done": true
       },
       {
+        "name": "Sitemap Generator",
+        "slug": "sitemap-generator",
+        "tier": 3,
+        "done": true
+      },
+      {
         "name": "Keyword Density Checker",
         "slug": "keyword-density-checker",
         "tier": 1,
@@ -2409,22 +2505,28 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
         "done": true
       },
       {
+        "name": "Schema Markup Generator",
+        "slug": "schema-markup-generator",
+        "tier": 3,
+        "done": true
+      },
+      {
+        "name": "XML Sitemap Validator",
+        "slug": "xml-sitemap-validator",
+        "tier": 3,
+        "done": true
+      },
+      {
         "name": "SERP Snippet Preview Tool",
         "slug": "serp-snippet-preview-tool",
         "tier": 1,
         "done": true
       },
       {
-        "name": "Sitemap Generator",
-        "slug": "sitemap-generator",
+        "name": "Readability Checker",
+        "slug": "readability-checker",
         "tier": 3,
-        "done": false
-      },
-      {
-        "name": "Schema Markup Generator",
-        "slug": "schema-markup-generator",
-        "tier": 3,
-        "done": false
+        "done": true
       },
       {
         "name": "Backlink Checker",
@@ -2457,12 +2559,6 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
         "done": false
       },
       {
-        "name": "XML Sitemap Validator",
-        "slug": "xml-sitemap-validator",
-        "tier": 3,
-        "done": false
-      },
-      {
         "name": "Canonical Tag Checker",
         "slug": "canonical-tag-checker",
         "tier": 4,
@@ -2484,12 +2580,6 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
         "name": "Header Tag (H1-H6) Analyzer",
         "slug": "header-tag-analyzer",
         "tier": 4,
-        "done": false
-      },
-      {
-        "name": "Readability Checker",
-        "slug": "readability-checker",
-        "tier": 3,
         "done": false
       },
       {
@@ -2623,6 +2713,18 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
         "slug": "self-destructing-secure-note-generator",
         "tier": 5,
         "done": true
+      },
+      {
+        "name": "PGP Key Viewer",
+        "slug": "pgp-key-viewer",
+        "tier": 3,
+        "done": true
+      },
+      {
+        "name": "Certificate Chain Viewer",
+        "slug": "certificate-chain-viewer",
+        "tier": 3,
+        "done": true
       }
     ]
   },
@@ -2634,25 +2736,91 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
         "name": "CSV to Excel",
         "slug": "csv-to-excel",
         "tier": 3,
-        "done": false
+        "done": true
       },
       {
         "name": "Excel to CSV",
         "slug": "excel-to-csv",
         "tier": 2,
-        "done": false
+        "done": true
       },
       {
         "name": "DOCX to TXT",
         "slug": "docx-to-txt",
         "tier": 3,
-        "done": false
+        "done": true
       },
       {
         "name": "TXT to DOCX",
         "slug": "txt-to-docx",
         "tier": 2,
-        "done": false
+        "done": true
+      },
+      {
+        "name": "Document Merger",
+        "slug": "document-merger",
+        "tier": 4,
+        "done": true
+      },
+      {
+        "name": "Resume Builder",
+        "slug": "resume-builder",
+        "tier": 2,
+        "done": true
+      },
+      {
+        "name": "Cover Letter Generator",
+        "slug": "cover-letter-generator",
+        "tier": 2,
+        "done": true
+      },
+      {
+        "name": "Invoice Template Generator",
+        "slug": "invoice-template-generator",
+        "tier": 2,
+        "done": true
+      },
+      {
+        "name": "Certificate Generator",
+        "slug": "certificate-generator",
+        "tier": 2,
+        "done": true
+      },
+      {
+        "name": "Letterhead Generator",
+        "slug": "letterhead-generator",
+        "tier": 2,
+        "done": true
+      },
+      {
+        "name": "Business Card Designer",
+        "slug": "business-card-designer",
+        "tier": 3,
+        "done": true
+      },
+      {
+        "name": "EPUB Viewer",
+        "slug": "epub-viewer",
+        "tier": 3,
+        "done": true
+      },
+      {
+        "name": "Word Document Viewer",
+        "slug": "word-document-viewer",
+        "tier": 4,
+        "done": true
+      },
+      {
+        "name": "ODT Viewer",
+        "slug": "odt-viewer",
+        "tier": 4,
+        "done": true
+      },
+      {
+        "name": "PowerPoint Viewer",
+        "slug": "powerpoint-viewer",
+        "tier": 6,
+        "done": true
       },
       {
         "name": "ODT Converter",
@@ -2664,48 +2832,6 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
         "name": "EPUB Converter",
         "slug": "epub-converter",
         "tier": 5,
-        "done": false
-      },
-      {
-        "name": "Document Merger",
-        "slug": "document-merger",
-        "tier": 4,
-        "done": false
-      },
-      {
-        "name": "Resume Builder",
-        "slug": "resume-builder",
-        "tier": 2,
-        "done": false
-      },
-      {
-        "name": "Cover Letter Generator",
-        "slug": "cover-letter-generator",
-        "tier": 2,
-        "done": false
-      },
-      {
-        "name": "Invoice Template Generator",
-        "slug": "invoice-template-generator",
-        "tier": 2,
-        "done": false
-      },
-      {
-        "name": "Certificate Generator",
-        "slug": "certificate-generator",
-        "tier": 2,
-        "done": false
-      },
-      {
-        "name": "Letterhead Generator",
-        "slug": "letterhead-generator",
-        "tier": 2,
-        "done": false
-      },
-      {
-        "name": "Business Card Designer",
-        "slug": "business-card-designer",
-        "tier": 3,
         "done": false
       }
     ]
@@ -2721,64 +2847,76 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
         "done": true
       },
       {
+        "name": "CSV Merger",
+        "slug": "csv-merger",
+        "tier": 2,
+        "done": true
+      },
+      {
+        "name": "CSV Splitter",
+        "slug": "csv-splitter",
+        "tier": 2,
+        "done": true
+      },
+      {
+        "name": "Excel to JSON",
+        "slug": "excel-to-json",
+        "tier": 2,
+        "done": true
+      },
+      {
+        "name": "JSON to Excel",
+        "slug": "json-to-excel",
+        "tier": 2,
+        "done": true
+      },
+      {
+        "name": "Duplicate Row Remover",
+        "slug": "duplicate-row-remover",
+        "tier": 2,
+        "done": true
+      },
+      {
+        "name": "Data Cleaner",
+        "slug": "data-cleaner",
+        "tier": 3,
+        "done": true
+      },
+      {
+        "name": "Pivot Table Generator",
+        "slug": "pivot-table-generator",
+        "tier": 4,
+        "done": true
+      },
+      {
+        "name": "Chart Generator from CSV",
+        "slug": "chart-generator-from-csv",
+        "tier": 2,
+        "done": true
+      },
+      {
+        "name": "Excel Formula Generator",
+        "slug": "excel-formula-generator",
+        "tier": 2,
+        "done": true
+      },
+      {
         "name": "VLOOKUP Formula Generator",
         "slug": "vlookup-formula-generator",
         "tier": 1,
         "done": true
       },
       {
-        "name": "CSV Merger",
-        "slug": "csv-merger",
+        "name": "Excel Viewer",
+        "slug": "excel-viewer",
         "tier": 2,
-        "done": false
+        "done": true
       },
       {
-        "name": "CSV Splitter",
-        "slug": "csv-splitter",
-        "tier": 2,
-        "done": false
-      },
-      {
-        "name": "Excel to JSON",
-        "slug": "excel-to-json",
-        "tier": 2,
-        "done": false
-      },
-      {
-        "name": "JSON to Excel",
-        "slug": "json-to-excel",
-        "tier": 2,
-        "done": false
-      },
-      {
-        "name": "Duplicate Row Remover",
-        "slug": "duplicate-row-remover",
-        "tier": 2,
-        "done": false
-      },
-      {
-        "name": "Data Cleaner",
-        "slug": "data-cleaner",
-        "tier": 3,
-        "done": false
-      },
-      {
-        "name": "Pivot Table Generator",
-        "slug": "pivot-table-generator",
-        "tier": 4,
-        "done": false
-      },
-      {
-        "name": "Chart Generator from CSV",
-        "slug": "chart-generator-from-csv",
-        "tier": 2,
-        "done": false
-      },
-      {
-        "name": "Excel Formula Generator",
-        "slug": "excel-formula-generator",
-        "tier": 2,
-        "done": false
+        "name": "Parquet Viewer",
+        "slug": "parquet-viewer",
+        "tier": 5,
+        "done": true
       }
     ]
   },
@@ -2811,6 +2949,12 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
         "done": true
       },
       {
+        "name": "Color Palette Generator",
+        "slug": "color-palette-generator",
+        "tier": 2,
+        "done": true
+      },
+      {
         "name": "Gradient Generator",
         "slug": "gradient-generator",
         "tier": 1,
@@ -2820,6 +2964,12 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
         "name": "Color Contrast Checker",
         "slug": "color-contrast-checker",
         "tier": 1,
+        "done": true
+      },
+      {
+        "name": "Color Blindness Simulator",
+        "slug": "color-blindness-simulator",
+        "tier": 2,
         "done": true
       },
       {
@@ -2835,6 +2985,12 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
         "done": true
       },
       {
+        "name": "Image Color Palette Extractor",
+        "slug": "image-color-palette-extractor",
+        "tier": 2,
+        "done": true
+      },
+      {
         "name": "CSS Gradient Generator",
         "slug": "css-gradient-generator",
         "tier": 1,
@@ -2845,24 +3001,6 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
         "slug": "tailwind-color-shade-generator",
         "tier": 1,
         "done": true
-      },
-      {
-        "name": "Color Palette Generator",
-        "slug": "color-palette-generator",
-        "tier": 2,
-        "done": false
-      },
-      {
-        "name": "Color Blindness Simulator",
-        "slug": "color-blindness-simulator",
-        "tier": 2,
-        "done": false
-      },
-      {
-        "name": "Image Color Palette Extractor",
-        "slug": "image-color-palette-extractor",
-        "tier": 2,
-        "done": false
       }
     ]
   },
@@ -2901,6 +3039,30 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
         "done": true
       },
       {
+        "name": "QR Code with Logo Generator",
+        "slug": "qr-code-with-logo-generator",
+        "tier": 2,
+        "done": true
+      },
+      {
+        "name": "Bulk QR Code Generator",
+        "slug": "bulk-qr-code-generator",
+        "tier": 2,
+        "done": true
+      },
+      {
+        "name": "QR Code Decoder (from Image)",
+        "slug": "qr-code-decoder",
+        "tier": 2,
+        "done": true
+      },
+      {
+        "name": "Barcode Decoder (from Image)",
+        "slug": "barcode-decoder",
+        "tier": 3,
+        "done": true
+      },
+      {
         "name": "QR Code Scanner",
         "slug": "qr-code-scanner",
         "tier": 2,
@@ -2909,18 +3071,6 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
       {
         "name": "Barcode Scanner",
         "slug": "barcode-scanner",
-        "tier": 2,
-        "done": false
-      },
-      {
-        "name": "QR Code with Logo Generator",
-        "slug": "qr-code-with-logo-generator",
-        "tier": 2,
-        "done": false
-      },
-      {
-        "name": "Bulk QR Code Generator",
-        "slug": "bulk-qr-code-generator",
         "tier": 2,
         "done": false
       }
@@ -3097,6 +3247,18 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
         "slug": "mac-address-lookup-tool",
         "tier": 2,
         "done": true
+      },
+      {
+        "name": "Robots.txt Viewer",
+        "slug": "robots-txt-viewer",
+        "tier": 1,
+        "done": true
+      },
+      {
+        "name": "Sitemap Viewer",
+        "slug": "sitemap-viewer",
+        "tier": 1,
+        "done": true
       }
     ]
   },
@@ -3108,55 +3270,55 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
         "name": "GIF Maker from Video",
         "slug": "gif-maker-from-video",
         "tier": 4,
-        "done": false
+        "done": true
       },
       {
         "name": "GIF Maker from Images",
         "slug": "gif-maker-from-images",
         "tier": 3,
-        "done": false
+        "done": true
       },
       {
         "name": "GIF Resizer",
         "slug": "gif-resizer",
         "tier": 3,
-        "done": false
+        "done": true
       },
       {
         "name": "GIF Compressor",
         "slug": "gif-compressor",
         "tier": 4,
-        "done": false
+        "done": true
       },
       {
         "name": "GIF to Video Converter",
         "slug": "gif-to-video-converter",
         "tier": 4,
-        "done": false
+        "done": true
       },
       {
         "name": "GIF Splitter (Frame Extractor)",
         "slug": "gif-splitter",
         "tier": 3,
-        "done": false
+        "done": true
       },
       {
         "name": "GIF Speed Changer",
         "slug": "gif-speed-changer",
         "tier": 4,
-        "done": false
+        "done": true
       },
       {
         "name": "Reverse GIF Maker",
         "slug": "reverse-gif-maker",
         "tier": 4,
-        "done": false
+        "done": true
       },
       {
         "name": "Meme Caption Generator",
         "slug": "meme-caption-generator",
         "tier": 3,
-        "done": false
+        "done": true
       }
     ]
   },
@@ -3164,6 +3326,18 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
     "name": "Font & Typography Tools",
     "slug": "font-and-typography-tools",
     "tools": [
+      {
+        "name": "Font Pairing Generator",
+        "slug": "font-pairing-generator",
+        "tier": 2,
+        "done": true
+      },
+      {
+        "name": "Google Fonts Previewer",
+        "slug": "google-fonts-previewer",
+        "tier": 2,
+        "done": true
+      },
       {
         "name": "Fancy Text Generator",
         "slug": "fancy-text-generator",
@@ -3177,16 +3351,10 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
         "done": true
       },
       {
-        "name": "Font Pairing Generator",
-        "slug": "font-pairing-generator",
+        "name": "Font File Previewer (TTF/OTF/WOFF)",
+        "slug": "font-file-previewer",
         "tier": 2,
-        "done": false
-      },
-      {
-        "name": "Google Fonts Previewer",
-        "slug": "google-fonts-previewer",
-        "tier": 2,
-        "done": false
+        "done": true
       },
       {
         "name": "Font Identifier (Image to Font)",
@@ -3207,39 +3375,39 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
     "slug": "writing-and-citation-tools",
     "tools": [
       {
+        "name": "Citation Generator (APA/MLA/Chicago)",
+        "slug": "citation-generator",
+        "tier": 2,
+        "done": true
+      },
+      {
+        "name": "Essay Outline Generator",
+        "slug": "essay-outline-generator",
+        "tier": 3,
+        "done": true
+      },
+      {
+        "name": "Bibliography Generator",
+        "slug": "bibliography-generator",
+        "tier": 2,
+        "done": true
+      },
+      {
         "name": "Readability Score Checker",
         "slug": "readability-score-checker",
         "tier": 1,
         "done": true
       },
       {
-        "name": "Citation Generator (APA/MLA/Chicago)",
-        "slug": "citation-generator",
-        "tier": 2,
-        "done": false
+        "name": "Thesis Statement Generator",
+        "slug": "thesis-statement-generator",
+        "tier": 3,
+        "done": true
       },
       {
         "name": "Plagiarism Checker",
         "slug": "plagiarism-checker",
         "tier": 6,
-        "done": false
-      },
-      {
-        "name": "Essay Outline Generator",
-        "slug": "essay-outline-generator",
-        "tier": 3,
-        "done": false
-      },
-      {
-        "name": "Bibliography Generator",
-        "slug": "bibliography-generator",
-        "tier": 2,
-        "done": false
-      },
-      {
-        "name": "Thesis Statement Generator",
-        "slug": "thesis-statement-generator",
-        "tier": 3,
         "done": false
       },
       {
@@ -3270,24 +3438,36 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
         "name": "Mail Header Analyzer",
         "slug": "mail-header-analyzer",
         "tier": 2,
-        "done": false
+        "done": true
       },
       {
         "name": "Email Signature Generator",
         "slug": "email-signature-generator",
         "tier": 2,
-        "done": false
-      },
-      {
-        "name": "Bulk Email List Verifier",
-        "slug": "bulk-email-list-verifier",
-        "tier": 5,
-        "done": false
+        "done": true
       },
       {
         "name": "Email Subject Line Tester",
         "slug": "email-subject-line-tester",
         "tier": 2,
+        "done": true
+      },
+      {
+        "name": "vCard (.vcf) Viewer",
+        "slug": "vcard-viewer",
+        "tier": 1,
+        "done": true
+      },
+      {
+        "name": "EML File Viewer",
+        "slug": "eml-file-viewer",
+        "tier": 2,
+        "done": true
+      },
+      {
+        "name": "Bulk Email List Verifier",
+        "slug": "bulk-email-list-verifier",
+        "tier": 5,
         "done": false
       }
     ]
@@ -3300,61 +3480,61 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
         "name": "Privacy Policy Generator",
         "slug": "privacy-policy-generator",
         "tier": 2,
-        "done": false
+        "done": true
       },
       {
         "name": "Terms & Conditions Generator",
         "slug": "terms-and-conditions-generator",
         "tier": 2,
-        "done": false
+        "done": true
       },
       {
         "name": "NDA (Non-Disclosure Agreement) Generator",
         "slug": "nda-generator",
         "tier": 2,
-        "done": false
+        "done": true
       },
       {
         "name": "Disclaimer Generator",
         "slug": "disclaimer-generator",
         "tier": 2,
-        "done": false
+        "done": true
       },
       {
         "name": "Refund Policy Generator",
         "slug": "refund-policy-generator",
         "tier": 2,
-        "done": false
+        "done": true
       },
       {
         "name": "Cookie Policy Generator",
         "slug": "cookie-policy-generator",
         "tier": 2,
-        "done": false
+        "done": true
       },
       {
         "name": "Employment Contract Generator",
         "slug": "employment-contract-generator",
         "tier": 2,
-        "done": false
+        "done": true
       },
       {
         "name": "Rental/Lease Agreement Generator",
         "slug": "rental-lease-agreement-generator",
         "tier": 2,
-        "done": false
+        "done": true
       },
       {
         "name": "Freelance Contract Generator",
         "slug": "freelance-contract-generator",
         "tier": 2,
-        "done": false
+        "done": true
       },
       {
         "name": "Affidavit Template Generator",
         "slug": "affidavit-template-generator",
         "tier": 2,
-        "done": false
+        "done": true
       }
     ]
   },
@@ -3435,15 +3615,15 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
     "slug": "language-and-translation-tools",
     "tools": [
       {
-        "name": "Language Translator",
-        "slug": "language-translator",
-        "tier": 5,
-        "done": false
-      },
-      {
         "name": "Language Detector",
         "slug": "language-detector",
         "tier": 3,
+        "done": true
+      },
+      {
+        "name": "Language Translator",
+        "slug": "language-translator",
+        "tier": 5,
         "done": false
       },
       {
@@ -3516,25 +3696,25 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
         "name": "Digital Signature Maker",
         "slug": "digital-signature-maker",
         "tier": 2,
-        "done": false
+        "done": true
       },
       {
         "name": "Handwritten Signature Generator",
         "slug": "handwritten-signature-generator",
         "tier": 2,
-        "done": false
+        "done": true
       },
       {
         "name": "Signature to Transparent PNG Converter",
         "slug": "signature-to-transparent-png-converter",
         "tier": 2,
-        "done": false
+        "done": true
       },
       {
         "name": "Initials Logo Generator",
         "slug": "initials-logo-generator",
         "tier": 2,
-        "done": false
+        "done": true
       }
     ]
   },
@@ -3546,6 +3726,12 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
         "name": "World Clock",
         "slug": "world-clock",
         "tier": 1,
+        "done": true
+      },
+      {
+        "name": "Meeting Time Planner (Time Zone Overlap)",
+        "slug": "meeting-time-planner",
+        "tier": 2,
         "done": true
       },
       {
@@ -3573,16 +3759,16 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
         "done": true
       },
       {
-        "name": "Meeting Time Planner (Time Zone Overlap)",
-        "slug": "meeting-time-planner",
-        "tier": 2,
-        "done": false
-      },
-      {
         "name": "Habit Tracker Sheet Generator",
         "slug": "habit-tracker-sheet-generator",
         "tier": 2,
-        "done": false
+        "done": true
+      },
+      {
+        "name": "ICS Calendar File Viewer",
+        "slug": "ics-calendar-file-viewer",
+        "tier": 2,
+        "done": true
       }
     ]
   },
@@ -3594,37 +3780,37 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
         "name": "Flashcard Maker",
         "slug": "flashcard-maker",
         "tier": 2,
-        "done": false
+        "done": true
       },
       {
         "name": "Quiz Generator",
         "slug": "quiz-generator",
         "tier": 2,
-        "done": false
+        "done": true
       },
       {
         "name": "Multiple Choice Test Generator",
         "slug": "multiple-choice-test-generator",
         "tier": 2,
-        "done": false
+        "done": true
       },
       {
         "name": "Handwriting Practice Sheet Generator",
         "slug": "handwriting-practice-sheet-generator",
         "tier": 3,
-        "done": false
+        "done": true
       },
       {
         "name": "Graph Paper Generator",
         "slug": "graph-paper-generator",
         "tier": 2,
-        "done": false
+        "done": true
       },
       {
         "name": "Timetable / Schedule Generator",
         "slug": "timetable-schedule-generator",
         "tier": 2,
-        "done": false
+        "done": true
       }
     ]
   },
@@ -3632,6 +3818,18 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
     "name": "Presentation Tools",
     "slug": "presentation-tools",
     "tools": [
+      {
+        "name": "Presentation Template Generator",
+        "slug": "presentation-template-generator",
+        "tier": 3,
+        "done": true
+      },
+      {
+        "name": "Slide Text Extractor",
+        "slug": "slide-text-extractor",
+        "tier": 2,
+        "done": true
+      },
       {
         "name": "PPT to Video Converter",
         "slug": "ppt-to-video-converter",
@@ -3648,18 +3846,6 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
         "name": "Slide Background Remover",
         "slug": "slide-background-remover",
         "tier": 5,
-        "done": false
-      },
-      {
-        "name": "Presentation Template Generator",
-        "slug": "presentation-template-generator",
-        "tier": 3,
-        "done": false
-      },
-      {
-        "name": "Slide Text Extractor",
-        "slug": "slide-text-extractor",
-        "tier": 2,
         "done": false
       }
     ]
@@ -3680,5 +3866,5 @@ export const ALL_TOOLS: (Tool & { categoryName: string; categorySlug: string })[
     return true;
   });
 
-export const TOTAL_TOOLS = 574;
-export const TOTAL_TOOLS_DONE = 423;
+export const TOTAL_TOOLS = 605;
+export const TOTAL_TOOLS_DONE = 535;

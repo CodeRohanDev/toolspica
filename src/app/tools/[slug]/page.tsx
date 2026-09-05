@@ -16,6 +16,7 @@ import { getHeroSubtitle } from "@/lib/hero-subtitle";
 import { getToolFeatures } from "@/lib/tool-features";
 import { getCategoryAudience } from "@/lib/category-audience";
 import { getVariantsForTool } from "@/lib/tool-variants";
+import { getToolContentLastModified } from "@/lib/content-freshness";
 import {
   JsonLd,
   breadcrumbJsonLd,
@@ -161,6 +162,7 @@ export default async function ToolPage(props: PageProps<"/tools/[slug]">) {
   const features = getToolFeatures(tool.tier);
   const audience = getCategoryAudience(tool.categorySlug);
 
+  const dateModified = getToolContentLastModified(tool.slug);
   const variants = getVariantsForTool(tool.slug);
   const relatedSearchItems = [
     ...variants.map((v) => ({ label: v.h1, href: `/${v.slug}` })),
@@ -212,9 +214,10 @@ export default async function ToolPage(props: PageProps<"/tools/[slug]">) {
           description: registered.content.overview[0],
           path: `/tools/${tool.slug}`,
           categoryName: tool.categoryName,
+          dateModified,
         })}
       />
-      <JsonLd data={faqJsonLd(registered.content.faqs)} />
+      <JsonLd data={faqJsonLd(registered.content.faqs, dateModified)} />
       <JsonLd
         data={howToJsonLd({
           name: tool.name,

@@ -58,10 +58,10 @@ export function SiteHeader() {
               priority
             />
           </Link>
-          <div className="flex flex-col leading-none">
+          <div className="flex flex-col items-start gap-1">
             <Link
               href="/"
-              className="text-lg font-semibold tracking-tight"
+              className="py-0.5 text-lg font-semibold leading-tight tracking-tight"
             >
               Toolspica
             </Link>
@@ -69,7 +69,7 @@ export function SiteHeader() {
               href={SITE.parentUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[10px] text-muted-foreground hover:text-brand"
+              className="py-0.5 text-[10px] leading-tight text-muted-foreground hover:text-brand"
             >
               by {SITE.parentBrand}
             </a>
@@ -81,28 +81,43 @@ export function SiteHeader() {
             <NavigationMenuItem>
               <NavigationMenuTrigger>Categories</NavigationMenuTrigger>
               <NavigationMenuContent>
-                <div className="grid w-[560px] grid-cols-2 gap-1 p-2">
-                  {featuredCategories.map((category) => (
-                    <NavigationMenuLink
-                      key={category.slug}
-                      render={<Link href={`/${category.slug}`} />}
-                      className="flex flex-col gap-0.5 rounded-lg px-3 py-2 hover:bg-accent"
-                    >
-                      <span className="text-sm font-medium">
-                        {category.name}
-                      </span>
-                      <span className="text-xs text-muted-foreground">
-                        {category.tools.length} tools
-                      </span>
-                    </NavigationMenuLink>
-                  ))}
+                <div className="grid w-[600px] grid-cols-2 gap-1 p-3">
+                  {featuredCategories.map((category) => {
+                    const CategoryIcon = getCategoryIcon(category.slug);
+                    const accent = getCategoryAccent(category.slug);
+                    return (
+                      <NavigationMenuLink
+                        key={category.slug}
+                        render={<Link href={`/${category.slug}`} />}
+                        className="group flex items-center gap-3 rounded-xl px-3 py-2.5 hover:bg-accent"
+                      >
+                        <span
+                          className={cn(
+                            "flex size-9 shrink-0 items-center justify-center rounded-lg transition-transform duration-200 group-hover:scale-110",
+                            accent
+                          )}
+                        >
+                          <CategoryIcon className="size-4" />
+                        </span>
+                        <span className="flex min-w-0 flex-col">
+                          <span className="truncate text-sm font-medium">
+                            {category.name}
+                          </span>
+                          <span className="text-xs text-muted-foreground">
+                            {category.tools.length} tools
+                          </span>
+                        </span>
+                      </NavigationMenuLink>
+                    );
+                  })}
                 </div>
                 <div className="border-t p-2">
                   <NavigationMenuLink
                     render={<Link href="/categories" />}
-                    className="flex items-center justify-center rounded-lg px-3 py-2 text-sm font-medium text-brand hover:bg-accent"
+                    className="flex items-center justify-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-brand hover:bg-accent"
                   >
-                    View all {TOOL_CATEGORIES.length} categories →
+                    View all {TOOL_CATEGORIES.length} categories
+                    <ChevronRight className="size-3.5" />
                   </NavigationMenuLink>
                 </div>
               </NavigationMenuContent>

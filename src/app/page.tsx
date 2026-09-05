@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/home/hero";
+import { HowItWorks } from "@/components/home/how-it-works";
 import { StatsBar } from "@/components/home/stats-bar";
 import { PopularTools } from "@/components/home/popular-tools";
 import { CategoryGrid } from "@/components/home/category-grid";
@@ -23,6 +24,7 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <HowItWorks />
       <StatsBar />
       <RecentlyUsed />
       <PopularTools />

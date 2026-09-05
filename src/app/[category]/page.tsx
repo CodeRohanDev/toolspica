@@ -17,6 +17,7 @@ import { TOOL_VARIANTS, findToolVariant, getVariantsForTool } from "@/lib/tool-v
 import { getHeroSubtitle } from "@/lib/hero-subtitle";
 import { getToolFeatures } from "@/lib/tool-features";
 import { getCategoryAudience } from "@/lib/category-audience";
+import { getToolContentLastModified, getMostRecent } from "@/lib/content-freshness";
 import {
   buildCategoryFaqs,
   buildCategoryIntro,
@@ -105,6 +106,11 @@ function CategoryPage({
   const faqs = buildCategoryFaqs(category);
   const seoParagraphs = buildCategorySeoParagraphs(category);
   const relatedCategories = getRelatedCategories(category);
+  const dateModified = getMostRecent(
+    category.tools
+      .filter((t) => t.done)
+      .map((t) => getToolContentLastModified(t.slug))
+  );
 
   return (
     <>
@@ -190,9 +196,10 @@ function CategoryPage({
           description: intro,
           path: `/${category.slug}`,
           itemNames: category.tools.map((t) => t.name),
+          dateModified,
         })}
       />
-      <JsonLd data={faqJsonLd(faqs)} />
+      <JsonLd data={faqJsonLd(faqs, dateModified)} />
     </>
   );
 }
@@ -208,6 +215,7 @@ function VariantLandingPage({ variantSlug }: { variantSlug: string }) {
   const features = getToolFeatures(tool.tier);
   const audience = getCategoryAudience(tool.categorySlug);
 
+  const dateModified = getToolContentLastModified(tool.slug);
   const siblingVariants = getVariantsForTool(tool.slug).filter(
     (v) => v.slug !== variant.slug
   );
@@ -263,9 +271,10 @@ function VariantLandingPage({ variantSlug }: { variantSlug: string }) {
           description: variant.introParagraph,
           path: `/${variant.slug}`,
           categoryName: tool.categoryName,
+          dateModified,
         })}
       />
-      <JsonLd data={faqJsonLd(registered.content.faqs)} />
+      <JsonLd data={faqJsonLd(registered.content.faqs, dateModified)} />
       <JsonLd
         data={howToJsonLd({
           name: variant.h1,
