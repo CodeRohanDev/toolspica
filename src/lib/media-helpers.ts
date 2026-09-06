@@ -1,3 +1,5 @@
+import { trackOperation } from "@/lib/track-operation";
+
 export function downloadMediaBytes(data: Uint8Array, filename: string, mime: string) {
   const blob = new Blob([data as BlobPart], { type: mime });
   const url = URL.createObjectURL(blob);
@@ -8,6 +10,7 @@ export function downloadMediaBytes(data: Uint8Array, filename: string, mime: str
   a.click();
   a.remove();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
+  trackOperation();
 }
 
 export function stripMediaExtension(filename: string): string {

@@ -1,3 +1,5 @@
+import { trackOperation } from "@/lib/track-operation";
+
 export function downloadPdfBytes(bytes: Uint8Array, filename: string) {
   const blob = new Blob([bytes as BlobPart], { type: "application/pdf" });
   const url = URL.createObjectURL(blob);
@@ -8,6 +10,7 @@ export function downloadPdfBytes(bytes: Uint8Array, filename: string) {
   a.click();
   a.remove();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
+  trackOperation();
 }
 
 export function downloadTextFile(text: string, filename: string, mime = "text/plain") {
@@ -20,6 +23,7 @@ export function downloadTextFile(text: string, filename: string, mime = "text/pl
   a.click();
   a.remove();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
+  trackOperation();
 }
 
 export function downloadBytesFile(bytes: Uint8Array, filename: string, mime: string) {
@@ -32,6 +36,7 @@ export function downloadBytesFile(bytes: Uint8Array, filename: string, mime: str
   a.click();
   a.remove();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
+  trackOperation();
 }
 
 export function stripPdfExtension(filename: string): string {

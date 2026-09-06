@@ -13,7 +13,7 @@ export function TextDiffChecker() {
 
   return (
     <div className="rounded-xl border bg-card p-5 sm:p-6">
-      <div className="grid gap-3 sm:grid-cols-2">
+      <div className="grid gap-3 lg:grid-cols-2">
         <Textarea value={a} onChange={(e) => setA(e.target.value)} placeholder="Original text" className="min-h-[180px]" />
         <Textarea value={b} onChange={(e) => setB(e.target.value)} placeholder="Changed text" className="min-h-[180px]" />
       </div>

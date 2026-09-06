@@ -1,0 +1,52 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAdmin() {
+      return request.auth != null && request.auth.token.email == 'hostspicapvt@gmail.com';
+    }
+
+    // Tool requests — public read, restricted create, vote-only update for
+    // regular visitors, full update/delete for the admin account.
+    // Voters are tracked as a map field on the same document (uid -> true)
+    // rather than a subcollection, so the whole vote operation is a single
+    // document write that Firestore rules can fully validate in one pass —
+    // a subcollection + cross-document `exists()` check can't work here,
+    // since rules evaluate each write in a transaction against the
+    // pre-transaction state, never against another write from the same
+    // commit.
+    match /toolRequests/{requestId} {
+      allow read: if true;
+
+      allow create: if request.resource.data.keys().hasOnly(
+                        ['name', 'nameNormalized', 'description', 'votes', 'createdAt', 'voters', 'status']
+                      )
+                    && request.resource.data.name is string
+                    && request.resource.data.name.size() > 0
+                    && request.resource.data.name.size() <= 80
+                    && request.resource.data.nameNormalized is string
+                    && (!('description' in request.resource.data)
+                        || (request.resource.data.description is string
+                            && request.resource.data.description.size() <= 300))
+                    && request.resource.data.votes == 1
+                    && request.resource.data.voters is map
+                    && request.resource.data.voters.size() == 0
+                    && request.resource.data.status == 'open'
+                    && request.resource.data.createdAt == request.time;
+
+      // A vote: caller must not already be in the voters map, exactly one
+      // new key (their own uid) gets added, and the count goes up by
+      // exactly 1 — validated as one atomic document write.
+      allow update: if request.auth != null
+                    && !(request.auth.uid in resource.data.voters)
+                    && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['votes', 'voters'])
+                    && request.resource.data.votes == resource.data.votes + 1
+                    && request.resource.data.voters.diff(resource.data.voters).affectedKeys().hasOnly([request.auth.uid])
+                    && request.resource.data.voters[request.auth.uid] == true;
+
+      // Admin: full control (status changes, edits, cleanup).
+      allow update, delete: if isAdmin();
+    }
+  }
+}

@@ -1,5 +1,6 @@
-import { Wrench, LayoutGrid, Gift, Lock } from "lucide-react";
+import { Wrench, LayoutGrid, Lock } from "lucide-react";
 import { TOOL_CATEGORIES, TOTAL_TOOLS } from "@/lib/tools-data.generated";
+import { LiveOperationsStat } from "@/components/home/live-operations-stat";
 
 const STATS = [
   {
@@ -15,12 +16,6 @@ const STATS = [
     hint: "PDF to AI writing",
   },
   {
-    icon: Gift,
-    value: "$0",
-    label: "Cost, ever",
-    hint: "no hidden paywalls",
-  },
-  {
     icon: Lock,
     value: "0",
     label: "Files stored",
@@ -32,6 +27,7 @@ export function StatsBar() {
   return (
     <section className="border-b bg-muted/30">
       <div className="mx-auto grid max-w-5xl grid-cols-2 gap-3 px-4 py-10 sm:grid-cols-4 sm:gap-4 sm:px-6 lg:px-8">
+        <LiveOperationsStat />
         {STATS.map((stat) => (
           <div
             key={stat.label}

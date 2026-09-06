@@ -104,6 +104,9 @@ export function SiteFooter() {
                 <Link href="/compare" className="text-sm text-muted-foreground hover:text-foreground">Compare</Link>
               </li>
               <li>
+                <Link href="/request-a-tool" className="text-sm text-muted-foreground hover:text-foreground">Request a Tool</Link>
+              </li>
+              <li>
                 <Link href="/contact" className="text-sm text-muted-foreground hover:text-foreground">Contact Us</Link>
               </li>
             </ul>

@@ -14,6 +14,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { getCategoryAccent, getCategoryIcon } from "@/lib/category-icons";
+import { LiveOperationsBadge } from "@/components/live-operations-badge";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -152,6 +153,7 @@ export function SiteHeader() {
         </NavigationMenu>
 
         <div className="flex items-center gap-1.5">
+          <LiveOperationsBadge className="hidden xl:flex" />
           <Button
             variant="ghost"
             size="icon"
@@ -190,6 +192,7 @@ export function SiteHeader() {
               </SheetHeader>
 
               <div className="flex flex-col gap-2 p-4">
+                <LiveOperationsBadge className="self-start" />
                 <Button
                   variant="outline"
                   render={<Link href="/search" onClick={() => setMobileOpen(false)} />}

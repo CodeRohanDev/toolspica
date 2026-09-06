@@ -1,3 +1,5 @@
+import { trackOperation } from "@/lib/track-operation";
+
 export function loadImageFromFile(file: File): Promise<HTMLImageElement> {
   return new Promise((resolve, reject) => {
     const url = URL.createObjectURL(file);
@@ -33,6 +35,7 @@ export function downloadBlob(blob: Blob, filename: string) {
   a.click();
   a.remove();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
+  trackOperation();
 }
 
 export function stripExtension(filename: string): string {

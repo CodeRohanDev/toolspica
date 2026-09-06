@@ -20,7 +20,7 @@ export function JsonDiffChecker() {
 
   return (
     <div className="rounded-xl border bg-card p-5 sm:p-6">
-      <div className="grid gap-3 sm:grid-cols-2">
+      <div className="grid gap-3 lg:grid-cols-2">
         <Textarea value={a} onChange={(e) => setA(e.target.value)} placeholder='{"a": 1}' className="min-h-[180px] font-mono text-sm" />
         <Textarea value={b} onChange={(e) => setB(e.target.value)} placeholder='{"a": 2}' className="min-h-[180px] font-mono text-sm" />
       </div>
