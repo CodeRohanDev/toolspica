@@ -2,9 +2,9 @@
 
 import * as React from "react";
 import { Button } from "@/components/ui/button";
-import { ImageUploadCard } from "@/components/tools/image-upload-card";
-import { ImageResultCard } from "@/components/tools/image-result-card";
-import { loadImageFromFile, canvasToBlob, downloadBlob, stripExtension } from "@/lib/image-processing";
+import { ImageBatchWorkspace } from "@/components/tools/image-batch-workspace";
+import { useBatchFiles } from "@/lib/use-batch-files";
+import { loadImageFromFile, canvasToBlob, stripExtension } from "@/lib/image-processing";
 
 const PRESETS = [
   { label: "Instagram Post", width: 1080, height: 1080 },
@@ -16,49 +16,30 @@ const PRESETS = [
 ];
 
 export function SocialMediaResizer() {
-  const [file, setFile] = React.useState<File | null>(null);
-  const [originalUrl, setOriginalUrl] = React.useState<string | null>(null);
   const [preset, setPreset] = React.useState(PRESETS[0]);
-  const [resultUrl, setResultUrl] = React.useState<string | null>(null);
-  const [resultBlob, setResultBlob] = React.useState<Blob | null>(null);
 
-  function handleFile(picked: File) {
-    setFile(picked);
-    setOriginalUrl(URL.createObjectURL(picked));
-  }
-  function clear() {
-    setFile(null);
-    setOriginalUrl(null);
-    setResultUrl(null);
-    setResultBlob(null);
-  }
-
-  const process = React.useCallback(
-    async (targetFile: File, targetWidth: number, targetHeight: number) => {
-      const img = await loadImageFromFile(targetFile);
+  const convert = React.useCallback(
+    async (file: File) => {
+      const img = await loadImageFromFile(file);
       const canvas = document.createElement("canvas");
-      canvas.width = targetWidth;
-      canvas.height = targetHeight;
+      canvas.width = preset.width;
+      canvas.height = preset.height;
       const ctx = canvas.getContext("2d")!;
 
-      // Cover-fit: scale to fill the target box, cropping any overflow.
-      const scale = Math.max(targetWidth / img.width, targetHeight / img.height);
+      const scale = Math.max(preset.width / img.width, preset.height / img.height);
       const drawWidth = img.width * scale;
       const drawHeight = img.height * scale;
-      const offsetX = (targetWidth - drawWidth) / 2;
-      const offsetY = (targetHeight - drawHeight) / 2;
+      const offsetX = (preset.width - drawWidth) / 2;
+      const offsetY = (preset.height - drawHeight) / 2;
       ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
 
       const blob = await canvasToBlob(canvas, "image/jpeg", 0.92);
-      setResultBlob(blob);
-      setResultUrl(URL.createObjectURL(blob));
+      return { blob, name: `${stripExtension(file.name)}-${preset.width}x${preset.height}.jpg` };
     },
-    []
+    [preset]
   );
 
-  React.useEffect(() => {
-    if (file) process(file, preset.width, preset.height);
-  }, [file, preset, process]);
+  const { items, addFiles, removeItem } = useBatchFiles(convert, { live: true });
 
   return (
     <div className="rounded-xl border bg-card p-5 sm:p-6">
@@ -79,16 +60,13 @@ export function SocialMediaResizer() {
         ))}
       </div>
 
-      <div className="mt-4 grid gap-4 sm:grid-cols-2">
-        <ImageUploadCard file={file} previewUrl={originalUrl} onFileSelect={handleFile} onClear={clear} />
-        <ImageResultCard
-          previewUrl={resultUrl}
-          fileSize={resultBlob?.size}
-          onDownload={() =>
-            resultBlob &&
-            file &&
-            downloadBlob(resultBlob, `${stripExtension(file.name)}-${preset.width}x${preset.height}.jpg`)
-          }
+      <div className="mt-4">
+        <ImageBatchWorkspace
+          items={items}
+          onFilesSelect={addFiles}
+          onRemove={removeItem}
+          uploadLabel="Drop images to resize"
+          zipName="resized-images.zip"
         />
       </div>
     </div>

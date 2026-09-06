@@ -1,32 +1,16 @@
 "use client";
 
 import * as React from "react";
-import { ImageUploadCard } from "@/components/tools/image-upload-card";
-import { ImageResultCard } from "@/components/tools/image-result-card";
-import { loadImageFromFile, canvasToBlob, downloadBlob, stripExtension } from "@/lib/image-processing";
+import { ImageBatchWorkspace } from "@/components/tools/image-batch-workspace";
+import { useBatchFiles } from "@/lib/use-batch-files";
+import { loadImageFromFile, canvasToBlob, stripExtension } from "@/lib/image-processing";
 import { buildIco } from "@/lib/ico-writer";
 
 const SIZES = [16, 32, 48, 64, 128, 256];
 
 export function IcoConverter() {
-  const [file, setFile] = React.useState<File | null>(null);
-  const [originalUrl, setOriginalUrl] = React.useState<string | null>(null);
-  const [resultUrl, setResultUrl] = React.useState<string | null>(null);
-  const [resultBlob, setResultBlob] = React.useState<Blob | null>(null);
-
-  function handleFile(picked: File) {
-    setFile(picked);
-    setOriginalUrl(URL.createObjectURL(picked));
-  }
-  function clear() {
-    setFile(null);
-    setOriginalUrl(null);
-    setResultUrl(null);
-    setResultBlob(null);
-  }
-
-  const process = React.useCallback(async (targetFile: File) => {
-    const img = await loadImageFromFile(targetFile);
+  const convert = React.useCallback(async (file: File) => {
+    const img = await loadImageFromFile(file);
     const entries = await Promise.all(
       SIZES.map(async (size) => {
         const canvas = document.createElement("canvas");
@@ -40,24 +24,21 @@ export function IcoConverter() {
     );
     const icoBytes = buildIco(entries);
     const blob = new Blob([icoBytes as BlobPart], { type: "image/x-icon" });
-    setResultBlob(blob);
-    setResultUrl(URL.createObjectURL(blob));
+    return { blob, name: `${stripExtension(file.name)}.ico` };
   }, []);
 
-  React.useEffect(() => {
-    if (file) process(file);
-  }, [file, process]);
+  const { items, addFiles, removeItem } = useBatchFiles(convert, { live: true });
 
   return (
     <div className="rounded-xl border bg-card p-5 sm:p-6">
-      <div className="grid gap-4 sm:grid-cols-2">
-        <ImageUploadCard file={file} previewUrl={originalUrl} onFileSelect={handleFile} onClear={clear} />
-        <ImageResultCard
-          previewUrl={resultUrl}
-          fileSize={resultBlob?.size}
-          onDownload={() => resultBlob && file && downloadBlob(resultBlob, `${stripExtension(file.name)}.ico`)}
-        />
-      </div>
+      <ImageBatchWorkspace
+        items={items}
+        onFilesSelect={addFiles}
+        onRemove={removeItem}
+        uploadLabel="Drop images to convert to .ico"
+        zipName="converted-icos.zip"
+      />
+
       <p className="mt-3 text-xs text-muted-foreground">
         Bundles {SIZES.join(", ")}px versions into a single multi-size .ico file — the standard
         format for website favicons and Windows application icons.

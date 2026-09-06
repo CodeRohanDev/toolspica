@@ -2,9 +2,9 @@
 
 import * as React from "react";
 import { Label } from "@/components/ui/label";
-import { ImageUploadCard } from "@/components/tools/image-upload-card";
-import { ImageResultCard } from "@/components/tools/image-result-card";
-import { loadImageFromFile, canvasToBlob, downloadBlob, stripExtension } from "@/lib/image-processing";
+import { ImageBatchWorkspace } from "@/components/tools/image-batch-workspace";
+import { useBatchFiles } from "@/lib/use-batch-files";
+import { loadImageFromFile, canvasToBlob, stripExtension } from "@/lib/image-processing";
 
 // Median filter: replaces each pixel with the median of its neighborhood.
 // Unlike a blur, this removes salt-and-pepper style noise spikes while
@@ -37,57 +37,36 @@ function medianFilter(imageData: ImageData, radius: number): ImageData {
 }
 
 export function ImageNoiseReducer() {
-  const [file, setFile] = React.useState<File | null>(null);
-  const [originalUrl, setOriginalUrl] = React.useState<string | null>(null);
   const [radius, setRadius] = React.useState(1);
-  const [resultUrl, setResultUrl] = React.useState<string | null>(null);
-  const [resultBlob, setResultBlob] = React.useState<Blob | null>(null);
-  const [processing, setProcessing] = React.useState(false);
 
-  function handleFile(picked: File) {
-    setFile(picked);
-    setOriginalUrl(URL.createObjectURL(picked));
-  }
-  function clear() {
-    setFile(null);
-    setOriginalUrl(null);
-    setResultUrl(null);
-    setResultBlob(null);
-  }
+  const convert = React.useCallback(
+    async (file: File) => {
+      const img = await loadImageFromFile(file);
+      const canvas = document.createElement("canvas");
+      canvas.width = img.width;
+      canvas.height = img.height;
+      const ctx = canvas.getContext("2d")!;
+      ctx.drawImage(img, 0, 0);
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const filtered = medianFilter(imageData, radius);
+      ctx.putImageData(filtered, 0, 0);
+      const blob = await canvasToBlob(canvas, "image/png");
+      return { blob, name: `${stripExtension(file.name)}-denoised.png` };
+    },
+    [radius]
+  );
 
-  const process = React.useCallback(async (targetFile: File, r: number) => {
-    setProcessing(true);
-    const img = await loadImageFromFile(targetFile);
-    const canvas = document.createElement("canvas");
-    canvas.width = img.width;
-    canvas.height = img.height;
-    const ctx = canvas.getContext("2d")!;
-    ctx.drawImage(img, 0, 0);
-    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    const filtered = medianFilter(imageData, r);
-    ctx.putImageData(filtered, 0, 0);
-    const blob = await canvasToBlob(canvas, "image/png");
-    setResultBlob(blob);
-    setResultUrl(URL.createObjectURL(blob));
-    setProcessing(false);
-  }, []);
-
-  React.useEffect(() => {
-    if (file) process(file, radius);
-  }, [file, radius, process]);
+  const { items, addFiles, removeItem } = useBatchFiles(convert, { live: true });
 
   return (
     <div className="rounded-xl border bg-card p-5 sm:p-6">
-      <div className="grid gap-4 sm:grid-cols-2">
-        <ImageUploadCard file={file} previewUrl={originalUrl} onFileSelect={handleFile} onClear={clear} />
-        <ImageResultCard
-          previewUrl={resultUrl}
-          fileSize={resultBlob?.size}
-          onDownload={() =>
-            resultBlob && file && downloadBlob(resultBlob, `${stripExtension(file.name)}-denoised.png`)
-          }
-        />
-      </div>
+      <ImageBatchWorkspace
+        items={items}
+        onFilesSelect={addFiles}
+        onRemove={removeItem}
+        uploadLabel="Drop images to reduce noise in"
+        zipName="denoised-images.zip"
+      />
 
       <div className="mt-4 flex items-center gap-3">
         <Label htmlFor="noise-radius" className="shrink-0 text-sm text-muted-foreground">
@@ -101,7 +80,6 @@ export function ImageNoiseReducer() {
           step={1}
           value={radius}
           onChange={(e) => setRadius(Number(e.target.value))}
-          disabled={!file || processing}
           className="flex-1"
         />
         <span className="w-24 shrink-0 text-sm tabular-nums">{radius * 2 + 1}×{radius * 2 + 1}</span>

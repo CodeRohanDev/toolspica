@@ -72,7 +72,7 @@ export function OdtViewer() {
       {error && <p className="mt-3 text-sm text-destructive">{error}</p>}
 
       {blocks.length > 0 && (
-        <div className="mt-4 max-h-[600px] overflow-auto rounded-lg border bg-white p-6 text-black">
+        <div className="mt-4 max-h-[750px] overflow-auto rounded-lg border bg-white p-6 text-black">
           {blocks.map((block, i) => {
             if (block.type === "heading") {
               const Tag = (`h${Math.min(6, Math.max(1, block.level))}` as unknown) as "h1";

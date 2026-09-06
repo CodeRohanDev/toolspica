@@ -60,7 +60,7 @@ export function ParquetViewer() {
       {rows.length > 0 && (
         <>
           <StatBar items={[{ label: "total rows", value: totalRows }, { label: "columns", value: columns.length }, { label: "showing", value: rows.length }]} />
-          <div className="mt-2 max-h-[450px] overflow-auto rounded-lg border">
+          <div className="mt-2 max-h-[650px] overflow-auto rounded-lg border">
             <table className="w-full text-sm">
               <thead className="sticky top-0 bg-card">
                 <tr className="border-b bg-muted/40">

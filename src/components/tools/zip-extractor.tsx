@@ -1,76 +1,39 @@
 "use client";
 
 import * as React from "react";
-import { Button } from "@/components/ui/button";
-import { Download } from "lucide-react";
-import { MediaUploadZone, formatBytes } from "@/components/tools/media-upload-zone";
-import { readZip, type ZipReadEntry } from "@/lib/pdf/zip-reader";
-import { downloadMediaBytes } from "@/lib/media-helpers";
-
-interface Extracted {
-  name: string;
-  size: number;
-  getData: ZipReadEntry["getData"];
-}
+import { BatchUploadZone } from "@/components/tools/batch-upload-zone";
+import { BatchFileList } from "@/components/tools/batch-file-list";
+import { useBatchFiles } from "@/lib/use-batch-files";
+import { readZip } from "@/lib/pdf/zip-reader";
+import { createZip } from "@/lib/zip-writer";
+import { stripMediaExtension } from "@/lib/media-helpers";
 
 export function ZipExtractor() {
-  const [file, setFile] = React.useState<File | null>(null);
-  const [entries, setEntries] = React.useState<Extracted[]>([]);
-  const [error, setError] = React.useState<string | null>(null);
-  const [busy, setBusy] = React.useState(false);
+  const convert = React.useCallback(async (file: File) => {
+    const bytes = new Uint8Array(await file.arrayBuffer());
+    const zipEntries = await readZip(bytes);
+    const entries = await Promise.all(
+      zipEntries
+        .filter((e) => !e.name.endsWith("/"))
+        .map(async (e) => ({ name: e.name, data: await e.getData() }))
+    );
+    if (entries.length === 0) throw new Error("No files found — this may not be a valid ZIP file.");
+    const zip = createZip(entries);
+    const blob = new Blob([zip as BlobPart], { type: "application/zip" });
+    return { blob, name: `${stripMediaExtension(file.name)}-extracted.zip` };
+  }, []);
 
-  async function handleFile(picked: File) {
-    setFile(picked);
-    setError(null);
-    setEntries([]);
-    setBusy(true);
-    try {
-      const bytes = new Uint8Array(await picked.arrayBuffer());
-      const zipEntries = await readZip(bytes);
-      const withSizes = await Promise.all(
-        zipEntries
-          .filter((e) => !e.name.endsWith("/"))
-          .map(async (e) => ({ name: e.name, size: (await e.getData()).length, getData: e.getData }))
-      );
-      setEntries(withSizes);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Couldn't read this ZIP file.");
-    } finally {
-      setBusy(false);
-    }
-  }
-
-  async function downloadOne(entry: Extracted) {
-    const data = await entry.getData();
-    const name = entry.name.split("/").pop() || entry.name;
-    downloadMediaBytes(data, name, "application/octet-stream");
-  }
+  const { items, addFiles, removeItem } = useBatchFiles(convert);
 
   return (
     <div className="rounded-xl border bg-card p-5 sm:p-6">
-      <MediaUploadZone file={file} onFileSelect={handleFile} onClear={() => setFile(null)} accept=".zip,application/zip" kind="archive" />
+      <BatchUploadZone accept=".zip,application/zip" onFilesSelect={addFiles} label="Drop ZIP files to extract" />
 
-      {busy && <p className="mt-3 text-sm text-muted-foreground">Reading archive...</p>}
-      {error && <p className="mt-3 text-sm text-destructive">{error}</p>}
-
-      {entries.length > 0 && (
-        <div className="mt-4 space-y-1.5">
-          {entries.map((e, i) => (
-            <div key={i} className="flex items-center justify-between rounded-lg border px-3 py-2">
-              <div className="min-w-0 flex-1">
-                <p className="truncate text-sm">{e.name}</p>
-                <p className="text-xs text-muted-foreground">{formatBytes(e.size)}</p>
-              </div>
-              <Button type="button" size="sm" variant="outline" onClick={() => downloadOne(e)}>
-                <Download className="size-3.5" /> Download
-              </Button>
-            </div>
-          ))}
-        </div>
-      )}
+      <BatchFileList items={items} onRemove={removeItem} zipName="extracted-archives.zip" />
 
       <p className="mt-3 text-xs text-muted-foreground">
-        Reads the ZIP's contents directly in your browser (supports both stored and DEFLATE-compressed entries) — click any file to download it individually, nothing is uploaded.
+        Reads each ZIP&apos;s contents directly in your browser (supports both stored and
+        DEFLATE-compressed entries) and repackages them for download — nothing is uploaded.
       </p>
     </div>
   );

@@ -9,7 +9,7 @@ export function ToolFeaturesAndAudience({
 }) {
   return (
     <section className="border-t">
-      <div className="mx-auto grid max-w-3xl gap-8 px-4 py-10 sm:grid-cols-2 sm:px-6 lg:px-8">
+      <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 sm:grid-cols-2 sm:px-6 lg:px-8">
         <div>
           <h2 className="text-base font-semibold tracking-tight">Features</h2>
           <ul className="mt-3 space-y-2">

@@ -38,8 +38,8 @@ export function AudioWaveformViewer() {
     const ctx = canvas?.getContext("2d");
     if (!canvas || !ctx) return;
 
-    const width = 800;
-    const height = 160;
+    const width = 1200;
+    const height = 260;
     canvas.width = width;
     canvas.height = height;
     ctx.fillStyle = "#f8fafc";

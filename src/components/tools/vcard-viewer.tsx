@@ -52,7 +52,7 @@ export function VcardViewer() {
         value={input}
         onChange={(e) => setInput(e.target.value)}
         placeholder={"Paste .vcf content, or upload a file above...\nBEGIN:VCARD\nFN:Jane Doe\nEMAIL:jane@example.com\nEND:VCARD"}
-        rows={6}
+        rows={16}
         className="mt-3 resize-y font-mono text-xs"
       />
 

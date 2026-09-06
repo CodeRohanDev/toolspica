@@ -101,7 +101,7 @@ export function EpubViewer() {
             title="EPUB content"
             srcDoc={`<!doctype html><html><head><style>body{font-family:Georgia,serif;line-height:1.6;padding:1.5rem;max-width:700px;margin:0 auto}</style></head><body>${content}</body></html>`}
             sandbox=""
-            className="mt-3 h-[500px] w-full rounded-lg border"
+            className="mt-3 h-[700px] w-full rounded-lg border"
           />
 
           <div className="mt-3 flex justify-center gap-2">

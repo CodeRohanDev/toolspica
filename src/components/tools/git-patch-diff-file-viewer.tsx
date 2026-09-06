@@ -50,7 +50,7 @@ export function GitPatchDiffFileViewer() {
         value={input}
         onChange={(e) => setInput(e.target.value)}
         placeholder="Paste a .patch or .diff file's contents, or upload one above..."
-        rows={8}
+        rows={14}
         className="mt-3 resize-y font-mono text-xs"
       />
 
@@ -61,7 +61,7 @@ export function GitPatchDiffFileViewer() {
             {" · "}
             <span className="text-red-600">-{stats.removed} removed</span>
           </p>
-          <div className="mt-2 max-h-[500px] overflow-auto rounded-lg border font-mono text-xs">
+          <div className="mt-2 max-h-[700px] overflow-auto rounded-lg border font-mono text-xs">
             {lines.map((line, i) => (
               <div key={i} className={`whitespace-pre px-2 py-0.5 ${STYLES[classify(line)]}`}>
                 {line || " "}

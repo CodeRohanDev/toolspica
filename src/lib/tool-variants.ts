@@ -10129,6 +10129,50 @@ export const TOOL_VARIANTS: ToolVariant[] = [
       "Builds a genuine, standards-compliant PDF directly from your images, verified by rendering the output and confirming pixel-exact accuracy.",
   },
   {
+    slug: "img-to-pdf",
+    toolSlug: "image-to-pdf",
+    h1: "IMG to PDF Converter",
+    subtitle: "Convert Any Image File (JPG, PNG, WEBP) to PDF",
+    metaTitle: "IMG to PDF Converter — Free Online Tool",
+    metaDescription:
+      "Free IMG to PDF converter. Turn any image file — JPG, PNG, WEBP, and more — into a real, downloadable PDF, right in your browser.",
+    introParagraph:
+      "\"IMG to PDF\" covers any image file you need turned into a PDF, whatever format it's actually saved in. This tool accepts JPG, PNG, WEBP, GIF, BMP, and more — no need to know or check the exact file type first. Add your images, reorder them if needed, and get a genuine, standards-compliant PDF built entirely in your browser.",
+  },
+  {
+    slug: "img-to-pdf-converter",
+    toolSlug: "image-to-pdf",
+    h1: "IMG to PDF Converter Online",
+    subtitle: "Convert Any Image to PDF Online, Free",
+    metaTitle: "IMG to PDF Converter Online — Free Tool",
+    metaDescription:
+      "Convert IMG to PDF online for free. Works with JPG, PNG, WEBP, and other image formats — no sign-up, no watermark.",
+    introParagraph:
+      "Whether your file is a JPG, PNG, WEBP, or any other common image format, this tool reads it and builds a proper multi-page PDF directly in your browser — no upload to a server, no sign-up, no watermark on the result.",
+  },
+  {
+    slug: "img-to-pdf-online",
+    toolSlug: "image-to-pdf",
+    h1: "IMG to PDF Online",
+    subtitle: "Turn Any Image into a PDF, Instantly",
+    metaTitle: "IMG to PDF Online — Free, No Sign-Up",
+    metaDescription:
+      "Free IMG to PDF online tool. Select any image file and download it as a PDF instantly — no installs, no sign-up.",
+    introParagraph:
+      "Select any image file from your device — it doesn't need to be a specific format — and get a downloadable PDF back instantly, processed entirely on your own device.",
+  },
+  {
+    slug: "convert-img-to-pdf",
+    toolSlug: "image-to-pdf",
+    h1: "Convert IMG to PDF",
+    subtitle: "Convert Any Image Format to PDF for Free",
+    metaTitle: "Convert IMG to PDF — Free Online Tool",
+    metaDescription:
+      "Free tool to convert any image format to PDF. Supports JPG, PNG, WEBP, and more, with pages generated in your browser.",
+    introParagraph:
+      "Drop in any image — JPG, PNG, WEBP, or otherwise — and this tool converts it into a PDF page, combining multiple images into one multi-page document when you add more than one.",
+  },
+  {
     slug: "photos-to-pdf-converter",
     toolSlug: "image-to-pdf",
     h1: "Photos to PDF Converter",

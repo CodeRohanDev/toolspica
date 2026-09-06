@@ -57,7 +57,7 @@ export function EnvFileViewer() {
         value={input}
         onChange={(e) => setInput(e.target.value)}
         placeholder={"Paste .env content, or upload a file above...\nAPI_KEY=abc123\nDEBUG=true"}
-        rows={6}
+        rows={16}
         className="mt-3 resize-y font-mono text-sm"
       />
 

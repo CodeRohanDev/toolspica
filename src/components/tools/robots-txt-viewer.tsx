@@ -55,7 +55,7 @@ export function RobotsTxtViewer() {
     <div className="rounded-xl border bg-card p-5 sm:p-6">
       <input type="file" accept=".txt" onChange={handleUpload} className="text-sm" />
 
-      <Textarea value={input} onChange={(e) => setInput(e.target.value)} rows={8} className="mt-3 resize-y font-mono text-sm" />
+      <Textarea value={input} onChange={(e) => setInput(e.target.value)} rows={14} className="mt-3 resize-y font-mono text-sm" />
 
       <div className="mt-4 space-y-3 border-t pt-4">
         {groups.map((group, i) => (

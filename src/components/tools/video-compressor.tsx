@@ -1,26 +1,20 @@
 "use client";
 
 import * as React from "react";
-import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { Download } from "lucide-react";
-import { MediaUploadZone } from "@/components/tools/media-upload-zone";
-import { MediaProgressBar } from "@/components/tools/media-progress-bar";
+import { BatchUploadZone } from "@/components/tools/batch-upload-zone";
+import { BatchFileList } from "@/components/tools/batch-file-list";
+import { useBatchFiles } from "@/lib/use-batch-files";
 import { useFfmpegJob } from "@/lib/use-ffmpeg-job";
 import { pickUniqueName } from "@/lib/ffmpeg-setup";
-import { downloadMediaBytes, stripMediaExtension, formatMediaBytes } from "@/lib/media-helpers";
+import { stripMediaExtension } from "@/lib/media-helpers";
 
 export function VideoCompressor() {
-  const [file, setFile] = React.useState<File | null>(null);
   const [crf, setCrf] = React.useState(28);
-  const [resultSize, setResultSize] = React.useState<number | null>(null);
-  const { run, progress, processing, error, setError } = useFfmpegJob();
+  const { run } = useFfmpegJob();
 
-  async function compress() {
-    if (!file) return;
-    setError(null);
-    setResultSize(null);
-    try {
+  const convert = React.useCallback(
+    async (file: File) => {
       const inputName = pickUniqueName("mp4");
       const outputName = pickUniqueName("mp4");
       const buffer = new Uint8Array(await file.arrayBuffer());
@@ -29,16 +23,17 @@ export function VideoCompressor() {
         ["-i", inputName, "-c:v", "libx264", "-crf", String(crf), "-preset", "veryfast", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "128k", outputName],
         outputName
       );
-      setResultSize(data.length);
-      downloadMediaBytes(data, `${stripMediaExtension(file.name)}-compressed.mp4`, "video/mp4");
-    } catch {
-      // error state already set by the hook
-    }
-  }
+      const blob = new Blob([data as BlobPart], { type: "video/mp4" });
+      return { blob, name: `${stripMediaExtension(file.name)}-compressed.mp4` };
+    },
+    [crf, run]
+  );
+
+  const { items, addFiles, removeItem } = useBatchFiles(convert);
 
   return (
     <div className="rounded-xl border bg-card p-5 sm:p-6">
-      <MediaUploadZone file={file} onFileSelect={setFile} onClear={() => setFile(null)} accept="video/*" kind="video" />
+      <BatchUploadZone accept="video/*" onFilesSelect={addFiles} label="Drop videos to compress" />
 
       <div className="mt-4 flex items-center gap-3">
         <Label htmlFor="crf" className="shrink-0 text-sm text-muted-foreground">
@@ -46,23 +41,12 @@ export function VideoCompressor() {
         </Label>
         <input id="crf" type="range" min={18} max={40} value={crf} onChange={(e) => setCrf(Number(e.target.value))} className="flex-1" />
       </div>
-
-      {processing && <MediaProgressBar progress={progress} />}
-      {error && <p className="mt-3 text-sm text-destructive">{error}</p>}
-
-      <Button type="button" className="mt-4" onClick={compress} disabled={!file || processing}>
-        <Download className="size-4" />
-        {processing ? "Compressing..." : "Compress and download"}
-      </Button>
-      {file && resultSize !== null && (
-        <p className="mt-2 text-xs text-muted-foreground">
-          {formatMediaBytes(file.size)} → {formatMediaBytes(resultSize)}
-        </p>
-      )}
       <p className="mt-2 text-xs text-muted-foreground">
         Re-encodes with H.264 at a quality level you choose (CRF) — lower CRF means higher quality
         and a larger file, higher CRF means smaller file at reduced visual quality.
       </p>
+
+      <BatchFileList items={items} onRemove={removeItem} zipName="compressed-videos.zip" />
     </div>
   );
 }

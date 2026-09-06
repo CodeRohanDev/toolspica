@@ -10,7 +10,7 @@ export function SeoIntroHero({
   usesCloud?: boolean;
 }) {
   return (
-    <section className="mx-auto max-w-3xl px-4 pt-8 sm:px-6 lg:px-8">
+    <section className="mx-auto max-w-6xl px-4 pt-8 sm:px-6 lg:px-8">
       <h2 className="text-lg font-semibold tracking-tight">
         Need to use {toolName} right now?
       </h2>

@@ -9,15 +9,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { ImageUploadCard } from "@/components/tools/image-upload-card";
-import { ImageResultCard } from "@/components/tools/image-result-card";
-import {
-  loadImageFromFile,
-  canvasToBlob,
-  downloadBlob,
-  formatBytes,
-  stripExtension,
-} from "@/lib/image-processing";
+import { ImageBatchWorkspace } from "@/components/tools/image-batch-workspace";
+import { useBatchFiles } from "@/lib/use-batch-files";
+import { loadImageFromFile, canvasToBlob, stripExtension } from "@/lib/image-processing";
 
 const FORMATS = [
   { value: "image/png", label: "PNG", ext: "png" },
@@ -26,30 +20,15 @@ const FORMATS = [
 ];
 
 export function UniversalImageConverter() {
-  const [file, setFile] = React.useState<File | null>(null);
-  const [originalUrl, setOriginalUrl] = React.useState<string | null>(null);
   const [format, setFormat] = React.useState("image/jpeg");
   const [quality, setQuality] = React.useState(0.92);
   const [bgColor, setBgColor] = React.useState("#ffffff");
-  const [resultUrl, setResultUrl] = React.useState<string | null>(null);
-  const [resultBlob, setResultBlob] = React.useState<Blob | null>(null);
-  const [error, setError] = React.useState<string | null>(null);
 
-  function handleFile(picked: File) {
-    setFile(picked);
-    setOriginalUrl(URL.createObjectURL(picked));
-    setError(null);
-  }
-  function clear() {
-    setFile(null);
-    setOriginalUrl(null);
-    setResultUrl(null);
-    setResultBlob(null);
-  }
+  const targetExt = FORMATS.find((f) => f.value === format)?.ext ?? "png";
 
-  const process = React.useCallback(async (targetFile: File) => {
-    try {
-      const img = await loadImageFromFile(targetFile);
+  const convert = React.useCallback(
+    async (file: File) => {
+      const img = await loadImageFromFile(file);
       const canvas = document.createElement("canvas");
       canvas.width = img.width;
       canvas.height = img.height;
@@ -60,37 +39,22 @@ export function UniversalImageConverter() {
       }
       ctx.drawImage(img, 0, 0);
       const blob = await canvasToBlob(canvas, format, format === "image/png" ? undefined : quality);
-      setResultBlob(blob);
-      setResultUrl(URL.createObjectURL(blob));
-    } catch {
-      setError("Couldn't convert this file — the format may not be supported by your browser.");
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [format, quality, bgColor]);
+      return { blob, name: `${stripExtension(file.name)}.${targetExt}` };
+    },
+    [format, quality, bgColor, targetExt]
+  );
 
-  React.useEffect(() => {
-    if (file) process(file);
-  }, [file, process]);
-
-  const targetExt = FORMATS.find((f) => f.value === format)?.ext ?? "png";
+  const { items, addFiles, removeItem } = useBatchFiles(convert, { live: true });
 
   return (
     <div className="rounded-xl border bg-card p-5 sm:p-6">
-      <div className="grid gap-4 sm:grid-cols-2">
-        <ImageUploadCard
-          file={file}
-          previewUrl={originalUrl}
-          onFileSelect={handleFile}
-          onClear={clear}
-        />
-        <ImageResultCard
-          previewUrl={resultUrl}
-          fileSize={resultBlob?.size}
-          onDownload={() =>
-            resultBlob && file && downloadBlob(resultBlob, `${stripExtension(file.name)}.${targetExt}`)
-          }
-        />
-      </div>
+      <ImageBatchWorkspace
+        items={items}
+        onFilesSelect={addFiles}
+        onRemove={removeItem}
+        uploadLabel="Drop any images to convert"
+        zipName="converted-images.zip"
+      />
 
       <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-3">
         <div className="flex items-center gap-2">
@@ -141,13 +105,6 @@ export function UniversalImageConverter() {
           </div>
         )}
       </div>
-
-      {error && <p className="mt-3 text-sm text-destructive">{error}</p>}
-      {file && resultBlob && (
-        <p className="mt-3 text-xs text-muted-foreground">
-          {formatBytes(file.size)} → {formatBytes(resultBlob.size)}
-        </p>
-      )}
     </div>
   );
 }

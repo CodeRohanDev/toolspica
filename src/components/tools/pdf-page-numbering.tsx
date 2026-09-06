@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -12,9 +11,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Download } from "lucide-react";
-import { PdfUploadZone } from "@/components/tools/pdf-upload-zone";
-import { downloadPdfBytes, stripPdfExtension } from "@/lib/pdf/pdf-helpers";
+import { BatchUploadZone } from "@/components/tools/batch-upload-zone";
+import { BatchFileList } from "@/components/tools/batch-file-list";
+import { useBatchFiles } from "@/lib/use-batch-files";
+import { stripPdfExtension } from "@/lib/pdf/pdf-helpers";
 
 const POSITIONS = [
   { value: "bottom-center", label: "Bottom center" },
@@ -25,18 +25,12 @@ const POSITIONS = [
 ];
 
 export function PdfPageNumbering() {
-  const [file, setFile] = React.useState<File | null>(null);
   const [position, setPosition] = React.useState("bottom-center");
   const [startAt, setStartAt] = React.useState("1");
   const [format, setFormat] = React.useState("{n}");
-  const [processing, setProcessing] = React.useState(false);
-  const [error, setError] = React.useState<string | null>(null);
 
-  async function apply() {
-    if (!file) return;
-    setProcessing(true);
-    setError(null);
-    try {
+  const convert = React.useCallback(
+    async (file: File) => {
       const bytes = await file.arrayBuffer();
       const doc = await PDFDocument.load(bytes);
       const font = await doc.embedFont(StandardFonts.Helvetica);
@@ -58,17 +52,17 @@ export function PdfPageNumbering() {
       });
 
       const outBytes = await doc.save();
-      downloadPdfBytes(outBytes, `${stripPdfExtension(file.name)}-numbered.pdf`);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Couldn't add page numbers — the PDF may be corrupted or password-protected.");
-    } finally {
-      setProcessing(false);
-    }
-  }
+      const blob = new Blob([outBytes as BlobPart], { type: "application/pdf" });
+      return { blob, name: `${stripPdfExtension(file.name)}-numbered.pdf` };
+    },
+    [position, startAt, format]
+  );
+
+  const { items, addFiles, removeItem } = useBatchFiles(convert);
 
   return (
     <div className="rounded-xl border bg-card p-5 sm:p-6">
-      <PdfUploadZone file={file} onFileSelect={setFile} onClear={() => setFile(null)} />
+      <BatchUploadZone accept="application/pdf,.pdf" onFilesSelect={addFiles} label="Drop PDFs to add page numbers to" />
 
       <div className="mt-4 flex flex-wrap items-end gap-4">
         <div>
@@ -99,13 +93,9 @@ export function PdfPageNumbering() {
           <Input id="pn-format" value={format} onChange={(e) => setFormat(e.target.value)} className="mt-1.5 w-40 font-mono" />
         </div>
       </div>
+      <p className="mt-2 text-xs text-muted-foreground">These settings apply to every PDF you add.</p>
 
-      {error && <p className="mt-3 text-sm text-destructive">{error}</p>}
-
-      <Button type="button" className="mt-4" onClick={apply} disabled={!file || processing}>
-        <Download className="size-4" />
-        {processing ? "Applying..." : "Add page numbers and download"}
-      </Button>
+      <BatchFileList items={items} onRemove={removeItem} zipName="numbered-pdfs.zip" />
     </div>
   );
 }

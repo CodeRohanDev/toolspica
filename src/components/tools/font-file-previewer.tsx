@@ -42,7 +42,7 @@ export function FontFilePreviewer() {
 
       {fontFamily && (
         <>
-          <Textarea value={text} onChange={(e) => setText(e.target.value)} rows={2} className="mt-3 resize-y" />
+          <Textarea value={text} onChange={(e) => setText(e.target.value)} rows={4} className="mt-3 resize-y" />
           <Label className="mt-3 flex items-center gap-2 text-sm text-muted-foreground">
             Size: {size}px
             <input type="range" min={12} max={96} value={size} onChange={(e) => setSize(Number(e.target.value))} className="flex-1" />

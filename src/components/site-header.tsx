@@ -45,8 +45,8 @@ export function SiteHeader() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   return (
-    <div className="px-3 pt-3 sm:px-4 sm:pt-4">
-      <header className="sticky top-3 z-40 mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 rounded-2xl border bg-background/85 px-4 shadow-sm backdrop-blur-md supports-[backdrop-filter]:bg-background/70 sm:top-4 sm:px-5">
+    <div className="sticky top-3 z-40 px-3 pt-3 sm:top-4 sm:px-4 sm:pt-4">
+      <header className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 rounded-2xl border bg-background/85 px-4 shadow-sm backdrop-blur-md supports-[backdrop-filter]:bg-background/70 sm:px-5">
         <div className="flex items-center gap-2">
           <Link href="/" className="flex items-center gap-2">
             <Image

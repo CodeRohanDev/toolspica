@@ -64,9 +64,9 @@ export function LogFileViewer() {
       </div>
 
       {lines.length === 0 ? (
-        <Textarea value={input} onChange={(e) => setInput(e.target.value)} placeholder="Paste log content, or upload a file above..." rows={10} className="mt-3 resize-y font-mono text-xs" />
+        <Textarea value={input} onChange={(e) => setInput(e.target.value)} placeholder="Paste log content, or upload a file above..." rows={16} className="mt-3 resize-y font-mono text-xs" />
       ) : (
-        <div className="mt-3 max-h-[500px] overflow-auto rounded-lg border font-mono text-xs">
+        <div className="mt-3 max-h-[700px] overflow-auto rounded-lg border font-mono text-xs">
           {filtered.map((line, i) => {
             const level = detectLevel(line);
             return (

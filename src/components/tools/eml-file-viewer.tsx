@@ -96,7 +96,7 @@ export function EmlFileViewer() {
             <p><span className="text-muted-foreground">Subject:</span> {parsed.subject}</p>
             <p><span className="text-muted-foreground">Date:</span> {parsed.date}</p>
           </div>
-          <div className="max-h-96 overflow-auto whitespace-pre-wrap p-3 text-sm">{parsed.body || "(no readable body content)"}</div>
+          <div className="max-h-[750px] overflow-auto whitespace-pre-wrap p-3 text-sm">{parsed.body || "(no readable body content)"}</div>
         </div>
       )}
       <p className="mt-3 text-xs text-muted-foreground">

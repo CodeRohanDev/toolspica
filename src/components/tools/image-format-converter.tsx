@@ -2,15 +2,9 @@
 
 import * as React from "react";
 import { Label } from "@/components/ui/label";
-import { ImageUploadCard } from "@/components/tools/image-upload-card";
-import { ImageResultCard } from "@/components/tools/image-result-card";
-import {
-  loadImageFromFile,
-  canvasToBlob,
-  downloadBlob,
-  formatBytes,
-  stripExtension,
-} from "@/lib/image-processing";
+import { ImageBatchWorkspace } from "@/components/tools/image-batch-workspace";
+import { useBatchFiles } from "@/lib/use-batch-files";
+import { loadImageFromFile, canvasToBlob, stripExtension } from "@/lib/image-processing";
 
 interface ImageFormatConverterProps {
   accept: string;
@@ -27,28 +21,12 @@ export function ImageFormatConverter({
   needsBackgroundFill,
   showQuality,
 }: ImageFormatConverterProps) {
-  const [file, setFile] = React.useState<File | null>(null);
-  const [originalUrl, setOriginalUrl] = React.useState<string | null>(null);
   const [quality, setQuality] = React.useState(0.92);
   const [bgColor, setBgColor] = React.useState("#ffffff");
-  const [resultUrl, setResultUrl] = React.useState<string | null>(null);
-  const [resultBlob, setResultBlob] = React.useState<Blob | null>(null);
 
-  function handleFile(picked: File) {
-    setFile(picked);
-    setOriginalUrl(URL.createObjectURL(picked));
-  }
-
-  function clear() {
-    setFile(null);
-    setOriginalUrl(null);
-    setResultUrl(null);
-    setResultBlob(null);
-  }
-
-  const process = React.useCallback(
-    async (targetFile: File) => {
-      const img = await loadImageFromFile(targetFile);
+  const convert = React.useCallback(
+    async (file: File) => {
+      const img = await loadImageFromFile(file);
       const canvas = document.createElement("canvas");
       canvas.width = img.width;
       canvas.height = img.height;
@@ -59,36 +37,23 @@ export function ImageFormatConverter({
       }
       ctx.drawImage(img, 0, 0);
       const blob = await canvasToBlob(canvas, targetMime, showQuality ? quality : undefined);
-      setResultBlob(blob);
-      setResultUrl(URL.createObjectURL(blob));
+      return { blob, name: `${stripExtension(file.name)}.${targetExt}` };
     },
-    [needsBackgroundFill, bgColor, targetMime, showQuality, quality]
+    [needsBackgroundFill, bgColor, targetMime, targetExt, showQuality, quality]
   );
 
-  React.useEffect(() => {
-    if (file) process(file);
-  }, [file, process]);
+  const { items, addFiles, removeItem } = useBatchFiles(convert, { live: true });
 
   return (
     <div className="rounded-xl border bg-card p-5 sm:p-6">
-      <div className="grid gap-4 sm:grid-cols-2">
-        <ImageUploadCard
-          file={file}
-          previewUrl={originalUrl}
-          onFileSelect={handleFile}
-          onClear={clear}
-          accept={accept}
-        />
-        <ImageResultCard
-          previewUrl={resultUrl}
-          fileSize={resultBlob?.size}
-          onDownload={() =>
-            resultBlob &&
-            file &&
-            downloadBlob(resultBlob, `${stripExtension(file.name)}.${targetExt}`)
-          }
-        />
-      </div>
+      <ImageBatchWorkspace
+        items={items}
+        onFilesSelect={addFiles}
+        onRemove={removeItem}
+        accept={accept}
+        uploadLabel={`Drop image files to convert to ${targetExt.toUpperCase()}`}
+        zipName={`converted-to-${targetExt}.zip`}
+      />
 
       <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-3">
         {needsBackgroundFill && (
@@ -120,18 +85,10 @@ export function ImageFormatConverter({
               onChange={(e) => setQuality(Number(e.target.value))}
               className="flex-1"
             />
-            <span className="w-10 shrink-0 text-sm tabular-nums">
-              {Math.round(quality * 100)}%
-            </span>
+            <span className="w-10 shrink-0 text-sm tabular-nums">{Math.round(quality * 100)}%</span>
           </div>
         )}
       </div>
-
-      {file && resultBlob && (
-        <p className="mt-3 text-xs text-muted-foreground">
-          {formatBytes(file.size)} → {formatBytes(resultBlob.size)}
-        </p>
-      )}
     </div>
   );
 }

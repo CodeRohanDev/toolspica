@@ -69,7 +69,7 @@ export default async function ToolPage(props: PageProps<"/tools/[slug]">) {
 
   const otherToolsSection = relatedTools.length > 0 && (
     <div className="border-t">
-      <div className="mx-auto max-w-3xl px-4 py-6 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 lg:px-8">
         <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
           Other tools in {tool.categoryName}
         </p>
@@ -102,14 +102,14 @@ export default async function ToolPage(props: PageProps<"/tools/[slug]">) {
           accentClass={accent}
         />
 
-        <section className="mx-auto max-w-3xl px-4 py-8 sm:px-6 lg:px-8">
+        <section className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
           <div className="flex flex-col items-start gap-3 rounded-xl border border-dashed bg-muted/30 p-6">
             <Badge variant="secondary" className="gap-1.5">
               <Clock3 className="size-3.5" />
               Coming soon
             </Badge>
             <p className="text-sm text-muted-foreground">
-              We're building {tool.name} right now. It will run{" "}
+              We&apos;re building {tool.name} right now. It will run{" "}
               {tool.tier <= 4
                 ? "entirely in your browser"
                 : "with privacy-first processing"}{" "}
@@ -121,7 +121,7 @@ export default async function ToolPage(props: PageProps<"/tools/[slug]">) {
         {otherToolsSection}
 
         <div className="border-t">
-          <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
             <FaqSection
               faqs={[
                 {
@@ -189,7 +189,7 @@ export default async function ToolPage(props: PageProps<"/tools/[slug]">) {
         usesCloud={tool.tier > 4}
       />
 
-      <section className="mx-auto max-w-3xl px-4 py-8 sm:px-6 lg:px-8">
+      <section className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
         <registered.Component />
       </section>
 

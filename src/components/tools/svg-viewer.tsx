@@ -40,17 +40,17 @@ export function SvgViewer() {
       </label>
 
       <div className="mt-3 grid gap-3 sm:grid-cols-2">
-        <Textarea value={input} onChange={(e) => setInput(e.target.value)} rows={10} className="resize-y font-mono text-xs" />
-        <div className="min-h-[200px] rounded-lg border bg-[repeating-conic-gradient(#e5e7eb_0%_25%,transparent_0%_50%)] bg-[length:16px_16px]">
+        <Textarea value={input} onChange={(e) => setInput(e.target.value)} rows={16} className="resize-y font-mono text-xs" />
+        <div className="min-h-[420px] rounded-lg border bg-[repeating-conic-gradient(#e5e7eb_0%_25%,transparent_0%_50%)] bg-[length:16px_16px]">
           {isValid ? (
             <iframe
               title="SVG preview"
               srcDoc={`<!doctype html><html><body style="margin:0;display:flex;align-items:center;justify-content:center;min-height:100vh">${input}</body></html>`}
               sandbox=""
-              className="h-full min-h-[200px] w-full border-0"
+              className="h-full min-h-[420px] w-full border-0"
             />
           ) : (
-            <p className="flex min-h-[200px] items-center justify-center text-sm text-destructive">Invalid SVG markup</p>
+            <p className="flex min-h-[420px] items-center justify-center text-sm text-destructive">Invalid SVG markup</p>
           )}
         </div>
       </div>

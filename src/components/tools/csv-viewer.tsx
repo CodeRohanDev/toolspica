@@ -47,7 +47,7 @@ export function CsvViewer() {
       {rows.length > 0 && (
         <>
           <p className="mt-3 text-sm text-muted-foreground">{fileName} — {rows.length - 1} rows × {rows[0]?.length ?? 0} columns</p>
-          <div className="mt-2 max-h-[500px] overflow-auto rounded-md border">
+          <div className="mt-2 max-h-[700px] overflow-auto rounded-md border">
             <table className="w-full text-sm">
               <thead className="sticky top-0 bg-muted">
                 <tr>{rows[0]?.map((h, i) => <th key={i} className="border-b px-3 py-2 text-left font-semibold">{h}</th>)}</tr>

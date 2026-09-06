@@ -52,7 +52,7 @@ export function ArchiveContentViewer() {
           <p className="mb-2 text-sm text-muted-foreground">
             {entries.length} file{entries.length === 1 ? "" : "s"} · {formatMediaBytes(totalSize)} total
           </p>
-          <div className="max-h-96 overflow-auto rounded-lg border">
+          <div className="max-h-[750px] overflow-auto rounded-lg border">
             <table className="w-full text-sm">
               <tbody>
                 {entries.map((entry, i) => (

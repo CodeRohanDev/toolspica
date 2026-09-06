@@ -1,62 +1,30 @@
 "use client";
 
 import * as React from "react";
-import { ImageUploadCard } from "@/components/tools/image-upload-card";
-import { ImageResultCard } from "@/components/tools/image-result-card";
-import { canvasToBlob, downloadBlob, stripExtension } from "@/lib/image-processing";
+import { ImageBatchWorkspace } from "@/components/tools/image-batch-workspace";
+import { useBatchFiles } from "@/lib/use-batch-files";
+import { canvasToBlob, stripExtension } from "@/lib/image-processing";
 import { decodeHeicToCanvas } from "@/lib/heic-decoder";
 
 export function HeicToPng() {
-  const [file, setFile] = React.useState<File | null>(null);
-  const [resultUrl, setResultUrl] = React.useState<string | null>(null);
-  const [resultBlob, setResultBlob] = React.useState<Blob | null>(null);
-  const [loading, setLoading] = React.useState(false);
-  const [error, setError] = React.useState<string | null>(null);
+  const convert = React.useCallback(async (file: File) => {
+    const canvas = await decodeHeicToCanvas(file);
+    const blob = await canvasToBlob(canvas, "image/png");
+    return { blob, name: `${stripExtension(file.name)}.png` };
+  }, []);
 
-  async function handleFile(picked: File) {
-    setFile(picked);
-    setResultUrl(null);
-    setResultBlob(null);
-    setError(null);
-    setLoading(true);
-    try {
-      const canvas = await decodeHeicToCanvas(picked);
-      const blob = await canvasToBlob(canvas, "image/png");
-      setResultBlob(blob);
-      setResultUrl(URL.createObjectURL(blob));
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Couldn't convert this HEIC file.");
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  function clear() {
-    setFile(null);
-    setResultUrl(null);
-    setResultBlob(null);
-    setError(null);
-  }
+  const { items, addFiles, removeItem } = useBatchFiles(convert, { live: true });
 
   return (
     <div className="rounded-xl border bg-card p-5 sm:p-6">
-      <div className="grid gap-4 sm:grid-cols-2">
-        <ImageUploadCard
-          file={file}
-          previewUrl={null}
-          onFileSelect={handleFile}
-          onClear={clear}
-          accept=".heic,.heif,image/heic,image/heif"
-          label={loading ? "Decoding HEIC..." : "Upload a HEIC/HEIF file"}
-        />
-        <ImageResultCard
-          previewUrl={resultUrl}
-          fileSize={resultBlob?.size}
-          onDownload={() => resultBlob && file && downloadBlob(resultBlob, `${stripExtension(file.name)}.png`)}
-        />
-      </div>
-
-      {error && <p className="mt-3 text-sm text-destructive">{error}</p>}
+      <ImageBatchWorkspace
+        items={items}
+        onFilesSelect={addFiles}
+        onRemove={removeItem}
+        accept=".heic,.heif,image/heic,image/heif"
+        uploadLabel="Drop HEIC/HEIF files to convert to PNG"
+        zipName="converted-pngs.zip"
+      />
 
       <p className="mt-3 text-xs text-muted-foreground">
         HEIC (used by default on iPhone) decodes entirely in your browser via WebAssembly — nothing

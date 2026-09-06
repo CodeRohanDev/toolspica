@@ -1,43 +1,30 @@
 "use client";
 
 import * as React from "react";
-import { Button } from "@/components/ui/button";
-import { Download } from "lucide-react";
-import { MediaUploadZone, formatBytes } from "@/components/tools/media-upload-zone";
-import { downloadMediaBytes } from "@/lib/media-helpers";
+import { BatchUploadZone } from "@/components/tools/batch-upload-zone";
+import { BatchFileList } from "@/components/tools/batch-file-list";
+import { useBatchFiles } from "@/lib/use-batch-files";
 
 export function UniversalFileCompressor() {
-  const [file, setFile] = React.useState<File | null>(null);
-  const [resultSize, setResultSize] = React.useState<number | null>(null);
-  const [busy, setBusy] = React.useState(false);
+  const convert = React.useCallback(async (file: File) => {
+    const stream = file.stream().pipeThrough(new CompressionStream("gzip"));
+    const buffer = await new Response(stream).arrayBuffer();
+    const blob = new Blob([buffer], { type: "application/gzip" });
+    return { blob, name: `${file.name}.gz` };
+  }, []);
 
-  async function compress() {
-    if (!file) return;
-    setBusy(true);
-    setResultSize(null);
-    try {
-      const stream = file.stream().pipeThrough(new CompressionStream("gzip"));
-      const buffer = await new Response(stream).arrayBuffer();
-      setResultSize(buffer.byteLength);
-      downloadMediaBytes(new Uint8Array(buffer), `${file.name}.gz`, "application/gzip");
-    } finally {
-      setBusy(false);
-    }
-  }
+  const { items, addFiles, removeItem } = useBatchFiles(convert);
 
   return (
     <div className="rounded-xl border bg-card p-5 sm:p-6">
-      <MediaUploadZone file={file} onFileSelect={setFile} onClear={() => setFile(null)} kind="archive" label="Drop any file to compress" />
+      <BatchUploadZone onFilesSelect={addFiles} label="Drop any files to compress" />
 
-      <Button type="button" className="mt-4" onClick={compress} disabled={!file || busy}>
-        <Download className="size-4" />
-        {busy ? "Compressing..." : "Compress with GZIP"}
-      </Button>
-      {file && resultSize !== null && (
-        <p className="mt-2 text-xs text-muted-foreground">{formatBytes(file.size)} → {formatBytes(resultSize)}</p>
-      )}
-      <p className="mt-2 text-xs text-muted-foreground">
-        Works on any file type using your browser's native GZIP compression — no library, no upload. How much it shrinks depends entirely on the file's content (already-compressed files like JPGs or MP4s won't shrink much further).
+      <BatchFileList items={items} onRemove={removeItem} zipName="compressed-files.zip" />
+
+      <p className="mt-3 text-xs text-muted-foreground">
+        Works on any file type using your browser&apos;s native GZIP compression — no library, no
+        upload. How much it shrinks depends entirely on the file&apos;s content (already-compressed
+        files like JPGs or MP4s won&apos;t shrink much further).
       </p>
     </div>
   );

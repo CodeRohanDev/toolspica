@@ -13,13 +13,11 @@ import { RandomTextGenerator } from "@/components/tools/random-text-generator";
 import { FindAndReplace } from "@/components/tools/find-and-replace";
 import { TextCleaner } from "@/components/tools/text-cleaner";
 import { RemoveExtraSpaces } from "@/components/tools/remove-extra-spaces";
-import { UrlEncoder } from "@/components/tools/url-encoder";
-import { UrlDecoder } from "@/components/tools/url-decoder";
+import { UrlEncoderDecoder } from "@/components/tools/url-encoder-decoder";
 import { WordFrequencyCounter } from "@/components/tools/word-frequency-counter";
 import { Rot13Encoder } from "@/components/tools/rot13-encoder";
 import { MorseCodeTranslator } from "@/components/tools/morse-code-translator";
-import { BinaryToText } from "@/components/tools/binary-to-text";
-import { TextToBinary } from "@/components/tools/text-to-binary";
+import { BinaryTextConverter } from "@/components/tools/binary-text-converter";
 import { PalindromeChecker } from "@/components/tools/palindrome-checker";
 import { AnagramSolver } from "@/components/tools/anagram-solver";
 import { LineCounter } from "@/components/tools/line-counter";
@@ -33,8 +31,7 @@ import { TextWrapper } from "@/components/tools/text-wrapper";
 import { JsonFormatter } from "@/components/tools/json-formatter";
 import { JsonValidator } from "@/components/tools/json-validator";
 import { JsonMinifier } from "@/components/tools/json-minifier";
-import { Base64Encode } from "@/components/tools/base64-encode";
-import { Base64Decode } from "@/components/tools/base64-decode";
+import { Base64EncoderDecoder } from "@/components/tools/base64-encoder-decoder";
 import { JwtDecoder } from "@/components/tools/jwt-decoder";
 import { RegexTester } from "@/components/tools/regex-tester";
 import { UuidGenerator } from "@/components/tools/uuid-generator";
@@ -66,8 +63,7 @@ import { WebpToJpg } from "@/components/tools/webp-to-jpg";
 import { JpgToWebp } from "@/components/tools/jpg-to-webp";
 import { BlurImage } from "@/components/tools/blur-image";
 import { ImageColorPicker } from "@/components/tools/image-color-picker";
-import { ImageToBase64 } from "@/components/tools/image-to-base64";
-import { Base64ToImage } from "@/components/tools/base64-to-image";
+import { ImageBase64Converter } from "@/components/tools/image-base64-converter";
 import { BmpToJpg } from "@/components/tools/bmp-to-jpg";
 import { GrayscaleImage } from "@/components/tools/grayscale-image";
 import { RoundedCornersImage } from "@/components/tools/rounded-corners-image";
@@ -401,8 +397,7 @@ import { PomodoroTimer } from "@/components/tools/pomodoro-timer";
 import { OnlineStopwatch } from "@/components/tools/online-stopwatch";
 import { CountdownToDateWidget } from "@/components/tools/countdown-to-date-widget";
 import { WorkDaysCalculator } from "@/components/tools/work-days-calculator";
-import { JsonToCsv } from "@/components/tools/json-to-csv";
-import { CsvToJson } from "@/components/tools/csv-to-json";
+import { JsonCsvConverter } from "@/components/tools/json-csv-converter";
 import { XmlFormatter } from "@/components/tools/xml-formatter";
 import { XmlToJson } from "@/components/tools/xml-to-json";
 import { JwtGenerator } from "@/components/tools/jwt-generator";
@@ -412,8 +407,7 @@ import { SqlFormatter } from "@/components/tools/sql-formatter";
 import { SqlMinifier } from "@/components/tools/sql-minifier";
 import { CronExpressionGenerator } from "@/components/tools/cron-expression-generator";
 import { HtmlFormatterBeautifier } from "@/components/tools/html-formatter-beautifier";
-import { HtmlToMarkdown } from "@/components/tools/html-to-markdown";
-import { MarkdownToHtml } from "@/components/tools/markdown-to-html";
+import { HtmlMarkdownConverter } from "@/components/tools/html-markdown-converter";
 import { MarkdownPreviewer } from "@/components/tools/markdown-previewer";
 import { CodeDiffChecker } from "@/components/tools/code-diff-checker";
 import { CodeBeautifier } from "@/components/tools/code-beautifier";
@@ -422,8 +416,7 @@ import { JsonPathTester } from "@/components/tools/json-path-tester";
 import { UserAgentParser } from "@/components/tools/user-agent-parser";
 import { JsMinifier } from "@/components/tools/js-minifier";
 import { YamlFormatter } from "@/components/tools/yaml-formatter";
-import { YamlToJson } from "@/components/tools/yaml-to-json";
-import { JsonToYaml } from "@/components/tools/json-to-yaml";
+import { JsonYamlConverter } from "@/components/tools/json-yaml-converter";
 import { GraphqlQueryFormatter } from "@/components/tools/graphql-query-formatter";
 import { wordCounterContent } from "@/lib/tools-content/word-counter";
 import { characterCounterContent } from "@/lib/tools-content/character-counter";
@@ -1167,8 +1160,8 @@ export const TOOLS_REGISTRY: Record<string, RegisteredTool> = {
     Component: RemoveExtraSpaces,
     content: removeExtraSpacesContent,
   },
-  "url-encoder": { Component: UrlEncoder, content: urlEncoderContent },
-  "url-decoder": { Component: UrlDecoder, content: urlDecoderContent },
+  "url-encoder": { Component: UrlEncoderDecoder, content: urlEncoderContent },
+  "url-decoder": { Component: UrlEncoderDecoder, content: urlDecoderContent },
   "word-frequency-counter": {
     Component: WordFrequencyCounter,
     content: wordFrequencyCounterContent,
@@ -1178,8 +1171,8 @@ export const TOOLS_REGISTRY: Record<string, RegisteredTool> = {
     Component: MorseCodeTranslator,
     content: morseCodeTranslatorContent,
   },
-  "binary-to-text": { Component: BinaryToText, content: binaryToTextContent },
-  "text-to-binary": { Component: TextToBinary, content: textToBinaryContent },
+  "binary-to-text": { Component: BinaryTextConverter, content: binaryToTextContent },
+  "text-to-binary": { Component: BinaryTextConverter, content: textToBinaryContent },
   "palindrome-checker": {
     Component: PalindromeChecker,
     content: palindromeCheckerContent,
@@ -1214,8 +1207,8 @@ export const TOOLS_REGISTRY: Record<string, RegisteredTool> = {
   "json-formatter": { Component: JsonFormatter, content: jsonFormatterContent },
   "json-validator": { Component: JsonValidator, content: jsonValidatorContent },
   "json-minifier": { Component: JsonMinifier, content: jsonMinifierContent },
-  "base64-encode": { Component: Base64Encode, content: base64EncodeContent },
-  "base64-decode": { Component: Base64Decode, content: base64DecodeContent },
+  "base64-encode": { Component: Base64EncoderDecoder, content: base64EncodeContent },
+  "base64-decode": { Component: Base64EncoderDecoder, content: base64DecodeContent },
   "jwt-decoder": { Component: JwtDecoder, content: jwtDecoderContent },
   "regex-tester": { Component: RegexTester, content: regexTesterContent },
   "uuid-generator": { Component: UuidGenerator, content: uuidGeneratorContent },
@@ -1295,8 +1288,8 @@ export const TOOLS_REGISTRY: Record<string, RegisteredTool> = {
     Component: ImageColorPicker,
     content: imageColorPickerContent,
   },
-  "image-to-base64": { Component: ImageToBase64, content: imageToBase64Content },
-  "base64-to-image": { Component: Base64ToImage, content: base64ToImageContent },
+  "image-to-base64": { Component: ImageBase64Converter, content: imageToBase64Content },
+  "base64-to-image": { Component: ImageBase64Converter, content: base64ToImageContent },
   "bmp-to-jpg": { Component: BmpToJpg, content: bmpToJpgContent },
   "image-grayscale-converter": {
     Component: GrayscaleImage,
@@ -1899,8 +1892,8 @@ export const TOOLS_REGISTRY: Record<string, RegisteredTool> = {
   "online-stopwatch": { Component: OnlineStopwatch, content: onlineStopwatchContent },
   "countdown-to-date-widget": { Component: CountdownToDateWidget, content: countdownToDateWidgetContent },
   "work-days-calculator": { Component: WorkDaysCalculator, content: workDaysCalculatorContent },
-  "json-to-csv": { Component: JsonToCsv, content: jsonToCsvContent },
-  "csv-to-json": { Component: CsvToJson, content: csvToJsonContent },
+  "json-to-csv": { Component: JsonCsvConverter, content: jsonToCsvContent },
+  "csv-to-json": { Component: JsonCsvConverter, content: csvToJsonContent },
   "xml-formatter": { Component: XmlFormatter, content: xmlFormatterContent },
   "xml-to-json": { Component: XmlToJson, content: xmlToJsonContent },
   "jwt-generator": { Component: JwtGenerator, content: jwtGeneratorContent },
@@ -1910,8 +1903,8 @@ export const TOOLS_REGISTRY: Record<string, RegisteredTool> = {
   "sql-minifier": { Component: SqlMinifier, content: sqlMinifierContent },
   "cron-expression-generator": { Component: CronExpressionGenerator, content: cronExpressionGeneratorContent },
   "html-formatter-beautifier": { Component: HtmlFormatterBeautifier, content: htmlFormatterBeautifierContent },
-  "html-to-markdown": { Component: HtmlToMarkdown, content: htmlToMarkdownContent },
-  "markdown-to-html": { Component: MarkdownToHtml, content: markdownToHtmlContent },
+  "html-to-markdown": { Component: HtmlMarkdownConverter, content: htmlToMarkdownContent },
+  "markdown-to-html": { Component: HtmlMarkdownConverter, content: markdownToHtmlContent },
   "markdown-previewer": { Component: MarkdownPreviewer, content: markdownPreviewerContent },
   "code-diff-checker": { Component: CodeDiffChecker, content: codeDiffCheckerContent },
   "code-beautifier": { Component: CodeBeautifier, content: codeBeautifierContent },
@@ -1920,8 +1913,8 @@ export const TOOLS_REGISTRY: Record<string, RegisteredTool> = {
   "user-agent-parser": { Component: UserAgentParser, content: userAgentParserContent },
   "js-minifier": { Component: JsMinifier, content: jsMinifierContent },
   "yaml-formatter": { Component: YamlFormatter, content: yamlFormatterContent },
-  "yaml-to-json": { Component: YamlToJson, content: yamlToJsonContent },
-  "json-to-yaml": { Component: JsonToYaml, content: jsonToYamlContent },
+  "yaml-to-json": { Component: JsonYamlConverter, content: yamlToJsonContent },
+  "json-to-yaml": { Component: JsonYamlConverter, content: jsonToYamlContent },
   "graphql-query-formatter": { Component: GraphqlQueryFormatter, content: graphqlQueryFormatterContent },
   "hashtag-generator": { Component: HashtagGenerator, content: hashtagGeneratorContent },
   "instagram-caption-generator": { Component: InstagramCaptionGenerator, content: instagramCaptionGeneratorContent },

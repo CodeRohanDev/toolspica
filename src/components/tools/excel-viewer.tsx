@@ -68,7 +68,7 @@ export function ExcelViewer() {
       )}
 
       {rows.length > 0 && (
-        <div className="mt-4 max-h-[450px] overflow-auto rounded-lg border">
+        <div className="mt-4 max-h-[650px] overflow-auto rounded-lg border">
           <table className="w-full border-collapse text-sm">
             <tbody>
               {rows.map((row, i) => (

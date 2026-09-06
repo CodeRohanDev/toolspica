@@ -34,7 +34,7 @@ export function CertificateChainViewer() {
         value={input}
         onChange={(e) => setInput(e.target.value)}
         placeholder="Paste a certificate chain — one or more PEM certificates, one after another..."
-        rows={10}
+        rows={16}
         className="resize-y font-mono text-xs"
       />
 

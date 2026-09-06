@@ -4,17 +4,16 @@ import { notFound } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 import { PageHeader } from "@/components/page-header";
 import { FaqSection } from "@/components/faq-section";
-import { ToolCard } from "@/components/tool-card";
+import { CategoryToolGrid } from "@/components/category-tool-grid";
 import { ToolPageHeader } from "@/components/tools/tool-page-header";
 import { SeoIntroHero } from "@/components/tools/seo-intro-hero";
 import { ToolFeaturesAndAudience } from "@/components/tools/tool-features-audience";
 import { RelatedSearches } from "@/components/tools/related-searches";
 import { ToolContentSections } from "@/components/tools/tool-content-sections";
-import { getCategoryAccent, getCategoryIcon } from "@/lib/category-icons";
+import { getCategoryAccent, getCategoryGlow, getCategoryIcon } from "@/lib/category-icons";
 import { ALL_TOOLS, TOOL_CATEGORIES } from "@/lib/tools-data.generated";
 import { getRegisteredTool } from "@/lib/tools-registry";
 import { TOOL_VARIANTS, findToolVariant, getVariantsForTool } from "@/lib/tool-variants";
-import { getHeroSubtitle } from "@/lib/hero-subtitle";
 import { getToolFeatures } from "@/lib/tool-features";
 import { getCategoryAudience } from "@/lib/category-audience";
 import { getToolContentLastModified, getMostRecent } from "@/lib/content-freshness";
@@ -102,10 +101,13 @@ function CategoryPage({
 }) {
   const Icon = getCategoryIcon(category.slug);
   const accent = getCategoryAccent(category.slug);
+  const glow = getCategoryGlow(category.slug);
   const intro = buildCategoryIntro(category);
   const faqs = buildCategoryFaqs(category);
   const seoParagraphs = buildCategorySeoParagraphs(category);
   const relatedCategories = getRelatedCategories(category);
+  const doneCount = category.tools.filter((t) => t.done).length;
+  const comingSoonCount = category.tools.length - doneCount;
   const dateModified = getMostRecent(
     category.tools
       .filter((t) => t.done)
@@ -115,34 +117,37 @@ function CategoryPage({
   return (
     <>
       <PageHeader
-        eyebrow={`${category.tools.length} tools`}
+        eyebrow={`${category.tools.length} free tools`}
         title={category.name}
         description={intro}
         icon={Icon}
         accentClass={accent}
+        glowClass={glow}
+        breadcrumb={[
+          { label: "Home", href: "/" },
+          { label: "Categories", href: "/categories" },
+          { label: category.name },
+        ]}
+        stats={[
+          { value: category.tools.length, label: "tools total" },
+          { value: doneCount, label: "available now" },
+          ...(comingSoonCount > 0 ? [{ value: comingSoonCount, label: "coming soon" }] : []),
+        ]}
       />
 
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {category.tools.map((tool) => (
-            <ToolCard
-              key={tool.slug}
-              slug={tool.slug}
-              name={tool.name}
-              categorySlug={category.slug}
-              done={tool.done}
-            />
-          ))}
-        </div>
+        <CategoryToolGrid tools={category.tools} categorySlug={category.slug} categoryName={category.name} />
       </section>
 
       <section className="border-t bg-muted/30">
         <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
-          <div className="prose prose-neutral max-w-none prose-headings:font-semibold">
-            <h2>About {category.name}</h2>
-            {seoParagraphs.map((paragraph, index) => (
-              <p key={index}>{paragraph}</p>
-            ))}
+          <div className="rounded-2xl border bg-card p-6 shadow-sm sm:p-10">
+            <div className="prose prose-neutral max-w-none prose-headings:font-semibold">
+              <h2>About {category.name}</h2>
+              {seoParagraphs.map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -153,9 +158,17 @@ function CategoryPage({
 
       <section className="border-t">
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-          <h2 className="text-xl font-semibold tracking-tight">
-            Related categories
-          </h2>
+          <div className="flex items-center justify-between">
+            <h2 className="text-xl font-semibold tracking-tight">
+              Related categories
+            </h2>
+            <Link
+              href="/categories"
+              className="hidden items-center gap-1 text-sm font-medium text-brand hover:underline sm:flex"
+            >
+              View all categories <ArrowRight className="size-3.5" />
+            </Link>
+          </div>
           <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
             {relatedCategories.map((related) => {
               const RelatedIcon = getCategoryIcon(related.slug);

@@ -85,8 +85,8 @@ export function AudioSpectrogramViewer() {
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext("2d");
     if (canvas && ctx) {
-      canvas.width = 700;
-      canvas.height = 200;
+      canvas.width = 1200;
+      canvas.height = 320;
       ctx.fillStyle = "#0f172a";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
     }

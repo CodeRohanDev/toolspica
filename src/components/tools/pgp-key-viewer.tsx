@@ -55,7 +55,7 @@ export function PgpKeyViewer() {
         value={input}
         onChange={(e) => setInput(e.target.value)}
         placeholder="Paste an armored PGP public or private key block (-----BEGIN PGP ... KEY BLOCK-----)..."
-        rows={10}
+        rows={16}
         className="resize-y font-mono text-xs"
       />
 

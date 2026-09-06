@@ -23,7 +23,7 @@ export function ToolPageHeader({
 }: ToolPageHeaderProps) {
   return (
     <div className="border-b">
-      <div className="mx-auto max-w-3xl px-4 py-6 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 lg:px-8">
         <nav
           aria-label="Breadcrumb"
           className="flex items-center gap-1.5 text-xs text-muted-foreground"

@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { Download } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,8 +12,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { ImageUploadCard } from "@/components/tools/image-upload-card";
-import { ImageResultCard } from "@/components/tools/image-result-card";
-import { loadImageFromFile, canvasToBlob, downloadBlob, stripExtension } from "@/lib/image-processing";
+import { loadImageFromFile, canvasToBlob, downloadBlob, formatBytes, stripExtension } from "@/lib/image-processing";
 
 const ASPECT_OPTIONS = [
   { value: "free", label: "Freeform", ratio: null },
@@ -21,11 +21,41 @@ const ASPECT_OPTIONS = [
   { value: "16:9", label: "16:9", ratio: 16 / 9 },
 ];
 
+type Handle = "n" | "s" | "e" | "w" | "ne" | "nw" | "se" | "sw";
+const HANDLES: Handle[] = ["nw", "n", "ne", "e", "se", "s", "sw", "w"];
+const HIT_RADIUS = 14;
+const MIN_SIZE = 16;
+
 interface Rect {
   x: number;
   y: number;
   w: number;
   h: number;
+}
+
+type Mode = { kind: "draw" } | { kind: "move" } | { kind: "resize"; handle: Handle };
+
+function handleCenter(rect: Rect, handle: Handle): { x: number; y: number } {
+  const cx = rect.x + rect.w / 2;
+  const cy = rect.y + rect.h / 2;
+  const left = rect.x;
+  const right = rect.x + rect.w;
+  const top = rect.y;
+  const bottom = rect.y + rect.h;
+  switch (handle) {
+    case "nw": return { x: left, y: top };
+    case "n": return { x: cx, y: top };
+    case "ne": return { x: right, y: top };
+    case "e": return { x: right, y: cy };
+    case "se": return { x: right, y: bottom };
+    case "s": return { x: cx, y: bottom };
+    case "sw": return { x: left, y: bottom };
+    case "w": return { x: left, y: cy };
+  }
+}
+
+function pointInRect(x: number, y: number, r: Rect): boolean {
+  return x >= r.x && x <= r.x + r.w && y >= r.y && y <= r.y + r.h;
 }
 
 export function CropImage() {
@@ -37,7 +67,10 @@ export function CropImage() {
   const [resultUrl, setResultUrl] = React.useState<string | null>(null);
   const [resultBlob, setResultBlob] = React.useState<Blob | null>(null);
   const imgRef = React.useRef<HTMLImageElement>(null);
-  const dragState = React.useRef<{ startX: number; startY: number } | null>(null);
+  const containerRef = React.useRef<HTMLDivElement>(null);
+  const modeRef = React.useRef<Mode | null>(null);
+  const startPointRef = React.useRef<{ x: number; y: number }>({ x: 0, y: 0 });
+  const startRectRef = React.useRef<Rect>({ x: 0, y: 0, w: 0, h: 0 });
 
   function handleFile(picked: File) {
     setFile(picked);
@@ -57,35 +90,141 @@ export function CropImage() {
 
   const ratio = ASPECT_OPTIONS.find((a) => a.value === aspect)?.ratio ?? null;
 
+  function localPoint(e: PointerEvent | React.PointerEvent): { x: number; y: number } {
+    const bounds = containerRef.current!.getBoundingClientRect();
+    return {
+      x: Math.max(0, Math.min(bounds.width, e.clientX - bounds.left)),
+      y: Math.max(0, Math.min(bounds.height, e.clientY - bounds.top)),
+    };
+  }
+
+  function clampRect(r: Rect, bounds: { width: number; height: number }): Rect {
+    const w = Math.min(Math.max(r.w, MIN_SIZE), bounds.width);
+    const h = Math.min(Math.max(r.h, MIN_SIZE), bounds.height);
+    const x = Math.min(Math.max(r.x, 0), bounds.width - w);
+    const y = Math.min(Math.max(r.y, 0), bounds.height - h);
+    return { x, y, w, h };
+  }
+
   function handlePointerDown(e: React.PointerEvent<HTMLDivElement>) {
-    const bounds = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - bounds.left;
-    const y = e.clientY - bounds.top;
-    dragState.current = { startX: x, startY: y };
-    setRect({ x, y, w: 0, h: 0 });
-    e.currentTarget.setPointerCapture(e.pointerId);
-  }
-  function handlePointerMove(e: React.PointerEvent<HTMLDivElement>) {
-    if (!dragState.current) return;
-    const bounds = e.currentTarget.getBoundingClientRect();
-    const x = Math.max(0, Math.min(bounds.width, e.clientX - bounds.left));
-    const y = Math.max(0, Math.min(bounds.height, e.clientY - bounds.top));
-    const { startX, startY } = dragState.current;
-    let w = x - startX;
-    let h = y - startY;
-    if (ratio) {
-      h = Math.sign(h || 1) * Math.abs(w) / ratio;
+    if (!containerRef.current) return;
+    const p = localPoint(e);
+
+    if (rect) {
+      const hit = HANDLES.find((h) => {
+        const c = handleCenter(rect, h);
+        return Math.hypot(p.x - c.x, p.y - c.y) <= HIT_RADIUS;
+      });
+      if (hit) {
+        modeRef.current = { kind: "resize", handle: hit };
+        startRectRef.current = { ...rect };
+        startPointRef.current = p;
+        e.preventDefault();
+        return;
+      }
+      if (pointInRect(p.x, p.y, rect)) {
+        modeRef.current = { kind: "move" };
+        startRectRef.current = { ...rect };
+        startPointRef.current = p;
+        e.preventDefault();
+        return;
+      }
     }
-    setRect({
-      x: w < 0 ? startX + w : startX,
-      y: h < 0 ? startY + h : startY,
-      w: Math.abs(w),
-      h: Math.abs(h),
-    });
+
+    modeRef.current = { kind: "draw" };
+    startPointRef.current = p;
+    startRectRef.current = { x: p.x, y: p.y, w: 0, h: 0 };
+    setRect({ x: p.x, y: p.y, w: 0, h: 0 });
+    e.preventDefault();
   }
-  function handlePointerUp() {
-    dragState.current = null;
-  }
+
+  React.useEffect(() => {
+    function onMove(e: PointerEvent) {
+      const mode = modeRef.current;
+      if (!mode || !containerRef.current) return;
+      const bounds = containerRef.current.getBoundingClientRect();
+      const p = localPoint(e);
+      const start = startPointRef.current;
+      const base = startRectRef.current;
+
+      if (mode.kind === "draw") {
+        const w = p.x - start.x;
+        let h = p.y - start.y;
+        if (ratio) h = (Math.sign(h || 1) * Math.abs(w)) / ratio;
+        setRect({
+          x: w < 0 ? start.x + w : start.x,
+          y: h < 0 ? start.y + h : start.y,
+          w: Math.abs(w),
+          h: Math.abs(h),
+        });
+        return;
+      }
+
+      if (mode.kind === "move") {
+        const dx = p.x - start.x;
+        const dy = p.y - start.y;
+        setRect(clampRect({ x: base.x + dx, y: base.y + dy, w: base.w, h: base.h }, bounds));
+        return;
+      }
+
+      // resize
+      const right = base.x + base.w;
+      const bottom = base.y + base.h;
+      let rx = base.x;
+      let ry = base.y;
+      let rw = base.w;
+      let rh = base.h;
+
+      if (mode.handle.includes("e")) rw = p.x - rx;
+      if (mode.handle.includes("w")) {
+        rw = right - p.x;
+        rx = p.x;
+      }
+      if (mode.handle.includes("s")) rh = p.y - ry;
+      if (mode.handle.includes("n")) {
+        rh = bottom - p.y;
+        ry = p.y;
+      }
+
+      if (ratio) {
+        const isVertical = mode.handle === "n" || mode.handle === "s";
+        const isHorizontal = mode.handle === "e" || mode.handle === "w";
+        if (isVertical) {
+          rw = rh * ratio;
+          rx = base.x + (base.w - rw) / 2;
+        } else if (isHorizontal) {
+          rh = rw / ratio;
+          ry = base.y + (base.h - rh) / 2;
+        } else {
+          rh = Math.abs(rw) / ratio;
+          if (mode.handle.includes("n")) ry = bottom - rh;
+          if (mode.handle.includes("w")) rx = right - rw;
+        }
+      }
+
+      if (rw < MIN_SIZE) {
+        rw = MIN_SIZE;
+        if (mode.handle.includes("w")) rx = right - MIN_SIZE;
+      }
+      if (rh < MIN_SIZE) {
+        rh = MIN_SIZE;
+        if (mode.handle.includes("n")) ry = bottom - MIN_SIZE;
+      }
+
+      setRect(clampRect({ x: rx, y: ry, w: rw, h: rh }, bounds));
+    }
+
+    function onUp() {
+      modeRef.current = null;
+    }
+
+    window.addEventListener("pointermove", onMove);
+    window.addEventListener("pointerup", onUp);
+    return () => {
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerup", onUp);
+    };
+  }, [ratio]);
 
   async function applyCrop() {
     if (!file || !rect || !imgRef.current || !naturalSize || rect.w < 2 || rect.h < 2) return;
@@ -108,6 +247,17 @@ export function CropImage() {
     setResultUrl(URL.createObjectURL(blob));
   }
 
+  const handleCursor: Record<Handle, string> = {
+    n: "cursor-ns-resize",
+    s: "cursor-ns-resize",
+    e: "cursor-ew-resize",
+    w: "cursor-ew-resize",
+    ne: "cursor-nesw-resize",
+    sw: "cursor-nesw-resize",
+    nw: "cursor-nwse-resize",
+    se: "cursor-nwse-resize",
+  };
+
   return (
     <div className="rounded-xl border bg-card p-5 sm:p-6">
       {!originalUrl && (
@@ -117,21 +267,39 @@ export function CropImage() {
       {originalUrl && (
         <>
           <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-            Drag on the image to select a crop area
+            Drag to select a crop area — drag inside the box to move it, or drag a handle to resize
           </p>
           <div
-            className="relative mt-2 max-w-full touch-none select-none overflow-hidden rounded-xl border"
+            ref={containerRef}
+            className="relative mt-2 inline-block max-w-full touch-none select-none overflow-hidden rounded-xl border"
             onPointerDown={handlePointerDown}
-            onPointerMove={handlePointerMove}
-            onPointerUp={handlePointerUp}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img ref={imgRef} src={originalUrl} alt="To crop" className="block max-h-[480px] w-full object-contain" draggable={false} />
+            <img ref={imgRef} src={originalUrl} alt="To crop" className="pointer-events-none block max-h-[480px] max-w-full" draggable={false} />
             {rect && rect.w > 0 && rect.h > 0 && (
-              <div
-                className="absolute border-2 border-brand bg-brand/10"
-                style={{ left: rect.x, top: rect.y, width: rect.w, height: rect.h }}
-              />
+              <>
+                <div
+                  className="pointer-events-none absolute inset-0 bg-black/40"
+                  style={{
+                    clipPath: `polygon(0 0, 0 100%, ${rect.x}px 100%, ${rect.x}px ${rect.y}px, ${rect.x + rect.w}px ${rect.y}px, ${rect.x + rect.w}px ${rect.y + rect.h}px, ${rect.x}px ${rect.y + rect.h}px, ${rect.x}px 100%, 100% 100%, 100% 0)`,
+                  }}
+                />
+                <div
+                  className="pointer-events-none absolute border-2 border-brand"
+                  style={{ left: rect.x, top: rect.y, width: rect.w, height: rect.h }}
+                >
+                  {HANDLES.map((h) => {
+                    const c = handleCenter(rect, h);
+                    return (
+                      <div
+                        key={h}
+                        className={`pointer-events-auto absolute size-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-brand bg-background shadow ${handleCursor[h]}`}
+                        style={{ left: c.x - rect.x, top: c.y - rect.y }}
+                      />
+                    );
+                  })}
+                </div>
+              </>
             )}
           </div>
 
@@ -163,13 +331,29 @@ export function CropImage() {
 
       {resultUrl && (
         <div className="mt-5">
-          <ImageResultCard
-            previewUrl={resultUrl}
-            fileSize={resultBlob?.size}
-            onDownload={() =>
-              resultBlob && file && downloadBlob(resultBlob, `${stripExtension(file.name)}-cropped.png`)
-            }
-          />
+          <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Result</p>
+          <div
+            className="mt-2 inline-block max-w-full overflow-hidden rounded-xl border"
+            style={{
+              backgroundImage:
+                "conic-gradient(#00000010 0.25turn, transparent 0turn 0.5turn, #00000010 0turn 0.75turn, transparent 0turn)",
+              backgroundSize: "20px 20px",
+            }}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={resultUrl} alt="Cropped result" className="block max-h-[480px] max-w-full object-contain" />
+          </div>
+          <div className="mt-1.5 flex items-center justify-between">
+            <p className="text-xs text-muted-foreground">{resultBlob ? formatBytes(resultBlob.size) : " "}</p>
+            <Button
+              type="button"
+              size="sm"
+              onClick={() => resultBlob && file && downloadBlob(resultBlob, `${stripExtension(file.name)}-cropped.png`)}
+            >
+              <Download className="size-3.5" />
+              Download
+            </Button>
+          </div>
         </div>
       )}
     </div>

@@ -39,12 +39,12 @@ export function SitemapViewer() {
     <div className="rounded-xl border bg-card p-5 sm:p-6">
       <input type="file" accept=".xml" onChange={handleUpload} className="text-sm" />
 
-      <Textarea value={input} onChange={(e) => setInput(e.target.value)} placeholder="Paste sitemap.xml content, or upload a file above..." rows={8} className="mt-3 resize-y font-mono text-xs" />
+      <Textarea value={input} onChange={(e) => setInput(e.target.value)} placeholder="Paste sitemap.xml content, or upload a file above..." rows={14} className="mt-3 resize-y font-mono text-xs" />
 
       {urls.length > 0 && (
         <div className="mt-4 border-t pt-4">
           <p className="mb-2 text-sm text-muted-foreground">{urls.length} URL{urls.length === 1 ? "" : "s"}</p>
-          <div className="max-h-[400px] overflow-auto rounded-lg border">
+          <div className="max-h-[750px] overflow-auto rounded-lg border">
             <table className="w-full text-sm">
               <thead className="sticky top-0 bg-card">
                 <tr className="border-b bg-muted/40">

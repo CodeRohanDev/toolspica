@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { Button } from "@/components/ui/button";
 import {
   Select,
   SelectContent,
@@ -10,12 +9,12 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
-import { Download } from "lucide-react";
-import { MediaUploadZone } from "@/components/tools/media-upload-zone";
-import { MediaProgressBar } from "@/components/tools/media-progress-bar";
+import { BatchUploadZone } from "@/components/tools/batch-upload-zone";
+import { BatchFileList } from "@/components/tools/batch-file-list";
+import { useBatchFiles } from "@/lib/use-batch-files";
 import { useFfmpegJob } from "@/lib/use-ffmpeg-job";
 import { pickUniqueName } from "@/lib/ffmpeg-setup";
-import { downloadMediaBytes, stripMediaExtension } from "@/lib/media-helpers";
+import { stripMediaExtension } from "@/lib/media-helpers";
 
 const RATIOS = [
   { value: "16:9", w: 16, h: 9, label: "16:9 (widescreen)" },
@@ -25,33 +24,28 @@ const RATIOS = [
 ];
 
 export function VideoAspectRatioConverter() {
-  const [file, setFile] = React.useState<File | null>(null);
   const [ratio, setRatio] = React.useState("16:9");
-  const { run, progress, processing, error, setError } = useFfmpegJob();
+  const { run } = useFfmpegJob();
 
-  async function convert() {
-    if (!file) return;
-    setError(null);
-    try {
+  const convert = React.useCallback(
+    async (file: File) => {
       const target = RATIOS.find((r) => r.value === ratio)!;
       const inputName = pickUniqueName("mp4");
       const outputName = pickUniqueName("mp4");
       const buffer = new Uint8Array(await file.arrayBuffer());
       const vf = `scale=w='min(1280,iw)':h=-2,pad=ceil(iw/2)*2:ceil((iw*${target.h}/${target.w})/2)*2:(ow-iw)/2:(oh-ih)/2:color=black`;
-      const data = await run(
-        [{ name: inputName, data: buffer }],
-        ["-i", inputName, "-vf", vf, "-c:v", "libx264", "-pix_fmt", "yuv420p", "-c:a", "copy", outputName],
-        outputName
-      );
-      downloadMediaBytes(data, `${stripMediaExtension(file.name)}-${ratio.replace(":", "x")}.mp4`, "video/mp4");
-    } catch {
-      // error state already set by the hook
-    }
-  }
+      const data = await run([{ name: inputName, data: buffer }], ["-i", inputName, "-vf", vf, "-c:v", "libx264", "-pix_fmt", "yuv420p", "-c:a", "copy", outputName], outputName);
+      const blob = new Blob([data as BlobPart], { type: "video/mp4" });
+      return { blob, name: `${stripMediaExtension(file.name)}-${ratio.replace(":", "x")}.mp4` };
+    },
+    [ratio, run]
+  );
+
+  const { items, addFiles, removeItem } = useBatchFiles(convert);
 
   return (
     <div className="rounded-xl border bg-card p-5 sm:p-6">
-      <MediaUploadZone file={file} onFileSelect={setFile} onClear={() => setFile(null)} accept="video/*" kind="video" />
+      <BatchUploadZone accept="video/*" onFilesSelect={addFiles} label="Drop videos to change the aspect ratio of" />
 
       <div className="mt-4">
         <Label className="text-sm text-muted-foreground">Target aspect ratio</Label>
@@ -66,18 +60,12 @@ export function VideoAspectRatioConverter() {
           </SelectContent>
         </Select>
       </div>
-
-      {processing && <MediaProgressBar progress={progress} />}
-      {error && <p className="mt-3 text-sm text-destructive">{error}</p>}
-
-      <Button type="button" className="mt-4" onClick={convert} disabled={!file || processing}>
-        <Download className="size-4" />
-        {processing ? "Converting..." : "Convert and download"}
-      </Button>
       <p className="mt-2 text-xs text-muted-foreground">
-        Fits the original video inside the new aspect ratio and adds black letterbox/pillarbox bars
-        to fill the rest, rather than cropping or stretching your content out of proportion.
+        Fits each original video inside the new aspect ratio and adds black letterbox/pillarbox
+        bars to fill the rest, rather than cropping or stretching content out of proportion.
       </p>
+
+      <BatchFileList items={items} onRemove={removeItem} zipName="resized-videos.zip" />
     </div>
   );
 }

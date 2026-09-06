@@ -11,7 +11,7 @@ export function ToolContentSections({
   return (
     <>
       <section className="border-t">
-        <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
           <div className="prose prose-neutral max-w-none prose-headings:font-semibold prose-headings:tracking-tight prose-headings:text-xl">
             <h2>About {toolName}</h2>
             {content.overview.map((paragraph, index) => (
@@ -31,7 +31,7 @@ export function ToolContentSections({
       </section>
 
       <section className="border-t">
-        <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
           <h2 className="text-xl font-semibold tracking-tight">Examples</h2>
           <div className="mt-5 space-y-4">
             {content.examples.map((example, index) => (
@@ -62,7 +62,7 @@ export function ToolContentSections({
       </section>
 
       <div className="border-t">
-        <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
           <FaqSection
             faqs={content.faqs}
             title="Frequently asked questions"

@@ -38,7 +38,7 @@ export function WordDocumentViewer() {
 
       {error && <p className="mt-3 text-sm text-destructive">{error}</p>}
 
-      <div ref={containerRef} className="mt-4 max-h-[600px] overflow-auto rounded-lg border bg-white p-4 [&_*]:!max-w-full" />
+      <div ref={containerRef} className="mt-4 max-h-[750px] overflow-auto rounded-lg border bg-white p-4 [&_*]:!max-w-full" />
       <p className="mt-3 text-xs text-muted-foreground">
         Renders a visual preview of the document&apos;s layout, text, and tables — complex
         formatting (headers/footers, some styles) may not be pixel-perfect compared to Microsoft

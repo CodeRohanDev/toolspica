@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import { PDFDocument } from "pdf-lib";
-import { Button } from "@/components/ui/button";
 import {
   Select,
   SelectContent,
@@ -11,9 +10,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
-import { Download } from "lucide-react";
-import { PdfUploadZone } from "@/components/tools/pdf-upload-zone";
-import { downloadPdfBytes, stripPdfExtension } from "@/lib/pdf/pdf-helpers";
+import { BatchUploadZone } from "@/components/tools/batch-upload-zone";
+import { BatchFileList } from "@/components/tools/batch-file-list";
+import { useBatchFiles } from "@/lib/use-batch-files";
+import { stripPdfExtension } from "@/lib/pdf/pdf-helpers";
 
 const SIZES = [
   { value: "a4", label: "A4", width: 595.28, height: 841.89 },
@@ -22,16 +22,10 @@ const SIZES = [
 ];
 
 export function PdfPageSizeConverter() {
-  const [file, setFile] = React.useState<File | null>(null);
   const [targetSize, setTargetSize] = React.useState("a4");
-  const [processing, setProcessing] = React.useState(false);
-  const [error, setError] = React.useState<string | null>(null);
 
-  async function apply() {
-    if (!file) return;
-    setProcessing(true);
-    setError(null);
-    try {
+  const convert = React.useCallback(
+    async (file: File) => {
       const target = SIZES.find((s) => s.value === targetSize)!;
       const bytes = await file.arrayBuffer();
       const doc = await PDFDocument.load(bytes);
@@ -43,22 +37,21 @@ export function PdfPageSizeConverter() {
         const newWidth = width * scale;
         const newHeight = height * scale;
         page.setSize(target.width, target.height);
-        // Center the scaled content on the new, larger page.
         page.translateContent((target.width - newWidth) / 2, (target.height - newHeight) / 2);
       });
 
       const outBytes = await doc.save();
-      downloadPdfBytes(outBytes, `${stripPdfExtension(file.name)}-${targetSize}.pdf`);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Couldn't resize this PDF — it may be corrupted or password-protected.");
-    } finally {
-      setProcessing(false);
-    }
-  }
+      const blob = new Blob([outBytes as BlobPart], { type: "application/pdf" });
+      return { blob, name: `${stripPdfExtension(file.name)}-${targetSize}.pdf` };
+    },
+    [targetSize]
+  );
+
+  const { items, addFiles, removeItem } = useBatchFiles(convert);
 
   return (
     <div className="rounded-xl border bg-card p-5 sm:p-6">
-      <PdfUploadZone file={file} onFileSelect={setFile} onClear={() => setFile(null)} />
+      <BatchUploadZone accept="application/pdf,.pdf" onFilesSelect={addFiles} label="Drop PDFs to change the page size of" />
 
       <div className="mt-4">
         <Label className="text-sm text-muted-foreground">Target page size</Label>
@@ -75,17 +68,12 @@ export function PdfPageSizeConverter() {
           </SelectContent>
         </Select>
       </div>
-
-      {error && <p className="mt-3 text-sm text-destructive">{error}</p>}
-
-      <Button type="button" className="mt-4" onClick={apply} disabled={!file || processing}>
-        <Download className="size-4" />
-        {processing ? "Converting..." : "Convert page size and download"}
-      </Button>
       <p className="mt-2 text-xs text-muted-foreground">
         Scales each page&apos;s content proportionally to fit the new size, centered with equal
         margins, rather than stretching it out of proportion.
       </p>
+
+      <BatchFileList items={items} onRemove={removeItem} zipName="resized-pdfs.zip" />
     </div>
   );
 }

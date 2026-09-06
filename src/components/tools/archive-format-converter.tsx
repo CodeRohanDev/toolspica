@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { Button } from "@/components/ui/button";
 import {
   Select,
   SelectContent,
@@ -10,10 +9,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
-import { Download } from "lucide-react";
-import { MediaUploadZone } from "@/components/tools/media-upload-zone";
+import { BatchUploadZone } from "@/components/tools/batch-upload-zone";
+import { BatchFileList } from "@/components/tools/batch-file-list";
+import { useBatchFiles } from "@/lib/use-batch-files";
 import { createSevenZip } from "@/lib/sevenzip-setup";
-import { downloadMediaBytes, stripMediaExtension } from "@/lib/media-helpers";
+import { stripMediaExtension } from "@/lib/media-helpers";
 
 const FORMATS = [
   { value: "zip", label: "ZIP", ext: "zip", flag: "-tzip" },
@@ -22,16 +22,10 @@ const FORMATS = [
 ];
 
 export function ArchiveFormatConverter() {
-  const [file, setFile] = React.useState<File | null>(null);
   const [format, setFormat] = React.useState("zip");
-  const [busy, setBusy] = React.useState(false);
-  const [error, setError] = React.useState<string | null>(null);
 
-  async function convert() {
-    if (!file) return;
-    setError(null);
-    setBusy(true);
-    try {
+  const convert = React.useCallback(
+    async (file: File) => {
       const target = FORMATS.find((f) => f.value === format)!;
       const sevenZip = await createSevenZip();
       const buffer = new Uint8Array(await file.arrayBuffer());
@@ -44,17 +38,17 @@ export function ArchiveFormatConverter() {
       sevenZip.FS.chdir("..");
       sevenZip.callMain(["a", target.flag, `out.${target.ext}`, ...names.map((n) => `out/${n}`)]);
       const data = sevenZip.FS.readFile(`out.${target.ext}`) as Uint8Array;
-      downloadMediaBytes(data, `${stripMediaExtension(file.name)}.${target.ext}`, "application/octet-stream");
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Couldn't convert this archive.");
-    } finally {
-      setBusy(false);
-    }
-  }
+      const blob = new Blob([data as BlobPart], { type: "application/octet-stream" });
+      return { blob, name: `${stripMediaExtension(file.name)}.${target.ext}` };
+    },
+    [format]
+  );
+
+  const { items, addFiles, removeItem } = useBatchFiles(convert);
 
   return (
     <div className="rounded-xl border bg-card p-5 sm:p-6">
-      <MediaUploadZone file={file} onFileSelect={setFile} onClear={() => setFile(null)} kind="archive" label="Drop a ZIP, 7Z, TAR, RAR, or ISO file" />
+      <BatchUploadZone onFilesSelect={addFiles} label="Drop ZIP, 7Z, TAR, RAR, or ISO files" />
 
       <div className="mt-4">
         <Label className="text-sm text-muted-foreground">Convert to</Label>
@@ -69,16 +63,12 @@ export function ArchiveFormatConverter() {
           </SelectContent>
         </Select>
       </div>
-
-      {error && <p className="mt-3 text-sm text-destructive">{error}</p>}
-
-      <Button type="button" className="mt-4" onClick={convert} disabled={!file || busy}>
-        <Download className="size-4" />
-        {busy ? "Converting..." : `Convert to ${format.toUpperCase()}`}
-      </Button>
       <p className="mt-2 text-xs text-muted-foreground">
-        Extracts the source archive (ZIP, 7Z, TAR, RAR, or ISO) and repacks its contents into your chosen format, using a real 7-Zip build compiled to WebAssembly, entirely in your browser.
+        Extracts each source archive (ZIP, 7Z, TAR, RAR, or ISO) and repacks its contents into your
+        chosen format, using a real 7-Zip build compiled to WebAssembly, entirely in your browser.
       </p>
+
+      <BatchFileList items={items} onRemove={removeItem} zipName="converted-archives.zip" />
     </div>
   );
 }

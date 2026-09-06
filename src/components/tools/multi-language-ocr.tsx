@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { Button } from "@/components/ui/button";
 import {
   Select,
   SelectContent,
@@ -10,11 +9,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
-import { Download } from "lucide-react";
-import { ImageUploadCard } from "@/components/tools/image-upload-card";
-import { CopyButton } from "@/components/tools/copy-button";
-import { useTesseractOcr } from "@/lib/use-tesseract-ocr";
-import { downloadTextFile } from "@/lib/pdf/pdf-helpers";
+import { BatchUploadZone } from "@/components/tools/batch-upload-zone";
+import { BatchFileList } from "@/components/tools/batch-file-list";
+import { useBatchFiles } from "@/lib/use-batch-files";
 import { stripExtension } from "@/lib/image-processing";
 
 const LANGUAGES = [
@@ -31,38 +28,25 @@ const LANGUAGES = [
 ];
 
 export function MultiLanguageOcr() {
-  const [file, setFile] = React.useState<File | null>(null);
-  const [previewUrl, setPreviewUrl] = React.useState<string | null>(null);
   const [lang, setLang] = React.useState("eng");
-  const [text, setText] = React.useState("");
-  const { recognize, status, busy, error, setError } = useTesseractOcr();
 
-  function handleFile(picked: File) {
-    setFile(picked);
-    setPreviewUrl(URL.createObjectURL(picked));
-    setText("");
-    setError(null);
-  }
-  function clear() {
-    setFile(null);
-    setPreviewUrl(null);
-    setText("");
-    setError(null);
-  }
+  const convert = React.useCallback(
+    async (file: File) => {
+      const { createWorker } = await import("tesseract.js");
+      const worker = await createWorker(lang, 1, { corePath: "/tesseract-core", workerPath: "/tesseract-worker.min.js" });
+      const { data } = await worker.recognize(file);
+      await worker.terminate();
+      const blob = new Blob([data.text.trim()], { type: "text/plain" });
+      return { blob, name: `${stripExtension(file.name)}.txt` };
+    },
+    [lang]
+  );
 
-  async function run() {
-    if (!file) return;
-    try {
-      const data = await recognize(file, lang);
-      setText(data.text.trim());
-    } catch {
-      // error already set by hook
-    }
-  }
+  const { items, addFiles, removeItem } = useBatchFiles(convert);
 
   return (
     <div className="rounded-xl border bg-card p-5 sm:p-6">
-      <ImageUploadCard file={file} previewUrl={previewUrl} onFileSelect={handleFile} onClear={clear} />
+      <BatchUploadZone accept="image/*" onFilesSelect={addFiles} label="Drop images to extract text from" />
 
       <div className="mt-4">
         <Label className="text-sm text-muted-foreground">Language</Label>
@@ -77,33 +61,13 @@ export function MultiLanguageOcr() {
           </SelectContent>
         </Select>
       </div>
-
-      {file && (
-        <Button type="button" className="mt-4" onClick={run} disabled={busy}>
-          {busy ? status || "Recognizing..." : "Extract text"}
-        </Button>
-      )}
-
-      {error && <p className="mt-3 text-sm text-destructive">{error}</p>}
-
-      {text && (
-        <div className="mt-4">
-          <div className="flex items-center justify-between">
-            <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Recognized text</p>
-            <div className="flex gap-2">
-              <CopyButton value={text} />
-              <Button type="button" size="sm" onClick={() => downloadTextFile(text, `${stripExtension(file!.name)}.txt`)}>
-                <Download className="size-3.5" /> Download .txt
-              </Button>
-            </div>
-          </div>
-          <pre className="mt-1.5 max-h-96 overflow-auto whitespace-pre-wrap rounded-lg border bg-muted/40 p-3 text-sm">{text}</pre>
-        </div>
-      )}
-
-      <p className="mt-3 text-xs text-muted-foreground">
-        Downloads the appropriate language model the first time you use it, then recognizes text in that language entirely on your device. Choose the language that matches your image's text for best accuracy.
+      <p className="mt-2 text-xs text-muted-foreground">
+        Downloads the appropriate language model the first time you use it, then recognizes text
+        in that language entirely on your device. Choose the language that matches your images&apos;
+        text for best accuracy — the same language applies to every file you add.
       </p>
+
+      <BatchFileList items={items} onRemove={removeItem} zipName="extracted-text.zip" />
     </div>
   );
 }

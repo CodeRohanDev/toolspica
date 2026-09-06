@@ -1,10 +1,10 @@
 "use client";
 
 import * as React from "react";
-import { PDFDocument } from "pdf-lib";
 import { Button } from "@/components/ui/button";
 import { Download, ImagePlus, X } from "lucide-react";
-import { downloadPdfBytes, formatBytes } from "@/lib/pdf/pdf-helpers";
+import { loadImageFromFile, canvasToBlob, downloadBlob, formatBytes } from "@/lib/image-processing";
+import { buildImagePdf } from "@/lib/pdf-writer";
 
 interface QueueItem {
   file: File;
@@ -19,7 +19,7 @@ export function JpgToPdf() {
   function addFiles(files: FileList | null) {
     if (!files) return;
     const picked = Array.from(files)
-      .filter((f) => /jpe?g/i.test(f.type))
+      .filter((f) => f.type.startsWith("image/"))
       .map((file) => ({ file, previewUrl: URL.createObjectURL(file) }));
     setItems((prev) => [...prev, ...picked]);
   }
@@ -39,15 +39,26 @@ export function JpgToPdf() {
   async function generate() {
     setProcessing(true);
     try {
-      const doc = await PDFDocument.create();
-      for (const { file } of items) {
-        const bytes = await file.arrayBuffer();
-        const img = await doc.embedJpg(bytes);
-        const page = doc.addPage([img.width, img.height]);
-        page.drawImage(img, { x: 0, y: 0, width: img.width, height: img.height });
-      }
-      const pdfBytes = await doc.save();
-      downloadPdfBytes(pdfBytes, "images.pdf");
+      const pages = await Promise.all(
+        items.map(async ({ file }) => {
+          const img = await loadImageFromFile(file);
+          const canvas = document.createElement("canvas");
+          canvas.width = img.width;
+          canvas.height = img.height;
+          const ctx = canvas.getContext("2d")!;
+          ctx.fillStyle = "#ffffff";
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(img, 0, 0);
+          const blob = await canvasToBlob(canvas, "image/jpeg", 0.92);
+          return {
+            width: canvas.width,
+            height: canvas.height,
+            jpegBytes: new Uint8Array(await blob.arrayBuffer()),
+          };
+        })
+      );
+      const pdfBytes = buildImagePdf(pages);
+      downloadBlob(new Blob([pdfBytes as BlobPart], { type: "application/pdf" }), "images.pdf");
     } finally {
       setProcessing(false);
     }
@@ -62,12 +73,14 @@ export function JpgToPdf() {
         <span className="flex size-11 items-center justify-center rounded-full bg-muted">
           <ImagePlus className="size-5 text-muted-foreground" />
         </span>
-        <p className="text-sm font-medium">Click to add JPG images (select multiple, order matters)</p>
-        <p className="text-xs text-muted-foreground">Processed locally in your browser — never uploaded</p>
+        <p className="text-sm font-medium">Click to add images (select multiple, order matters)</p>
+        <p className="text-xs text-muted-foreground">
+          JPG, PNG, WEBP, and other formats all work — processed locally in your browser, never uploaded
+        </p>
         <input
           ref={inputRef}
           type="file"
-          accept="image/jpeg"
+          accept="image/*"
           multiple
           className="hidden"
           onChange={(e) => addFiles(e.target.files)}

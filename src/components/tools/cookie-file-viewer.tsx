@@ -45,7 +45,7 @@ export function CookieFileViewer() {
         value={input}
         onChange={(e) => setInput(e.target.value)}
         placeholder={"Paste a Netscape-format cookies.txt file's content, or upload one above..."}
-        rows={6}
+        rows={16}
         className="mt-3 resize-y font-mono text-xs"
       />
 

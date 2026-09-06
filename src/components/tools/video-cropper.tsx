@@ -12,8 +12,10 @@ import { downloadMediaBytes, stripMediaExtension } from "@/lib/media-helpers";
 
 export function VideoCropper() {
   const [file, setFile] = React.useState<File | null>(null);
-  const [margin, setMargin] = React.useState(10);
+  const [margins, setMargins] = React.useState({ top: 10, bottom: 10, left: 10, right: 10 });
   const { run, progress, processing, error, setError } = useFfmpegJob();
+
+  const anyMargin = margins.top > 0 || margins.bottom > 0 || margins.left > 0 || margins.right > 0;
 
   async function crop() {
     if (!file) return;
@@ -22,8 +24,9 @@ export function VideoCropper() {
       const inputName = pickUniqueName("mp4");
       const outputName = pickUniqueName("mp4");
       const buffer = new Uint8Array(await file.arrayBuffer());
-      const keep = (100 - margin * 2) / 100;
-      const cropExpr = `crop=iw*${keep.toFixed(3)}:ih*${keep.toFixed(3)}:iw*${(margin / 100).toFixed(3)}:ih*${(margin / 100).toFixed(3)}`;
+      const keepW = (100 - margins.left - margins.right) / 100;
+      const keepH = (100 - margins.top - margins.bottom) / 100;
+      const cropExpr = `crop=iw*${keepW.toFixed(3)}:ih*${keepH.toFixed(3)}:iw*${(margins.left / 100).toFixed(3)}:ih*${(margins.top / 100).toFixed(3)}`;
       const data = await run(
         [{ name: inputName, data: buffer }],
         ["-i", inputName, "-vf", cropExpr, "-c:v", "libx264", "-pix_fmt", "yuv420p", "-c:a", "copy", outputName],
@@ -39,23 +42,35 @@ export function VideoCropper() {
     <div className="rounded-xl border bg-card p-5 sm:p-6">
       <MediaUploadZone file={file} onFileSelect={setFile} onClear={() => setFile(null)} accept="video/*" kind="video" />
 
-      <div className="mt-4 flex items-center gap-3">
-        <Label htmlFor="crop-margin" className="shrink-0 text-sm text-muted-foreground">
-          Crop margin ({margin}% per side)
-        </Label>
-        <input id="crop-margin" type="range" min={0} max={40} value={margin} onChange={(e) => setMargin(Number(e.target.value))} className="flex-1" />
+      <div className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-4">
+        {(["top", "bottom", "left", "right"] as const).map((side) => (
+          <div key={side}>
+            <Label htmlFor={`crop-${side}`} className="text-sm capitalize text-muted-foreground">
+              {side} margin ({margins[side]}%)
+            </Label>
+            <input
+              id={`crop-${side}`}
+              type="range"
+              min={0}
+              max={40}
+              value={margins[side]}
+              onChange={(e) => setMargins((m) => ({ ...m, [side]: Number(e.target.value) }))}
+              className="mt-1.5 w-full"
+            />
+          </div>
+        ))}
       </div>
 
       {processing && <MediaProgressBar progress={progress} />}
       {error && <p className="mt-3 text-sm text-destructive">{error}</p>}
 
-      <Button type="button" className="mt-4" onClick={crop} disabled={!file || processing || margin === 0}>
+      <Button type="button" className="mt-4" onClick={crop} disabled={!file || processing || !anyMargin}>
         <Download className="size-4" />
         {processing ? "Cropping..." : "Crop and download"}
       </Button>
       <p className="mt-2 text-xs text-muted-foreground">
-        Trims an equal percentage off all four sides, centered on the frame — useful for removing
-        unwanted borders or black bars.
+        Adjust each side independently — useful for removing unwanted borders, black bars, or an
+        off-center subject.
       </p>
     </div>
   );

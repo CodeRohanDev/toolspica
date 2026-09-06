@@ -1,9 +1,9 @@
 "use client";
 
 import * as React from "react";
-import { ImageUploadCard } from "@/components/tools/image-upload-card";
-import { ImageResultCard } from "@/components/tools/image-result-card";
-import { loadImageFromFile, canvasToBlob, downloadBlob, stripExtension } from "@/lib/image-processing";
+import { ImageBatchWorkspace } from "@/components/tools/image-batch-workspace";
+import { useBatchFiles } from "@/lib/use-batch-files";
+import { loadImageFromFile, canvasToBlob, stripExtension } from "@/lib/image-processing";
 
 const FILTERS = [
   { id: "none", label: "Original", css: "none" },
@@ -18,54 +18,34 @@ const FILTERS = [
 ];
 
 export function PhotoFilters() {
-  const [file, setFile] = React.useState<File | null>(null);
-  const [originalUrl, setOriginalUrl] = React.useState<string | null>(null);
   const [activeFilter, setActiveFilter] = React.useState("sepia");
-  const [resultUrl, setResultUrl] = React.useState<string | null>(null);
-  const [resultBlob, setResultBlob] = React.useState<Blob | null>(null);
 
-  function handleFile(picked: File) {
-    setFile(picked);
-    setOriginalUrl(URL.createObjectURL(picked));
-  }
-  function clear() {
-    setFile(null);
-    setOriginalUrl(null);
-    setResultUrl(null);
-    setResultBlob(null);
-  }
+  const convert = React.useCallback(
+    async (file: File) => {
+      const img = await loadImageFromFile(file);
+      const canvas = document.createElement("canvas");
+      canvas.width = img.width;
+      canvas.height = img.height;
+      const ctx = canvas.getContext("2d")!;
+      ctx.filter = FILTERS.find((f) => f.id === activeFilter)?.css ?? "none";
+      ctx.drawImage(img, 0, 0);
+      const blob = await canvasToBlob(canvas, "image/png");
+      return { blob, name: `${stripExtension(file.name)}-${activeFilter}.png` };
+    },
+    [activeFilter]
+  );
 
-  const process = React.useCallback(async (targetFile: File, filterId: string) => {
-    const img = await loadImageFromFile(targetFile);
-    const canvas = document.createElement("canvas");
-    canvas.width = img.width;
-    canvas.height = img.height;
-    const ctx = canvas.getContext("2d")!;
-    ctx.filter = FILTERS.find((f) => f.id === filterId)?.css ?? "none";
-    ctx.drawImage(img, 0, 0);
-    const blob = await canvasToBlob(canvas, "image/png");
-    setResultBlob(blob);
-    setResultUrl(URL.createObjectURL(blob));
-  }, []);
-
-  React.useEffect(() => {
-    if (file) process(file, activeFilter);
-  }, [file, activeFilter, process]);
+  const { items, addFiles, removeItem } = useBatchFiles(convert, { live: true });
 
   return (
     <div className="rounded-xl border bg-card p-5 sm:p-6">
-      <div className="grid gap-4 sm:grid-cols-2">
-        <ImageUploadCard file={file} previewUrl={originalUrl} onFileSelect={handleFile} onClear={clear} />
-        <ImageResultCard
-          previewUrl={resultUrl}
-          fileSize={resultBlob?.size}
-          onDownload={() =>
-            resultBlob &&
-            file &&
-            downloadBlob(resultBlob, `${stripExtension(file.name)}-${activeFilter}.png`)
-          }
-        />
-      </div>
+      <ImageBatchWorkspace
+        items={items}
+        onFilesSelect={addFiles}
+        onRemove={removeItem}
+        uploadLabel="Drop images to apply a filter to"
+        zipName="filtered-images.zip"
+      />
 
       <div className="mt-4 flex flex-wrap gap-2">
         {FILTERS.map((f) => (
@@ -73,11 +53,8 @@ export function PhotoFilters() {
             key={f.id}
             type="button"
             onClick={() => setActiveFilter(f.id)}
-            disabled={!file}
             className={`rounded-lg border px-3 py-1.5 text-sm transition-colors ${
-              activeFilter === f.id
-                ? "border-brand bg-brand-soft font-medium"
-                : "hover:border-brand/50"
+              activeFilter === f.id ? "border-brand bg-brand-soft font-medium" : "hover:border-brand/50"
             }`}
           >
             {f.label}

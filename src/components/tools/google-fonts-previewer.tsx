@@ -64,7 +64,7 @@ export function GoogleFontsPreviewer() {
         </Button>
       </div>
 
-      <Textarea value={text} onChange={(e) => setText(e.target.value)} rows={3} className="mt-3 resize-y" />
+      <Textarea value={text} onChange={(e) => setText(e.target.value)} rows={5} className="mt-3 resize-y" />
 
       <div className="mt-3 flex flex-wrap gap-4">
         <label className="flex items-center gap-2 text-sm text-muted-foreground">

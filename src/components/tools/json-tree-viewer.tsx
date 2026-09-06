@@ -17,7 +17,7 @@ export function JsonTreeViewer() {
 
   return (
     <div className="rounded-xl border bg-card p-5 sm:p-6">
-      <Textarea value={input} onChange={(e) => setInput(e.target.value)} rows={8} className="resize-y font-mono text-sm" />
+      <Textarea value={input} onChange={(e) => setInput(e.target.value)} rows={14} className="resize-y font-mono text-sm" />
 
       {error && <p className="mt-3 text-sm text-destructive">{error}</p>}
 

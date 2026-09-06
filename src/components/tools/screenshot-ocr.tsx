@@ -1,72 +1,32 @@
 "use client";
 
 import * as React from "react";
-import { Button } from "@/components/ui/button";
-import { Download } from "lucide-react";
-import { ImageUploadCard } from "@/components/tools/image-upload-card";
-import { CopyButton } from "@/components/tools/copy-button";
-import { useTesseractOcr } from "@/lib/use-tesseract-ocr";
-import { downloadTextFile } from "@/lib/pdf/pdf-helpers";
+import { BatchUploadZone } from "@/components/tools/batch-upload-zone";
+import { BatchFileList } from "@/components/tools/batch-file-list";
+import { useBatchFiles } from "@/lib/use-batch-files";
 import { stripExtension } from "@/lib/image-processing";
 
 export function ScreenshotOcr() {
-  const [file, setFile] = React.useState<File | null>(null);
-  const [previewUrl, setPreviewUrl] = React.useState<string | null>(null);
-  const [text, setText] = React.useState("");
-  const { recognize, status, busy, error, setError } = useTesseractOcr();
+  const convert = React.useCallback(async (file: File) => {
+    const { createWorker } = await import("tesseract.js");
+    const worker = await createWorker("eng", 1, { corePath: "/tesseract-core", workerPath: "/tesseract-worker.min.js" });
+    const { data } = await worker.recognize(file);
+    await worker.terminate();
+    const blob = new Blob([data.text.trim()], { type: "text/plain" });
+    return { blob, name: `${stripExtension(file.name)}.txt` };
+  }, []);
 
-  function handleFile(picked: File) {
-    setFile(picked);
-    setPreviewUrl(URL.createObjectURL(picked));
-    setText("");
-    setError(null);
-  }
-  function clear() {
-    setFile(null);
-    setPreviewUrl(null);
-    setText("");
-    setError(null);
-  }
-
-  async function run() {
-    if (!file) return;
-    try {
-      const data = await recognize(file);
-      setText(data.text.trim());
-    } catch {
-      // error already set by hook
-    }
-  }
+  const { items, addFiles, removeItem } = useBatchFiles(convert);
 
   return (
     <div className="rounded-xl border bg-card p-5 sm:p-6">
-      <ImageUploadCard file={file} previewUrl={previewUrl} onFileSelect={handleFile} onClear={clear} accept="image/png,image/jpeg,image/webp" />
+      <BatchUploadZone accept="image/png,image/jpeg,image/webp" onFilesSelect={addFiles} label="Drop screenshots to extract text from" />
 
-      {file && (
-        <Button type="button" className="mt-4" onClick={run} disabled={busy}>
-          {busy ? status || "Recognizing..." : "Extract text from screenshot"}
-        </Button>
-      )}
-
-      {error && <p className="mt-3 text-sm text-destructive">{error}</p>}
-
-      {text && (
-        <div className="mt-4">
-          <div className="flex items-center justify-between">
-            <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Recognized text</p>
-            <div className="flex gap-2">
-              <CopyButton value={text} />
-              <Button type="button" size="sm" onClick={() => downloadTextFile(text, `${stripExtension(file!.name)}.txt`)}>
-                <Download className="size-3.5" /> Download .txt
-              </Button>
-            </div>
-          </div>
-          <pre className="mt-1.5 max-h-96 overflow-auto whitespace-pre-wrap rounded-lg border bg-muted/40 p-3 text-sm">{text}</pre>
-        </div>
-      )}
+      <BatchFileList items={items} onRemove={removeItem} zipName="screenshot-text.zip" />
 
       <p className="mt-3 text-xs text-muted-foreground">
-        Built for screenshots — copy error messages, chat text, or UI labels without retyping. Runs entirely in your browser via WebAssembly, no upload.
+        Built for screenshots — copy error messages, chat text, or UI labels without retyping.
+        Runs entirely in your browser via WebAssembly, no upload.
       </p>
     </div>
   );

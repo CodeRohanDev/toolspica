@@ -1,12 +1,9 @@
 "use client";
 
 import * as React from "react";
-import { Button } from "@/components/ui/button";
-import { Download } from "lucide-react";
-import { ImageUploadCard } from "@/components/tools/image-upload-card";
-import { useTesseractOcr } from "@/lib/use-tesseract-ocr";
-import { downloadTextFile } from "@/lib/pdf/pdf-helpers";
-import { stripExtension } from "@/lib/image-processing";
+import { BatchUploadZone } from "@/components/tools/batch-upload-zone";
+import { BatchFileList } from "@/components/tools/batch-file-list";
+import { useBatchFiles } from "@/lib/use-batch-files";
 
 const EMAIL_RE = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/;
 const PHONE_RE = /(\+?\d[\d\s().-]{7,}\d)/;
@@ -31,70 +28,34 @@ function buildVcard(text: string): { vcard: string; name: string } {
   return { vcard, name };
 }
 
+function safeName(name: string): string {
+  return name.replace(/[^a-zA-Z0-9-_ ]/g, "").trim() || "contact";
+}
+
 export function BusinessCardOcr() {
-  const [file, setFile] = React.useState<File | null>(null);
-  const [previewUrl, setPreviewUrl] = React.useState<string | null>(null);
-  const [vcard, setVcard] = React.useState("");
-  const [vcardName, setVcardName] = React.useState("contact");
-  const { recognize, status, busy, error, setError } = useTesseractOcr();
+  const convert = React.useCallback(async (file: File) => {
+    const { createWorker } = await import("tesseract.js");
+    const worker = await createWorker("eng", 1, { corePath: "/tesseract-core", workerPath: "/tesseract-worker.min.js" });
+    const { data } = await worker.recognize(file);
+    await worker.terminate();
+    const { vcard, name } = buildVcard(data.text);
+    const blob = new Blob([vcard], { type: "text/vcard" });
+    return { blob, name: `${safeName(name)}.vcf` };
+  }, []);
 
-  function handleFile(picked: File) {
-    setFile(picked);
-    setPreviewUrl(URL.createObjectURL(picked));
-    setVcard("");
-    setError(null);
-  }
-  function clear() {
-    setFile(null);
-    setPreviewUrl(null);
-    setVcard("");
-    setError(null);
-  }
-
-  async function run() {
-    if (!file) return;
-    try {
-      const data = await recognize(file);
-      const { vcard: built, name } = buildVcard(data.text);
-      setVcard(built);
-      setVcardName(name);
-    } catch {
-      // error already set by hook
-    }
-  }
+  const { items, addFiles, removeItem } = useBatchFiles(convert);
 
   return (
     <div className="rounded-xl border bg-card p-5 sm:p-6">
-      <ImageUploadCard file={file} previewUrl={previewUrl} onFileSelect={handleFile} onClear={clear} />
+      <BatchUploadZone accept="image/*" onFilesSelect={addFiles} label="Drop business card photos" />
 
-      {file && (
-        <Button type="button" className="mt-4" onClick={run} disabled={busy}>
-          {busy ? status || "Recognizing..." : "Scan business card"}
-        </Button>
-      )}
-
-      {error && <p className="mt-3 text-sm text-destructive">{error}</p>}
-
-      {vcard && (
-        <div className="mt-4">
-          <pre className="whitespace-pre-wrap rounded-lg border bg-muted/40 p-3 text-sm">{vcard}</pre>
-          <Button
-            type="button"
-            className="mt-3"
-            onClick={() => downloadTextFile(vcard, `${stripPdfExtensionSafe(vcardName)}.vcf`, "text/vcard")}
-          >
-            <Download className="size-3.5" /> Download .vcf
-          </Button>
-        </div>
-      )}
+      <BatchFileList items={items} onRemove={removeItem} zipName="business-card-contacts.zip" />
 
       <p className="mt-3 text-xs text-muted-foreground">
-        Extracts text from a business card photo and picks out an email and phone number using pattern matching, then builds a standard .vcf contact file you can import into any contacts app. Field detection is heuristic — always double-check the result before saving.
+        Extracts text from each business card photo and picks out an email and phone number using
+        pattern matching, then builds a standard .vcf contact file you can import into any
+        contacts app. Field detection is heuristic — always double-check the result before saving.
       </p>
     </div>
   );
-}
-
-function stripPdfExtensionSafe(name: string): string {
-  return name.replace(/[^a-zA-Z0-9-_ ]/g, "").trim() || "contact";
 }

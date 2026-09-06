@@ -2,57 +2,41 @@
 
 import * as React from "react";
 import { Label } from "@/components/ui/label";
-import { ImageUploadCard } from "@/components/tools/image-upload-card";
-import { ImageResultCard } from "@/components/tools/image-result-card";
-import { loadImageFromFile, canvasToBlob, downloadBlob, stripExtension } from "@/lib/image-processing";
+import { ImageBatchWorkspace } from "@/components/tools/image-batch-workspace";
+import { useBatchFiles } from "@/lib/use-batch-files";
+import { loadImageFromFile, canvasToBlob, stripExtension } from "@/lib/image-processing";
 
 export function BorderImage() {
-  const [file, setFile] = React.useState<File | null>(null);
-  const [originalUrl, setOriginalUrl] = React.useState<string | null>(null);
   const [width, setWidth] = React.useState(20);
   const [color, setColor] = React.useState("#ffffff");
-  const [resultUrl, setResultUrl] = React.useState<string | null>(null);
-  const [resultBlob, setResultBlob] = React.useState<Blob | null>(null);
 
-  function handleFile(picked: File) {
-    setFile(picked);
-    setOriginalUrl(URL.createObjectURL(picked));
-  }
-  function clear() {
-    setFile(null);
-    setOriginalUrl(null);
-    setResultUrl(null);
-    setResultBlob(null);
-  }
+  const convert = React.useCallback(
+    async (file: File) => {
+      const img = await loadImageFromFile(file);
+      const canvas = document.createElement("canvas");
+      canvas.width = img.width + width * 2;
+      canvas.height = img.height + width * 2;
+      const ctx = canvas.getContext("2d")!;
+      ctx.fillStyle = color;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, width, width);
+      const blob = await canvasToBlob(canvas, "image/png");
+      return { blob, name: `${stripExtension(file.name)}-bordered.png` };
+    },
+    [width, color]
+  );
 
-  const process = React.useCallback(async (targetFile: File, borderWidth: number, borderColor: string) => {
-    const img = await loadImageFromFile(targetFile);
-    const canvas = document.createElement("canvas");
-    canvas.width = img.width + borderWidth * 2;
-    canvas.height = img.height + borderWidth * 2;
-    const ctx = canvas.getContext("2d")!;
-    ctx.fillStyle = borderColor;
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(img, borderWidth, borderWidth);
-    const blob = await canvasToBlob(canvas, "image/png");
-    setResultBlob(blob);
-    setResultUrl(URL.createObjectURL(blob));
-  }, []);
-
-  React.useEffect(() => {
-    if (file) process(file, width, color);
-  }, [file, width, color, process]);
+  const { items, addFiles, removeItem } = useBatchFiles(convert, { live: true });
 
   return (
     <div className="rounded-xl border bg-card p-5 sm:p-6">
-      <div className="grid gap-4 sm:grid-cols-2">
-        <ImageUploadCard file={file} previewUrl={originalUrl} onFileSelect={handleFile} onClear={clear} />
-        <ImageResultCard
-          previewUrl={resultUrl}
-          fileSize={resultBlob?.size}
-          onDownload={() => resultBlob && file && downloadBlob(resultBlob, `${stripExtension(file.name)}-bordered.png`)}
-        />
-      </div>
+      <ImageBatchWorkspace
+        items={items}
+        onFilesSelect={addFiles}
+        onRemove={removeItem}
+        uploadLabel="Drop images to add a border to"
+        zipName="bordered-images.zip"
+      />
 
       <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-3">
         <div className="flex flex-1 items-center gap-3">
@@ -66,7 +50,6 @@ export function BorderImage() {
             max={100}
             value={width}
             onChange={(e) => setWidth(Number(e.target.value))}
-            disabled={!file}
             className="flex-1"
           />
           <span className="w-12 shrink-0 text-sm tabular-nums">{width}px</span>

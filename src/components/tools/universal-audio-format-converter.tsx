@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { Button } from "@/components/ui/button";
 import {
   Select,
   SelectContent,
@@ -10,12 +9,12 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
-import { Download } from "lucide-react";
-import { MediaUploadZone } from "@/components/tools/media-upload-zone";
-import { MediaProgressBar } from "@/components/tools/media-progress-bar";
+import { BatchUploadZone } from "@/components/tools/batch-upload-zone";
+import { BatchFileList } from "@/components/tools/batch-file-list";
+import { useBatchFiles } from "@/lib/use-batch-files";
 import { useFfmpegJob } from "@/lib/use-ffmpeg-job";
 import { pickUniqueName, pickInputName } from "@/lib/ffmpeg-setup";
-import { downloadMediaBytes, stripMediaExtension } from "@/lib/media-helpers";
+import { stripMediaExtension } from "@/lib/media-helpers";
 
 const FORMATS = [
   { value: "mp3", label: "MP3", ext: "mp3", codec: ["-c:a", "libmp3lame", "-q:a", "2"], mime: "audio/mpeg" },
@@ -26,32 +25,27 @@ const FORMATS = [
 ];
 
 export function UniversalAudioFormatConverter() {
-  const [file, setFile] = React.useState<File | null>(null);
   const [format, setFormat] = React.useState("mp3");
-  const { run, progress, processing, error, setError } = useFfmpegJob();
+  const { run } = useFfmpegJob();
 
-  async function convert() {
-    if (!file) return;
-    setError(null);
-    try {
+  const convert = React.useCallback(
+    async (file: File) => {
       const target = FORMATS.find((f) => f.value === format)!;
       const inputName = pickInputName(file);
       const outputName = pickUniqueName(target.ext);
       const buffer = new Uint8Array(await file.arrayBuffer());
-      const data = await run(
-        [{ name: inputName, data: buffer }],
-        ["-i", inputName, ...target.codec, outputName],
-        outputName
-      );
-      downloadMediaBytes(data, `${stripMediaExtension(file.name)}.${target.ext}`, target.mime);
-    } catch {
-      // error state already set by the hook
-    }
-  }
+      const data = await run([{ name: inputName, data: buffer }], ["-i", inputName, ...target.codec, outputName], outputName);
+      const blob = new Blob([data as BlobPart], { type: target.mime });
+      return { blob, name: `${stripMediaExtension(file.name)}.${target.ext}` };
+    },
+    [format, run]
+  );
+
+  const { items, addFiles, removeItem } = useBatchFiles(convert);
 
   return (
     <div className="rounded-xl border bg-card p-5 sm:p-6">
-      <MediaUploadZone file={file} onFileSelect={setFile} onClear={() => setFile(null)} accept="audio/*" kind="audio" />
+      <BatchUploadZone accept="audio/*" onFilesSelect={addFiles} label="Drop any audio files to convert" />
 
       <div className="mt-4">
         <Label className="text-sm text-muted-foreground">Output format</Label>
@@ -67,17 +61,12 @@ export function UniversalAudioFormatConverter() {
         </Select>
       </div>
 
-      {processing && <MediaProgressBar progress={progress} />}
-      {error && <p className="mt-3 text-sm text-destructive">{error}</p>}
-
-      <Button type="button" className="mt-4" onClick={convert} disabled={!file || processing}>
-        <Download className="size-4" />
-        {processing ? "Converting..." : `Convert to ${format.toUpperCase()}`}
-      </Button>
-      <p className="mt-2 text-xs text-muted-foreground">
-        One tool for any audio format swap — pick your target and this decodes the source and
-        re-encodes it, all locally in your browser.
+      <p className="mt-3 text-xs text-muted-foreground">
+        One tool for any audio format swap — pick your target and this decodes each source file and
+        re-encodes it, all locally in your browser. Files process one at a time, in order.
       </p>
+
+      <BatchFileList items={items} onRemove={removeItem} zipName={`converted-${format}s.zip`} />
     </div>
   );
 }

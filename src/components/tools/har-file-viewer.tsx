@@ -78,7 +78,7 @@ export function HarFileViewer() {
               { label: "total size", value: `${(totalSize / 1024).toFixed(1)} KB` },
             ]}
           />
-          <div className="mt-2 max-h-[450px] overflow-auto rounded-lg border">
+          <div className="mt-2 max-h-[650px] overflow-auto rounded-lg border">
             <table className="w-full text-sm">
               <thead className="sticky top-0 bg-card">
                 <tr className="border-b bg-muted/40">

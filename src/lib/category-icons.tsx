@@ -90,9 +90,45 @@ const ACCENT_PALETTE = [
   "bg-teal-500/10 text-teal-600",
 ];
 
+const GLOW_PALETTE = [
+  "bg-blue-500",
+  "bg-violet-500",
+  "bg-rose-500",
+  "bg-amber-500",
+  "bg-emerald-500",
+  "bg-cyan-500",
+  "bg-fuchsia-500",
+  "bg-orange-500",
+  "bg-indigo-500",
+  "bg-teal-500",
+];
+
+const BORDER_PALETTE = [
+  "hover:border-blue-500/40 hover:shadow-blue-500/10",
+  "hover:border-violet-500/40 hover:shadow-violet-500/10",
+  "hover:border-rose-500/40 hover:shadow-rose-500/10",
+  "hover:border-amber-500/40 hover:shadow-amber-500/10",
+  "hover:border-emerald-500/40 hover:shadow-emerald-500/10",
+  "hover:border-cyan-500/40 hover:shadow-cyan-500/10",
+  "hover:border-fuchsia-500/40 hover:shadow-fuchsia-500/10",
+  "hover:border-orange-500/40 hover:shadow-orange-500/10",
+  "hover:border-indigo-500/40 hover:shadow-indigo-500/10",
+  "hover:border-teal-500/40 hover:shadow-teal-500/10",
+];
+
 const CATEGORY_ORDER = Object.keys(CATEGORY_ICONS);
 
 export function getCategoryAccent(slug: string): string {
   const index = CATEGORY_ORDER.indexOf(slug);
   return ACCENT_PALETTE[(index < 0 ? 0 : index) % ACCENT_PALETTE.length];
+}
+
+export function getCategoryGlow(slug: string): string {
+  const index = CATEGORY_ORDER.indexOf(slug);
+  return GLOW_PALETTE[(index < 0 ? 0 : index) % GLOW_PALETTE.length];
+}
+
+export function getCategoryBorderGlow(slug: string): string {
+  const index = CATEGORY_ORDER.indexOf(slug);
+  return BORDER_PALETTE[(index < 0 ? 0 : index) % BORDER_PALETTE.length];
 }
