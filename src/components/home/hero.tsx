@@ -22,7 +22,7 @@ export function Hero() {
     <section className="relative border-b">
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 overflow-hidden"
+        className="pointer-events-none absolute inset-x-0 -top-[76px] bottom-0 overflow-hidden sm:-top-20"
         style={{
           maskImage:
             "radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%)",

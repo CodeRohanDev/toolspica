@@ -3,11 +3,13 @@ import Link from "next/link";
 import { PageHeader } from "@/components/page-header";
 import { getCategoryAccent, getCategoryIcon } from "@/lib/category-icons";
 import { TOOL_CATEGORIES, TOTAL_TOOLS } from "@/lib/tools-data.generated";
-import { JsonLd, breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
+import { JsonLd, breadcrumbJsonLd, collectionPageJsonLd, pageMetadata } from "@/lib/seo";
+
+const description = `Browse all ${TOOL_CATEGORIES.length} tool categories on Toolspica — ${TOTAL_TOOLS}+ free, browser-based tools for PDF, image, video, developer, SEO, and AI workflows.`;
 
 export const metadata: Metadata = pageMetadata({
   title: "All Categories",
-  description: `Browse all ${TOOL_CATEGORIES.length} tool categories on Toolspica — ${TOTAL_TOOLS}+ free, browser-based tools for PDF, image, video, developer, SEO, and AI workflows.`,
+  description,
   path: "/categories",
 });
 
@@ -55,6 +57,15 @@ export default function CategoriesPage() {
           { name: "Home", path: "/" },
           { name: "Categories", path: "/categories" },
         ])}
+      />
+      <JsonLd
+        data={collectionPageJsonLd({
+          name: "All Categories",
+          description,
+          path: "/categories",
+          itemNames: TOOL_CATEGORIES.map((c) => c.name),
+          itemPaths: TOOL_CATEGORIES.map((c) => `/${c.slug}`),
+        })}
       />
     </>
   );

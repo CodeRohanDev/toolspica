@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { Textarea } from "@/components/ui/textarea";
-import { User } from "lucide-react";
+import { Upload, User } from "lucide-react";
 
 interface Contact {
   fn: string;
@@ -46,7 +46,11 @@ export function VcardViewer() {
 
   return (
     <div className="rounded-xl border bg-card p-5 sm:p-6">
-      <input type="file" accept=".vcf" onChange={handleUpload} className="text-sm" />
+      <label className="flex w-fit cursor-pointer items-center gap-2 rounded-md border px-3 py-2 text-sm hover:bg-accent">
+        <Upload className="size-4" />
+        Upload a .vcf file
+        <input type="file" accept=".vcf" onChange={handleUpload} className="hidden" />
+      </label>
 
       <Textarea
         value={input}

@@ -16,6 +16,8 @@ import { getHeroSubtitle } from "@/lib/hero-subtitle";
 import { getToolFeatures } from "@/lib/tool-features";
 import { getCategoryAudience } from "@/lib/category-audience";
 import { getVariantsForTool } from "@/lib/tool-variants";
+import { getAvailableLangsForSlug } from "@/lib/blog/registry";
+import { BLOG_LANG_LABEL } from "@/lib/blog/types";
 import { getToolContentLastModified } from "@/lib/content-freshness";
 import {
   JsonLd,
@@ -163,6 +165,7 @@ export default async function ToolPage(props: PageProps<"/tools/[slug]">) {
   const audience = getCategoryAudience(tool.categorySlug);
 
   const dateModified = getToolContentLastModified(tool.slug);
+  const blogLangs = getAvailableLangsForSlug(tool.slug);
   const variants = getVariantsForTool(tool.slug);
   const relatedSearchItems = [
     ...variants.map((v) => ({ label: v.h1, href: `/${v.slug}` })),
@@ -194,6 +197,28 @@ export default async function ToolPage(props: PageProps<"/tools/[slug]">) {
       </section>
 
       {otherToolsSection}
+
+      {blogLangs.includes("en") && (
+        <div className="border-t">
+          <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 lg:px-8">
+            <Link
+              href={`/blog/en/${tool.slug}`}
+              className="flex items-center justify-between gap-3 rounded-xl border bg-card p-4 text-sm transition-colors hover:border-brand/40"
+            >
+              <span>
+                Read the full guide to using <strong>{tool.name}</strong>
+                {blogLangs.length > 1 && (
+                  <span className="text-muted-foreground">
+                    {" "}
+                    ({blogLangs.map((l) => BLOG_LANG_LABEL[l]).join(", ")})
+                  </span>
+                )}
+              </span>
+              <ArrowUpRight className="size-4 shrink-0 text-muted-foreground" />
+            </Link>
+          </div>
+        </div>
+      )}
 
       <ToolFeaturesAndAudience features={features} audience={audience} />
 

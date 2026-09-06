@@ -3,7 +3,7 @@
 import * as React from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, Upload } from "lucide-react";
 import { CopyButton } from "@/components/tools/copy-button";
 
 interface EnvEntry {
@@ -46,7 +46,11 @@ export function EnvFileViewer() {
   return (
     <div className="rounded-xl border bg-card p-5 sm:p-6">
       <div className="flex flex-wrap items-center gap-2">
-        <input type="file" accept=".env,.txt" onChange={handleUpload} className="text-sm" />
+        <label className="flex w-fit shrink-0 cursor-pointer items-center gap-2 rounded-md border px-3 py-2 text-sm hover:bg-accent">
+          <Upload className="size-4" />
+          Upload a .env file
+          <input type="file" accept=".env,.txt" onChange={handleUpload} className="hidden" />
+        </label>
         <Button type="button" size="sm" variant="outline" onClick={() => setReveal((r) => !r)}>
           {reveal ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
           {reveal ? "Hide values" : "Reveal values"}

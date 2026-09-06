@@ -98,6 +98,12 @@ export function SiteFooter() {
                 <Link href="/about" className="text-sm text-muted-foreground hover:text-foreground">About Us</Link>
               </li>
               <li>
+                <Link href="/blog" className="text-sm text-muted-foreground hover:text-foreground">Blog</Link>
+              </li>
+              <li>
+                <Link href="/compare" className="text-sm text-muted-foreground hover:text-foreground">Compare</Link>
+              </li>
+              <li>
                 <Link href="/contact" className="text-sm text-muted-foreground hover:text-foreground">Contact Us</Link>
               </li>
             </ul>

@@ -7,17 +7,14 @@ import { diffLines } from "@/lib/line-diff";
 export function JsonDiffChecker() {
   const [a, setA] = React.useState("");
   const [b, setB] = React.useState("");
-  const [error, setError] = React.useState<string | null>(null);
 
-  const diff = React.useMemo(() => {
+  const { diff, error } = React.useMemo(() => {
     try {
-      setError(null);
       const pa = a.trim() ? JSON.stringify(JSON.parse(a), null, 2) : "";
       const pb = b.trim() ? JSON.stringify(JSON.parse(b), null, 2) : "";
-      return diffLines(pa, pb);
+      return { diff: diffLines(pa, pb), error: null as string | null };
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Invalid JSON");
-      return [];
+      return { diff: [], error: err instanceof Error ? err.message : "Invalid JSON" };
     }
   }, [a, b]);
 
@@ -31,7 +28,7 @@ export function JsonDiffChecker() {
       {!error && (a || b) && (
         <div className="mt-3 max-h-96 overflow-auto rounded-md border font-mono text-sm">
           {diff.map((d, i) => (
-            <div key={i} className={`whitespace-pre px-3 py-0.5 ${d.type === "added" ? "bg-green-500/15 text-green-700 dark:text-green-400" : d.type === "removed" ? "bg-red-500/15 text-red-700 dark:text-red-400" : ""}`}>
+            <div key={i} className={`whitespace-pre px-3 py-0.5 ${d.type === "added" ? "bg-green-500/15 text-green-700" : d.type === "removed" ? "bg-red-500/15 text-red-700" : ""}`}>
               {d.type === "added" ? "+ " : d.type === "removed" ? "- " : "  "}{d.text || " "}
             </div>
           ))}

@@ -2,14 +2,19 @@ import type { MetadataRoute } from "next";
 import { SITE } from "@/lib/site";
 import { ALL_TOOLS, TOOL_CATEGORIES } from "@/lib/tools-data.generated";
 import { TOOL_VARIANTS } from "@/lib/tool-variants";
+import { BLOG_LANGS } from "@/lib/blog/types";
+import { getBlogSlugsForLang } from "@/lib/blog/registry";
+import { COMPARE_PAGES } from "@/lib/compare-content";
 import {
   getToolContentLastModified,
+  getBlogPostLastModified,
   getMostRecent,
 } from "@/lib/content-freshness";
 
 const STATIC_PAGES: { path: string; priority: number }[] = [
   { path: "/", priority: 1 },
   { path: "/categories", priority: 0.9 },
+  { path: "/compare", priority: 0.5 },
   { path: "/about", priority: 0.5 },
   { path: "/contact", priority: 0.4 },
   { path: "/privacy-policy", priority: 0.3 },
@@ -70,5 +75,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.65,
   }));
 
-  return [...staticEntries, ...categoryEntries, ...toolEntries, ...variantEntries];
+  const blogEntries: MetadataRoute.Sitemap = BLOG_LANGS.flatMap((lang) =>
+    getBlogSlugsForLang(lang).map((slug) => ({
+      url: `${SITE.url}/blog/${lang}/${slug}`,
+      lastModified: getBlogPostLastModified(lang, slug),
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    }))
+  );
+
+  const compareEntries: MetadataRoute.Sitemap = COMPARE_PAGES.map((page) => ({
+    url: `${SITE.url}/compare/${page.slug}`,
+    changeFrequency: "monthly" as const,
+    priority: 0.55,
+  }));
+
+  return [...staticEntries, ...categoryEntries, ...toolEntries, ...variantEntries, ...blogEntries, ...compareEntries];
 }

@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { Textarea } from "@/components/ui/textarea";
+import { Upload } from "lucide-react";
 
 interface CookieEntry {
   domain: string;
@@ -39,7 +40,11 @@ export function CookieFileViewer() {
 
   return (
     <div className="rounded-xl border bg-card p-5 sm:p-6">
-      <input type="file" accept=".txt" onChange={handleUpload} className="text-sm" />
+      <label className="flex w-fit cursor-pointer items-center gap-2 rounded-md border px-3 py-2 text-sm hover:bg-accent">
+        <Upload className="size-4" />
+        Upload a cookie file
+        <input type="file" accept=".txt" onChange={handleUpload} className="hidden" />
+      </label>
 
       <Textarea
         value={input}

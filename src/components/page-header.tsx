@@ -35,7 +35,7 @@ export function PageHeader({
   glowClass,
 }: PageHeaderProps) {
   return (
-    <section className="relative overflow-hidden border-b bg-muted/30">
+    <section className="relative -mt-[76px] overflow-hidden border-b bg-muted/30 pt-[76px] sm:-mt-20 sm:pt-20">
       {glowClass && (
         <div
           aria-hidden

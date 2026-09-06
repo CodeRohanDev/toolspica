@@ -50,6 +50,33 @@ export function getToolContentLastModified(slug: string): string {
   return date;
 }
 
+export function getBlogPostLastModified(lang: string, slug: string): string {
+  const key = `blog:${lang}:${slug}`;
+  const cached = cache.get(key);
+  if (cached) return cached;
+
+  let date: string;
+  try {
+    const absolutePath = path.join(
+      process.cwd(),
+      "src/lib/blog-content",
+      lang,
+      `${slug}.ts`
+    );
+    const output = execSync(`git log -1 --format=%aI -- "${absolutePath}"`, {
+      cwd: process.cwd(),
+    })
+      .toString()
+      .trim();
+    date = output || getRepoFallbackDate();
+  } catch {
+    date = getRepoFallbackDate();
+  }
+
+  cache.set(key, date);
+  return date;
+}
+
 export function getMostRecent(dates: string[]): string {
   if (dates.length === 0) return getRepoFallbackDate();
   return dates.reduce((latest, current) =>

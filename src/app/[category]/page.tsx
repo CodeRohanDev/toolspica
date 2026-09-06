@@ -209,6 +209,7 @@ function CategoryPage({
           description: intro,
           path: `/${category.slug}`,
           itemNames: category.tools.map((t) => t.name),
+          itemPaths: category.tools.map((t) => `/tools/${t.slug}`),
           dateModified,
         })}
       />

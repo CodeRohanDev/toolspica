@@ -22,7 +22,7 @@ export function TextDiffChecker() {
           <p className="mt-3 text-sm text-muted-foreground">{added} lines added, {removed} lines removed</p>
           <div className="mt-2 max-h-96 overflow-auto rounded-md border font-mono text-sm">
             {diff.map((d, i) => (
-              <div key={i} className={`whitespace-pre-wrap px-3 py-0.5 ${d.type === "added" ? "bg-green-500/15 text-green-700 dark:text-green-400" : d.type === "removed" ? "bg-red-500/15 text-red-700 dark:text-red-400" : ""}`}>
+              <div key={i} className={`whitespace-pre-wrap px-3 py-0.5 ${d.type === "added" ? "bg-green-500/15 text-green-700" : d.type === "removed" ? "bg-red-500/15 text-red-700" : ""}`}>
                 {d.type === "added" ? "+ " : d.type === "removed" ? "- " : "  "}{d.text || " "}
               </div>
             ))}

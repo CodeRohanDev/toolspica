@@ -80,7 +80,7 @@ export function IpBlacklistChecker() {
                 <span>{r.name}</span>
                 <span
                   className={`flex items-center gap-1.5 font-medium ${
-                    r.listed ? "text-destructive" : "text-green-600 dark:text-green-500"
+                    r.listed ? "text-destructive" : "text-green-600"
                   }`}
                 >
                   {r.listed ? <X className="size-4" /> : <Check className="size-4" />}

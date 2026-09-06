@@ -3,13 +3,14 @@
 import * as React from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
+import { Upload } from "lucide-react";
 
 const LEVEL_STYLES: Record<string, string> = {
-  ERROR: "bg-red-500/10 text-red-700 dark:text-red-400",
-  FATAL: "bg-red-500/10 text-red-700 dark:text-red-400",
-  WARN: "bg-amber-500/10 text-amber-700 dark:text-amber-400",
-  WARNING: "bg-amber-500/10 text-amber-700 dark:text-amber-400",
-  INFO: "bg-blue-500/10 text-blue-700 dark:text-blue-400",
+  ERROR: "bg-red-500/10 text-red-700",
+  FATAL: "bg-red-500/10 text-red-700",
+  WARN: "bg-amber-500/10 text-amber-700",
+  WARNING: "bg-amber-500/10 text-amber-700",
+  INFO: "bg-blue-500/10 text-blue-700",
   DEBUG: "bg-muted text-muted-foreground",
 };
 
@@ -49,7 +50,11 @@ export function LogFileViewer() {
   return (
     <div className="rounded-xl border bg-card p-5 sm:p-6">
       <div className="flex flex-wrap items-center gap-2">
-        <input type="file" accept=".log,.txt" onChange={handleUpload} className="text-sm" />
+        <label className="flex w-fit shrink-0 cursor-pointer items-center gap-2 rounded-md border px-3 py-2 text-sm hover:bg-accent">
+          <Upload className="size-4" />
+          Upload a log file
+          <input type="file" accept=".log,.txt" onChange={handleUpload} className="hidden" />
+        </label>
         <Input value={filter} onChange={(e) => setFilter(e.target.value)} placeholder="Search..." className="max-w-xs" />
         {Object.entries(counts).map(([level, count]) => (
           <button

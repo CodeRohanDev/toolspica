@@ -11,7 +11,7 @@ function PassBadge({ pass, label }: { pass: boolean; label: string }) {
     <div className="flex items-center justify-between rounded-lg border px-3 py-2 text-sm">
       <span>{label}</span>
       {pass ? (
-        <span className="flex items-center gap-1 font-medium text-green-600 dark:text-green-400">
+        <span className="flex items-center gap-1 font-medium text-green-600">
           <CheckCircle2 className="size-4" /> Pass
         </span>
       ) : (

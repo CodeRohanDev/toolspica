@@ -112,7 +112,7 @@ export function FileEncryptorDecryptor() {
 
           {error && <p className="mt-3 text-sm text-destructive">{error}</p>}
           {done && !error && (
-            <p className="mt-3 text-sm text-green-600 dark:text-green-500">
+            <p className="mt-3 text-sm text-green-600">
               Done — check your downloads.
             </p>
           )}

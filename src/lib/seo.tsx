@@ -17,6 +17,31 @@ function dynamicOgImageUrl(title: string, eyebrow?: string): string {
   return `${SITE.url}/api/og?${params.toString()}`;
 }
 
+/**
+ * Google truncates meta description snippets at ~155-160 characters —
+ * anything longer gets cut off mid-word/mid-sentence in search results.
+ * Content authored for on-page reading (tool overviews, category intros)
+ * is often much longer, so the <meta name="description"> tag needs its
+ * own short form. Cuts at the last full sentence within the limit when
+ * one leaves enough text, otherwise at the last word boundary.
+ */
+export function truncateForMeta(text: string, max = 155): string {
+  if (text.length <= max) return text;
+  const window = text.slice(0, max);
+
+  const lastSentenceEnd = Math.max(
+    window.lastIndexOf(". "),
+    window.lastIndexOf("! "),
+    window.lastIndexOf("? ")
+  );
+  if (lastSentenceEnd > max * 0.4) {
+    return window.slice(0, lastSentenceEnd + 1);
+  }
+
+  const lastSpace = window.lastIndexOf(" ");
+  return `${window.slice(0, lastSpace > 0 ? lastSpace : max)}…`;
+}
+
 export function pageMetadata({
   title,
   description,
@@ -27,10 +52,11 @@ export function pageMetadata({
 }: PageMetadataInput): Metadata {
   const url = `${SITE.url}${path}`;
   const ogImage = image ?? dynamicOgImageUrl(title, eyebrow);
+  const shortDescription = truncateForMeta(description);
 
   return {
     title,
-    description,
+    description: shortDescription,
     alternates: { canonical: url },
     robots: noIndex
       ? { index: false, follow: false }
@@ -58,15 +84,21 @@ export function organizationJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": `${SITE.parentUrl}/#organization`,
     name: SITE.parentBrand,
     url: SITE.parentUrl,
     logo: `${SITE.url}/logo.png`,
     brand: {
       "@type": "Brand",
+      "@id": `${SITE.url}/#brand`,
       name: SITE.name,
       url: SITE.url,
+      description: SITE.description,
     },
-    sameAs: [SITE.parentUrl],
+    sameAs: [
+      SITE.parentUrl,
+      `https://twitter.com/${SITE.twitterHandle.replace(/^@/, "")}`,
+    ],
   };
 }
 
@@ -74,8 +106,11 @@ export function websiteJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
+    "@id": `${SITE.url}/#website`,
     name: SITE.name,
+    description: SITE.description,
     url: SITE.url,
+    publisher: { "@id": `${SITE.parentUrl}/#organization` },
     potentialAction: {
       "@type": "SearchAction",
       target: {
@@ -134,6 +169,8 @@ export function softwareApplicationJsonLd(input: {
     url: `${SITE.url}${input.path}`,
     applicationCategory: input.categoryName,
     operatingSystem: "Any (runs in browser)",
+    isPartOf: { "@id": `${SITE.url}/#website` },
+    publisher: { "@id": `${SITE.parentUrl}/#organization` },
     ...(input.dateModified && { dateModified: input.dateModified }),
     offers: {
       "@type": "Offer",
@@ -162,11 +199,36 @@ export function howToJsonLd(input: {
   };
 }
 
+export function blogPostingJsonLd(input: {
+  title: string;
+  description: string;
+  path: string;
+  inLanguage: string;
+  datePublished: string;
+  dateModified?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: input.title,
+    description: input.description,
+    url: `${SITE.url}${input.path}`,
+    inLanguage: input.inLanguage,
+    datePublished: input.datePublished,
+    dateModified: input.dateModified ?? input.datePublished,
+    isPartOf: { "@id": `${SITE.url}/#website` },
+    author: { "@id": `${SITE.parentUrl}/#organization` },
+    publisher: { "@id": `${SITE.parentUrl}/#organization` },
+    mainEntityOfPage: `${SITE.url}${input.path}`,
+  };
+}
+
 export function collectionPageJsonLd(input: {
   name: string;
   description: string;
   path: string;
   itemNames: string[];
+  itemPaths?: string[];
   dateModified?: string;
 }) {
   return {
@@ -175,6 +237,7 @@ export function collectionPageJsonLd(input: {
     name: input.name,
     description: input.description,
     url: `${SITE.url}${input.path}`,
+    isPartOf: { "@id": `${SITE.url}/#website` },
     ...(input.dateModified && { dateModified: input.dateModified }),
     mainEntity: {
       "@type": "ItemList",
@@ -182,6 +245,9 @@ export function collectionPageJsonLd(input: {
         "@type": "ListItem",
         position: index + 1,
         name,
+        ...(input.itemPaths?.[index] && {
+          url: `${SITE.url}${input.itemPaths[index]}`,
+        }),
       })),
     },
   };

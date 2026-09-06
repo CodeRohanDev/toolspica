@@ -38,6 +38,11 @@ export function SmoothScroll() {
       isFirstRender.current = false;
       return;
     }
+    // New route's content height can differ from the previous page's —
+    // Lenis caches the scrollable content height, so without recomputing
+    // it here, scroll gets capped at the old (often shorter) page's height
+    // until something else happens to trigger a resize.
+    lenisRef.current?.resize();
     lenisRef.current?.scrollTo(0, { immediate: true });
   }, [pathname]);
 

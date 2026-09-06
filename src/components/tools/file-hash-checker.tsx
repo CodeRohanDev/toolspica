@@ -90,7 +90,7 @@ export function FileHashChecker() {
             {match !== null && (
               <p
                 className={`mt-2 flex items-center gap-1.5 text-sm font-medium ${
-                  match ? "text-green-600 dark:text-green-500" : "text-destructive"
+                  match ? "text-green-600" : "text-destructive"
                 }`}
               >
                 {match ? <Check className="size-4" /> : <X className="size-4" />}

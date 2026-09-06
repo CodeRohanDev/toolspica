@@ -26,7 +26,7 @@ export function YesNoDecisionMaker() {
         <span
           className={`text-5xl font-extrabold tracking-tight ${
             result === "YES"
-              ? "text-green-600 dark:text-green-400"
+              ? "text-green-600"
               : result === "NO"
                 ? "text-destructive"
                 : "text-foreground"

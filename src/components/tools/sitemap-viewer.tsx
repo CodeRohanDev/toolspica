@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { Textarea } from "@/components/ui/textarea";
+import { Upload } from "lucide-react";
 
 interface SitemapUrl {
   loc: string;
@@ -37,7 +38,11 @@ export function SitemapViewer() {
 
   return (
     <div className="rounded-xl border bg-card p-5 sm:p-6">
-      <input type="file" accept=".xml" onChange={handleUpload} className="text-sm" />
+      <label className="flex w-fit cursor-pointer items-center gap-2 rounded-md border px-3 py-2 text-sm hover:bg-accent">
+        <Upload className="size-4" />
+        Upload sitemap.xml
+        <input type="file" accept=".xml" onChange={handleUpload} className="hidden" />
+      </label>
 
       <Textarea value={input} onChange={(e) => setInput(e.target.value)} placeholder="Paste sitemap.xml content, or upload a file above..." rows={14} className="mt-3 resize-y font-mono text-xs" />
 

@@ -79,7 +79,7 @@ export function LotteryNumberGenerator() {
             {bonus.map((n, i) => (
               <span
                 key={`b${i}`}
-                className="flex size-11 items-center justify-center rounded-full border-2 border-amber-400 bg-amber-100 text-lg font-bold tabular-nums dark:bg-amber-950"
+                className="flex size-11 items-center justify-center rounded-full border-2 border-amber-400 bg-amber-100 text-lg font-bold tabular-nums"
               >
                 {n}
               </span>
